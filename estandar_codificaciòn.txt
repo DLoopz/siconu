@@ -1,0 +1,5 @@
+codificacion en ingles, controladores, nombres de funciones, clases, modelos, vistas, variables. 
+Ademas los nombre utilizados deberan dar una idea clara de lo que se realiza
+
+
+comentarios por funcion, en español y que de una idea general de la accion de la funcion 
