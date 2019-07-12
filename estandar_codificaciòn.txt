@@ -1,0 +1,22 @@
+codificacion en ingles, controladores, nombres de funciones, clases, modelos, vistas, variables. 
+Ademas los nombre utilizados deberan dar una idea clara de lo que se realiza
+
+
+comentarios por funcion, en español y que de una idea general de la accion de la funcion.
+
+modelos
+    Un modelo por tabla
+    cada modelo deberan contener las funciones de CRUD para su tabla asociada, en caso de usar vista se agregara la funcion para consultarla
+    solo se recivira un arreglo de parametros, dentro del cual se encontraran los nombres de las variables y los campos de la tabla que se ejecutaran.
+    el nombre del arreglo sera "$data".
+
+controladores
+    funcion index que servira para cargar la vista principal del controlador.
+    cuando se envien datos al modelo para el nombre de las variables se utilizara el mismo de los campos, se creara un arreglo llamado fields y debera tener la siguiente estructura.
+        $fields = array(
+            'id'=$id
+            'nombre'=$nombre
+            'rol'=$rol
+        ) 
+
+vistas
