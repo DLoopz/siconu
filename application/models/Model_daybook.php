@@ -9,13 +9,13 @@ class Model_daybook extends CI_Model
     return $this->db->insert('registro_asiento', $data);
   }
   //Ver los registros contables registrados
-  public function view_entries($data)
+  public function get_entries($data)
   {
     $sql = $this->db->get_where('registro_asiento', $data);
     return $sql->result();
   }
   //Ver registro contable registrado
-  public function view_entry($data)
+  public function get_entry($data)
   {
     $sql = $this->db->get_where('registro_asiento', $data);
     return $sql->row();

@@ -1,0 +1,30 @@
+.btn-outline-primary {
+	color: #DE6262;
+	background-color: transparent;
+	background-image: none;
+	border-color: #DE6262;
+}
+.btn-outline-primary:hover {
+	color: #fff;
+	background-color: #DE6262;
+	border-color: #DE6262;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #DE6262;
+  border: #DE6262 1px; 
+}
+
+.fondo-rosa {
+ position:fixed;
+ left:0px;
+ bottom:0px;
+ height:80px;
+ width:100%;
+ background:#DE6262;
+ color: #FFFFFF;
+}
+
+.principal-color{
+	color:#DE6262;
+}
