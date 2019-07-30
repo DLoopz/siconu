@@ -16,7 +16,6 @@
 }
 
 .fondo-rosa {
- position:fixed;
  left:0px;
  bottom:0px;
  height:80px;
@@ -27,4 +26,8 @@
 
 .principal-color{
 	color:#DE6262;
+}
+
+.line_sep{
+  background: #DE6262;
 }

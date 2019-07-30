@@ -1,0 +1,35 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">
+        <a class="nav-link" href="<?php echo base_url();?>alumno"><img src="<?php echo base_url() ?>source/img/img.png" class="figure-img img-fluid rounded" alt="img-siconu-home" width="95px"> <span class="sr-only">(current)</span></a>
+    </h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a aria-label="Left Align" data-toggle="tooltip" data-placement="top" title=""><strong><em><i class="icon-user"></i></em><?=$this->session->userdata('nombre')?></strong></a>
+        
+
+        <button type="button" class="btn btn-outline-primary my-2 my-sm-0" aria-label="Left Align" data-toggle="tooltip1" data-placement="top" title="Limpiar Base de Datos"><strong><em><i class="icon-trash-1"></i></em></strong></button>
+    </nav>
+    <button type="button" class="btn btn-outline-primary my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#cerrarSesion" data-placement="top" title="Cerrar sesión"><strong><em><i class="icon-login-1"></i></em></strong></button>
+    
+</div>
+
+<!-- Modal para confirmación de cierre de sesión-->
+<div class="modal fade" id="cerrarSesion" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal">No</button>
+                <a href="<?php echo base_url()?>login/logout"><span class="glyphicon glyphicon-user" style="font-size:20px;" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0" type="button">Si</button></a>
+                <!--<button type="button" class="btn btn-primary">Si</button>-->
+            </div>
+        </div>
+    </div>
+</div>

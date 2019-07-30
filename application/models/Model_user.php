@@ -3,30 +3,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_user extends CI_Model
 {
-  //Insertar registro contable
+  //Insertar usuario
   public function insert_user($data)
   {
     return $this->db->insert('usuario', $data);
   }
-  //Ver los registros contables registrados
+  //Insertar alumno en usuario_grupo
+  public function insert_std($data)
+  {
+    return $this->db->insert('usuario_grupo', $data);
+  }
+  //Ver los usuarios registrados
   public function get_users($data)
   {
     $sql = $this->db->get_where('usuario', $data);
     return $sql->result();
   }
-  //Ver registro contable registrado
+  //Ver usuario registrado
   public function get_user($data)
   {
     $sql = $this->db->get_where('usuario', $data);
     return $sql->row();
   }
-  //Actualizar registro contable
+  //obtner ultimo usuario registrado
+  public function last_user()
+  {
+    $this->db->select_max('id_usuario');
+    $sql=$this->db->get('usuario');
+    return $sql->row();
+  }
+  //Actualizar usuario
   public function update_user($data)
   {
-    $this->db->where('id', $data['id']);
+    $this->db->where('id_usuario', $data['id_usuario']);
     return $this->db->update('usuario', $data);
   }
-  //Eliminar registro contable
+  //Eliminar usuario
   public function delete_user($data)
   {
     return $this->db->delete( 'usuario' , $data );
