@@ -16,12 +16,11 @@
 }
 
 .fondo-rosa {
- left:0px;
- bottom:0px;
- height:80px;
- width:100%;
- background:#DE6262;
- color: #FFFFFF;
+	background:#DE6262;
+	color: #FFFFFF;
+	position: relative;
+	bottom: 0;
+	width: 100%;
 }
 
 .principal-color{
