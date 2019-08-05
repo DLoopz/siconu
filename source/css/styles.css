@@ -31,3 +31,8 @@
 .line_sep{
   background: #DE6262;
 }
+select{
+    background: transparent;
+    height: 38px;
+     
+  }
