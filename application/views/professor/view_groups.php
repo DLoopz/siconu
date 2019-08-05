@@ -1,9 +1,11 @@
 <div class="container col-lg-6 col-md-8">
+  <div style="float: left;"><a href="<?php echo base_url('professor/account_catalog'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catalogo de cuentas"><i class="icon-plus-2"></i></a></div>
   <div class="text-center"> 
     <h3>Lista de Grupos</h3>
   </div>
   <div>
     <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar grupo"><i class="icon-plus-2"></i></a>
+   
     <table class="table " id="user-table">
       <thead>
         <tr>

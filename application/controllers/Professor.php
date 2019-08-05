@@ -297,13 +297,13 @@ class Professor extends CI_Controller {
   {
     $fields = array('usuario_id' => $this->session->userdata('id_user'));
     $catalog=$this->model_account->get_catalog($fields);
-    if ($catalog)
+    if ($catalog)//entra si el usuario ya tiene por lo menos una cuenta
     {
       $data['title'] = 'Catalogo de cuentas';
       $data['accounts'] = $catalog;
       $this->load->view('head',$data);
       $this->load->view('navbar');
-      $this->load->view('professor/view_add_catalog');
+      $this->load->view('professor/view_catalog_user');
       $this->load->view('foot');
     }
     else
@@ -314,35 +314,125 @@ class Professor extends CI_Controller {
 
   public function create_account_catalog()
   {
-    $data['title'] = 'Crear catalogo de cuentas';
     $accounts= $this->model_account->get_std_accounts();
-    if ($this->input->post('crear_catalogo'))
+    if($this->input->post('crear_catalogo'))
     {
-      foreach ($accounts as $account) {
-        if ($this->input->post('cuenta'.$account->id_catalogo_estandar)==1)
-        {
-          $fields = array(
-            'tipo_id' => $account->tipo_id,
-            'clasificiacion_id' => $account->clasificacion_id,
-            'nombre' => $account->nombre,
-            'usuario_id' => $this->session->userdata('id_user')
-          );
-          $acc=$this->model_account->insert_account($fields);
-          $retVal = ($acc) ? $this->session->set_flashdata('correcto', '<div class="alert alert-success">Contraseña editado correctamente</div>'):$this->session->set_flashdata('incorrecto', '<div class="alert alert-danger"> Error contraseña no editado</div>');
-        }
-      }
-      redirect('professor');
+
     }
     else
     {
       $data['accounts'] = $accounts;
-      $data['title'] = 'Crear catalogo de cuentas';
+      $data['title'] = 'Catálogo de cuentas';
       $data['accounts'] = $this->model_account->get_std_accounts();
       $this->load->view('head',$data);
       $this->load->view('navbar');
-      $this->load->view('professor/view_add_catalog');
+      $this->load->view('professor/view_catalog');
+      $this->load->view('foot');
+
+    }
+  }
+
+
+   public function add_account()
+  {
+    //se establecen reglas de validacion
+    $this->form_validation->set_rules('nombre','nombre','required|min_length[3]|alpha|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    $this->form_validation->set_rules('tipo','tipo de cuenta','required');
+     $this->form_validation->set_rules('clasificacion','clasificacion de cuenta','required');
+    //personalizacion de reglas de validacion
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('is_unique', 'El %s ya existe');
+    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener letras');
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    if (!$this->form_validation->run())
+    {
+      $data['title']="Agregar cuenta";
+      $fields = array('usuario_id' => $this->session->userdata('id_user'));
+      $data['view_tipo']=$this->model_account->get_tipo_cuenta($fields);
+      $data['view_clasificacion']=$this->model_account->get_clasificacion_cuenta($fields);
+      $this->load->view('head', $data);
+      $this->load->view('navbar');      
+      $this->load->view('professor/view_add_account');
       $this->load->view('foot');
     }
+    else
+    {
+      $fields = array(
+        'tipo_id' => $this->input->post('tipo'),
+        'clasificacion_id' => $this->input->post('clasificacion'),
+        'nombre' => $this->input->post('nombre'),
+        'usuario_id' => $this->session->userdata('id_user')
+      );
+      $add=$this->model_account->insert_account($fields);
+      if($add==true){
+          $this->session->set_flashdata('correcto','<div class="alert alert-success">Cuenta agregado correctamente</div>');
+      }else{
+          $this->session->set_flashdata('incorrecto','<div class="alert alert-danger"> Error cuenta no agregado</div>');
+      }
+      redirect('professor/account_catalog', 'refresh');
+    }
+  }
+
+  public function del_account()
+  {
+    $id = $this->input->post("id_catalogo_usuario");
+    $fields = array('id_catalogo_usuario' => $id );
+    $this->model_account->delete_account($fields);
+    redirect('professor/account_catalog', 'refresh');
+  }
+
+   public function edit_account($id=null)
+  {
+    //reglas de validacion
+    $this->form_validation->set_rules('nombre','nombre','required|min_length[3]|alpha|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    //personalizacion de reglas de validacion
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('is_unique', 'El %s ya existe');
+    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener letras');
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');   
+    if($this->form_validation->run()==FAlSE)
+    {      
+      if($id)
+      {
+        $fields = array('id_catalogo_usuario' => $id);
+        $data['account']= $this->model_account->get_account($fields);            
+      }
+      $data['title']='Editar cuenta';
+      $this->load->view('head', $data);
+      $this->load->view('navbar');
+      $this->load->view('professor/view_edit_account');
+      $this->load->view('foot');
+    }
+    else
+    {
+      if($this->input->post("edit_cuenta"))
+      {
+        $fields = array(
+          'id_catalogo_usuario' => $id,
+          'nombre' => $this->input->post('nombre'),
+        );
+        $mod  = $this->model_account->update_account($fields);
+        if(!$mod)
+        {
+          $this->session->set_flashdata('msg', '<div class="alert alert-success">Cuenta editado correctamente</div>');
+        }else{
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error Cuenta no editada</div>');
+        }
+        redirect('professor/account_catalog');
+      }
+      else
+      {
+        redirect('professor/account_catalog');
+      }    
+    }   
   }
 
   public function edit_professor($id=null)
