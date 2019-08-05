@@ -14,8 +14,9 @@ class Student extends CI_Controller {
 		$this->load->view('foot');
 	}
 
-	public function add_exercise($id=null)
+	public function add_exercise()
 	{
+    $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre','ejercicio','required|min_length[3]|max_length[50]');
     //personalizacion de reglas de validacion

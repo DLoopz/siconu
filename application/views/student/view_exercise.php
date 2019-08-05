@@ -5,7 +5,7 @@
 	  if($this->session->flashdata('msg'))
 	    echo $this->session->flashdata('msg');
 	?>
-	<a href="<?php echo base_url();?>student/add_exercise/<?php echo $this->session->userdata('id_user');?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
+	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
 	<div class="table-responsive-md">
 		<table class="table table-hover" id="user-table">
 	    <thead>
