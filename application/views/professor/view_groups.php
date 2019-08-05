@@ -2,6 +2,11 @@
   <div class="text-center"> 
     <h3>Lista de Grupos</h3>
   </div>
+  <hr class="line-sep">
+    <?php
+      if($this->session->flashdata('msg'))
+        echo $this->session->flashdata('msg');
+    ?>
   <div>
     <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar grupo"><i class="icon-plus-2"></i></a>
     <table class="table " id="user-table">

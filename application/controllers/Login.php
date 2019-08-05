@@ -62,6 +62,7 @@ class Login extends CI_Controller
 					'usuario' => $user->matricula,
 					'id_user' => $user->id_usuario,
 					'rol' => $user->rol,
+					'nombre'=> $user->nombre,
 					'activo' =>true
 				);
 				$this->session->set_userdata($newdata);

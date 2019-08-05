@@ -1,5 +1,8 @@
 	<!--body-->
 		<div class="container">
+			<div><h3>Rayado diario</h3></div>
+			<hr class="line_sep">
+			<a href="<?php echo base_url();?>student/add_exercise/<?php echo $this->session->userdata('id_user');?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
 			<div class="table-responsive-md">
 			  <table class="table table-hover">
 				  <thead>

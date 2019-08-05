@@ -385,8 +385,10 @@ class Professor extends CI_Controller {
           'matricula' => $this->input->post('usuario')
         );
         $mod  = $this->model_user->update_user($fields);
-        if(!$mod)
+        if($mod)
         {
+          $datos_usuario = array( 'nombre' => $this->input->post('nombre'));
+          $this->session->set_userdata($datos_usuario);
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Profesor editado correctamente</div>');
         }else{
           $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error profesor no editado</div>');
