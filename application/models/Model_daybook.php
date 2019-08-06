@@ -6,7 +6,10 @@ class Model_daybook extends CI_Model
   //Insertar asiento contable
   public function insert_entry($data)
   {
-    return $this->db->insert('asiento', $data);
+    $sql= $this->db->insert('asiento', $data);
+    $this->db->select_max('id_asiento');
+    $sql=$this->db->get('asiento');
+    return $sql->row();
   }
   //Ver los asientos contables registrados
   public function get_entries($data)
@@ -30,5 +33,13 @@ class Model_daybook extends CI_Model
   public function delete_entry($data)
   {
     return $this->db->delete( 'asiento' , $data );
+  }
+
+  //registros en los asientos contables
+  //Ver los asientos contables registrados
+  public function get_registers($data)
+  {
+    $sql = $this->db->get_where('registro_asiento', $data);
+    return $sql->result();
   }
 }

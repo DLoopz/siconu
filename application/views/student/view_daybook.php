@@ -17,12 +17,17 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <!--tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr-->
+				    <?php $i=1; foreach ($entries as $entry) {?>
+				    <tr>
+				    	<td><?php echo $i;?></td>
+				    	<td><?php echo $entry->fecha;?></td>
+				    	<td>------------</td>
+				    	<td><?php echo $entry->concepto;?></td>
+				    	<td></td>
+				    	<td></td>
+				    	<td></td>
+				    </tr>
+				  	<?php $i++;} ?>
 				    <tr>
 				    	<td colspan="3"></td>
 				    	<th>SUMAS</th>

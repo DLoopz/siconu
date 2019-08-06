@@ -36,3 +36,14 @@ select{
     height: 38px;
      
   }
+
+.personal-radio:checked{
+	border-color: #DE6262 !important; 
+  border-radius: 50%;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #DE6262;
+  background-color: #DE6262;
+}
