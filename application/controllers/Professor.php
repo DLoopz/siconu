@@ -317,6 +317,21 @@ class Professor extends CI_Controller {
     $accounts= $this->model_account->get_std_accounts();
     if($this->input->post('crear_catalogo'))
     {
+      foreach ($accounts as $account) 
+      {
+        if($this->input->post('cuenta'.$account->id_catalogo_estandar)){
+          $fields = array(
+            'tipo_id' => $account->tipo_id,
+            'clasificacion_id' => $account->clasificacion_id,
+            'nombre' => $account->nombre,
+            'usuario_id' => $this->session->userdata('id_user')
+          );
+          $acc=$this->model_account->insert_account($fields);
+
+          $retVal = ($acc) ? $this->session->set_flashdata('msg', '<div class="alert alert-success">Cuentas seleccionadas</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-danger">No ha seleccionado ninguna cuenta</div>');
+        }
+      }
+      redirect('professor/account_catalog');
 
     }
     else
@@ -324,6 +339,8 @@ class Professor extends CI_Controller {
       $data['accounts'] = $accounts;
       $data['title'] = 'Catálogo de cuentas';
       $data['accounts'] = $this->model_account->get_std_accounts();
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $data['clasifications']=$this->model_account->get_clasificacion_cuenta();
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('professor/view_catalog');
