@@ -28,12 +28,6 @@
 						}?>
 						</div>
 				<?php } ?>
-<<<<<<< Updated upstream
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" name="cuenta<?php echo $account->id_catalogo_estandar;?>" value="<?php echo $account->id_catalogo_estandar;?>">
-					<?php echo $account->nombre;?>
-=======
->>>>>>> Stashed changes
 				</div>
 			<?php } ?>
 

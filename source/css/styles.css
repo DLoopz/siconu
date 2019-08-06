@@ -36,8 +36,7 @@ select{
     height: 38px;
      
   }
-
-<<<<<<< Updated upstream
+  
 .personal-radio:checked{
 	border-color: #DE6262 !important; 
   border-radius: 50%;
@@ -65,5 +64,4 @@ select{
 .espacio-footer
 {
 	padding-top: 30px;
-
 }
