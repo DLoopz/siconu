@@ -52,6 +52,10 @@ select{
 {
 	min-height: 400px;
 }
+.container
+{
+	min-height: 400px;
+}
 
 .espacio
 {
@@ -61,5 +65,5 @@ select{
 .espacio-footer
 {
 	padding-top: 30px;
->>>>>>> Stashed changes
+
 }
