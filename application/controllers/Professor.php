@@ -297,6 +297,8 @@ class Professor extends CI_Controller {
   {
     $fields = array('usuario_id' => $this->session->userdata('id_user'));
     $catalog=$this->model_account->get_catalog($fields);
+    $data['types']=$this->model_account->get_tipo_cuenta();
+    $data['clasifications']=$this->model_account->get_clasificacion_cuenta();
     if ($catalog)//entra si el usuario ya tiene por lo menos una cuenta
     {
       $data['title'] = 'Catalogo de cuentas';

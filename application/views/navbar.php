@@ -9,8 +9,11 @@
             <button type="button" class="btn btn-outline-primary my-2 my-sm-0" aria-label="Left Align" data-toggle="tooltip1" data-placement="top" title="Limpiar Base de Datos"><strong><em><i class="icon-trash-1"></i></em></strong></button>
         <?php } elseif ($this->session->userdata('rol')==2) {?>
             <!---------------botones del profesor------------>
-            <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="btn btn-outline-primary my-2 my-sm-0" title="Editar perfil de profesor"></a>
-            <a href="<?php echo base_url();?>professor/create_account_catalog" class="btn btn-outline-primary my-2 my-sm-0" title="Catalogo de cuentas"></a>
+
+            <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="btn btn-outline-secondary my-2 my-sm-0" title="Editar perfil de profesor"><i class="icon-edit-1"></i></a>
+            <a href="<?php echo base_url('professor/account_catalog'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Catálogo de cuentas"><i class="icon-plus-2"></i></a>
+
+            
 
         <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
