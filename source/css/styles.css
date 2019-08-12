@@ -46,10 +46,6 @@ select{
   color: #fff;
   border-color: #DE6262;
   background-color: #DE6262;
-=======
-.container
-{
-	min-height: 400px;
 }
 .container
 {
@@ -64,4 +60,20 @@ select{
 .espacio-footer
 {
 	padding-top: 30px;
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+  color: #bfbfbc;
+  border-color: #bfbfbc;
+  background-color: transparent;
+}
+
+.icon-danger
+{
+	color: #DE6262;
+}
+
+.icon-danger:hover
+{
+	color: white;
 }

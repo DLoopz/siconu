@@ -26,6 +26,7 @@ class Daybook extends CI_Controller {
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('concepto','nombre del asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('fecha_asiento','fecha del asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
     $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
@@ -62,12 +63,13 @@ class Daybook extends CI_Controller {
     }
   }
 
-  public function register($id=null)
+  public function register($id_empresa=null, $id_asiento=null)
 	{
 		$data['title']="Regsitros  de Asiento";
-		$fields = array('asiento_id' => $id );
+		$fields = array('asiento_id' => $id_asiento);
 		$data['registers']=$this->model_daybook->get_registers($fields);
-		$data['id_asiento']=$id;
+		$data['id_asiento']=$id_asiento;
+    $data['id_empresa']=$id_empresa;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
 		$this->load->view('student/view_registers');
@@ -77,7 +79,7 @@ class Daybook extends CI_Controller {
 		public function add_register($id_asiento=null)
 	{
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','nombre del registro','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('cuenta','cuenta del registro','required');
     $this->form_validation->set_rules('cantidad','cantidad','required|min_length[1]|max_length[11]');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
@@ -85,12 +87,13 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    //$fields = array('usuario_id' => $this->session->userdata('id_user'), );
+    $accounts=$this->model_account->get_std_accounts(/*$fields*/);
     if (!$this->form_validation->run())
     {
     	$data['title']="Alumno: Agregar Asiento";
 			$data['id_asiento']=$id_asiento;
-			//$fields = array('usuario_id' => $this->session->userdata('id_user'), );
-			$data['accounts']=$this->model_account->get_std_accounts(/*$fields*/);
+			$data['accounts']=$accounts;
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
 			$this->load->view('student/view_add_register');
@@ -98,16 +101,27 @@ class Daybook extends CI_Controller {
     }
     else
     {
-    	$folio= $account->tipo_id.$account->clasificacion_id;
-      $fields = array(
-        'asiento_id' => $id_asiento,
-        'folio'      => $folio,
-        'catalogo_usuario_id' => $acount->catalogo_usuario_id,
-        'cuenta' => $account->cuenta,
-        'parcial' => $parcial,
-        'debe' => $debe, 	 	
-        'haber' => $haber
-      );
+      $id= $this->input->post('cuenta');
+    	$folio= $accounts[$id]->tipo_id.$accounts[$id]->clasificacion_id;
+      if ($this->input->post('movimiento')=='cargo') {
+        $fields = array(
+          'asiento_id' => $id_asiento,
+          'folio'      => $folio,
+          'catalogo_usuario_id' =>$id,
+          'cuenta' => $accounts[1]->nombre,
+          'debe' => $this->input->post('cantidad')
+        );
+      }
+      else
+      {
+        $fields = array(
+          'asiento_id' => $id_asiento,
+          'folio'      => $folio,
+          'catalogo_usuario_id' =>$id,
+          'cuenta' => $accounts[1]->nombre,
+          'haber' => $this->input->post('cantidad')
+        );
+      }
       $add=$this->model_daybook->insert_register($fields);
       if($add)
       {
@@ -117,7 +131,8 @@ class Daybook extends CI_Controller {
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
       }
-      redirect('daybook/register/'.$add->id_asiento, 'refresh');
+      $this->session->set_flashdata('id_emp',$id_empresa);
+      redirect('daybook/register/'.$id_asiento, 'refresh');
     }
   }
 }

@@ -46,7 +46,7 @@ class Professor extends CI_Controller {
         'usuario_id' => $this->session->userdata('id_user')
       );
       $add=$this->model_group->insert_group($fields);
-      if(!$add){
+      if($add){
           $this->session->set_flashdata('msg','<div class="alert alert-success"> Grupo agregado correctamente</div>');
       }else{
           $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error grupo no agregado</div>');
@@ -87,7 +87,7 @@ class Professor extends CI_Controller {
         );
         $mod= $this->model_group->update_group($fields);
         //redirect('profesor');
-        if(!$mod){
+        if($mod){
           $this->session->set_flashdata('correcto', '<div class="alert alert-success"> grupo editado correctamente</div>');
         }else{
           $this->session->set_flashdata('incorrecto', '<div class="alert alert-danger"> Error grupo no editado </div>');
@@ -229,7 +229,7 @@ class Professor extends CI_Controller {
           'matricula' => $this->input->post('matricula')
         );
         $mod= $this->model_user->update_user($fields);
-        if(!$mod){
+        if($mod){
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Alumno editado correctamente</div>');
         }else{
           $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error alumno no editado</div>');
@@ -271,7 +271,7 @@ class Professor extends CI_Controller {
         );
         $mod= $this->model_user->update_user($fields);
         //redirect('profesor');
-        if(!$mod){
+        if($mod){
           $this->session->set_flashdata('correcto', '<div class="alert alert-success">Contraseña editado correctamente</div>');
         }else{
           $this->session->set_flashdata('incorrecto', '<div class="alert alert-danger"> Error contraseña no editado</div>');
@@ -437,7 +437,7 @@ class Professor extends CI_Controller {
           'nombre' => $this->input->post('nombre'),
         );
         $mod  = $this->model_account->update_account($fields);
-        if(!$mod)
+        if($mod)
         {
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Cuenta editado correctamente</div>');
         }else{

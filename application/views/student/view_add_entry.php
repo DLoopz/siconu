@@ -13,10 +13,8 @@
 				</div>
 				<div class="form-group">
           <label>Seleccione la fecha del Asiento</label>
-          <div class="input-group">
-            <input type="date" name="fecha_asiento" class="form-control">
-            <?php echo form_error('fecha_asiento'); ?>
-          </div>
+          <input type="date" name="fecha_asiento" class="form-control" value="<?php  ?>">
+          <?php echo form_error('fecha_asiento'); ?>
         </div>
 				<input type="submit" name="add_entry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
 				<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>

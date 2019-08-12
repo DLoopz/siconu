@@ -42,4 +42,8 @@ class Model_daybook extends CI_Model
     $sql = $this->db->get_where('registro_asiento', $data);
     return $sql->result();
   }
+  public function insert_register($data)
+  {
+    return $this->db->insert('registro_asiento', $data);
+  }
 }
