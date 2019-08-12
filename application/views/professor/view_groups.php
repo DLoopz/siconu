@@ -1,5 +1,4 @@
 <div class="container col-lg-6 col-md-8">
-  <div style="float: left;"><a href="<?php echo base_url('professor/account_catalog'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catalogo de cuentas"><i class="icon-plus-2"></i></a></div>
   <div class="text-center"> 
     <h3>Lista de Grupos</h3>
   </div>
@@ -26,7 +25,7 @@
           <!--EDITAR-->
           <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar grupo"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
           <!--ELIMINAR-->
-          <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+          <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" href=""data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
           <!--VER-->
           <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver alumnos"><strong><em><i class="icon-eye"></i></em></strong></a>
           </td>
