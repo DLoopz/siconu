@@ -3,23 +3,21 @@
 	<!--<hr class="line_sep">-->
 	<div class="">
 		<?php
-        if($this->session->flashdata('msg'))
-            echo $this->session->flashdata('msg');
-        ?>
+      if($this->session->flashdata('msg'))
+        echo $this->session->flashdata('msg');
+    ?>
+  </div>
     <a href="<?php echo base_url('professor/add_account'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar cuenta"><i class="icon-plus-2"></i></a>
-
-        <?php //clasificacion_id ?>
-        <hr class="line_sep">
-		<form method="post" action="<?php echo base_url();?>professor/create_account_catalog" class="col-12">
+    <div>  
+      <hr class="line_sep">
 			<?php foreach ($types as $type) {?>
-				
-				<h3><?php echo $type->nombre; ?></h3>
+			 <h3><?php echo $type->nombre; ?></h3>
 				<hr class="line_sep">
 				<div class="row">
 				<?php foreach ($clasifications as $cla) {?>
 					<div class="col-6 espacio">
 					<?php if ($type->nombre!="Capital"){?>
-              <h5><?php echo $cla->nombre; ?></h5>
+              <h4><?php echo $cla->nombre; ?></h4>
             <?php } ?>
 					<table class="table">
             <head>
@@ -37,7 +35,7 @@
       						<td><?php echo $account->nombre;?></td>
       						<td colspan="2" class="row">
                     <!-- eliminar cuenta -->
-                    <a class="btn btn-outline-primary my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                    <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                     <!--editar cuenta-->
                   	<a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
                   </td>
@@ -52,12 +50,9 @@
 				<?php } ?>
 				</div>
 			<?php } ?>
-
-		<div class="col-4 offset-4">
-			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0">
-			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
-		</div>
-		</form>
+      <div class="col-4 offset-4">
+        <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
+      </div>
 	</div>
 </div>
 
@@ -78,7 +73,7 @@
                <form method="POST" action="<?php echo base_url() ?>professor/del_account">
                    <input type="hidden" id="eliminar" name="id_catalogo_usuario"></input>
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">                   
+                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">                   
                </form>
             </div>
         </div>

@@ -4,6 +4,8 @@
   </div>
   <hr class="line_sep">
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar alumno"><i class="icon-user-add"></i></a>
+  </br>
+  </br>
   <table class="table " id="user-table">
     <thead>
       <tr>
@@ -27,7 +29,7 @@
           <!--EDITAR password-->
           <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit-1"></i></em></strong></a>
           <!-- eliminar confirmación -->
-          <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar"><strong><em><i class="icon-user-delete"></i></em></strong></a>
+          <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar"><strong><em><i class="icon-user-delete"></i></em></strong></a>
         </td>
       </tr>
       <?php } ?>
