@@ -11,6 +11,14 @@ class Model_daybook extends CI_Model
     $sql=$this->db->get('asiento');
     return $sql->row();
   }
+  //ultimo registro
+  public function last_entry($data)
+  {
+    $this->db->select_max('id_asiento');
+    $this->db->where('empresa_id',$data['empresa_id']);
+    $sql=$this->db->get('asiento');
+    return $sql->row();
+  }
   //Ver los asientos contables registrados
   public function get_entries($data)
   {
@@ -36,7 +44,13 @@ class Model_daybook extends CI_Model
   }
 
   //registros en los asientos contables
-  //Ver los asientos contables registrados
+   //Ver todos los registros de los asientos de la empresa
+  public function get_all_registers($data)
+  {
+    $sql = $this->db->get_where('rayado_diario', $data);
+    return $sql->result();
+  }
+  //Ver los registros registrados en un asiento
   public function get_registers($data)
   {
     $sql = $this->db->get_where('registro_asiento', $data);

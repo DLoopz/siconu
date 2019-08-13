@@ -26,9 +26,9 @@
           		<!-- editar ejercicio -->
               <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit-1"></i></em></strong></a>
 	            <!-- eliminar ejercicio -->
-              <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" title="Eliminar Ejercicio"><strong><em><i class="icon-eye"></i></em></strong></a>
+              <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" href="" title="Eliminar Ejercicio"><strong><em><i class="icon-trash"></i></em></strong></a>
               <!--editar password ejercicio-->
-	            <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>daybook/book/<?php echo $exercise->id_empresa;?>" title="Administrar Ejercicio"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+	            <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>daybook/book/<?php echo $exercise->id_empresa;?>" title="Administrar Ejercicio"><strong><em><i class="icon-eye"></i></em></strong></a>
 	          </td>
 	        </tr>
 	      <?php } ?>

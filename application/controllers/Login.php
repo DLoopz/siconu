@@ -61,6 +61,7 @@ class Login extends CI_Controller
 				$newdata = array(    
 					'usuario' => $user->matricula,
 					'id_user' => $user->id_usuario,
+					'grupo' => $user->grupo_id,
 					'rol' => $user->rol,
 					'nombre'=> $user->nombre,
 					'activo' =>true

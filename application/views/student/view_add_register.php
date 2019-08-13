@@ -1,12 +1,12 @@
 <div class="container col-md-6">
 	<h3>Ingresar registro</h3>
 	<hr class="line_sep">
-	<form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa?>/<?php echo $id_asiento;?>">
+	<form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
 		<div class="form-group">
 			Cuenta
 			<select class="form-control" name="cuenta">
 				<?php foreach ($accounts as $account) {?>
-		  		<option value="<?php echo $account->id_catalogo_estandar;?>"><?php echo $account->nombre;?></option>
+		  		<option value="<?php echo $account->id_catalogo_usuario;?>"><?php echo $account->nombre;?></option>
 		  	<?php } ?>
 			</select>
 			<?php echo form_error('cuenta') ?>
@@ -27,16 +27,16 @@
 		</div>
 		<div class="form-group">
 			<div class="custom-control custom-radio custom-control-inline col-5">
-			  <input type="radio" id="cargo" name="movimiento" class="custom-control-input" checked>
+			  <input type="radio" id="cargo" name="movimiento" class="custom-control-input" value="cargo" checked>
 			  <label class="custom-control-label" for="cargo">Cargo</label>
 			</div>
 			<div class="custom-control custom-radio custom-control-inline col-5">
-			  <input type="radio" id="abono" name="movimiento" class="custom-control-input">
+			  <input type="radio" id="abono" name="movimiento" class="custom-control-input" value="abono">
 			  <label class="custom-control-label" for="abono">Abono</label>
 			</div>
 		</div>
 		<input type="submit" name="add_resgistry" value="Registrar" class="btn btn-outline-success my-2 my-sm-0">
-		<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+		<a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
 	</form>
 </div>
 

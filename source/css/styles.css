@@ -5,7 +5,7 @@
 	border-color: #DE6262;
 }
 .btn-outline-primary:hover {
-	color: #fff;
+	color: #fff !important;
 	background-color: #DE6262;
 	border-color: #DE6262;
 }
@@ -66,14 +66,4 @@ select{
   color: #bfbfbc;
   border-color: #bfbfbc;
   background-color: transparent;
-}
-
-.icon-danger
-{
-	color: #DE6262;
-}
-
-.icon-danger:hover
-{
-	color: white;
 }

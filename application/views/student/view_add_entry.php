@@ -8,18 +8,18 @@
 			<form method="post"  action="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa;?>">
 				<div class="form-group">
 					Nombre del Asiento:
-					<input type="text" name="concepto" class="form-control" placeholder="Nombre del Asiento">
+					<input type="text" name="concepto" class="form-control" placeholder="Nombre del Asiento" value="<?php echo set_value('concepto');?>">
 					<?php echo form_error('concepto'); ?>
 				</div>
 				<div class="form-group">
           <label>Seleccione la fecha del Asiento</label>
-          <input type="date" name="fecha_asiento" class="form-control" value="<?php  ?>">
+          <input type="date" name="fecha_asiento" class="form-control" value="<?php echo set_value('fecha_asiento');?>">
           <?php echo form_error('fecha_asiento'); ?>
         </div>
 				<input type="submit" name="add_entry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
-				<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+				<a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
 			</form>
 		</div>
 	</div>
 	<hr>
-</div>	
+</div>		

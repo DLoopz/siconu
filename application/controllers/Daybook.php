@@ -15,6 +15,7 @@ class Daybook extends CI_Controller {
 		$data['title']="Rayado Diario";
 		$fields = array('empresa_id' => $id );
 		$data['entries']=$this->model_daybook->get_entries($fields);
+    $data['registers']=$this->model_daybook->get_all_registers($fields);
 		$data['id_empresa']=$id;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
@@ -58,8 +59,8 @@ class Daybook extends CI_Controller {
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no agregado</div>');
       }
-      $this->session->set_flashdata('id_emp',$id_empresa);
-      redirect('daybook/register/'.$add->id_asiento, 'refresh');
+      //$this->session->set_flashdata('id_emp',$id_empresa);
+      redirect('daybook/register/'.$id_empresa.'/'.$add->id_asiento, 'refresh');
     }
   }
 
@@ -76,7 +77,7 @@ class Daybook extends CI_Controller {
 		$this->load->view('foot');
 	}
 
-		public function add_register($id_asiento=null)
+	public function add_register($id_empresa=null,$id_asiento=null)
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
@@ -87,12 +88,13 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    //$fields = array('usuario_id' => $this->session->userdata('id_user'), );
-    $accounts=$this->model_account->get_std_accounts(/*$fields*/);
+    $fields = array('usuario_id' => $this->session->userdata('grupo'), );
+    $accounts=$this->model_account->get_catalog($fields);
     if (!$this->form_validation->run())
     {
     	$data['title']="Alumno: Agregar Asiento";
 			$data['id_asiento']=$id_asiento;
+      $data['id_empresa']=$id_empresa;
 			$data['accounts']=$accounts;
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
@@ -102,13 +104,18 @@ class Daybook extends CI_Controller {
     else
     {
       $id= $this->input->post('cuenta');
-    	$folio= $accounts[$id]->tipo_id.$accounts[$id]->clasificacion_id;
+      for ($i=0; $i < count($accounts); $i++) { 
+        if ($accounts[$i]->id_catalogo_usuario==$id){
+          $a=$i;
+        }
+      }
+    	$folio= ($accounts[$a]->tipo_id*1000)+($accounts[$a]->clasificacion_id*100)+$a+1;
       if ($this->input->post('movimiento')=='cargo') {
         $fields = array(
           'asiento_id' => $id_asiento,
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
-          'cuenta' => $accounts[1]->nombre,
+          'cuenta' => $accounts[$a]->nombre,
           'debe' => $this->input->post('cantidad')
         );
       }
@@ -118,7 +125,7 @@ class Daybook extends CI_Controller {
           'asiento_id' => $id_asiento,
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
-          'cuenta' => $accounts[1]->nombre,
+          'cuenta' => $accounts[$a]->nombre,
           'haber' => $this->input->post('cantidad')
         );
       }
@@ -131,8 +138,24 @@ class Daybook extends CI_Controller {
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
       }
-      $this->session->set_flashdata('id_emp',$id_empresa);
-      redirect('daybook/register/'.$id_asiento, 'refresh');
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
     }
+  }
+
+  public function delete_entry($id_empresa=null,$id_asiento=null)
+  {
+    $fields = array('empresa_id' =>$id_empresa);
+    $del=$this->model_daybook->last_entry($fields);
+    $fields = array('id_asiento' => $del->id_asiento);
+    $del=$this->model_daybook->delete_entry($fields);
+    if($del)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      }
+      redirect('daybook/book/'.$id_empresa, 'refresh');
   }
 }
