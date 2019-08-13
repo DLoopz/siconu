@@ -330,7 +330,9 @@ class Professor extends CI_Controller {
           );
           $acc=$this->model_account->insert_account($fields);
 
-          $retVal = ($acc) ? $this->session->set_flashdata('msg', '<div class="alert alert-success">Cuentas seleccionadas</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-danger">No ha seleccionado ninguna cuenta</div>');
+          $retVal = ($acc) ? $this->session->set_flashdata('msg', '<div class="alert alert-danger">No ha seleccionado ninguna cuenta</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-success">Cuentas seleccionadas</div>');
+        }else{
+          //redirect('professor/add_account');
         }
       }
       redirect('professor/account_catalog');
@@ -355,16 +357,17 @@ class Professor extends CI_Controller {
    public function add_account()
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','nombre','required|min_length[3]|alpha|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    $this->form_validation->set_rules('nombre','nombre','required|min_length[3]|alpha_numeric_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]',array('required' => 'El campo %s es obligatorio' ));
     $this->form_validation->set_rules('tipo','tipo de cuenta','required');
      $this->form_validation->set_rules('clasificacion','clasificacion de cuenta','required');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('required', 'Este campo debe tener un valor diferente al predeterminado');
     $this->form_validation->set_message('is_unique', 'El %s ya existe');
-    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener letras');
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('alpha_numeric_spaces', 'El campo %s no acepta caracteres especiales');
     $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+   
+
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())

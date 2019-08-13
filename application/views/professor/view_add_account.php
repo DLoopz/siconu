@@ -12,22 +12,22 @@
 				<div class="form-group">
           <label>Elige el tipo de la cuenta</label>
           <br>
-        	<select  class="col-md-12" name="tipo" class="form-group"> 
-            <option name="tipo">Selecciona una opción</option>
+        	<select  class="form-control" name="tipo" class="form-group"> 
+            <option value="" >Selecciona una opción</option>
             	<?php foreach($view_tipo as $row){?>
-            <option  value="<?php echo $row->id_tipo;?>" >
+            		<option  value="<?php echo $row->id_tipo;?>" >
                 <?php echo $row->nombre;?></option><?php } ?>
           </select>
-         <?php echo form_error('tipo');?></div>
+         <?php echo form_error('tipo');?>
+        </div>
         <div class="form-group">
-            <label>Elige la clasificacion de la cuenta</label>
-            <br>
-          	<select  class="col-md-12" name="clasificacion" class="form-group"> 
-              <option>Selecciona una opción</option>
-              	<?php foreach($view_clasificacion as $row){?>
+          <label>Elige la clasificacion de la cuenta</label>
+          <select  class="form-control" name="clasificacion" class="form-group"> 
+            <option value="" >Selecciona una opción</option>
+            <?php foreach($view_clasificacion as $row){?>
               <option name="clasificacion" value="<?php echo $row->id_clasificacion;?>" >
-                  <?php echo $row->nombre;?></option><?php } ?>
-            </select>
+              <?php echo $row->nombre;?></option><?php } ?>
+          </select>
              <?php echo form_error('clasificacion');?>
         </div>
 				<div class="form-group">
@@ -36,7 +36,7 @@
 					<?php echo form_error('nombre'); ?>
 				</div>
 				<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-				<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+				<a href="<?php echo base_url()?>professor/account_catalog"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
 			</form>
 		</div>
 	</div>

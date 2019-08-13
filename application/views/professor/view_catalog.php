@@ -12,13 +12,13 @@
         <?php //clasificacion_id ?>
 		<form method="post" action="<?php echo base_url();?>professor/create_account_catalog" class="col-12">
 			<?php foreach ($types as $type) {?>
-				<h4><?php echo $type->nombre; ?></h4>
+				<h3><?php echo $type->nombre; ?></h3>
 				<hr class="line_sep">
 				<div class="row">
 				<?php foreach ($clasifications as $cla) {?>
-					<div class="col-4 espacio">
+					<div class="col-6 espacio">
 						<?php if ($type->nombre!="Capital"){?>
-							<h5><?php echo $cla->nombre; ?></h5>
+							<h4><?php echo $cla->nombre; ?></h4>
 						<?php } ?>
 					
 						<?php foreach ($accounts as $account){
@@ -35,12 +35,12 @@
 			<?php } ?>
 			<hr class="line_sep">
 			<div class="checkbox">
-				<input  type="checkbox" id="checkall"/>Seleccionar todos<br>
+				<input  class="checkitem" type="checkbox" id="checkall"/>Seleccionar todos<br>
 			</div>
 
 		<div class="col-4 offset-4">
 			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0">
-			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
 		</div>
 		</form>
 	</div>
