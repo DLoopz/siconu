@@ -17,7 +17,7 @@
 				<div class="row">
 				<?php foreach ($clasifications as $cla) {?>
 					<div class="col-6 espacio">
-						<?php if ($type->nombre!="Capital"){?>
+						<?php if ($type->id_tipo!=3){?>
 							<h4><?php echo $cla->nombre; ?></h4>
 						<?php } ?>
 					

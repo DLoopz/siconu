@@ -81,7 +81,7 @@ class Daybook extends CI_Controller {
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
-    $this->form_validation->set_rules('cantidad','cantidad','required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('cantidad','cantidad','numeric|required|min_length[1]|max_length[11]');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
     $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
@@ -157,5 +157,79 @@ class Daybook extends CI_Controller {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
       }
       redirect('daybook/book/'.$id_empresa, 'refresh');
+  }
+
+  public function delet_entry($id_empresa=null)
+  {
+    $fields = array('id_asiento' => $this->input->post('id_entry'));
+    $del=$this->model_daybook->delete_entry($fields);
+    if($del)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      }
+      redirect('daybook/book/'.$id_empresa, 'refresh');
+  }
+
+  public function delete_register($id_empresa=null,$id_asiento=null)
+  {
+    $fields = array('id_registro' => $this->input->post('id_register'));
+    $del=$this->model_daybook->delete_register($fields);
+    if($del)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      }
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+  }
+
+  public function edit_entry($id_empresa=null,$id_asiento=null)
+  {
+    //se establecen reglas de validacion
+    $this->form_validation->set_rules('concepto','nombre del asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('fecha_asiento','fecha del asiento','required');
+    //personalizacion de reglas de validacion
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
+    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    if (!$this->form_validation->run())
+    {
+      $data['title']="Alumno: Agregar Asiento";
+      $data['id_empresa']=$id_empresa;
+      $fields = array('id_asiento' => $id_asiento);
+      $data['entry']=$this->model_daybook->get_entry($fields);
+      $this->load->view('head',$data);
+      $this->load->view('navbar');
+      $this->load->view('student/view_upd_entry');
+      $this->load->view('foot');
+    }
+    else
+    {
+      $fields = array(
+        'id_asiento' => $id_asiento,
+        'empresa_id' => $id_empresa,
+        'concepto' => $this->input->post('concepto'),
+        'fecha' => $this->input->post('fecha_asiento') 
+      );
+      $upd=$this->model_daybook->update_entry($fields);
+      if($upd)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento modificado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no modificado</div>');
+      }
+      //$this->session->set_flashdata('id_emp',$id_empresa);
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+    }
   }
 }

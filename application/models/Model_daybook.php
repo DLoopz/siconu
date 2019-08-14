@@ -34,7 +34,7 @@ class Model_daybook extends CI_Model
   //Actualizar asiento contable
   public function update_entry($data)
   {
-    $this->db->where('id', $data['id']);
+    $this->db->where('id_asiento', $data['id_asiento']);
     return $this->db->update('asiento', $data);
   }
   //Eliminar asiento contable
@@ -60,4 +60,10 @@ class Model_daybook extends CI_Model
   {
     return $this->db->insert('registro_asiento', $data);
   }
+    //Eliminar asiento contable
+  public function delete_register($data)
+  {
+    return $this->db->delete( 'registro_asiento' , $data );
+  }
+
 }

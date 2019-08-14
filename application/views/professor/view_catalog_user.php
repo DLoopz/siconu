@@ -8,52 +8,52 @@
     ?>
   </div>
     <a href="<?php echo base_url('professor/add_account'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar cuenta"><i class="icon-plus-2"></i></a>
-    <div>  
+    <hr class="line_sep">
+  <div> 
+    <?php $flag=0; foreach ($types as $type) {?>
+      <h3><?php echo $type->nombre; ?></h3>
       <hr class="line_sep">
-			<?php foreach ($types as $type) {?>
-			 <h3><?php echo $type->nombre; ?></h3>
-				<hr class="line_sep">
-				<div class="row">
-				<?php foreach ($clasifications as $cla) {?>
-					<div class="col-6 espacio">
-					<?php if ($type->nombre!="Capital"){?>
+      <div class="row">
+        <?php foreach ($clasifications as $cla) {?>
+          <div class="col-6 espacio">
+          <?php if ($type->id_tipo!=3){?>
               <h4><?php echo $cla->nombre; ?></h4>
-            <?php } ?>
-					<table class="table">
-            <head>
-              <tr>
-                <td>Folio</td>
-                <td>Cuenta</td>
-                <td colspan="2">Opciones</td>
-              </tr>
-            </head>
-						<tbody>
-						<?php $i=0; foreach ($accounts as $account){ $i++;
-							if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {?>
-							<tr>
-                  <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$i; echo $folio; ?></td>
-      						<td><?php echo $account->nombre;?></td>
-      						<td colspan="2" class="row">
-                    <!-- eliminar cuenta -->
-                    <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-                    <!--editar cuenta-->
-                  	<a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+            <?php }else{$flag++;} ?>
+            <?php if ($flag<2) {?> 
+              <table class="table">
+                <head>
+                  <tr>
+                    <td>Folio</td>
+                    <td>Cuenta</td>
+                    <td colspan="2">Opciones</td>
+                  </tr>
+                </head>
+              	<tbody>
+                <?php $j=0; foreach ($accounts as $account){
+                if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {$j++;?>
+                  <tr>
+                  <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
+                  <td><?php echo $account->nombre;?></td>
+                  <td colspan="2" class="row">
+                  <!-- eliminar cuenta -->
+                  <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                  <!--editar cuenta-->
+                  <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
                   </td>
-                  
-                 </tr>
-        					
-				<?php	}
-						}?>
-						</tbody>
-						</table>
-						</div>
-				<?php } ?>
-				</div>
-			<?php } ?>
-      <div class="col-4 offset-4">
-        <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
+                  </tr>
+                <?php	}
+                }?>
+              	</tbody>
+              </table>
+            <?php } ?>
+          </div>
+        <?php } ?>
       </div>
-	</div>
+    <?php } ?>
+    <div class="col-4 offset-4">
+    <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 col-12">Volver</button></a>
+    </div>
+  </div>
 </div>
 
 <!-- Modal de confirmación -->
