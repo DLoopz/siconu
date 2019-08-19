@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-08-2019 a las 11:34:47
+-- Tiempo de generación: 19-08-2019 a las 11:53:09
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -262,6 +262,18 @@ CREATE TABLE `parcial` (
 --
 DROP VIEW IF EXISTS `rayado_diario`;
 CREATE TABLE `rayado_diario` (
+`id_asiento` int(11)
+,`empresa_id` int(11)
+,`descripcion` varchar(50)
+,`fecha` date
+,`id_registro` int(11)
+,`asiento_id` int(11)
+,`folio` varchar(50)
+,`catalogo_usuario_id` int(11)
+,`cuenta` varchar(50)
+,`parcial` float
+,`debe` float
+,`haber` float
 );
 
 -- --------------------------------------------------------
@@ -449,7 +461,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `rayado_diario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rayado_diario`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`concepto` AS `concepto`,`asiento`.`fecha` AS `fecha`,`registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber` from (`asiento` join `registro_asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rayado_diario`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`descripcion` AS `descripcion`,`asiento`.`fecha` AS `fecha`,`registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber` from (`asiento` join `registro_asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
 
 --
 -- Índices para tablas volcadas

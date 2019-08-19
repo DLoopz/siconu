@@ -9,9 +9,9 @@ class Model_exercise extends CI_Model
     return $this->db->insert('empresa', $data);
   }
   //Ver los ejercicios registrados
-  public function get_exercises()
+  public function get_exercises($data)
   {
-    $sql = $this->db->get_where('empresa');
+    $sql = $this->db->get_where('empresa',$data);
     return $sql->result();
   }
   //Ver ejercicio registrado

@@ -65,7 +65,7 @@
 					    	<td></td>
 					    	<td><?php echo $entry->fecha;?></td>
 					    	<td></td>
-					    	<th><?php echo $entry->concepto;?></th>
+					    	<th><?php echo $entry->descripcion;?></th>
 					    	<td></td>
 					    	<td></td>
 					    	<td></td>

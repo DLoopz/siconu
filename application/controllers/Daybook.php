@@ -48,7 +48,7 @@ class Daybook extends CI_Controller {
     {
       $fields = array(
         'empresa_id' => $id_empresa,
-        'concepto' => $this->input->post('concepto'),
+        'descripcion' => $this->input->post('concepto'),
         'fecha' => $this->input->post('fecha_asiento') 
       );
       $add=$this->model_daybook->insert_entry($fields);
@@ -91,7 +91,7 @@ class Daybook extends CI_Controller {
       $fields = array(
         'id_asiento' => $id_asiento,
         'empresa_id' => $id_empresa,
-        'concepto' => $this->input->post('concepto'),
+        'descripcion' => $this->input->post('concepto'),
         'fecha' => $this->input->post('fecha_asiento') 
       );
       $upd=$this->model_daybook->update_entry($fields);
@@ -415,7 +415,7 @@ class Daybook extends CI_Controller {
     {
       $fields = array(
           'registro_id' => $id_registro,
-          'concepto' => $this->input->post('concepto'),
+          'descripcion' => $this->input->post('concepto'),
           'cantidad' =>$this->input->post('cantidad')
         );
       $add=$this->model_daybook->insert_register_partial($fields);
