@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-08-2019 a las 11:00:38
+-- Tiempo de generación: 19-08-2019 a las 11:34:47
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -33,21 +33,15 @@ DROP TABLE IF EXISTS `asiento`;
 CREATE TABLE `asiento` (
   `id_asiento` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
-  `concepto` varchar(50) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `asiento`:
---   `empresa_id`
---       `empresa` -> `id_empresa`
---
 
 --
 -- Volcado de datos para la tabla `asiento`
 --
 
-INSERT INTO `asiento` (`id_asiento`, `empresa_id`, `concepto`, `fecha`) VALUES
+INSERT INTO `asiento` (`id_asiento`, `empresa_id`, `descripcion`, `fecha`) VALUES
 (42, 9, 'Primer movimiento', '2019-08-14'),
 (47, 9, 'segundo movimiento', '2019-08-15'),
 (48, 9, 'prueba parcial', '2019-08-15');
@@ -65,14 +59,6 @@ CREATE TABLE `catalogo_estandar` (
   `clasificacion_id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `catalogo_estandar`:
---   `tipo_id`
---       `tipo_cuenta` -> `id_tipo`
---   `clasificacion_id`
---       `clasificacion_cuenta` -> `id_clasificacion`
---
 
 --
 -- Volcado de datos para la tabla `catalogo_estandar`
@@ -125,14 +111,6 @@ CREATE TABLE `catalogo_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- RELACIONES PARA LA TABLA `catalogo_usuario`:
---   `clasificacion_id`
---       `clasificacion_cuenta` -> `id_clasificacion`
---   `tipo_id`
---       `tipo_cuenta` -> `id_tipo`
---
-
---
 -- Volcado de datos para la tabla `catalogo_usuario`
 --
 
@@ -181,10 +159,6 @@ CREATE TABLE `clasificacion_cuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- RELACIONES PARA LA TABLA `clasificacion_cuenta`:
---
-
---
 -- Volcado de datos para la tabla `clasificacion_cuenta`
 --
 
@@ -206,10 +180,6 @@ CREATE TABLE `empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- RELACIONES PARA LA TABLA `empresa`:
---
-
---
 -- Volcado de datos para la tabla `empresa`
 --
 
@@ -228,10 +198,6 @@ CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `grupo`:
---
 
 --
 -- Volcado de datos para la tabla `grupo`
@@ -270,11 +236,7 @@ CREATE TABLE `grupos_usuarios` (
 --
 DROP VIEW IF EXISTS `parcial`;
 CREATE TABLE `parcial` (
-`id_asiento` int(11)
-,`empresa_id` int(11)
-,`descripcion` varchar(50)
-,`fecha` date
-,`id_registro` int(11)
+`id_registro` int(11)
 ,`asiento_id` int(11)
 ,`folio` varchar(50)
 ,`catalogo_usuario_id` int(11)
@@ -286,6 +248,10 @@ CREATE TABLE `parcial` (
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
 ,`cantidad` float
+,`id_asiento` int(11)
+,`empresa_id` int(11)
+,`descripcion` varchar(50)
+,`fecha` date
 );
 
 -- --------------------------------------------------------
@@ -296,18 +262,6 @@ CREATE TABLE `parcial` (
 --
 DROP VIEW IF EXISTS `rayado_diario`;
 CREATE TABLE `rayado_diario` (
-`id_asiento` int(11)
-,`empresa_id` int(11)
-,`concepto` varchar(50)
-,`fecha` date
-,`id_registro` int(11)
-,`asiento_id` int(11)
-,`folio` varchar(50)
-,`catalogo_usuario_id` int(11)
-,`cuenta` varchar(50)
-,`parcial` float
-,`debe` float
-,`haber` float
 );
 
 -- --------------------------------------------------------
@@ -327,14 +281,6 @@ CREATE TABLE `registro_asiento` (
   `debe` float NOT NULL DEFAULT '0',
   `haber` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `registro_asiento`:
---   `asiento_id`
---       `asiento` -> `id_asiento`
---   `catalogo_usuario_id`
---       `catalogo_usuario` -> `id_catalogo_usuario`
---
 
 --
 -- Volcado de datos para la tabla `registro_asiento`
@@ -364,10 +310,6 @@ CREATE TABLE `registro_parcial` (
   `concepto` varchar(50) NOT NULL,
   `cantidad` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `registro_parcial`:
---
 
 --
 -- Volcado de datos para la tabla `registro_parcial`
@@ -408,12 +350,6 @@ CREATE TABLE `tarjeta_almacen` (
   `maximo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELACIONES PARA LA TABLA `tarjeta_almacen`:
---   `empresa_id`
---       `empresa` -> `id_empresa`
---
-
 -- --------------------------------------------------------
 
 --
@@ -425,10 +361,6 @@ CREATE TABLE `tipo_cuenta` (
   `id_tipo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `tipo_cuenta`:
---
 
 --
 -- Volcado de datos para la tabla `tipo_cuenta`
@@ -457,10 +389,6 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- RELACIONES PARA LA TABLA `usuario`:
---
-
---
 -- Volcado de datos para la tabla `usuario`
 --
 
@@ -485,14 +413,6 @@ CREATE TABLE `usuario_grupo` (
   `usuario_id` int(11) NOT NULL,
   `grupo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `usuario_grupo`:
---   `grupo_id`
---       `grupo` -> `id_grupo`
---   `usuario_id`
---       `usuario` -> `id_usuario`
---
 
 --
 -- Volcado de datos para la tabla `usuario_grupo`
@@ -520,7 +440,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `parcial`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parcial`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`concepto` AS `descripcion`,`asiento`.`fecha` AS `fecha`,`parcial`.`id_registro` AS `id_registro`,`parcial`.`asiento_id` AS `asiento_id`,`parcial`.`folio` AS `folio`,`parcial`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`parcial`.`cuenta` AS `cuenta`,`parcial`.`parcial` AS `parcial`,`parcial`.`debe` AS `debe`,`parcial`.`haber` AS `haber`,`parcial`.`id_parcial` AS `id_parcial`,`parcial`.`registro_id` AS `registro_id`,`parcial`.`concepto` AS `concepto`,`parcial`.`cantidad` AS `cantidad` from (`asiento` join (select `registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber`,`registro_parcial`.`id_parcial` AS `id_parcial`,`registro_parcial`.`registro_id` AS `registro_id`,`registro_parcial`.`concepto` AS `concepto`,`registro_parcial`.`cantidad` AS `cantidad` from (`registro_asiento` join `registro_parcial` on((`registro_asiento`.`id_registro` = `registro_parcial`.`registro_id`)))) `parcial` on((`asiento`.`id_asiento` = `parcial`.`asiento_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parcial`  AS  select `registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber`,`registro_parcial`.`id_parcial` AS `id_parcial`,`registro_parcial`.`registro_id` AS `registro_id`,`registro_parcial`.`concepto` AS `concepto`,`registro_parcial`.`cantidad` AS `cantidad`,`asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`descripcion` AS `descripcion`,`asiento`.`fecha` AS `fecha` from ((`registro_asiento` join `registro_parcial` on((`registro_asiento`.`id_registro` = `registro_parcial`.`registro_id`))) join `asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
 
 -- --------------------------------------------------------
 
