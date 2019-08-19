@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-08-2019 a las 10:15:59
+-- Tiempo de generación: 19-08-2019 a las 11:00:38
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -38,6 +38,12 @@ CREATE TABLE `asiento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `asiento`:
+--   `empresa_id`
+--       `empresa` -> `id_empresa`
+--
+
+--
 -- Volcado de datos para la tabla `asiento`
 --
 
@@ -59,6 +65,14 @@ CREATE TABLE `catalogo_estandar` (
   `clasificacion_id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `catalogo_estandar`:
+--   `tipo_id`
+--       `tipo_cuenta` -> `id_tipo`
+--   `clasificacion_id`
+--       `clasificacion_cuenta` -> `id_clasificacion`
+--
 
 --
 -- Volcado de datos para la tabla `catalogo_estandar`
@@ -111,6 +125,14 @@ CREATE TABLE `catalogo_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `catalogo_usuario`:
+--   `clasificacion_id`
+--       `clasificacion_cuenta` -> `id_clasificacion`
+--   `tipo_id`
+--       `tipo_cuenta` -> `id_tipo`
+--
+
+--
 -- Volcado de datos para la tabla `catalogo_usuario`
 --
 
@@ -159,6 +181,10 @@ CREATE TABLE `clasificacion_cuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `clasificacion_cuenta`:
+--
+
+--
 -- Volcado de datos para la tabla `clasificacion_cuenta`
 --
 
@@ -180,6 +206,10 @@ CREATE TABLE `empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `empresa`:
+--
+
+--
 -- Volcado de datos para la tabla `empresa`
 --
 
@@ -198,6 +228,10 @@ CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `grupo`:
+--
 
 --
 -- Volcado de datos para la tabla `grupo`
@@ -295,6 +329,14 @@ CREATE TABLE `registro_asiento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `registro_asiento`:
+--   `asiento_id`
+--       `asiento` -> `id_asiento`
+--   `catalogo_usuario_id`
+--       `catalogo_usuario` -> `id_catalogo_usuario`
+--
+
+--
 -- Volcado de datos para la tabla `registro_asiento`
 --
 
@@ -322,6 +364,10 @@ CREATE TABLE `registro_parcial` (
   `concepto` varchar(50) NOT NULL,
   `cantidad` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `registro_parcial`:
+--
 
 --
 -- Volcado de datos para la tabla `registro_parcial`
@@ -362,6 +408,12 @@ CREATE TABLE `tarjeta_almacen` (
   `maximo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- RELACIONES PARA LA TABLA `tarjeta_almacen`:
+--   `empresa_id`
+--       `empresa` -> `id_empresa`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -373,6 +425,10 @@ CREATE TABLE `tipo_cuenta` (
   `id_tipo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `tipo_cuenta`:
+--
 
 --
 -- Volcado de datos para la tabla `tipo_cuenta`
@@ -401,6 +457,10 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `usuario`:
+--
+
+--
 -- Volcado de datos para la tabla `usuario`
 --
 
@@ -409,7 +469,9 @@ INSERT INTO `usuario` (`id_usuario`, `rol`, `nombre`, `apellido_paterno`, `apell
 (19, 2, 'DavidM', 'Lopez', 'Polanco', 'dloopz16@gmail.com', '698d51a19d8a121ce581499d7b701668'),
 (21, 3, 'aaa', 'aaa', 'aaa', '12345', '25d55ad283aa400af464c76d713c07ad'),
 (25, 3, 'ccc', 'ccc', 'ccc', '12368', '25d55ad283aa400af464c76d713c07ad'),
-(27, 3, 'aaa', 'aaa', 'aaa', '0114010005', '25d55ad283aa400af464c76d713c07ad');
+(27, 3, 'aaa', 'aaa', 'aaa', '0114010005', '25d55ad283aa400af464c76d713c07ad'),
+(28, 2, 'profesor', 'profesor', 'profesor', 'asas@gmail.com', 'dda5ad8a4da8b217e69db78e02951256'),
+(29, 2, 'profesor', 'profesor', 'profesor', 'prosor1@homail.com', '1b129ef22981d8a624f451b88ef37371');
 
 -- --------------------------------------------------------
 
@@ -423,6 +485,14 @@ CREATE TABLE `usuario_grupo` (
   `usuario_id` int(11) NOT NULL,
   `grupo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `usuario_grupo`:
+--   `grupo_id`
+--       `grupo` -> `id_grupo`
+--   `usuario_id`
+--       `usuario` -> `id_usuario`
+--
 
 --
 -- Volcado de datos para la tabla `usuario_grupo`
@@ -609,7 +679,7 @@ ALTER TABLE `tipo_cuenta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `usuario_grupo`
 --

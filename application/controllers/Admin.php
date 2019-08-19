@@ -106,8 +106,8 @@ class Admin extends CI_Controller
         $this->email->to($correo);
         $this->email->subject('Usuario del sistema FEP');
         $this->email->message('Su usuario de ingreso es: '.$correo.', Su contraseña es: profesor'.$num);
-        $this->email->send();
-        if($add==true)
+        $send=$this->email->send();
+        if($add and $send)
         {
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Profesor añadido exitosamente</div>');
         }

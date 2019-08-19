@@ -10,6 +10,7 @@
 					<div class="text-center"><?php echo $regsiter->cuenta; ?></div>
 					<hr>
 			<?php } ?>
+			
 		<?php }
 		?>
 		
