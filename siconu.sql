@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-08-2019 a las 14:06:48
+-- Tiempo de generación: 19-08-2019 a las 10:15:59
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
--- Versión de PHP: 7.2.19-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,8 +42,9 @@ CREATE TABLE `asiento` (
 --
 
 INSERT INTO `asiento` (`id_asiento`, `empresa_id`, `concepto`, `fecha`) VALUES
-(1, 7, 'sssdfcsdfs', '2019-08-20'),
-(2, 7, 'dasdasd', '0000-00-00');
+(42, 9, 'Primer movimiento', '2019-08-14'),
+(47, 9, 'segundo movimiento', '2019-08-15'),
+(48, 9, 'prueba parcial', '2019-08-15');
 
 -- --------------------------------------------------------
 
@@ -80,10 +81,10 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 (15, 1, 2, 'Mobiliario y equipo de oficina'),
 (16, 1, 2, 'Equipo de cómputo '),
 (17, 1, 2, 'Equipo de transporte'),
-(18, 2, 2, 'Equipo de reparto'),
-(19, 2, 2, 'Gastos de constitución'),
-(20, 2, 2, 'Gastos de instalación'),
-(21, 2, 2, 'Depósitos en garantía'),
+(18, 1, 2, 'Equipo de reparto'),
+(19, 1, 2, 'Gastos de constitución'),
+(20, 1, 2, 'Gastos de instalación'),
+(21, 1, 2, 'Depósitos en garantía'),
 (22, 2, 1, 'Proveedores'),
 (23, 2, 1, 'Documentos por pagar '),
 (24, 2, 1, 'Acreedores diversos'),
@@ -91,8 +92,8 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 (26, 2, 1, 'Intereses cobrados por anticipado'),
 (27, 2, 2, 'Hipotecas por pagar'),
 (28, 2, 2, 'Documentos por pagar largo plazo'),
-(29, 3, 3, 'Capital contribuido'),
-(30, 3, 3, 'Capital ganado');
+(31, 3, 1, 'capital ganado'),
+(32, 3, 1, 'capital contribuido');
 
 -- --------------------------------------------------------
 
@@ -114,21 +115,36 @@ CREATE TABLE `catalogo_usuario` (
 --
 
 INSERT INTO `catalogo_usuario` (`id_catalogo_usuario`, `tipo_id`, `clasificacion_id`, `nombre`, `usuario_id`) VALUES
-(1, 1, 1, 'Caja', 26),
-(23, 1, 1, 'Bancos', 26),
-(24, 1, 1, 'Mercancías', 26),
-(25, 1, 1, 'Documentos por cobrar', 26),
-(26, 1, 1, 'Propaganda y publicidad', 26),
-(27, 1, 2, 'Edificios', 26),
-(28, 1, 2, 'Mobiliario y equipo de oficina', 26),
-(29, 2, 2, 'Gastos de constitución', 26),
-(30, 2, 2, 'Depósitos en garantía', 26),
-(31, 2, 1, 'Documentos por pagar ', 26),
-(32, 2, 1, 'Acreedores diversos', 26),
-(33, 2, 1, 'Rentas cobradas por anticipado', 26),
-(34, 3, 3, 'Capital contribuido', 26),
-(35, 3, 3, 'Capital ganado', 26),
-(37, 1, 1, 'cajachica', 26);
+(97, 1, 1, 'Caja', 19),
+(98, 1, 1, 'Bancos', 19),
+(99, 1, 1, 'Mercancías', 19),
+(100, 1, 1, 'Clientes', 19),
+(101, 1, 1, 'Documentos por cobrar', 19),
+(102, 1, 1, 'Deudores diversos', 19),
+(103, 1, 1, 'Papelería y útiles', 19),
+(104, 1, 1, 'Propaganda y publicidad', 19),
+(105, 1, 1, 'Primas de seguros', 19),
+(106, 1, 1, 'Rentas pagadas por anticipado', 19),
+(107, 1, 1, 'Intereses pagados por anticipado', 19),
+(108, 1, 2, 'Terrenos', 19),
+(109, 1, 2, 'Edificios', 19),
+(110, 1, 2, 'Mobiliario y equipo de oficina', 19),
+(111, 1, 2, 'Equipo de cómputo ', 19),
+(112, 1, 2, 'Equipo de transporte', 19),
+(113, 1, 2, 'Equipo de reparto', 19),
+(114, 1, 2, 'Gastos de constitución', 19),
+(115, 1, 2, 'Gastos de instalación', 19),
+(116, 1, 2, 'Depósitos en garantía', 19),
+(117, 2, 1, 'Proveedores', 19),
+(118, 2, 1, 'Documentos por pagar ', 19),
+(119, 2, 1, 'Acreedores diversos', 19),
+(120, 2, 1, 'Rentas cobradas por anticipado', 19),
+(121, 2, 1, 'Intereses cobrados por anticipado', 19),
+(122, 2, 2, 'Hipotecas por pagar', 19),
+(123, 2, 2, 'Documentos por pagar largo plazo', 19),
+(124, 3, 1, 'capital ganado', 19),
+(125, 3, 1, 'capital contribuido', 19),
+(126, 1, 1, 'Caja chica', 19);
 
 -- --------------------------------------------------------
 
@@ -148,8 +164,7 @@ CREATE TABLE `clasificacion_cuenta` (
 
 INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 (1, 'Circulante'),
-(2, 'No circulante'),
-(3, 'Capital');
+(2, 'No circulante');
 
 -- --------------------------------------------------------
 
@@ -169,7 +184,8 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`id_empresa`, `usuario_id`, `nombre`) VALUES
-(7, 27, 'aaaa');
+(9, 21, 'prueba ejercicio S.A de C.V'),
+(10, 21, 'empresita');
 
 -- --------------------------------------------------------
 
@@ -215,6 +231,54 @@ CREATE TABLE `grupos_usuarios` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `parcial`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `parcial`;
+CREATE TABLE `parcial` (
+`id_asiento` int(11)
+,`empresa_id` int(11)
+,`descripcion` varchar(50)
+,`fecha` date
+,`id_registro` int(11)
+,`asiento_id` int(11)
+,`folio` varchar(50)
+,`catalogo_usuario_id` int(11)
+,`cuenta` varchar(50)
+,`parcial` float
+,`debe` float
+,`haber` float
+,`id_parcial` int(11)
+,`registro_id` int(11)
+,`concepto` varchar(50)
+,`cantidad` float
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `rayado_diario`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `rayado_diario`;
+CREATE TABLE `rayado_diario` (
+`id_asiento` int(11)
+,`empresa_id` int(11)
+,`concepto` varchar(50)
+,`fecha` date
+,`id_registro` int(11)
+,`asiento_id` int(11)
+,`folio` varchar(50)
+,`catalogo_usuario_id` int(11)
+,`cuenta` varchar(50)
+,`parcial` float
+,`debe` float
+,`haber` float
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `registro_asiento`
 --
 
@@ -229,6 +293,53 @@ CREATE TABLE `registro_asiento` (
   `debe` float NOT NULL DEFAULT '0',
   `haber` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `registro_asiento`
+--
+
+INSERT INTO `registro_asiento` (`id_registro`, `asiento_id`, `folio`, `catalogo_usuario_id`, `cuenta`, `parcial`, `debe`, `haber`) VALUES
+(44, 42, '2201', 122, 'Hipotecas por pagar', 0, 0, 1000),
+(53, 47, '1101', 97, 'Caja', 0, 1000, 0),
+(54, 47, '1103', 99, 'Mercancías', 0, 1, 0),
+(55, 47, '1107', 103, 'Papelería y útiles', 0, 1001, 0),
+(56, 47, '1102', 98, 'Bancos', 0, 0, 2001),
+(57, 47, '1101', 97, 'Caja', 0, 0, 1),
+(58, 48, '1109', 105, 'Primas de seguros', 0, 3100, 0),
+(59, 48, '1101', 97, 'Caja', 0, 0, 3100),
+(60, 42, '1101', 97, 'Caja', 0, 1000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `registro_parcial`
+--
+
+DROP TABLE IF EXISTS `registro_parcial`;
+CREATE TABLE `registro_parcial` (
+  `id_parcial` int(11) NOT NULL,
+  `registro_id` int(11) NOT NULL,
+  `concepto` varchar(50) NOT NULL,
+  `cantidad` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `registro_parcial`
+--
+
+INSERT INTO `registro_parcial` (`id_parcial`, `registro_id`, `concepto`, `cantidad`) VALUES
+(1, 48, 'abc', 123),
+(2, 48, 'eee', 1),
+(3, 48, '111', 11),
+(4, 51, 'bancoA', 1000),
+(5, 53, 'bancoA', 1000),
+(6, 54, 'fdsdfsf', 1),
+(7, 55, 'ya sabes', 1001),
+(8, 56, 'BancoA', 1000),
+(9, 56, 'BancoB', 1000),
+(10, 56, 'BancoC', 1),
+(11, 58, 'primaA', 1000),
+(12, 58, 'primaB', 2100);
 
 -- --------------------------------------------------------
 
@@ -270,7 +381,7 @@ CREATE TABLE `tipo_cuenta` (
 INSERT INTO `tipo_cuenta` (`id_tipo`, `nombre`) VALUES
 (1, 'Activo'),
 (2, 'Pasivo'),
-(3, 'Capital');
+(3, 'Capital contable');
 
 -- --------------------------------------------------------
 
@@ -332,6 +443,24 @@ DROP TABLE IF EXISTS `grupos_usuarios`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `grupos_usuarios`  AS  select `usuario_grupo`.`id_usuario_grupo` AS `id_usuario_grupo`,`usuario_grupo`.`usuario_id` AS `usuario_id`,`usuario_grupo`.`grupo_id` AS `grupo_id`,`grupo`.`nombre` AS `grupo`,`usuario`.`nombre` AS `nombre`,`usuario`.`apellido_paterno` AS `apellido_paterno`,`usuario`.`apellido_materno` AS `apellido_materno`,`usuario`.`rol` AS `rol`,`usuario`.`matricula` AS `matricula` from ((`usuario` join `usuario_grupo` on((`usuario`.`id_usuario` = `usuario_grupo`.`usuario_id`))) join `grupo` on((`grupo`.`id_grupo` = `usuario_grupo`.`grupo_id`))) ;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `parcial`
+--
+DROP TABLE IF EXISTS `parcial`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parcial`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`concepto` AS `descripcion`,`asiento`.`fecha` AS `fecha`,`parcial`.`id_registro` AS `id_registro`,`parcial`.`asiento_id` AS `asiento_id`,`parcial`.`folio` AS `folio`,`parcial`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`parcial`.`cuenta` AS `cuenta`,`parcial`.`parcial` AS `parcial`,`parcial`.`debe` AS `debe`,`parcial`.`haber` AS `haber`,`parcial`.`id_parcial` AS `id_parcial`,`parcial`.`registro_id` AS `registro_id`,`parcial`.`concepto` AS `concepto`,`parcial`.`cantidad` AS `cantidad` from (`asiento` join (select `registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber`,`registro_parcial`.`id_parcial` AS `id_parcial`,`registro_parcial`.`registro_id` AS `registro_id`,`registro_parcial`.`concepto` AS `concepto`,`registro_parcial`.`cantidad` AS `cantidad` from (`registro_asiento` join `registro_parcial` on((`registro_asiento`.`id_registro` = `registro_parcial`.`registro_id`)))) `parcial` on((`asiento`.`id_asiento` = `parcial`.`asiento_id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `rayado_diario`
+--
+DROP TABLE IF EXISTS `rayado_diario`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rayado_diario`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`concepto` AS `concepto`,`asiento`.`fecha` AS `fecha`,`registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber` from (`asiento` join `registro_asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
+
 --
 -- Índices para tablas volcadas
 --
@@ -388,6 +517,13 @@ ALTER TABLE `registro_asiento`
   ADD KEY `catalogo_usuario_id` (`catalogo_usuario_id`);
 
 --
+-- Indices de la tabla `registro_parcial`
+--
+ALTER TABLE `registro_parcial`
+  ADD PRIMARY KEY (`id_parcial`),
+  ADD KEY `registro_id` (`registro_id`);
+
+--
 -- Indices de la tabla `tarjeta_almacen`
 --
 ALTER TABLE `tarjeta_almacen`
@@ -423,27 +559,27 @@ ALTER TABLE `usuario_grupo`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT de la tabla `catalogo_estandar`
 --
 ALTER TABLE `catalogo_estandar`
-  MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `catalogo_usuario`
 --
 ALTER TABLE `catalogo_usuario`
-  MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 --
 -- AUTO_INCREMENT de la tabla `clasificacion_cuenta`
 --
 ALTER TABLE `clasificacion_cuenta`
-  MODIFY `id_clasificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_clasificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
@@ -453,7 +589,12 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `registro_asiento`
 --
 ALTER TABLE `registro_asiento`
-  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+--
+-- AUTO_INCREMENT de la tabla `registro_parcial`
+--
+ALTER TABLE `registro_parcial`
+  MODIFY `id_parcial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_almacen`
 --
