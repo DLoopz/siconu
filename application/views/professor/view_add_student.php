@@ -1,5 +1,5 @@
 <div class="container col-md-6">
-  <div><h3>Agregar nuevo alumno</h3></div>
+  <div class="text-center"><h3>Agregar Alumno</h3></div>
   <hr class="line_sep">
 	<?php
 		if($this->session->flashdata('msg'))

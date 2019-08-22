@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div class="text-center">
     <h3>Lista de Alumnos</h3>
   </div>
   <hr class="line_sep">
