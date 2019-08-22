@@ -107,37 +107,8 @@ class Daybook extends CI_Controller {
     }
   }
 
-  public function delete_entry($id_empresa=null,$id_asiento=null)
-  {
-    $fields = array('empresa_id' =>$id_empresa);
-    $del=$this->model_daybook->last_entry($fields);
-    $fields = array('id_asiento' => $del->id_asiento);
-    $del=$this->model_daybook->delete_entry($fields);
-    if($del)
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
-      }
-      else
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
-      }
-      redirect('daybook/book/'.$id_empresa, 'refresh');
-  }
+  
 
-  public function delet_entry($id_empresa=null)
-  {
-    $fields = array('id_asiento' => $this->input->post('id_entry'));
-    $del=$this->model_daybook->delete_entry($fields);
-    if($del)
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
-      }
-      else
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
-      }
-      redirect('daybook/book/'.$id_empresa, 'refresh');
-  }
 
 //-----------funciones para los registros en los asientos
   public function register($id_empresa=null, $id_asiento=null,$edit=null)
@@ -171,6 +142,7 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     $fields = array('usuario_id' => $this->session->userdata('grupo'), );
     $accounts=$this->model_account->get_catalog($fields);
+
     if (!$this->form_validation->run())
     {
     	$data['title']="Alumno: Agregar Asiento";
@@ -230,6 +202,204 @@ class Daybook extends CI_Controller {
     }
   }
 
+
+  //-----------funciones para los registros parciales
+  public function register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
+  {
+
+    if (is_null($id_registro)) {
+      //se establecen reglas de validacion
+      $this->form_validation->set_rules('cuenta','cuenta del registro','required');
+      //personalizacion de reglas de validacion
+      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+      $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
+      $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+      //personalizacion de delimitadores
+      $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+      $fields = array('usuario_id' => $this->session->userdata('grupo'), );
+      $accounts=$this->model_account->get_catalog($fields);
+      if (!$this->form_validation->run())
+      {
+         $this->session->set_flashdata('msg','<script type="text/javascript"> $(\'#myTab li:first-child a\').tab(\'show\')</script>');
+        $data['title']="Alumno: Agregar Asiento";
+        $data['id_asiento']=$id_asiento;
+        $data['id_empresa']=$id_empresa;
+        $data['accounts']=$accounts;
+        $this->load->view('head',$data);
+        $this->load->view('navbar');
+        //$this->load->view('student/view_add_register_partial');
+        $this->load->view('student/view_register_partial');
+        $this->load->view('foot');
+      }
+      else
+      {
+        $id = $this->input->post('cuenta');
+        for ($i=0; $i < count($accounts); $i++) { 
+          if ($accounts[$i]->id_catalogo_usuario==$id){
+            $a=$i;
+          }
+        }
+        $folio= ($accounts[$a]->tipo_id*1000)+($accounts[$a]->clasificacion_id*100)+$a+1;
+        $fields = array(
+            'asiento_id' => $id_asiento,
+            'folio'      => $folio,
+            'catalogo_usuario_id' =>$id,
+            'cuenta' => $accounts[$a]->nombre
+          );
+        $add=$this->model_daybook->insert_register($fields);
+        if($add)
+        {
+          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        }
+        else
+        {
+          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        }
+        $fields = array('asiento_id' =>$id_asiento);
+        $add=$this->model_daybook->last_register($fields);
+        redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
+      }
+    }
+    else
+    {
+      $data['title']="Alumno: Agregar Asiento parcial";
+      $data['id_asiento']=$id_asiento;
+      $data['id_empresa']=$id_empresa;
+      $data['id_registro']=$id_registro;
+      $fields = array('registro_id' => $id_registro);
+      $data['partials']=$this->model_daybook->get_registers_partial($fields);
+      $this->load->view('head',$data);
+      $this->load->view('navbar');
+      $this->load->view('student/view_register_partial');
+      $this->load->view('foot');
+    }
+    
+  }
+
+  public function add_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
+  {
+    //se establecen reglas de validacion
+    $this->form_validation->set_rules('concepto','concepto','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('cantidad','cantidad','required|numeric');
+    //personalizacion de reglas de validacion
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('numeric', 'El campo %s es numerico');
+    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    if (!$this->form_validation->run())
+    {
+      $this->session->set_flashdata('msg','<script type="text/javascript"> $(\'#myTab li:first-child a\').tab(\'show\')</script>');
+      $data['title']="Alumno: Agregar Asiento parcial";
+      $data['id_asiento']=$id_asiento;
+      $data['id_empresa']=$id_empresa;
+      $data['id_registro']=$id_registro;
+      $fields = array('registro_id' => $id_registro);
+      $data['partials']=$this->model_daybook->get_registers_partial($fields);
+      $data['modal'] = 'parciales';
+      $this->load->view('head',$data);
+      $this->load->view('navbar');
+      $this->load->view('student/view_register_partial');
+      //$this->load->view('student/view_add_register_partial');
+      $this->load->view('foot');
+    }
+    else
+    {
+      $fields = array(
+          'registro_id' => $id_registro,
+          'concepto' => $this->input->post('concepto'),
+          'cantidad' =>$this->input->post('cantidad')
+        );
+      $add=$this->model_daybook->insert_register_partial($fields);
+      if($add)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+      }
+      $fields = array('asiento_id' =>$id_asiento);
+      $add=$this->model_daybook->last_register($fields);
+      $id_registro = $add->id_registro;
+
+      redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
+    }
+  }
+
+
+
+
+
+  public function edit_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null)
+  {
+    if (!is_null($cantidad)){
+
+      //se establecen reglas de validacion
+      $this->form_validation->set_rules('operacion','operacion del registro','required');
+      //personalizacion de reglas de validacion
+      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+      //personalizacion de delimitadores
+      $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+      if (!$this->form_validation->run())
+      {
+        $data['title']="Alumno: Agregar Asiento parcial";
+        $data['id_asiento']=$id_asiento;
+        $data['id_empresa']=$id_empresa;
+        $data['id_registro']=$id_registro;
+        $fields = array('registro_id' => $id_registro);
+        $data['partials']=$this->model_daybook->get_registers_partial($fields);
+        $this->load->view('head',$data);
+        $this->load->view('navbar');
+        $this->load->view('student/view_register_partial');
+        $this->load->view('foot');
+      }
+      else
+      {
+        if ($this->input->post('operacion')=='cargo') {
+          $fields = array(
+            'id_registro' => $id_registro,
+            'debe' => $cantidad
+          );
+        }
+        else{
+          $fields = array(
+            'id_registro' => $id_registro,
+            'haber' => $cantidad
+          );
+        }
+        $upd=$this->model_daybook->update_register($fields);
+        if($upd)
+        {
+          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro modificado correctamente</div>');
+        }
+        else
+        {
+          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
+        }
+        redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+
+      }
+    }
+  }
+
+  //para cancelar en el parcial
+  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null)
+  {
+    $fields = array('id_registro' => $id_registro);
+    $del=$this->model_daybook->delete_register($fields);
+    if($del)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      }
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+  }
+
   public function delete_register($id_empresa=null,$id_asiento=null)
   {
     $fields = array('id_registro' => $this->input->post('id_register'));
@@ -245,7 +415,41 @@ class Daybook extends CI_Controller {
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
   }
 
-  /*public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null)
+  public function delet_entry($id_empresa=null)
+  {
+    $fields = array('id_asiento' => $this->input->post('id_entry'));
+    $del=$this->model_daybook->delete_entry($fields);
+    if($del)
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+    }
+    redirect('daybook/book/'.$id_empresa, 'refresh');
+  }
+  
+  public function delete_entry($id_empresa=null,$id_asiento=null)
+  {
+    $fields = array('empresa_id' =>$id_empresa);
+    $del=$this->model_daybook->last_entry($fields);
+    $fields = array('id_asiento' => $del->id_asiento);
+    $del=$this->model_daybook->delete_entry($fields);
+    if($del)
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      }
+      else
+      {
+        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      }
+      redirect('daybook/book/'.$id_empresa, 'refresh');
+  }
+
+
+
+/*public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null)
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
@@ -319,169 +523,9 @@ class Daybook extends CI_Controller {
     }
   }*/
 
-  //-----------funciones para los registros parciales
-  public function register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
-  {
-    if (is_null($id_registro)) {
-      //se establecen reglas de validacion
-      $this->form_validation->set_rules('cuenta','cuenta del registro','required');
-      //personalizacion de reglas de validacion
-      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-      $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-      $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
-      //personalizacion de delimitadores
-      $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-      $fields = array('usuario_id' => $this->session->userdata('grupo'), );
-      $accounts=$this->model_account->get_catalog($fields);
-      if (!$this->form_validation->run())
-      {
-         $this->session->set_flashdata('msg','<script type="text/javascript"> $(\'#myTab li:first-child a\').tab(\'show\')</script>');
-        $data['title']="Alumno: Agregar Asiento";
-        $data['id_asiento']=$id_asiento;
-        $data['id_empresa']=$id_empresa;
-        $data['accounts']=$accounts;
-        $this->load->view('head',$data);
-        $this->load->view('navbar');
-        $this->load->view('student/view_add_register_parcial');
-        $this->load->view('foot');
-      }
-      else
-      {
-        $id= $this->input->post('cuenta');
-        for ($i=0; $i < count($accounts); $i++) { 
-          if ($accounts[$i]->id_catalogo_usuario==$id){
-            $a=$i;
-          }
-        }
-        $folio= ($accounts[$a]->tipo_id*1000)+($accounts[$a]->clasificacion_id*100)+$a+1;
-        $fields = array(
-            'asiento_id' => $id_asiento,
-            'folio'      => $folio,
-            'catalogo_usuario_id' =>$id,
-            'cuenta' => $accounts[$a]->nombre
-          );
-        $add=$this->model_daybook->insert_register($fields);
-        if($add)
-        {
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
-        }
-        else
-        {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
-        }
-        $fields = array('asiento_id' =>$id_asiento);
-        $add=$this->model_daybook->last_register($fields);
-        redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
-      }
-    }
-    else{
-      $data['title']="Alumno: Agregar Asiento parcial";
-      $data['id_asiento']=$id_asiento;
-      $data['id_empresa']=$id_empresa;
-      $data['id_registro']=$id_registro;
-      $fields = array('registro_id' => $id_registro);
-      $data['partials']=$this->model_daybook->get_registers_partial($fields);
-      $this->load->view('head',$data);
-      $this->load->view('navbar');
-      $this->load->view('student/view_register_partial');
-      $this->load->view('foot');
-    }
-  }
-
-  public function add_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null){
-    //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','concepto','required|min_length[3]|max_length[50]');
-    $this->form_validation->set_rules('cantidad','cantidad','required|numeric');
-    //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('numeric', 'El campo %s es numerico');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
-    //personalizacion de delimitadores
-    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    if (!$this->form_validation->run())
-    {
-      $this->session->set_flashdata('msg','<script type="text/javascript"> $(\'#myTab li:first-child a\').tab(\'show\')</script>');
-      $data['title']="Alumno: Agregar Asiento parcial";
-      $data['id_asiento']=$id_asiento;
-      $data['id_empresa']=$id_empresa;
-      $data['id_registro']=$id_registro;
-      $this->load->view('head',$data);
-      $this->load->view('navbar');
-      $this->load->view('student/view_add_register_partial');
-      $this->load->view('foot');
-    }
-    else
-    {
-      $fields = array(
-          'registro_id' => $id_registro,
-          'descripcion' => $this->input->post('concepto'),
-          'cantidad' =>$this->input->post('cantidad')
-        );
-      $add=$this->model_daybook->insert_register_partial($fields);
-      if($add)
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
-      }
-      else
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
-      }
-      $fields = array('asiento_id' =>$id_asiento);
-      $add=$this->model_daybook->last_register($fields);
-      redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
-    }
-  }
-
-  public function edit_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null)
-  {
-    if (!is_null($cantidad)){
-
-      //se establecen reglas de validacion
-      $this->form_validation->set_rules('operacion','operacion del registro','required');
-      //personalizacion de reglas de validacion
-      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-      //personalizacion de delimitadores
-      $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-      if (!$this->form_validation->run())
-      {
-        $data['title']="Alumno: Agregar Asiento parcial";
-        $data['id_asiento']=$id_asiento;
-        $data['id_empresa']=$id_empresa;
-        $data['id_registro']=$id_registro;
-        $fields = array('registro_id' => $id_registro);
-        $data['partials']=$this->model_daybook->get_registers_partial($fields);
-        $this->load->view('head',$data);
-        $this->load->view('navbar');
-        $this->load->view('student/view_register_partial');
-        $this->load->view('foot');
-      }
-      else
-      {
-        if ($this->input->post('operacion')=='cargo') {
-          $fields = array(
-            'id_registro' => $id_registro,
-            'debe' => $cantidad
-          );
-        }
-        else{
-          $fields = array(
-            'id_registro' => $id_registro,
-            'haber' => $cantidad
-          );
-        }
-        $upd=$this->model_daybook->update_register($fields);
-        if($upd)
-        {
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro modificado correctamente</div>');
-        }
-        else
-        {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
-        }
-        redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
-
-      }
-    }
-  }
 }
+
+
+
+
+

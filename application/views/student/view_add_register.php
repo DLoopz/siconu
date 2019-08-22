@@ -54,10 +54,20 @@
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
+
+        
         <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
         <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+
       </form>
     </div>
   </div>
 </div>
 </div>
+
+
+
+
+    
+
+
