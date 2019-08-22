@@ -17,11 +17,12 @@ class Admin extends CI_Controller
 	public function edit_password($id=null)
 	{
 		//reglas de validacion
-    $this->form_validation->set_rules('password','contraseña','trim|required');
-    $this->form_validation->set_rules('password_c','contraseña','trim|required|matches[password]');
+    $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña ','trim|required|matches[password]');
     //personalizacion de reglas
-    $this->form_validation->set_message('required', 'El campo %s requerido');
-    $this->form_validation->set_message('matches', 'Las contaseñas no coinciden');
+    $this->form_validation->set_message('required', '%s es un campo requerido');
+    $this->form_validation->set_message('matches', 'Las Contraseñas no coinciden');
+    $this->form_validation->set_message('min_length', '% debe tener como mínimo 8 caracteres');
     //personalizacion de delimitadores
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE)
@@ -70,13 +71,13 @@ class Admin extends CI_Controller
     
   public function add_professor()
   {
-    $this->form_validation->set_rules('correo', 'correo','valid_email|required|min_length[8]|max_length[50]|is_unique[usuario.matricula]');
+    $this->form_validation->set_rules('correo', 'Correo electrónico','valid_email|required|min_length[8]|max_length[50]|is_unique[usuario.matricula]');
     //Personalizamos las reglas
-    $this->form_validation->set_message('required', 'El %s es un campo obligatorio');
-    $this->form_validation->set_message('valid_email', 'El %s no es valido');
-    $this->form_validation->set_message('min_length', 'El %s debe tener al menos 8 caracteres');
-    $this->form_validation->set_message('max_length', 'El %s no debe tener mas de 50 caracteres');
-    $this->form_validation->set_message('is_unique', 'El %s ya esta registrado');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('valid_email', '%s no es válido');
+    $this->form_validation->set_message('min_length', '%s debe tener al menos 8 caracteres');
+    $this->form_validation->set_message('max_length', '%s no debe tener mas de 50 caracteres');
+    $this->form_validation->set_message('is_unique', '%s ya esta registrado');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 	  if($this->form_validation->run() == FAlSE)

@@ -2,13 +2,13 @@
   <div class="text-center"> 
     <h3>Lista de Grupos</h3>
   </div>
-  <hr class="line-sep">
+  <hr class="line_sep">
     <?php
       if($this->session->flashdata('msg'))
         echo $this->session->flashdata('msg');
     ?>
   <div>
-    <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar grupo"><i class="icon-plus-2"></i></a>
+    <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Grupo"><i class="icon-plus-2"></i></a>
     </br>
     </br>
     <table class="table " id="user-table">
@@ -24,11 +24,11 @@
           <td><?php echo $group->grupo ?></td>
           <td>
           <!--EDITAR-->
-          <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar grupo"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
+          <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
           <!--ELIMINAR-->
-           <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+           <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
           <!--VER-->
-          <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver alumnos"><strong><em><i class="icon-eye"></i></em></strong></a>
+          <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos"><strong><em><i class="icon-eye"></i></em></strong></a>
           </td>
         </tr>
         <?php } ?>
@@ -48,13 +48,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro?
+                ¿Está seguro que desea eliminar el grupo?
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_group">
                    <input type="hidden" id="eliminar" name="id_grupo"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">                   
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0 data-dismiss="modal"" value="No">
+                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">                   
                </form>
             </div>
         </div>
