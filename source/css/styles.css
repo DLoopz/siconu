@@ -15,13 +15,23 @@
   border: #DE6262 1px;
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
 .fondo-rosa {
 	background:#DE6262;
 	color: #FFFFFF;
-	/*position: absolute;*/
+	position: absolute;
 	bottom: 0;
 	width: 100%;
 	height: 80px;
+	 margin-top:50px;
 }
 
 .principal-color{
@@ -97,3 +107,8 @@ select{
 .margin_left_modal{ 
     margin-left: 20px !important; 
 } 
+
+footer
+{
+   
+}

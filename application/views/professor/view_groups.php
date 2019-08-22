@@ -8,7 +8,7 @@
         echo $this->session->flashdata('msg');
     ?>
   <div>
-    <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Grupo"><i class="icon-plus-2"></i></a>
+    <a href="<?php echo base_url('professor/add_group'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Grupo"><i class="icon-plus-2"></i></a>
     </br>
     </br>
     <table class="table " id="user-table">
@@ -28,12 +28,13 @@
           <!--ELIMINAR-->
            <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
           <!--VER-->
-          <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos"><strong><em><i class="icon-eye"></i></em></strong></a>
+          <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos del Grupo"><strong><em><i class="icon-eye"></i></em></strong></a>
           </td>
         </tr>
         <?php } ?>
       </tbody>
       </table>
+      <br>
   </div>
 </div>
 
@@ -53,7 +54,7 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_group">
                    <input type="hidden" id="eliminar" name="id_grupo"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0 data-dismiss="modal"" value="No">
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
                    <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">                   
                </form>
             </div>

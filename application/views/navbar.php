@@ -11,7 +11,7 @@
 
             <!---------------botones del profesor------------>
             <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="btn btn-outline-secondary my-2 my-sm-0" title="Editar Perfil de Profesor"><i class="icon-edit-1"></i></a>
-            <a href="<?php echo base_url('professor/account_catalog'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Catálogo de Cuentas"><i class="icon-plus-2"></i></a>
+            <a href="<?php echo base_url('professor/account_catalog'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Catálogo de Cuentas"><i class="icon-plus-2"></i></a>
 
             
 

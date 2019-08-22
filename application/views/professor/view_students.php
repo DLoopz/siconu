@@ -3,7 +3,7 @@
     <h3>Lista de Alumnos</h3>
   </div>
   <hr class="line_sep">
-  <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar alumno"><i class="icon-user-add"></i></a>
+  <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
   </br>
   </br>
   <table class="table " id="user-table">

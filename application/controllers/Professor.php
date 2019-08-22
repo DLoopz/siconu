@@ -21,14 +21,13 @@ class Professor extends CI_Controller {
   public function add_group()
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','grupo','required|min_length[3]|alpha_numeric|max_length[7]|trim|is_unique[grupo.nombre]');
+    $this->form_validation->set_rules('nombre','Grupo','required|min_length[3]|alpha_numeric|max_length[7]|trim|is_unique[grupo.nombre]');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('is_unique', 'El %s ya existe');
-    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener números y letras');
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('is_unique', '%s ya existe');
+    $this->form_validation->set_message('alpha_numeric', '%s solo debe contener números y letras');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 7 caracteres');
+    $this->form_validation->set_message('min_length', '%s debe contener al menos 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -58,14 +57,13 @@ class Professor extends CI_Controller {
   public function edit_group($id=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','grupo','required|min_length[3]|alpha_numeric|max_length[7]|trim');
+    $this->form_validation->set_rules('nombre','Grupo','required|min_length[3]|alpha_numeric|max_length[7]|trim');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('is_unique', 'El %s ya existe');
-    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener números y letras');
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('is_unique', '%s ya existe');
+    $this->form_validation->set_message('alpha_numeric', '%s solo debe contener números y letras');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 7 caracteres');
+    $this->form_validation->set_message('min_length', '%s debe contener al menos 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE){
