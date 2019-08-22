@@ -1,3 +1,5 @@
+
+
 <div class="container col-md-4">
   <div class="container">
     <h3 class="text-center">Ingresar registro parcial</h3>

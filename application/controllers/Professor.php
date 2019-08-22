@@ -191,6 +191,54 @@ class Professor extends CI_Controller {
       }
     }//fin de form validation
   }
+
+  public function students_file($id_grupo=null)
+  {
+    if($this->input->post('archivo'))
+    {
+      $filename=$_FILES["file"]["name"];
+      $info = new SplFileInfo($filename);
+      $extension = pathinfo($info->getFilename(), PATHINFO_EXTENSION);
+
+      if($extension == 'csv')
+      {
+        $filename = $_FILES['file']['tmp_name'];
+        $handle = fopen($filename, "r");
+
+        while( ($data = fgetcsv($handle, 1000, '"') ) !== FALSE )
+        {
+          //$consulta = $this->db->query("LOAD DATA LOCAL INFILE '$ruta' INTO TABLE isr FIELDS TERMINATED BY ',' LINES TERMINATED BY '".'\r\n'."' (isr.lim_inferior, isr.cuota_fija, isr.porcentaje);");
+          $fields = array(
+            'matricula' => $data[0],
+            'apellido_paterno' => $data[1],
+            'apellido_materno' => $data[2],
+            'nombre' => $data[3],
+            'contrasenia' =>  md5($data[0])
+          );
+
+          $this->model_user->insert_user($fields);
+          $std=$this->model_user->last_user();
+          $fields = array
+          (
+            'usuario_id' => $std->id_usuario,
+            'grupo_id' => $id_grupo
+          );
+          $add=$this->model_user->insert_std($fields);
+        }
+        fclose($handle);
+
+        $this->session->set_flashdata('msg', '<div class="alert alert-success">Alumno agregado correctamente</div>');
+        
+        redirect('professor/show_students/'.$id_grupo);
+      }
+      else
+      {
+        $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error alumno no agregado</div>');
+        redirect('professor/show_students/'.$id_grupo);
+      }
+    }
+
+  }
   
   public function edit_student($id=null,$id_group=null)
   {

@@ -2,7 +2,57 @@
 	<h3>Agregar registros al asiento</h3>
 	<hr class="line_sep">
 	<div>
+
+    <?php 
+
+
+    /*
+  
+    //agregar con siguiente vista
+
 		<a href="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
+    */
+
+     ?>
+
+     <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
+
+    <!-- Modal para registros parciales -->
+    <div class="modal fade" id="parciales" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                  <h3 class="text-center">Ingresar registro parcial</h3>
+                  <hr class="line_sep">
+                    <div class="form-group">
+                      Concepto:
+                      <input class="form-control" type="text" name="concepto" value="<?php echo set_value('concepto');?>">
+                      <?php echo form_error('concepto') ?>
+                    </div>
+                    <div class="form-group">
+                      Cantidad:
+                      <input class="form-control" type="text" name="cantidad" value="<?php echo set_value('cantidad');?>">
+                      <?php echo form_error('cantidad') ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
+                    <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 		<table class="table table-hover" id="user-table">
 	    <thead>
 	      <tr>
@@ -45,7 +95,7 @@
         <?php echo form_error('operacion'); ?>
       </div>
       <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0">
-      <a href="<?php echo base_url()?>daybook/delete_entry/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+      <a href="<?php echo base_url()?>daybook/delet_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
 	  </form>
 	</div>
 </div>
