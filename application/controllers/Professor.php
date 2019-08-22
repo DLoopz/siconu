@@ -34,8 +34,8 @@ class Professor extends CI_Controller {
     if (!$this->form_validation->run())
     {
     	$data['title']="Registrar grupo";
-      $this->load->view('head');
-      $this->load->view('navbar', $data);      
+      $this->load->view('head',$data);
+      $this->load->view('navbar');      
       $this->load->view('professor/view_add_group');
       $this->load->view('foot');
     }

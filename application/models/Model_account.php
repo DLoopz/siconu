@@ -56,7 +56,7 @@ class Model_account extends CI_Model
     return $sql->result();
   }
   //Actualizar cuentas
-  public function update_group($data)
+  /*public function update_group($data)
   {
     $this->db->where('id_grupo', $data['id_grupo']);
     return $this->db->update('grupo', $data);
@@ -65,5 +65,5 @@ class Model_account extends CI_Model
   public function delete_group($data)
   {
     return $this->db->delete( 'grupo' , $data );
-  }
+  }*/
 }
