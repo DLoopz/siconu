@@ -6,7 +6,7 @@
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
   </br>
   </br>
-  <table class="table " id="user-table">
+  <table class="table table-responsive" id="user-table">
     <thead>
       <tr>
         <th>Nombre del alumno</th>
@@ -25,11 +25,11 @@
         <td><?php echo $student->matricula ?></td>
         <td>
           <!--EDITAR-->
-            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar alumno"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
           <!--EDITAR password-->
           <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit-1"></i></em></strong></a>
           <!-- eliminar confirmación -->
-          <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar"><strong><em><i class="icon-user-delete"></i></em></strong></a>
+          <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
         </td>
       </tr>
       <?php } ?>
@@ -53,8 +53,8 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_student/<?php echo $id_group ?>">
                    <input type="hidden" id="eliminar" name="id_alumno"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">                   
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">                   
                </form>
             </div>
         </div>

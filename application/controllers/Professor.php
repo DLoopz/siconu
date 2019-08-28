@@ -130,22 +130,20 @@ class Professor extends CI_Controller {
   public function add_student($id_grupo=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre', 'nombre', 'trim|required|alpha|min_length[3]');
-    $this->form_validation->set_rules('ap_paterno', 'apellido paterno', 'trim|required|alpha|min_length[3]',
-      array('max_length'=>'El campo %s debe contener mas de 3 caracteres'));
-    $this->form_validation->set_rules('ap_materno', 'apellido materno', 'trim|required|alpha|min_length[3]');
-    $this->form_validation->set_rules('matricula', 'matricula','trim|required|alpha_numeric|min_length[5]|is_unique[usuario.matricula]',
-      array('min_length'=>'El campo %s debe contener mas de 5 caracteres'));
-    $this->form_validation->set_rules('password', 'contraseña','trim|required|min_length[8]|alpha_numeric',
-      array('min_length'=>'El campo %s debe contener mas de 8 caracteres'));
+    $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[3]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|min_length[3]|alpha_numeric_spaces',
+      array('max_length'=>'%s debe contener al menos 3 caracteres'));
+    $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|min_length[3]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('matricula', 'Matricula','trim|required|alpha_numeric|min_length[5]|is_unique[usuario.matricula]',
+      array('min_length'=>'%s debe contener al menos 5 caracteres'));
     //personalizacion de reglas de validacion
-    $this->form_validation->set_rules('conf_password', 'confirmar contraseña','required|matches[password]');
-    $this->form_validation->set_message('required', 'El campo %s requerido');
-    $this->form_validation->set_message('alpha_numeric', 'El campo %s solo debe contener números y letras');
-    $this->form_validation->set_message('alpha', 'El campo %s solo debe contener letras'); 
-    $this->form_validation->set_message('is_unique', 'El campo %s ya existe');
-    $this->form_validation->set_message('matches', 'El campo %s no coincide con el campo contraseña');
-    $this->form_validation->set_message('min_length', 'El campo %s debe contener más de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+    $this->form_validation->set_message('is_unique', '%s ya existe');
+    $this->form_validation->set_message('min_length', '%s debe contener más de 3 caracteres');
+    //$this->form_validation->set_message('alpha_spaces', '%s no debe contener numeros');
+
+
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE)
@@ -167,7 +165,7 @@ class Professor extends CI_Controller {
           'apellido_paterno' =>  $this->input->post("ap_paterno"),
           'apellido_materno' =>  $this->input->post("ap_materno"),
           'matricula' =>  $this->input->post("matricula"),
-          'contrasenia' =>  md5($this->input->post("password"))
+          'contrasenia' =>  md5($this->input->post("matricula"))
         );               
         $this->model_user->insert_user($fields);
         $std=$this->model_user->last_user();
