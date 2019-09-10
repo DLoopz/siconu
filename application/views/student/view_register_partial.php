@@ -1,5 +1,5 @@
 <div class="container col-md-6">
-	<h3>Agregar registros al asiento</h3>
+	<h3 class="text-center">Agregar Registros al Asiento</h3>
 	<hr class="line_sep">
 	<div>
 
@@ -16,6 +16,7 @@
      ?>
 
      <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
+     <br><br>
 
     <!-- Modal para registros parciales -->
     <div class="modal fade" id="parciales" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
@@ -33,19 +34,21 @@
                   <h3 class="text-center">Ingresar registro parcial</h3>
                   <hr class="line_sep">
                     <div class="form-group">
-                      Concepto:
+                      Concepto
                       <input class="form-control" type="text" name="concepto" value="<?php echo set_value('concepto');?>">
                       <?php echo form_error('concepto') ?>
                     </div>
                     <div class="form-group">
-                      Cantidad:
+                      Cantidad
                       <input class="form-control" type="text" name="cantidad" value="<?php echo set_value('cantidad');?>">
                       <?php echo form_error('cantidad') ?>
                     </div>
                 </div>
-                <div class="modal-footer">
-                  <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
-                    <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+                <br>
+                <div class="modal-footer text-center">
+                   <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+                  <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+                   
                 </div>
                 </form>
             </div>
@@ -94,8 +97,11 @@
         </div>
         <?php echo form_error('operacion'); ?>
       </div>
-      <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0">
-      <a href="<?php echo base_url()?>daybook/delet_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+      <br>
+      <div class="panel-footer text-center">
+        <a href="<?php echo base_url()?>daybook/delet_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+        <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">  
+      </div>
 	  </form>
 	</div>
 </div>
@@ -111,13 +117,13 @@
         </button>
       </div>
       <div class="modal-body">
-        ¿Esta seguro?
+        ¿Está seguro de eliminar el registro?
       </div>
       <div class="modal-footer">
        <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
          <input type="hidden" id="eliminar" name="id_register"></input>
-         <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-         <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">                   
+         <input type="reset" class="btn btn-outline-success my-2 my-sm-0"  data_dismiss="modal" value="No">
+         <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">                   
        </form>
       </div>
     </div>

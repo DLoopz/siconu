@@ -11,7 +11,7 @@ class Check_balance extends CI_Controller
     $data['registers']=$this->model_daybook->get_all_registers($fields);
     $fields = array('id_empresa' => $id_empresa );
     $data['exercise']=$this->model_exercise->get_exercise($fields);
-		$data['title']="Balanza de comprobacion";
+		$data['title']="Balanza de comprobación";
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
 		$this->load->view('student/view_check_balance');

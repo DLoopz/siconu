@@ -27,12 +27,12 @@ class Daybook extends CI_Controller {
 	public function add_entry($id_empresa=null)
 	{
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','nombre del asiento','required|min_length[3]|max_length[50]');
-    $this->form_validation->set_rules('fecha_asiento','fecha del asiento','required');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -67,12 +67,12 @@ class Daybook extends CI_Controller {
   public function edit_entry($id_empresa=null,$id_asiento=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','nombre del asiento','required|min_length[3]|max_length[50]');
-    $this->form_validation->set_rules('fecha_asiento','fecha del asiento','required');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -113,7 +113,7 @@ class Daybook extends CI_Controller {
 //-----------funciones para los registros en los asientos
   public function register($id_empresa=null, $id_asiento=null,$edit=null)
 	{
-		$data['title']="Regsitros  de Asiento";
+		$data['title']="Registros  de Asiento";
 		$fields = array('asiento_id' => $id_asiento);
 		$data['registers']=$this->model_daybook->get_registers($fields);
     $data['partials']=$this->model_daybook->get_partials($fields);
@@ -132,12 +132,12 @@ class Daybook extends CI_Controller {
 	public function add_register($id_empresa=null,$id_asiento=null)
 	{
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('cuenta','cuenta del registro','required');
-    $this->form_validation->set_rules('cantidad','cantidad','numeric|required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
+    $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     $fields = array('usuario_id' => $this->session->userdata('grupo'), );
@@ -209,11 +209,11 @@ class Daybook extends CI_Controller {
 
     if (is_null($id_registro)) {
       //se establecen reglas de validacion
-      $this->form_validation->set_rules('cuenta','cuenta del registro','required');
+      $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
       //personalizacion de reglas de validacion
-      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-      $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-      $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+      $this->form_validation->set_message('required', '%s es un campo obligatorio');
+      $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+      $this->form_validation->set_message('min_length', '%s no debe de contener menos de 3 caracteres');
       //personalizacion de delimitadores
       $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
       $fields = array('usuario_id' => $this->session->userdata('grupo'), );
@@ -262,7 +262,7 @@ class Daybook extends CI_Controller {
     }
     else
     {
-      $data['title']="Alumno: Agregar Asiento parcial";
+      $data['title']="Alumno: Agregar Asiento Parcial";
       $data['id_asiento']=$id_asiento;
       $data['id_empresa']=$id_empresa;
       $data['id_registro']=$id_registro;
@@ -279,13 +279,13 @@ class Daybook extends CI_Controller {
   public function add_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','concepto','required|min_length[3]|max_length[50]');
-    $this->form_validation->set_rules('cantidad','cantidad','required|numeric');
+    $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('cantidad','Cantidad','required|numeric');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('numeric', 'El campo %s es numerico');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 50 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('numeric', '%s debe ser numérico');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -337,9 +337,9 @@ class Daybook extends CI_Controller {
     if (!is_null($cantidad)){
 
       //se establecen reglas de validacion
-      $this->form_validation->set_rules('operacion','operacion del registro','required');
+      $this->form_validation->set_rules('operacion','Operación del Registro','required');
       //personalizacion de reglas de validacion
-      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+      $this->form_validation->set_message('required', '%s es un campo obligatorio');
       //personalizacion de delimitadores
       $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
       if (!$this->form_validation->run())

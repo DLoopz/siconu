@@ -37,7 +37,7 @@ class Login extends CI_Controller
 			$this->form_validation->set_rules('usuario', 'usuario', 'required');
 			$this->form_validation->set_rules('password', 'contraseña', 'required');
 			//personalizacion de reglas de validacion
-			$this->form_validation->set_message('required', 'El campo %s es oblligatorio');
+			$this->form_validation->set_message('required', '%s es un campo oblligatorio');
 			//personalizacion de delimitadores
 			$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 			if ($this->form_validation->run() == FALSE)

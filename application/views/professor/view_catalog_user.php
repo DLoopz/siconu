@@ -1,5 +1,5 @@
 <div class="container">
-	<h3>Catálogo de Cuentas</h3>
+	<h3 class="text-center">Catálogo de Cuentas</h3>
 	<!--<hr class="line_sep">-->
 	<div class="">
 		<?php
@@ -11,21 +11,21 @@
     <hr class="line_sep">
   <div> 
     <?php $flag=0; foreach ($types as $type) {?>
-      <h3><?php echo $type->nombre; ?></h3>
+      <h3 class="text-center" ><?php echo $type->nombre; ?></h3>
       <hr class="line_sep">
       <div class="row">
         <?php foreach ($clasifications as $cla) {?>
           <div class="col-6 espacio">
           <?php if ($type->id_tipo!=3){?>
-              <h4><?php echo $cla->nombre; ?></h4>
+              <h4 class="text-center"><?php echo $cla->nombre; ?></h4>
             <?php }else{$flag++;} ?>
             <?php if ($flag<2) {?> 
               <table class="table">
                 <head>
                   <tr>
-                    <td>Folio</td>
-                    <td>Cuenta</td>
-                    <td colspan="2">Opciones</td>
+                    <th>Folio</th>
+                    <th>Cuenta</th>
+                    <th colspan="2">Opciones</th>
                   </tr>
                 </head>
               	<tbody>
@@ -50,9 +50,10 @@
         <?php } ?>
       </div>
     <?php } ?>
-    <div class="col-4 offset-4">
-    <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 col-12">Volver</button></a>
+    <div class="panel-footer col-4 offset-4">
+      <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 col-12">Volver</button></a>
     </div>
+    <br><br>
   </div>
 </div>
 
@@ -67,14 +68,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro?
+                 ¿Está seguro que desea eliminar la cuenta?
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_account">
-                   <input type="hidden" id="eliminar" name="id_catalogo_usuario"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">                   
-               </form>
+                  <input type="hidden" id="eliminar" name="id_catalogo_usuario"></input>
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+                  <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">    
+                </form>
             </div>
         </div>
     </div>

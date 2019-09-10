@@ -1,10 +1,10 @@
 	<!--body-->
 		<div class="container">
-			<div><h3>Rayado Diario</h3></div>
+			<div><h3 class="text-center">Rayado Diario</h3></div>
 			<hr class="line_sep">
 			<div class="row">
 				<div class="col-6">
-						<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento contable"><i class="icon-plus-2"></i></a>
+						<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 				</div>
 				<div class="col-6 text-right">
 					<a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-home-1"></i></a>
@@ -71,7 +71,7 @@
 					    	<td></td>
 					    	<td>
 					    		<!--editar descripcion del asiento-->
-                  <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar descripcion del Asiento"><strong><em><i class="icon-pencil-2"></i></em></strong></a>
+                  <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil-2"></i></em></strong></a>
                   <!--editar asiento-->
                   <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit-1"></i></em></strong></a>
 					    		<!-- eliminar asiento -->
@@ -105,13 +105,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro?
+                ¿Está seguro de eliminar el Asiento?
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delet_entry/<?php echo $id_empresa; ?>">
                    <input type="hidden" id="eliminar" name="id_entry"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">                   
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">                   
                </form>
             </div>
         </div>

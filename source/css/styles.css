@@ -34,6 +34,8 @@ body {
 	 margin-top:50px;
 }
 
+
+
 .principal-color{
 	color:#DE6262;
 }
@@ -108,7 +110,6 @@ select{
     margin-left: 20px !important; 
 } 
 
-footer
-{
-   
+.panel-footer{
+  padding-bottom: 50px !important;
 }

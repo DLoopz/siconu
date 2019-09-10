@@ -1,12 +1,14 @@
 <div class="container col-md-6">
-	<h3>Agregar registros al asiento</h3>
+	<h3 class="text-center">Agregar Registros al Asiento</h3>
 	<hr class="line_sep">
 	<?php if ($edit){?>
 		<div class="text-center alert-warning">Si no desea hacer cambios presione terminar.</div>
 		<?php } ?>
 		<div class="alert-warning text-center">Para realizar cambios en los registros eliminelos y vuela a capturarlos</div>
 	<div>
-		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
+		<br>
+		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros al Asiento"><i class="icon-plus-2"></i></a>
+		<br><br>
 		<table class="table table-hover" id="user-table">
 	    <thead>
 	      <tr>
@@ -29,7 +31,7 @@
 	          	<!--editar asiento-->
 	          	<!--a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar registro"><strong><em><i class="icon-edit-1"></i></em></strong></a-->
             	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>
 	        </tr>
 	      <?php foreach ($partials as $partial){
@@ -57,10 +59,12 @@
 		<?php if ($d!=$h) {?>
 			<div class="alert alert-danger text-center">Las sumas no son iguales ( Diferencia:<?php echo abs($d-$h);?>)</div>
 		<?php } ?>
-		<a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa;?>"> <button type="button" class="btn btn-outline-success my-2 my-sm-0" <?php if ($d!=$h or $d==0) {echo "disabled";}?>>Terminar</button></a>
-		<?php if (!$edit){?>
-			<a href="<?php echo base_url()?>daybook/delete_entry/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
-		<?php } ?>
+		<div class="panel-footer text-center">
+			<a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa;?>"> <button type="button" class="btn btn-outline-success my-2 my-sm-0" <?php if ($d!=$h or $d==0) {echo "disabled";}?>>Cerrar Asiento</button></a>
+			<?php if (!$edit){?>
+				<a href="<?php echo base_url()?>daybook/delete_entry/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a>
+			<?php } ?>
+		</div>
 	</div>
 </div>
 
@@ -75,13 +79,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro?
+                ¿Esta seguro de eliminar el registro?
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
                    <input type="hidden" id="eliminar" name="id_register"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">                   
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">                   
                </form>
             </div>
         </div>

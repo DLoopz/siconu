@@ -18,11 +18,12 @@ class Student extends CI_Controller {
 	{
     $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','ejercicio','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -53,11 +54,11 @@ class Student extends CI_Controller {
     public function edit_exercise($id=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','ejercicio','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE){       

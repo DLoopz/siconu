@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container col-md-8">
   <div class="text-center">
     <h3>Lista de Alumnos</h3>
   </div>
@@ -6,7 +6,7 @@
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
   </br>
   </br>
-  <table class="table table-responsive" id="user-table">
+  <table class="table" id="user-table">
     <thead>
       <tr>
         <th>Nombre del alumno</th>

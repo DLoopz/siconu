@@ -1,14 +1,14 @@
 <div class="container col-md-6">
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Registro normal</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Registro parcial</a>
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Registro Normal</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Registro Parcial</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
-      <h3 class="text-center">Ingresar registro</h3>
+      <h3 class="text-center">Ingresar Registro</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
         <div class="form-group">
@@ -21,7 +21,7 @@
           <?php echo form_error('cuenta') ?>
         </div>
         <div class="form-group">
-          Cantidad:
+          Cantidad
           <input type="text" name="cantidad" class="form-control">
           <?php echo form_error('cantidad') ?>
         </div>
@@ -35,8 +35,11 @@
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
         </div>
-        <input type="submit" name="add_resgistry" value="Registrar" class="btn btn-outline-success my-2 my-sm-0">
-        <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+        <br>
+        <div class="text-center">
+          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+          <input type="submit" name="add_resgistry" value="Registrar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+        </div>
       </form>
     </div>
   </div>
@@ -54,11 +57,12 @@
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
-
+        <br>
+        <div class="panel-footer text-center">
+          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+          <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
         
-        <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
-        <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-
+        </div>
       </form>
     </div>
   </div>

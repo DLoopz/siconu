@@ -50,7 +50,7 @@
         	<?php echo form_label('* Campos Obligatorios')?><br>
       		</div>
 					<br>
-					<div class="form-group text-center">
+					<div class="panel-footer text-center">
 						<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 						<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 					</div>
@@ -68,7 +68,7 @@
 				  	<label for="">Archivo en formato .csv</label>
 				  	<input class="form-control-file" type="file" name="file" id="file">
 				  </div>
-				  <div class="form-group text-center">
+				  <div class="panel-footer text-center">
 				  	<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 						

@@ -1,11 +1,12 @@
 <div class="container col-md-6">
-	<div><h3>Ejercicios</h3></div>
+	<div><h3 class="text-center">Ejercicios</h3></div>
 	<hr class="line_sep">
 	<?php
 	  if($this->session->flashdata('msg'))
 	    echo $this->session->flashdata('msg');
 	?>
-	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
+	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Ejercicio"><i class="icon-plus-2"></i></a>
+	<br><br>
 	<div class="table-responsive-md">
 		<table class="table table-hover" id="user-table">
 	    <thead>
@@ -26,7 +27,7 @@
           		<!-- editar ejercicio -->
               <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit-1"></i></em></strong></a>
 	            <!-- eliminar ejercicio -->
-              <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" href="" title="Eliminar Ejercicio"><strong><em><i class="icon-trash"></i></em></strong></a>
+              <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" href="" title="Eliminar Ejercicio"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
               <!--editar password ejercicio-->
 	            <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>daybook/book/<?php echo $exercise->id_empresa;?>" title="Administrar Ejercicio"><strong><em><i class="icon-eye"></i></em></strong></a>
 	          </td>
@@ -58,8 +59,8 @@
 				<div class="modal-footer">
 				<form method="POST" action="<?php echo base_url() ?>student/del_exercise">
 					<input type="hidden" id="eliminar" name="id_empresa"></input>
-					<input type="reset" class="btn btn-outline-success my-2 my-sm-0" value="No">
-					<input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">                   
+					<input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+					<input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">                   
 				</form>
 			</div>
 		</div>

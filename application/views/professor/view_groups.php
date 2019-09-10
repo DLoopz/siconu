@@ -1,4 +1,4 @@
-<div class="container col-lg-6 col-md-8">
+<div class="container col-lg-4 col-md-4">
   <div class="text-center"> 
     <h3>Lista de Grupos</h3>
   </div>
@@ -15,20 +15,20 @@
       <thead>
         <tr>
           <th>Grupo</th>
-          <th>Acciones</th>
+          <th colspan="2" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($groups as $group) {?>
         <tr >
           <td><?php echo $group->grupo ?></td>
-          <td>
+          <td colspan="2" class="row">
             <!--EDITAR-->
-            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
+            <a class="btn btn-outline-success my-2 my-sm-0 col-3 ofset-1" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
             <!--ELIMINAR-->
-             <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+             <a class="btn btn-outline-danger col-3 offset-1 " href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             <!--VER-->
-            <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos del Grupo"><strong><em><i class="icon-eye"></i></em></strong></a>
+            <a class="btn btn-outline-info my-2 my-sm-0 col-3 offset-1" href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos del Grupo"><strong><em><i class="icon-eye"></i></em></strong></a>
           </td>
         </tr>
         <?php } ?>
