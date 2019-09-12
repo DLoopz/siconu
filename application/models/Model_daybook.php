@@ -47,12 +47,14 @@ class Model_daybook extends CI_Model
    //Ver todos los registros de los asientos de la empresa
   public function get_all_registers($data)
   {
+    $this->db->order_by('haber');
     $sql = $this->db->get_where('rayado_diario', $data);
     return $sql->result();
   }
   //Ver los registros en un asiento
   public function get_registers($data)
   {
+    $this->db->order_by('haber');
     $sql = $this->db->get_where('registro_asiento', $data);
     return $sql->result();
   }

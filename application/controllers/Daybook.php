@@ -133,11 +133,12 @@ class Daybook extends CI_Controller {
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
-    $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     $fields = array('usuario_id' => $this->session->userdata('grupo'), );
@@ -149,6 +150,10 @@ class Daybook extends CI_Controller {
 			$data['id_asiento']=$id_asiento;
       $data['id_empresa']=$id_empresa;
 			$data['accounts']=$accounts;
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $data['clasifications']=$this->model_account->get_clasificacion_cuenta();
+      $fields = array('asiento_id' => $id_asiento);
+      $data['registers']=$this->model_daybook->get_registers($fields);
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
 			$this->load->view('student/view_add_register');
@@ -445,6 +450,14 @@ class Daybook extends CI_Controller {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
       }
       redirect('daybook/book/'.$id_empresa, 'refresh');
+  }
+
+  public function notCero($cantidad)
+  {
+    if ($cantidad > 0)
+      return True;
+    else
+      return False;
   }
 
 
