@@ -12,8 +12,10 @@ class Check_balance extends CI_Controller
     $fields = array('id_empresa' => $id_empresa );
     $data['exercise']=$this->model_exercise->get_exercise($fields);
 		$data['title']="Balanza de comprobación";
+		$data['id_empresa']=$id_empresa;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
+    $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_check_balance');
 		$this->load->view('foot');
 	}

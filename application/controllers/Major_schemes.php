@@ -14,6 +14,7 @@ class Major_schemes extends CI_Controller {
     $data['accounts']=$this->model_account->get_catalog($fields);
     $this->load->view('head',$data);
     $this->load->view('navbar');
+    $this->load->view('student/nabvar_options');
     $this->load->view('student/view_major_schemes');
     $this->load->view('foot');
 	}

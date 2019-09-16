@@ -20,6 +20,7 @@ class Daybook extends CI_Controller {
 		$data['id_empresa']=$id;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
+    $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_daybook');
 		$this->load->view('foot');
 	}
