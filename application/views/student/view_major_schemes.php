@@ -18,6 +18,11 @@
 		//print_r($numero_asiento);
 		//echo $numero_asiento[66];
 
+		/*if ($regs->debe>0): ?>
+				<?php echo $numero_asiento[$regs->id_asiento].')'; ?>
+			<?php endif 
+		*/
+
 		?>
 
 		
@@ -26,7 +31,7 @@
 			<table class="table table-hover table-responsive-md col-md-5">
 				<thead class="text-center">
 					<tr>
-						<th colspan="100%" >
+						<th colspan="2">
 							<?php echo $cu->cuenta; ?>					
 						</th>
 					</tr>
@@ -46,24 +51,11 @@
 
 						<?php if ($regs->cuenta == $cu->cuenta and $regs->registro_id==NULL): ?>
 							<tr>
-								<td class="border-right">
-									
-										<?php /* if ($regs->debe>0): ?>
-				      				<?php echo $numero_asiento[$regs->id_asiento].')'; ?>
-				      			<?php endif */?>
-									
-					      		$ <?php echo number_format($regs->debe,2,'.',','); ?>
-									
+								<td class="border-right ">
+					      	$ <?php echo number_format($regs->debe,2,'.',','); ?>
 						    </td>
-						    <td>
-						      
-						      	
-						      	$ <?php echo number_format($regs->haber,2,'.',','); ?>
-						      	
-						      	<?php /*if ($regs->haber>0): ?>
-						      		<?php echo $numero_asiento[$regs->id_asiento].')'; ?>
-						      	<?php endif */?>
-						      	
+						    <td class="">
+						      $ <?php echo number_format($regs->haber,2,'.',','); ?>
 						    </td>
 							</tr>
 
@@ -78,17 +70,11 @@
 
 						<?php if ($parc->cuenta == $cu->cuenta and $parc->registro_id!=NULL): ?>
 							<tr>
-								<td class="border-right">
-									<?php /* if ($parc->debe>0): ?>
-				      			<?php echo $numero_asiento[$parc->id_asiento].')'; ?>
-				      		<?php endif */?>
+								<td class="border-right ">
 						      $ <?php echo number_format($parc->debe,2,'.',','); ?>
 						    </td>
-						    <td>
+						    <td class="">
 						      $ <?php echo number_format($parc->haber,2,'.',','); ?>
-						      <?php /*if ($parc->haber>0): ?>
-				      			<?php echo $numero_asiento[$parc->id_asiento].')'; ?>
-				      		<?php endif */?>
 						    </td>
 							</tr>
 
@@ -101,17 +87,17 @@
 					<?php endforeach //parciales ?>
 
 					<tr>
-						<th class="table-secondary border-right"><?php echo $total_debe; ?></th>
-						<th class="table-secondary"><?php echo $total_haber; ?></th>
+						<th class="  border-right"><?php echo $total_debe; ?></th>
+						<th class=" "><?php echo $total_haber; ?></th>
 					</tr>
 
 					<tr>
 						<?php if ($total_debe>=$total_haber): ?>
-							<th class="table-success border-right"><?php echo abs($total_debe-$total_haber); ?></th>
-							<th class="table-success"></th>
+							<th class=" border-right"><?php echo abs($total_debe-$total_haber); ?></th>
+							<th class=""></th>
 						<?php else: ?>
-							<th class="table-success border-right"></th>
-							<th class="table-success"><?php echo abs($total_debe-$total_haber); ?></th>
+							<th class=" border-right"></th>
+							<th class=""><?php echo abs($total_debe-$total_haber); ?></th>
 						<?php endif ?>						
 					</tr>
 					

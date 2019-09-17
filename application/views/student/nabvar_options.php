@@ -5,7 +5,7 @@
   
   $var = array(
     1 => 'daybook',
-    2 => 'mayor_schemas',
+    2 => 'major_schemes',
     3 => 'check_balance',
     4 => 'sheet_balance',
     5 => 'result_state',
@@ -59,7 +59,7 @@
             <a class="nav-link <?php if(isset($book)) echo "link_activo";?>" href="<?php echo base_url();?>daybook/book/<?php echo $id_empresa; ?>" title="Rayado Diario">Rayado Diario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if(isset($mayor_schemas)) echo "link_activo";?>" title="Esquemas de Mayor"href="<?php echo base_url();?>mayor_schemas">Esquemas de Mayor</a>
+            <a class="nav-link <?php if(isset($mayor_schemas)) echo "link_activo";?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
           </li>
 
           <li class="nav-item">

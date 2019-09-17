@@ -53,12 +53,11 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
 	{
     $data['title']="Esquemas de mayor";
     $fields = array('empresa_id' => $id_empresa);
-
-
     $data['asientos'] = $this->model_schemes->get_asientos($fields);
     $data['registros'] = $this->model_schemes->get_all($fields);
     $data['cuentas'] = $this->model_schemes->get_cuentas($fields);
     $data['parciales'] = $this->model_schemes->get_partials($fields);
+    $data['id_empresa'] = $id_empresa;
     
     //echo "<pre>".print_r($data['asientos'], 1)."</pre>";
     //echo "<hr>";
