@@ -51,7 +51,7 @@ class Student extends CI_Controller {
     }
   }
 
-    public function edit_exercise($id=null)
+  public function edit_exercise($id=null)
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]');
@@ -96,5 +96,20 @@ class Student extends CI_Controller {
     $fields = array('id_empresa' => $id );
     $this->model_exercise->delete_exercise($fields);
     redirect('student', 'refresh');
+  }
+
+  public function close_exercise($id=null)
+  {
+    $fields = array(
+      'id_empresa' => $id,
+      'estado' =>  1
+    );
+    $mod= $this->model_exercise->update_exercise($fields);
+    if($mod){
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+    }else{
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+    }
+    redirect('student');
   }
 }

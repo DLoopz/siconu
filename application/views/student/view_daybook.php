@@ -7,7 +7,8 @@
 						<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 				</div>
 				<div class="col-6 text-right">
-					<a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-home-1"></i></a>
+					<a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
+					<a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
 				</div>
 			</div>
 			<br>
@@ -33,7 +34,7 @@
 					    	if ($entry->id_asiento==$register->asiento_id){ ?>
 					    		<tr>
 							    	<td><?php if ($i!=$aux) {echo $i; $aux=$i;} ?></td>
-							    	<td></td>
+							    	<td><?php echo $entry->fecha;?></td>
 							    	<td><?php echo $register->folio; ?></td>
 							    	<td>
 							    		<div class="<?php if ($register->haber>0){ echo "offset-2";}?>">
@@ -63,7 +64,7 @@
 					     } ?>
 					     <tr>
 					    	<td></td>
-					    	<td><?php echo $entry->fecha;?></td>
+					    	<td></td>
 					    	<td></td>
 					    	<th><?php echo $entry->descripcion;?></th>
 					    	<td></td>

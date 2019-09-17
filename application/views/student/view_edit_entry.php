@@ -9,7 +9,7 @@
 			<form method="post"  action="<?php echo base_url();?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>">
 				<div class="form-group">
 					Descripción del Asiento
-					<input type="text" name="concepto" class="form-control" placeholder="Descripción del Asiento" value="<?php echo $entry->concepto;?>">
+					<input type="text" name="concepto" class="form-control" placeholder="Descripción del Asiento" value="<?php echo $entry->Descripción;?>">
 					<?php echo form_error('concepto'); ?>
 				</div>
 				<div class="form-group">

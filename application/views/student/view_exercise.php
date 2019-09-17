@@ -13,6 +13,7 @@
 	      <tr>
 	      	<th>No.</th>
 	        <th>Nombre del ejercicio</th>
+	        <th>Estatus</th>
 	        <th>Acciones</th>
 	      </tr>
 	    </thead>
@@ -22,7 +23,8 @@
 	        	<td>
 	            <?php echo $i;?>
 	          </td>
-	          <td><?php echo $exercise->nombre ?></td>
+	          <td><?php echo $exercise->nombre;?></td>
+	          <td><?php if (!$exercise->estado){ echo '<div class="text-success">Abierto</div>';} else{ echo '<div class="text-danger">Cerrado</div>';}?></td>
 	          <td>
           		<!-- editar ejercicio -->
               <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit-1"></i></em></strong></a>

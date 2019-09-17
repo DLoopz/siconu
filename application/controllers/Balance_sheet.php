@@ -14,8 +14,10 @@ class Balance_sheet extends CI_Controller
     $data['types']=$this->model_account->get_tipo_cuenta($fields);
     $data['clasifications']=$this->model_account->get_clasificacion_cuenta($fields);
 		$data['title']="Balance General";
+		$data['id_empresa']=$id_empresa;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
+    $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_balance_sheet');
 		$this->load->view('foot');
 	}
