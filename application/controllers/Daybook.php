@@ -449,7 +449,7 @@ class Daybook extends CI_Controller {
 
 
 
-/*public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null)
+public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null)
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
@@ -460,19 +460,23 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+
     $fields = array('usuario_id' => $this->session->userdata('grupo'), );
     $accounts=$this->model_account->get_catalog($fields);
     $fields = array('id_registro' => $id_registro);
     $register=$this->model_daybook->get_register($fields);
+
     if (!$this->form_validation->run())
     {
       $data['title']="Alumno: Agregar Asiento";
       $data['id_asiento']=$id_asiento;
       $data['id_empresa']=$id_empresa;
       $data['accounts']=$accounts;
+      $data['register'] = $register;
+
       $this->load->view('head',$data);
       $this->load->view('navbar');
-      $this->load->view('student/view_add_register');
+      $this->load->view('student/view_edit_register');
       $this->load->view('foot');
     }
     else
@@ -493,24 +497,28 @@ class Daybook extends CI_Controller {
       $folio= ($accounts[$a]->tipo_id*1000)+($accounts[$a]->clasificacion_id*100)+$aux;
       if ($this->input->post('movimiento')=='cargo') {
         $fields = array(
+          'id_registro' => $id_registro,
           'asiento_id' => $id_asiento,
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
           'cuenta' => $accounts[$a]->nombre,
-          'debe' => $this->input->post('cantidad')
+          'debe' => $this->input->post('cantidad'),
+          'haber' => 0
         );
       }
       else
       {
         $fields = array(
+          'id_registro' => $id_registro,
           'asiento_id' => $id_asiento,
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
           'cuenta' => $accounts[$a]->nombre,
-          'haber' => $this->input->post('cantidad')
+          'haber' => $this->input->post('cantidad'),
+          'debe' => 0,
         );
       }
-      $add=$this->model_daybook->insert_register($fields);
+      $add=$this->model_daybook->update_register($fields);
       if($add)
       {
         $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
@@ -521,7 +529,7 @@ class Daybook extends CI_Controller {
       }
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
     }
-  }*/
+  }
 
 }
 

@@ -203,7 +203,6 @@ class Professor extends CI_Controller {
 
         while( ($data = fgetcsv($handle, 1000, '"') ) !== FALSE )
         {
-          //$consulta = $this->db->query("LOAD DATA LOCAL INFILE '$ruta' INTO TABLE isr FIELDS TERMINATED BY ',' LINES TERMINATED BY '".'\r\n'."' (isr.lim_inferior, isr.cuota_fija, isr.porcentaje);");
           $fields = array(
             'matricula' => $data[0],
             'apellido_paterno' => $data[1],
@@ -223,7 +222,7 @@ class Professor extends CI_Controller {
         }
         fclose($handle);
 
-        $this->session->set_flashdata('msg', '<div class="alert alert-success">Alumno agregado correctamente</div>');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success">Alumnos agregados correctamente<br>La contraseña del alumno es su matricula</div>');
         
         redirect('professor/show_students/'.$id_grupo);
       }

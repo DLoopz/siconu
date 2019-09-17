@@ -62,7 +62,7 @@ select{
 }
 .container
 {
-	min-height: 400px;
+	/*min-height: 4500px;*/
 }
 
 .espacio
@@ -112,4 +112,11 @@ select{
 
 .panel-footer{
   padding-bottom: 50px !important;
+}
+
+
+.border-right
+{
+  /*border-right: 1px solid #dee2e6!important;*/
+  border-right: 1px solid #000 !important;
 }

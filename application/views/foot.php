@@ -20,6 +20,8 @@
   		$(".exito:first-child, .error:first-child").hide();
 		});
 
+    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
+
   }); 
 
 </script>

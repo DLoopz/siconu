@@ -29,7 +29,9 @@
 	          <td class="text-right">$ <?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
 	          <td>
 	          	<!--editar asiento-->
-	          	<!--a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar registro"><strong><em><i class="icon-edit-1"></i></em></strong></a-->
+
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+
             	<!-- eliminar asiento -->
               <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>

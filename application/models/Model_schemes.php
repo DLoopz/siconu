@@ -3,34 +3,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_schemes extends CI_Model
 {
-  //Insertar ejercicio
-  /*public function insert_exercise($data)
+  
+
+  public function get_asientos($data)
   {
-    return $this->db->insert('registro_asiento', $data);
-  }*/
-  //Ver los ejercicios registrados
-  public function get_registers($data)
-  {
-    $this->db->order_by('cuenta');
-    //$this->db->order_by('id_asiento');
-    $sql = $this->db->get_where('rayado_diario',$data);
+    $sql = $this->db->get_where('asiento',$data);
     return $sql->result();
   }
-  //Ver ejercicio registrado
-  public function get_exercise($data)
+
+  public function get_cuentas($data)
   {
-    $sql = $this->db->get_where('registro_asiento', $data);
-    return $sql->row();
+    $sql = $this->db->query("
+      SELECT registro_asiento.cuenta
+      FROM empresa
+      JOIN asiento
+      ON asiento.empresa_id = empresa.id_empresa
+      JOIN registro_asiento
+      ON registro_asiento.asiento_id = asiento.id_asiento
+      WHERE empresa.id_empresa = {$data['empresa_id']}
+      GROUP BY registro_asiento.cuenta
+    ");
+    return $sql->result();
   }
-  //Actualizar ejercicio
-  /*public function update_exercise($data)
+
+
+
+  public function get_all($data)
   {
-    $this->db->where('id_registro_asiento', $data['id_registro_asiento']);
-    return $this->db->update('registro_asiento', $data);
+    
+    $sql = $this->db->query("
+      SELECT
+      asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, registro_asiento.id_registro, registro_asiento.asiento_id, registro_asiento.cuenta, registro_asiento.debe, registro_asiento.haber, registro_parcial.registro_id, registro_parcial.concepto, registro_parcial.cantidad
+      FROM asiento
+      JOIN empresa
+      on asiento.empresa_id = empresa.id_empresa
+      JOIN registro_asiento
+      on registro_asiento.asiento_id = asiento.id_asiento
+      LEFT JOIN registro_parcial
+      on registro_parcial.registro_id = registro_asiento.id_registro
+      WHERE empresa.id_empresa = {$data['empresa_id']}
+      ORDER by registro_asiento.cuenta ASC
+    ");
+    
+    return $sql->result();
+    
   }
-  //Eliminar ejercicio
-  public function delete_exercise($data)
+
+  public function get_partials($data)
   {
-    return $this->db->delete('registro_asiento' , $data );
-  }*/
+    $sql = $this->db->query("
+      SELECT asiento.id_asiento, empresa.id_empresa, registro_asiento.id_registro, registro_asiento.asiento_id, registro_asiento.cuenta, registro_asiento.debe, registro_asiento.haber, registro_parcial.registro_id FROM asiento JOIN empresa on asiento.empresa_id = empresa.id_empresa JOIN registro_asiento on registro_asiento.asiento_id = asiento.id_asiento RIGHT JOIN registro_parcial on registro_parcial.registro_id = registro_asiento.id_registro
+      WHERE empresa.id_empresa = {$data['empresa_id']}
+      GROUP by registro_asiento.id_registro 
+      ORDER BY registro_parcial.registro_id ASC
+    ");
+    
+    return $sql->result();
+  }
+
 }
