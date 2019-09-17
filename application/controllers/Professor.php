@@ -400,10 +400,17 @@ class Professor extends CI_Controller {
 
    public function add_account()
   {
+    $aux=$this->input->post('tipo');
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|alpha_numeric_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]',array('required' => '%s es un campo obligatorio' ));
     $this->form_validation->set_rules('tipo','Tipo de Cuenta','required');
+    if ($aux==3) {
+      $aux=1;
+    }
+    else
+    {
      $this->form_validation->set_rules('clasificacion','Clasificación de Cuenta','required');
+    }
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s debe tener un valor diferente al predeterminado');
     $this->form_validation->set_message('is_unique', '%s ya existe');
@@ -429,7 +436,7 @@ class Professor extends CI_Controller {
     {
       $fields = array(
         'tipo_id' => $this->input->post('tipo'),
-        'clasificacion_id' => $this->input->post('clasificacion'),
+        'clasificacion_id' => $aux,
         'nombre' => $this->input->post('nombre'),
         'usuario_id' => $this->session->userdata('id_user')
       );

@@ -47,6 +47,17 @@ class Admin extends CI_Controller
         	'id_usuario' => $id,
         	'contrasenia' => md5($password)
         );
+        $config = Array(
+              'protocol' => 'smtp',
+              'smtp_host' => 'ssl://smtp.googlemail.com',
+              'smtp_port' => 465,
+              'smtp_user' => 'e32wsaq1@gmail.com',
+              'smtp_pass' => '1qasw23e',
+              'mailtype' => 'html',
+              'charset' => 'iso-8859-1',
+              'wordwrap' => TRUE
+        );
+        $this->load->library('email',$config);
         $mod= $this->model_user->update_user($fields);
         $this->email->from('e32wsaq1@gmail.com', 'SICONU: Credenciales');
         $this->email->to($correo);

@@ -83,18 +83,21 @@
     </div>
   </div>
 </div>
+<br>
 </div>
 
 <script type="text/javascript">
   function activeClasification(){
     if (document.getElementById('tipo_cuenta').value==3) {
       document.getElementById('clasificacion_cuenta').disabled=true;
+      document.getElementById('clasificacion_cuenta').options[0].selected=true;
       document.getElementById('cuenta').disabled=false;
       setCuenta();
     }
     else
     {
       document.getElementById('clasificacion_cuenta').disabled=false;
+      document.getElementById('clasificacion_cuenta').options[0].selected=true;
       document.getElementById('cuenta').disabled=true;
     }
   }
@@ -122,14 +125,29 @@
     var x = document.getElementById("cuenta");
     for (var i = 0; i < nCuentas.length; i++) { imprimir=true;
       if (idTipo[i]==tipo && idClas[i]==clas){
-        for (var j = 0; j < Things.length; j++) {
-          if(idCuenta[i]==register[j])
+        for (var j = 0; j < registers.length; j++) {
+          if(idCuentas[i]==registers[j])
           {
             imprimir=false;
           }
         }
         if (imprimir) {
-          var option = document.createElement("option");
+         var option = document.createElement("option");
+          option.text = nCuentas[i];
+          option.value = idCuentas[i];
+          x.add(option); 
+          console.log(nCuentas[i]+", "+idCuentas[i]);
+        }
+      }
+      else  if (idTipo[i]==tipo && idTipo[i]==3){
+        for (var j = 0; j < registers.length; j++) {
+          if(idCuentas[i]==registers[j])
+          {
+            imprimir=false;
+          }
+        }
+        if (imprimir) {
+         var option = document.createElement("option");
           option.text = nCuentas[i];
           option.value = idCuentas[i];
           x.add(option); 
@@ -137,5 +155,5 @@
         }
       }
     }
-  }
+}
 </script>

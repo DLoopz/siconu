@@ -12,8 +12,8 @@
 				<div class="form-group">
           <label>Elija el tipo de la cuenta</label>
           <br>
-        	<select  class="form-control" name="tipo" class="form-group"> 
-            <option value="" >Seleccione una cuenta</option>
+        	<select  class="form-control" name="tipo" class="form-group" id="tipo" onchange="isCapital()"> 
+            <option value="0" disabled selected>Seleccione una cuenta</option>
             	<?php foreach($view_tipo as $row){?>
             		<option  value="<?php echo $row->id_tipo;?>" >
                 <?php echo $row->nombre;?></option><?php } ?>
@@ -22,8 +22,8 @@
         </div>
         <div class="form-group">
           <label>Elige la clasificación de la cuenta</label>
-          <select  class="form-control" name="clasificacion" class="form-group"> 
-            <option value="" >Seleccione una cuenta</option>
+          <select  class="form-control" name="clasificacion" class="form-group" id="clas"> 
+            <option value="0" disabled selected>Seleccione una cuenta</option>
             <?php foreach($view_clasificacion as $row){?>
               <option name="clasificacion" value="<?php echo $row->id_clasificacion;?>" >
               <?php echo $row->nombre;?></option><?php } ?>
@@ -46,3 +46,15 @@
 	</div>
 	<hr>
 </div>	
+<script type="text/javascript">
+  function isCapital(){
+    if (document.getElementById("tipo").value==3){
+      document.getElementById("clas").disabled=true;
+    }
+    else
+    {
+      document.getElementById("clas").disabled=false;
+      console.log(document.getElementById("tipo").value);
+    }
+  }
+</script>
