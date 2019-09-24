@@ -20,9 +20,9 @@ class Admin extends CI_Controller
     $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
     $this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña ','trim|required|matches[password]');
     //personalizacion de reglas
-    $this->form_validation->set_message('required', '%s es un campo requerido');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las Contraseñas no coinciden');
-    $this->form_validation->set_message('min_length', '% debe tener como mínimo 8 caracteres');
+    $this->form_validation->set_message('min_length', '%s debe tener como mínimo 8 caracteres');
     //personalizacion de delimitadores
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE)
@@ -64,7 +64,7 @@ class Admin extends CI_Controller
         $this->email->subject('Usuario del sistema FEP');
         $this->email->message("Su nueva contraseña es: ".$password);
         $this->email->send();
-        if(!$mod){
+        if($mod){
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Contraseña editado exitosamente</div');
         }
         else
@@ -119,7 +119,7 @@ class Admin extends CI_Controller
         $this->email->subject('Usuario del sistema FEP');
         $this->email->message('Su usuario de ingreso es: '.$correo.', Su contraseña es: profesor'.$num);
         $send=$this->email->send();
-        if($add and $send)
+        if($add && $send)
         {
           $this->session->set_flashdata('msg', '<div class="alert alert-success">Profesor añadido exitosamente</div>');
         }
@@ -139,6 +139,14 @@ class Admin extends CI_Controller
   public function eliminar_professor(){
     $fields = array('id_usuario' => $this->input->post("id_profesor"));
     $this->model_user->delete_user($fields);
+     if($fields)
+        {
+          $this->session->set_flashdata('msg', '<div class="alert alert-success">Profesor eliminado correctamente</div>');
+        }
+        else
+        {
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger">Error profesor no eliminado</div>');
+        }
     redirect('admin', 'refresh');
   }
 

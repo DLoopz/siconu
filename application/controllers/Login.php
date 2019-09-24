@@ -34,8 +34,8 @@ class Login extends CI_Controller
 	{
 		if ($this->input->post('login')) {
 			//se establecen reglas de validacion
-			$this->form_validation->set_rules('usuario', 'usuario', 'required');
-			$this->form_validation->set_rules('password', 'contraseña', 'required');
+			$this->form_validation->set_rules('usuario', 'Usuario', 'required');
+			$this->form_validation->set_rules('password', 'Contraseña', 'required');
 			//personalizacion de reglas de validacion
 			$this->form_validation->set_message('required', '%s es un campo oblligatorio');
 			//personalizacion de delimitadores
@@ -50,12 +50,22 @@ class Login extends CI_Controller
 			else
 			{
 				$fields = array(
-					'matricula' => $this->input->post('usuario'),
+					'matricula' => $this->input->post('usuario')
+				);
+				$fields1 = array(
 					'contrasenia' => md5($this->input->post('password'))
 				);
+
 				$user=$this->model_user->get_user($fields);
-				if (!$user){
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario o contraseña invalidos</div');
+				$pass=$this->model_user->get_user($fields1);
+				if (!$user && !$pass){
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario y contraseña inválidos</div');
+					redirect();
+				}elseif (!$user) {
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario inválido</div');
+					redirect();
+				}elseif (!$pass) {
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña inválida</div');
 					redirect();
 				}
 				$newdata = array(    

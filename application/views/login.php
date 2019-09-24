@@ -1,5 +1,5 @@
     <div class="container">
-        <div class="row">
+        <div class="row margin_top_login">
             <div class="col-md-6 col-md-offset-6">
                 <figure class="figure"><br/><br/>
                     <img src="<?php echo base_url();?>source/img/fondologin.png" class="figure-img img-fluid rounded" alt="img-siconu" width="500px">                
@@ -15,7 +15,7 @@
                         <form role="form" method="post" action="<?php echo base_url('login/login'); ?>">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Matrícula" name="usuario" type="text" autofocus>
+                                    <input class="form-control" placeholder="Usuario" name="usuario" type="text" autofocus>
                                 </div>
                                 <?php echo form_error('usuario'); ?>
                                 <div class="form-group">

@@ -1,4 +1,4 @@
-<div class="container col-md-6">
+<div class="container col-md-4">
   <div class="text-center"><h3>Editar Perfil Profesor</h3></div>
   <hr class="line_sep">
   <div>
@@ -39,6 +39,7 @@
     <div class="text-danger">
       <?php echo form_label('* Campos Obligatorios')?><br>
     </div>
+    <hr>
     <br>
     <div class="panel-footer text-center">
         <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor">

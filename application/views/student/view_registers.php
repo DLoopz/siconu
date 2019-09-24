@@ -4,7 +4,7 @@
 	<?php if ($edit){?>
 		<div class="text-center alert-warning">Si no desea hacer cambios presione terminar.</div>
 		<?php } ?>
-		<div class="alert-warning text-center">Para realizar cambios en los registros eliminelos y vuela a capturarlos</div>
+		<div class="alert-warning text-center">Para realizar cambios en los registros eliminelos y vuelva a capturarlos</div>
 	<div>
 		<br>
 		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros al Asiento"><i class="icon-plus-2"></i></a>
@@ -30,10 +30,10 @@
 	          <td>
 	          	<!--editar asiento-->
 
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar Registro Parcial"><strong><em><i class="icon-edit-1"></i></em></strong></a>
 
             	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro Parcial"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>
 	        </tr>
 	      <?php foreach ($partials as $partial){
@@ -81,7 +81,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro de eliminar el registro?
+                ¿Está seguro de eliminar el registro?
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">

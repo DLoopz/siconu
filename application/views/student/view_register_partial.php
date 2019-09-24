@@ -1,5 +1,5 @@
 <div class="container col-md-6">
-	<h3 class="text-center">Agregar Registros al Asiento</h3>
+	<h3 class="text-center">Ingresar Registro Parcial</h3>
 	<hr class="line_sep">
 	<div>
 
@@ -15,7 +15,7 @@
 
      ?>
 
-     <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
+     <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar Parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
      <br><br>
 
     <!-- Modal para registros parciales -->
@@ -24,14 +24,14 @@
             <div class="modal-content">
               <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cerrar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                  <h3 class="text-center">Ingresar registro parcial</h3>
+                  <h3 class="text-center">Ingresar Registro Parcial </h3>
                   <hr class="line_sep">
                     <div class="form-group">
                       Concepto
@@ -45,9 +45,9 @@
                     </div>
                 </div>
                 <br>
-                <div class="modal-footer text-center">
-                   <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-                  <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+                <div class="panel-footer text-center">
+                   <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Volver</button></a>
+                  <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
                    
                 </div>
                 </form>
@@ -72,9 +72,9 @@
 	          <td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
 	          <td>
 	          	<!--editar asiento-->
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $partial->id_parcial;?>" title="Editar registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $partial->id_parcial;?>" title="Editar Registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
             	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_partial" onclick="eliminar(<?php echo $partial->id_parcial;?>)" title="Eliminar registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_partial" onclick="eliminar(<?php echo $partial->id_parcial;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>
 	        </tr>
 	      <?php } ?>

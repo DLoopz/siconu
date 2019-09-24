@@ -1,12 +1,14 @@
 <div class="container col-md-8">
-  <div class="text-center">
-    <h3>Lista de Alumnos</h3>
+  <div >
+    <h3 class="text-center">Lista de Alumnos</h3>
   </div>
   <hr class="line_sep">
   <?php
     if($this->session->flashdata('msg'))
       echo $this->session->flashdata('msg');
   ?>
+  <a href="<?php echo base_url() ?>professor " class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
+  
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
   </br>
   </br>
@@ -16,7 +18,7 @@
         <th>Nombre del alumno</th>
         <th>Apellido Paterno</th>
         <th>Apellido Materno</th>
-        <th>Matricula/Nombre de usuario</th>
+        <th>Matrícula</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -29,9 +31,9 @@
         <td><?php echo $student->matricula ?></td>
         <td>
           <!--EDITAR-->
-            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil-1"></i></em></strong></a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil"></i></em></strong></a>
           <!--EDITAR password-->
-          <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+          <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit"></i></em></strong></a>
           <!-- eliminar confirmación -->
           <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
         </td>
@@ -40,6 +42,11 @@
     </tbody>
   </table>     
 </div>
+<?php if (!isset($student)){?>
+    <div class="text-center">
+      <p class="text-danger">No se han registrado alumnos</p>
+    </div>
+  <?php } ?>
 
 <!-- Modal de confirmación -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi_modal">
@@ -52,7 +59,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro de eliminar el alumno?
+                ¿Está seguro de eliminar el alumno?
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_student/<?php echo $id_group ?>">

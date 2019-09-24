@@ -27,7 +27,7 @@
 	          <td><?php if (!$exercise->estado){ echo '<div class="text-success">Abierto</div>';} else{ echo '<div class="text-danger">Cerrado</div>';}?></td>
 	          <td>
           		<!-- editar ejercicio -->
-              <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+              <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit"></i></em></strong></a>
 	            <!-- eliminar ejercicio -->
               <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" href="" title="Eliminar Ejercicio"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
               <!--editar password ejercicio-->
@@ -56,7 +56,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					¿Esta seguro de eliminar el ejercicio?
+					¿Está seguro de eliminar el ejercicio?
 				</div>
 				<div class="modal-footer">
 				<form method="POST" action="<?php echo base_url() ?>student/del_exercise">
