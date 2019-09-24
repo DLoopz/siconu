@@ -2,7 +2,7 @@
   <div class="text-center"><h3>Editar Contraseña del Alumno</h3></div>
   <hr class="line_sep">
   <div>
-    <form method="post" action="<?php echo base_url() ?>professor/edit_password/<?php echo $id_student;?>/<?php echo $id_group ?>">
+    <form method="post" action="<?php echo base_url() ?>student/edit_password">
       <div class="form-group">
         <label>Nueva Contraseña</label>
         <input class="form-control" name="password" id="password" type="password" autofocus >
@@ -14,7 +14,7 @@
         <?php echo form_error('password_c');?>
       </div>
       <div class="panel-footer text-center">
-        <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Volver </a>
+        <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>student"> Volver </a>
         <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
         
       </div>

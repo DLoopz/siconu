@@ -83,9 +83,8 @@
     </div>
   </div>
 </div>
-<br>
 </div>
-
+<br>
 <script type="text/javascript">
   function activeClasification(){
     if (document.getElementById('tipo_cuenta').value==3) {

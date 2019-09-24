@@ -48,7 +48,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="nav_proyecto">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto nav-fill">
           <?php if ($this->session->userdata('rol')==2) {?>
             <li class="nav-item">
               <a class="nav-link icon-reply" href="<?php echo base_url();?>professor/list_project/<?php echo $this->session->userdata('id_grupo');?>/" title="Rayado Diario"></a>
@@ -59,7 +59,7 @@
             <a class="nav-link <?php if(isset($book)) echo "link_activo";?>" href="<?php echo base_url();?>daybook/book/<?php echo $id_empresa; ?>" title="Rayado Diario">Rayado Diario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if(isset($mayor_schemas)) echo "link_activo";?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
+            <a class="nav-link <?php if(isset($mayor_schemas)) echo "link_activo";?>  <?php if($disabled){echo "disabled";} ?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
           </li>
 
           <li class="nav-item">
@@ -70,11 +70,11 @@
             <a class="nav-link <?php if(isset($sheet_balance)) echo "link_activo";?>" href="<?php echo base_url();?>/balance_sheet/sheet/<?php echo $id_empresa; ?>" title="Balance General">Balance General</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if(isset($result_state)) echo "link_activo"; ?>" href="<?php echo base_url();?>result_state" title="Esatdo de resultados"> Esatdo de resultados</a>
+            <a class="nav-link <?php if(isset($result_state)) echo "link_activo"; ?> disabled" href="<?php echo base_url();?>result_state" title="Esatdo de resultados"> Esatdo de resultados</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link <?php if(isset($stock_card)) echo "link_activo";?>" href="<?php echo base_url();?>stock_card" title="Targeta de almacen">
+            <a class="nav-link <?php if(isset($stock_card)) echo "link_activo";?> disabled" href="<?php echo base_url();?>stock_card" title="Targeta de almacen">
                 Targeta de almacen
             </a>
           </li>

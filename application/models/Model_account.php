@@ -7,9 +7,8 @@ class Model_account extends CI_Model
   public function insert_account($data)
   {
     //se inserta una nueva cuenta
-    $this->db->insert('catalogo_usuario', array('nombre' => $data['nombre'],'tipo_id' => $data['tipo_id'],'clasificacion_id' => $data['clasificacion_id'],'usuario_id' => $data['usuario_id']));
-   
-    
+    $sql=$this->db->insert('catalogo_usuario', array('nombre' => $data['nombre'],'tipo_id' => $data['tipo_id'],'clasificacion_id' => $data['clasificacion_id'],'usuario_id' => $data['usuario_id']));
+    return $sql;   
   }
   //Eliminar cuenta
   public function delete_account($data)
@@ -30,12 +29,12 @@ class Model_account extends CI_Model
     return $sql->result();
   }
   //Ver catalogo registrado
-  public function get_catalog()
+  public function get_catalog($data)
   {
     $this->db->order_by('tipo_id');
     $this->db->order_by('clasificacion_id');
     $this->db->order_by('id_catalogo_usuario');
-    $sql = $this->db->get_where('catalogo_usuario');
+    $sql = $this->db->get_where('catalogo_usuario',$data);
     return $sql->result();
   }
 
@@ -53,6 +52,14 @@ class Model_account extends CI_Model
   public function get_clasificacion_cuenta()
   {
     $sql = $this->db->get_where('clasificacion_cuenta');
+    return $sql->result();
+  }
+  public function get_catalog_student($data)
+  {
+    $this->db->order_by('tipo_id');
+    $this->db->order_by('clasificacion_id');
+    $this->db->order_by('id_catalogo_usuario');
+    $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }
   //Actualizar cuentas

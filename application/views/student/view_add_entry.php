@@ -24,7 +24,6 @@
 	        <a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 					<input type="submit" name="add_entry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
 				</div>
-				
 			</form>
 		</div>
 	</div>
