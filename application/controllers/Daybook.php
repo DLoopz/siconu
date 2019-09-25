@@ -19,8 +19,6 @@ class Daybook extends CI_Controller {
     $data['partials']=$this->model_daybook->get_partials($fields);
 		$data['id_empresa']=$id;
     $data['disabled']=false;
-    if(isset($data['entries'][0]->descripcion) and isset($data['registers'][0]->cuenta) and isset($data['partials'][0]->parcial))
-      $data['disabled']=true;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');

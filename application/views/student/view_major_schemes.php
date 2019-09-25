@@ -48,7 +48,7 @@
 
 						<?php if ($regs->cuenta == $cu->cuenta and $regs->registro_id==NULL): ?>
 							<tr>
-								<td class="border-right ">
+								<td class="border-right text-right">
 					      	$ <?php echo number_format($regs->debe,2,'.',','); ?>
 						    </td>
 						    <td class="">
@@ -84,17 +84,17 @@
 					<?php endforeach //parciales ?>
 
 					<tr>
-						<th class="  border-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
+						<th class="  border-right text-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
 						<th class=" ">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
 					</tr>
 
 					<tr>
 						<?php if ($total_debe>=$total_haber): ?>
-							<th class=" border-right table-success">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+							<th class=" border-right table-success text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 							<th class="table-secondary"></th>
 						<?php else: ?>
-							<th class=" border-right table-warning"></th>
-							<th class="table-secondary">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+							<th class=" border-right table-secondary"></th>
+							<th class="table-danger">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 						<?php endif ?>						
 					</tr>
 					

@@ -38,7 +38,12 @@
         </div>
         <div class="form-group">
           Cantidad
-          <input type="text" name="cantidad" class="form-control">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input type="text" name="cantidad" class="form-control" placeholder="0.00">
+          </div>
           <?php echo form_error('cantidad') ?>
         </div>
         <div class="form-group">
@@ -122,16 +127,17 @@
     var registers = [<?php foreach ($registers as $register){echo '"'.$register->cuenta.'",';} ?>];
     resetCuenta();
     var x = document.getElementById("cuenta");
-    for (var i = 0; i < nCuentas.length; i++) { imprimir=true;
+    for (var i = 0; i < nCuentas.length; i++) { 
+      imprimir=true;
       if (idTipo[i]==tipo && idClas[i]==clas){
         for (var j = 0; j < registers.length; j++) {
-          if(idCuentas[i]==registers[j])
+          if(nCuentas[i]==registers[j])
           {
             imprimir=false;
           }
         }
-        if (imprimir) {
-         var option = document.createElement("option");
+        if (imprimir){
+          var option = document.createElement("option");
           option.text = nCuentas[i];
           option.value = idCuentas[i];
           x.add(option); 
@@ -139,8 +145,9 @@
         }
       }
       else  if (idTipo[i]==tipo && idTipo[i]==3){
-        for (var j = 0; j < registers.length; j++) {
-          if(idCuentas[i]==registers[j])
+        imprimir=true;
+        for (var j = 0; j < registers.length; j++){
+          if(nCuentas[i]==registers[j])
           {
             imprimir=false;
           }
