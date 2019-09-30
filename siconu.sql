@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-08-2019 a las 11:53:09
+-- Tiempo de generación: 30-09-2019 a las 16:49:25
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -36,15 +36,6 @@ CREATE TABLE `asiento` (
   `descripcion` varchar(50) NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `asiento`
---
-
-INSERT INTO `asiento` (`id_asiento`, `empresa_id`, `descripcion`, `fecha`) VALUES
-(42, 9, 'Primer movimiento', '2019-08-14'),
-(47, 9, 'segundo movimiento', '2019-08-15'),
-(48, 9, 'prueba parcial', '2019-08-15');
 
 -- --------------------------------------------------------
 
@@ -98,6 +89,22 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `catalogo_grupo`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `catalogo_grupo`;
+CREATE TABLE `catalogo_grupo` (
+`id_catalogo_usuario` int(11)
+,`tipo_id` int(11)
+,`clasificacion_id` int(11)
+,`nombre` varchar(50)
+,`usuario_id` int(11)
+,`grupo_id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `catalogo_usuario`
 --
 
@@ -109,42 +116,6 @@ CREATE TABLE `catalogo_usuario` (
   `nombre` varchar(50) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `catalogo_usuario`
---
-
-INSERT INTO `catalogo_usuario` (`id_catalogo_usuario`, `tipo_id`, `clasificacion_id`, `nombre`, `usuario_id`) VALUES
-(97, 1, 1, 'Caja', 19),
-(98, 1, 1, 'Bancos', 19),
-(99, 1, 1, 'Mercancías', 19),
-(100, 1, 1, 'Clientes', 19),
-(101, 1, 1, 'Documentos por cobrar', 19),
-(102, 1, 1, 'Deudores diversos', 19),
-(103, 1, 1, 'Papelería y útiles', 19),
-(104, 1, 1, 'Propaganda y publicidad', 19),
-(105, 1, 1, 'Primas de seguros', 19),
-(106, 1, 1, 'Rentas pagadas por anticipado', 19),
-(107, 1, 1, 'Intereses pagados por anticipado', 19),
-(108, 1, 2, 'Terrenos', 19),
-(109, 1, 2, 'Edificios', 19),
-(110, 1, 2, 'Mobiliario y equipo de oficina', 19),
-(111, 1, 2, 'Equipo de cómputo ', 19),
-(112, 1, 2, 'Equipo de transporte', 19),
-(113, 1, 2, 'Equipo de reparto', 19),
-(114, 1, 2, 'Gastos de constitución', 19),
-(115, 1, 2, 'Gastos de instalación', 19),
-(116, 1, 2, 'Depósitos en garantía', 19),
-(117, 2, 1, 'Proveedores', 19),
-(118, 2, 1, 'Documentos por pagar ', 19),
-(119, 2, 1, 'Acreedores diversos', 19),
-(120, 2, 1, 'Rentas cobradas por anticipado', 19),
-(121, 2, 1, 'Intereses cobrados por anticipado', 19),
-(122, 2, 2, 'Hipotecas por pagar', 19),
-(123, 2, 2, 'Documentos por pagar largo plazo', 19),
-(124, 3, 1, 'capital ganado', 19),
-(125, 3, 1, 'capital contribuido', 19),
-(126, 1, 1, 'Caja chica', 19);
 
 -- --------------------------------------------------------
 
@@ -176,16 +147,9 @@ DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id_empresa` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `nombre` varchar(50) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`id_empresa`, `usuario_id`, `nombre`) VALUES
-(9, 21, 'prueba ejercicio S.A de C.V'),
-(10, 21, 'empresita');
 
 -- --------------------------------------------------------
 
@@ -198,16 +162,6 @@ CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `grupo`
---
-
-INSERT INTO `grupo` (`id_grupo`, `nombre`) VALUES
-(18, '111'),
-(19, '123'),
-(20, '901'),
-(24, '301');
 
 -- --------------------------------------------------------
 
@@ -241,13 +195,13 @@ CREATE TABLE `parcial` (
 ,`folio` varchar(50)
 ,`catalogo_usuario_id` int(11)
 ,`cuenta` varchar(50)
-,`parcial` float
-,`debe` float
-,`haber` float
+,`parcial` double
+,`debe` double
+,`haber` double
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` float
+,`cantidad` double
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -271,9 +225,9 @@ CREATE TABLE `rayado_diario` (
 ,`folio` varchar(50)
 ,`catalogo_usuario_id` int(11)
 ,`cuenta` varchar(50)
-,`parcial` float
-,`debe` float
-,`haber` float
+,`parcial` double
+,`debe` double
+,`haber` double
 );
 
 -- --------------------------------------------------------
@@ -289,25 +243,10 @@ CREATE TABLE `registro_asiento` (
   `folio` varchar(50) NOT NULL,
   `catalogo_usuario_id` int(11) NOT NULL,
   `cuenta` varchar(50) NOT NULL,
-  `parcial` float NOT NULL DEFAULT '0',
-  `debe` float NOT NULL DEFAULT '0',
-  `haber` float NOT NULL DEFAULT '0'
+  `parcial` double NOT NULL DEFAULT '0',
+  `debe` double NOT NULL DEFAULT '0',
+  `haber` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `registro_asiento`
---
-
-INSERT INTO `registro_asiento` (`id_registro`, `asiento_id`, `folio`, `catalogo_usuario_id`, `cuenta`, `parcial`, `debe`, `haber`) VALUES
-(44, 42, '2201', 122, 'Hipotecas por pagar', 0, 0, 1000),
-(53, 47, '1101', 97, 'Caja', 0, 1000, 0),
-(54, 47, '1103', 99, 'Mercancías', 0, 1, 0),
-(55, 47, '1107', 103, 'Papelería y útiles', 0, 1001, 0),
-(56, 47, '1102', 98, 'Bancos', 0, 0, 2001),
-(57, 47, '1101', 97, 'Caja', 0, 0, 1),
-(58, 48, '1109', 105, 'Primas de seguros', 0, 3100, 0),
-(59, 48, '1101', 97, 'Caja', 0, 0, 3100),
-(60, 42, '1101', 97, 'Caja', 0, 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -320,26 +259,8 @@ CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` float NOT NULL
+  `cantidad` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `registro_parcial`
---
-
-INSERT INTO `registro_parcial` (`id_parcial`, `registro_id`, `concepto`, `cantidad`) VALUES
-(1, 48, 'abc', 123),
-(2, 48, 'eee', 1),
-(3, 48, '111', 11),
-(4, 51, 'bancoA', 1000),
-(5, 53, 'bancoA', 1000),
-(6, 54, 'fdsdfsf', 1),
-(7, 55, 'ya sabes', 1001),
-(8, 56, 'BancoA', 1000),
-(9, 56, 'BancoB', 1000),
-(10, 56, 'BancoC', 1),
-(11, 58, 'primaA', 1000),
-(12, 58, 'primaB', 2100);
 
 -- --------------------------------------------------------
 
@@ -352,14 +273,15 @@ CREATE TABLE `tarjeta_almacen` (
   `id_tarjeta` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
   `fecha` date NOT NULL,
+  `referencia` varchar(50) NOT NULL,
   `entradas` int(11) NOT NULL,
   `salidas` int(11) NOT NULL,
   `existencia` int(11) NOT NULL,
-  `unitario` float NOT NULL,
-  `promedio` float NOT NULL,
-  `debe` float NOT NULL,
-  `haber` float NOT NULL,
-  `maximo` float NOT NULL
+  `unitario` double NOT NULL,
+  `promedio` double NOT NULL,
+  `debe` double NOT NULL,
+  `haber` double NOT NULL,
+  `saldo` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -405,13 +327,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `rol`, `nombre`, `apellido_paterno`, `apellido_materno`, `matricula`, `contrasenia`) VALUES
-(1, 1, 'admin', 'admin', 'admin', 'root', '63a9f0ea7bb98050796b649e85481845 '),
-(19, 2, 'DavidM', 'Lopez', 'Polanco', 'dloopz16@gmail.com', '698d51a19d8a121ce581499d7b701668'),
-(21, 3, 'aaa', 'aaa', 'aaa', '12345', '25d55ad283aa400af464c76d713c07ad'),
-(25, 3, 'ccc', 'ccc', 'ccc', '12368', '25d55ad283aa400af464c76d713c07ad'),
-(27, 3, 'aaa', 'aaa', 'aaa', '0114010005', '25d55ad283aa400af464c76d713c07ad'),
-(28, 2, 'profesor', 'profesor', 'profesor', 'asas@gmail.com', 'dda5ad8a4da8b217e69db78e02951256'),
-(29, 2, 'profesor', 'profesor', 'profesor', 'prosor1@homail.com', '1b129ef22981d8a624f451b88ef37371');
+(1, 1, 'Administrador de Siconu', 'Nova', 'Universitas', 'root', '63a9f0ea7bb98050796b649e85481845');
 
 -- --------------------------------------------------------
 
@@ -426,15 +342,14 @@ CREATE TABLE `usuario_grupo` (
   `grupo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `usuario_grupo`
---
+-- --------------------------------------------------------
 
-INSERT INTO `usuario_grupo` (`id_usuario_grupo`, `usuario_id`, `grupo_id`) VALUES
-(8, 19, 20),
-(9, 21, 20),
-(14, 25, 20),
-(17, 27, 24);
+--
+-- Estructura para la vista `catalogo_grupo`
+--
+DROP TABLE IF EXISTS `catalogo_grupo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `catalogo_grupo`  AS  select `catalogo_usuario`.`id_catalogo_usuario` AS `id_catalogo_usuario`,`catalogo_usuario`.`tipo_id` AS `tipo_id`,`catalogo_usuario`.`clasificacion_id` AS `clasificacion_id`,`catalogo_usuario`.`nombre` AS `nombre`,`catalogo_usuario`.`usuario_id` AS `usuario_id`,`usuario_grupo`.`grupo_id` AS `grupo_id` from (`usuario_grupo` join `catalogo_usuario` on((`catalogo_usuario`.`usuario_id` = `usuario_grupo`.`usuario_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -561,7 +476,7 @@ ALTER TABLE `usuario_grupo`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `catalogo_estandar`
 --
@@ -571,7 +486,7 @@ ALTER TABLE `catalogo_estandar`
 -- AUTO_INCREMENT de la tabla `catalogo_usuario`
 --
 ALTER TABLE `catalogo_usuario`
-  MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `clasificacion_cuenta`
 --
@@ -581,22 +496,22 @@ ALTER TABLE `clasificacion_cuenta`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `registro_asiento`
 --
 ALTER TABLE `registro_asiento`
-  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `registro_parcial`
 --
 ALTER TABLE `registro_parcial`
-  MODIFY `id_parcial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_parcial` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_almacen`
 --
@@ -611,12 +526,12 @@ ALTER TABLE `tipo_cuenta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `usuario_grupo`
 --
 ALTER TABLE `usuario_grupo`
-  MODIFY `id_usuario_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usuario_grupo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -626,13 +541,6 @@ ALTER TABLE `usuario_grupo`
 --
 ALTER TABLE `asiento`
   ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id_empresa`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `catalogo_estandar`
---
-ALTER TABLE `catalogo_estandar`
-  ADD CONSTRAINT `catalogo_estandar_ibfk_1` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_cuenta` (`id_tipo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `catalogo_estandar_ibfk_2` FOREIGN KEY (`clasificacion_id`) REFERENCES `clasificacion_cuenta` (`id_clasificacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `catalogo_usuario`
