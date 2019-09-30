@@ -28,6 +28,44 @@ class Student extends CI_Controller {
 		$this->load->view('foot');
 	}
 
+    public function edit_password(){
+    //reglas de validacion
+    $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
+    //personalizacion de reglas
+    $this->form_validation->set_message('required', '%s es un campo requerido');
+    $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
+    $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    //$this->form_validation->set_message('required', 'El campo %s requerido');
+    if($this->form_validation->run()==FAlSE)
+    {
+      $data['title']='Editar contraseña de alumno';
+      $this->load->view('head',$data);
+      $this->load->view('navbar');
+      $this->load->view('student/view_edit_pass');
+      $this->load->view('foot');
+    }else{
+      if($this->input->post("submit")){
+        $fields = array(
+          'id_usuario' => $this->session->userdata('id_user'),
+          'contrasenia' =>md5($this->input->post('password'))
+        );
+        $mod= $this->model_user->update_user($fields);
+        //redirect('profesor');
+        if($mod){
+          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Contraseña editada correctamente</div>');
+        }else{
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error contraseña no editada</div>');
+        }
+        redirect('student');
+      }else{
+        redirect('student');
+      }    
+    }   
+  }
+
 	public function add_exercise()
 	{
     $id=$this->session->userdata('id_user');

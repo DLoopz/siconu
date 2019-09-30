@@ -1,7 +1,7 @@
 <div class="container">
 	<h3 class="text-center">Creación de catálogo de cuentas</h3>
 	<hr class="line_sep">
-	<p class="text-justify">A continuación le presentamos algunas cuentas que podrían ser útiles al crear su catálogo.<br>
+	<p class="text-center alert alert-warning">A continuación le presentamos algunas cuentas que podrían ser útiles al crear su catálogo.<br>
 	Selecione las cuentas que desee incluir, de lo contrario pulse en crear para posteriormente crear sus cuentas personalizadas.</p>
 	<div class="">
 		<?php

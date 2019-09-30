@@ -32,6 +32,7 @@ class Daybook extends CI_Controller {
     $data['registers']=$this->model_daybook->get_all_registers($fields);
     $data['partials']=$this->model_daybook->get_partials($fields);
 		$data['id_empresa']=$id;
+    $data['disabled']=false;
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
@@ -156,8 +157,8 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    $fields = array('usuario_id' => $this->session->userdata('grupo'), );
-    $accounts=$this->model_account->get_catalog($fields);
+    $fields = array('grupo_id' => $this->session->userdata('grupo'));
+    $accounts=$this->model_account->get_catalog_student($fields);
 
     if (!$this->form_validation->run())
     {
@@ -236,8 +237,8 @@ class Daybook extends CI_Controller {
       $this->form_validation->set_message('min_length', '%s no debe de contener menos de 3 caracteres');
       //personalizacion de delimitadores
       $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-      $fields = array('usuario_id' => $this->session->userdata('grupo'), );
-      $accounts=$this->model_account->get_catalog($fields);
+      $fields = array('grupo_id' => $this->session->userdata('grupo'), );
+      $accounts=$this->model_account->get_catalog_student($fields);
       if (!$this->form_validation->run())
       {
          $this->session->set_flashdata('msg','<script type="text/javascript"> $(\'#myTab li:first-child a\').tab(\'show\')</script>');
@@ -489,8 +490,8 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
-    $fields = array('usuario_id' => $this->session->userdata('grupo'), );
-    $accounts=$this->model_account->get_catalog($fields);
+    $fields = array('grupo_id' => $this->session->userdata('grupo'), );
+    $accounts=$this->model_account->get_catalog_student($fields);
     $fields = array('id_registro' => $id_registro);
     $register=$this->model_daybook->get_register($fields);
 

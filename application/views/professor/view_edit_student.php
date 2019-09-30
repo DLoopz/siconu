@@ -30,7 +30,7 @@
 				<?php echo form_error('matricula');?>
 			</div>
 			<div class="panel-footer text-center">
-				<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>profesor"> Cancelar </a>
+				<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Cancelar </a>
 				<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 				
 			</div>
