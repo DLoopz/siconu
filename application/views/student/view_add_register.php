@@ -69,12 +69,28 @@
       <h3 class="text-center">Ingresar registro parcial</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+         <div class="form-group">
+          Tipo de cuenta
+          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasification()">
+            <option value="0" selected disabled>Seleccione tipo de cuenta</option>
+            <?php foreach ($types as $type) {?>
+              <option value="<?php echo $type->id_tipo;?>"><?php echo $type->nombre;?></option>
+            <?php } ?>
+          </select>
+        </div>
+         <div class="form-group">
+          Clasificacion de cuenta
+          <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta_p" onchange="activeCuenta()" disabled>
+            <option value="0" selected disabled>Seleccione clasificacion de cuenta</option>
+            <?php foreach ($clasifications as $clasification) {?>
+              <option value="<?php echo $clasification->id_clasificacion;?>"><?php echo $clasification->nombre;?></option>
+            <?php } ?>
+          </select>
+        </div>
         <div class="form-group">
           Cuenta
-          <select class="form-control" name="cuenta">
-            <?php foreach ($accounts as $account) {?>
-              <option value="<?php echo $account->id_catalogo_usuario;?>"><?php echo $account->nombre;?></option>
-            <?php } ?>
+          <select class="form-control" name="cuenta" disabled id="cuenta_p">
+            <option value="0" selected disabled>Seleccione cuenta</option>
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
@@ -94,7 +110,7 @@
   function activeClasification(){
     if (document.getElementById('tipo_cuenta').value==3) {
       document.getElementById('clasificacion_cuenta').disabled=true;
-      document.getElementById('clasificacion_cuenta').options[0].selected=true;
+      document.getElementById('clasificacion_cuenta').options[0].selected=_ptrue;
       document.getElementById('cuenta').disabled=false;
       setCuenta();
     }
@@ -127,6 +143,80 @@
     var registers = [<?php foreach ($registers as $register){echo '"'.$register->cuenta.'",';} ?>];
     resetCuenta();
     var x = document.getElementById("cuenta");
+    for (var i = 0; i < nCuentas.length; i++) { 
+      imprimir=true;
+      if (idTipo[i]==tipo && idClas[i]==clas){
+        for (var j = 0; j < registers.length; j++) {
+          if(nCuentas[i]==registers[j])
+          {
+            imprimir=false;
+          }
+        }
+        if (imprimir){
+          var option = document.createElement("option");
+          option.text = nCuentas[i];
+          option.value = idCuentas[i];
+          x.add(option); 
+          console.log(nCuentas[i]+", "+idCuentas[i]);
+        }
+      }
+      else  if (idTipo[i]==tipo && idTipo[i]==3){
+        imprimir=true;
+        for (var j = 0; j < registers.length; j++){
+          if(nCuentas[i]==registers[j])
+          {
+            imprimir=false;
+          }
+        }
+        if (imprimir) {
+         var option = document.createElement("option");
+          option.text = nCuentas[i];
+          option.value = idCuentas[i];
+          x.add(option); 
+          console.log(nCuentas[i]+", "+idCuentas[i]);
+        }
+      }
+    }
+}
+</script>
+
+<script type="text/javascript">
+  function activeClasification(){
+    if (document.getElementById('tipo_cuenta_p').value==3) {
+      document.getElementById('clasificacion_cuenta_p').disabled=true;
+      document.getElementById('clasificacion_cuenta_p').options[0].selected=_ptrue;
+      document.getElementById('cuenta').disabled=false;
+      setCuenta();
+    }
+    else
+    {
+      document.getElementById('clasificacion_cuenta_p').disabled=false;
+      document.getElementById('clasificacion_cuenta_p').options[0].selected=true;
+      document.getElementById('cuenta_p').disabled=true;
+    }
+  }
+
+  function activeCuenta(){
+    document.getElementById('cuenta_p').disabled=false;
+    setCuenta();
+  }
+  function resetCuenta(){
+    var x=document.getElementById('cuenta_p');
+    x.length=1;
+    x.options[0].value=0;
+    x.options[0].text="Seleccione cuenta";
+  }
+  function setCuenta()
+  {
+    var tipo=document.getElementById('tipo_cuenta_p').value;
+    var clas=document.getElementById('clasificacion_cuenta_p').value;
+    var idCuentas = [<?php foreach ($accounts as $account){echo '"'.$account->id_catalogo_usuario.'",';} ?>];
+    var nCuentas = [<?php foreach ($accounts as $account){echo '"'.$account->nombre.'",';} ?>];
+    var idTipo = [<?php foreach ($accounts as $account){echo '"'.$account->tipo_id.'",';} ?>];
+    var idClas = [<?php foreach ($accounts as $account){echo '"'.$account->clasificacion_id.'",';} ?>];
+    var registers = [<?php foreach ($registers as $register){echo '"'.$register->cuenta.'",';} ?>];
+    resetCuenta();
+    var x = document.getElementById("cuenta_p");
     for (var i = 0; i < nCuentas.length; i++) { 
       imprimir=true;
       if (idTipo[i]==tipo && idClas[i]==clas){

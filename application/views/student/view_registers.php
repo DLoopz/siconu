@@ -1,10 +1,6 @@
 <div class="container col-md-6">
 	<h3 class="text-center">Agregar Registros al Asiento</h3>
 	<hr class="line_sep">
-	<?php if ($edit){?>
-		<div class="text-center alert-warning">Si no desea hacer cambios presione terminar.</div>
-		<?php } ?>
-		<div class="alert-warning text-center">Para realizar cambios en los registros eliminelos y vuela a capturarlos</div>
 	<div>
 		<br>
 		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros al Asiento"><i class="icon-plus-2"></i></a>
