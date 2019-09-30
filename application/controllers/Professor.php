@@ -2,8 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Professor extends CI_Controller {
-	function __construct(){
+	function __construct()
+  {
     parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 2)
+    {
+      redirect('');
+    }
   }
   //vista principal
 	public function index()

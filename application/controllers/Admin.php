@@ -3,6 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+  function __construct()
+  {
+    parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 1)
+    {
+      redirect('');
+    }
+  }
+  
 	public function index()
 	{
 		$data['title']="Admin";
