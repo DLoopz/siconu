@@ -37,7 +37,7 @@ class Login extends CI_Controller
 			$this->form_validation->set_rules('usuario', 'Usuario', 'required');
 			$this->form_validation->set_rules('password', 'Contraseña', 'required');
 			//personalizacion de reglas de validacion
-			$this->form_validation->set_message('required', '%s es un campo oblligatorio');
+			$this->form_validation->set_message('required', '%s es un campo obligatorio');
 			//personalizacion de delimitadores
 			$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 			if ($this->form_validation->run() == FALSE)
@@ -65,7 +65,7 @@ class Login extends CI_Controller
 					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario inválido</div');
 					redirect();
 				}elseif (!$pass) {
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña inválida</div');
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña incorrecta</div');
 					redirect();
 				}
 				$fields = array(
