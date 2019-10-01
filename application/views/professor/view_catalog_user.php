@@ -7,8 +7,11 @@
         echo $this->session->flashdata('msg');
     ?>
   </div>
-    <a href="<?php echo base_url('professor/add_account'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar cuenta"><i class="icon-plus-2"></i></a>
+  <div class="">
+    <a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+    <a href="<?php echo base_url('professor/add_account'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Cuenta"><i class="icon-plus-2"></i></a>
     <hr class="line_sep">
+  </div>
   <div> 
     <?php $flag=0; foreach ($types as $type) {?>
       <h3 class="text-center" ><?php echo $type->nombre; ?></h3>
@@ -38,7 +41,7 @@
                   <!-- eliminar cuenta -->
                   <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                   <!--editar cuenta-->
-                  <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+                  <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
                   </td>
                   </tr>
                 <?php	}
@@ -50,9 +53,6 @@
         <?php } ?>
       </div>
     <?php } ?>
-    <div class="panel-footer col-4 offset-4">
-      <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 col-12">Volver</button></a>
-    </div>
     <br><br>
   </div>
 </div>

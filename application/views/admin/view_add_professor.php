@@ -1,10 +1,6 @@
 <div class="container col-md-4">
   <div class="text-center"><h3>Agregar Profesor</h3></div>
   <hr class="line_sep">
-  <?php
-    if($this->session->flashdata('msg'))
-      echo $this->session->flashdata('msg');
-    ?>
     <br>
     <form role="form" method="post" action="<?php echo base_url();?>admin/add_professor/">
       <div class="form-group">
@@ -15,7 +11,7 @@
         </div>
       </div>
       <div class="text-danger">
-        <?php echo form_label('* Campos Obligatorios')?><br>
+        <?php echo form_label('* Campo Obligatorio')?><br>
       </div>
       <br>
       <div class="panel-footer text-center">

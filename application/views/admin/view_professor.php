@@ -1,6 +1,10 @@
  <div class="container" style="width: 700px;">
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"><p class="text-light bg-dark"> 
+      <?php
+          if($this->session->flashdata('msg'))
+            echo $this->session->flashdata('msg');
+        ?>
       <center><h3>Lista de Profesores</h3></center></p>
       <hr class="line_sep">
       <div class="panel-body">
@@ -30,9 +34,9 @@
                     <td><?php echo $row->matricula ?></td>
                     <td>
                         <!-- eliminar profesor -->
-                        <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $row->id_usuario;?>)" title="Eliminar Profesor"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                        <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $row->id_usuario;?>)" title="Eliminar Profesor"><strong><em><i class="icon-user-delete-outline"></i></em></strong></a>
                         <!--editar password profesor-->
-                      <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>admin/edit_password/<?php echo $row->id_usuario;?>" title="Editar Contraseña Profesor"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+                      <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>admin/edit_password/<?php echo $row->id_usuario;?>" title="Editar Contraseña Profesor"><strong><em><i class="icon-edit"></i></em></strong></a>
                     </td>
                   </tr>
                 <?php } ?>

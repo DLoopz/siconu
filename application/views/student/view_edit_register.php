@@ -10,6 +10,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
+      <br>
       <h3 class="text-center">Editar Registro</h3>
       <hr class="line_sep">
 
@@ -31,7 +32,7 @@
         </div>
 
         <div class="form-group">
-          Cantidad:
+          Cantidad
           <input type="text" name="cantidad" class="form-control" 
           value="<?php if ($register->debe > 0): echo $register->debe; $band_debe = true; else: echo $register->haber; $band_debe = false; endif ?>">
           <?php echo form_error('cantidad') ?>
@@ -51,9 +52,11 @@
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
         </div>
-
-        <input type="submit" name="add_resgistry" value="Actualizar" class="btn btn-outline-success my-2 my-sm-0">
-        <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+        <br>
+        <div class="panel-footer text-center">
+          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
+          <input type="submit" name="add_resgistry" value="Actualizar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+        </div>
 
       </form>
     </div>

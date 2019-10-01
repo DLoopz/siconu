@@ -8,7 +8,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
-      <h3 class="text-center">Ingresar Registro</h3>
+      <h3 class="text-center">Agregar Registros al Asiento</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">
@@ -21,9 +21,9 @@
           </select>
         </div>
          <div class="form-group">
-          Clasificacion de cuenta
+          Clasificación de cuenta
           <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta" onchange="activeCuenta()" disabled>
-            <option value="0" selected disabled>Seleccione clasificacion de cuenta</option>
+            <option value="0" selected disabled>Seleccione clasificación de cuenta</option>
             <?php foreach ($clasifications as $clasification) {?>
               <option value="<?php echo $clasification->id_clasificacion;?>"><?php echo $clasification->nombre;?></option>
             <?php } ?>
@@ -66,7 +66,7 @@
   </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
     <div class="container">
-      <h3 class="text-center">Ingresar registro parcial</h3>
+      <h3 class="text-center"> Agregar Registros Parciales al Asiento</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">

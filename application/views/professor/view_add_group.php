@@ -8,14 +8,17 @@
 		<div class = "panel-body">
 			<form method="post"  action="<?php echo base_url();?>professor/add_group">
 				<div class="form-group">
-					Nombre del Grupo *
+					<label>Nombre del Grupo *</label>
+					<br>
 					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Grupo">
 					<?php echo form_error('nombre'); ?>
 				</div>
+				<br>
 				<div class="text-danger">
-        	<?php echo form_label('* Campos Obligatorios')?><br>
+        	<?php echo form_label('* Campo Obligatorio')?><br>
       	</div>
-      	<br>
+      	<hr><br>
+
       	<div class="panel-footer text-center">
       		<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 ">Volver</button></a>
 					<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
@@ -23,5 +26,5 @@
 			</form>
 		</div>
 	</div>
-	<hr>
+	
 </div>	

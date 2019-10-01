@@ -1,8 +1,8 @@
-<div class="container col-md-6">
+<div class="container col-md-4">
   
 	<nav>
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Agregar Nuevo Alumno</a>
+	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Agregar Alumno</a>
 
 	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Agregar Alumnos por Archivo</a>
 	  </div>
@@ -12,7 +12,7 @@
 	  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 	    <div class="container">
 	    	<br>
-	    	<div><h3 class="text-center">Agregar Nuevo Alumno</h3></div>
+	    	<div><h3 class="text-center">Agregar Alumno</h3></div>
 			  <hr class="line_sep">
 				<?php
 					if($this->session->flashdata('msg'))
@@ -43,6 +43,7 @@
 					<div class="text-danger">
         	<?php echo form_label('* Campos Obligatorios')?><br>
       		</div>
+      		<hr>
 					<br>
 					<div class="panel-footer text-center">
 						<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
@@ -62,6 +63,8 @@
 				  	<label for="">Archivo en formato .csv</label>
 				  	<input class="form-control-file" type="file" name="file" id="file">
 				  </div>
+				  <hr>
+				  <br>
 				  <div class="panel-footer text-center">
 				  	<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
