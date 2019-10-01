@@ -10,7 +10,7 @@
 		<div class = "panel-body">
 			<form method="post"  action="<?php echo base_url();?>professor/add_account">
 				<div class="form-group">
-          <label>Elija el tipo de la cuenta</label>
+          <label>Elija el tipo de la cuenta *</label>
           <br>
         	<select  class="form-control" name="tipo" class="form-group" id="tipo" onchange="isCapital()"> 
             <option value="0" disabled selected>Seleccione una cuenta</option>
@@ -21,7 +21,7 @@
          <?php echo form_error('tipo');?>
         </div>
         <div class="form-group">
-          <label>Elige la clasificación de la cuenta</label>
+          <label>Elija la clasificación de la cuenta *</label>
           <select  class="form-control" name="clasificacion" class="form-group" id="clas"> 
             <option value="0" disabled selected>Seleccione una cuenta</option>
             <?php foreach($view_clasificacion as $row){?>
@@ -31,10 +31,13 @@
              <?php echo form_error('clasificacion');?>
         </div>
 				<div class="form-group">
-					Nombre de la cuenta
+					Nombre de la cuenta *
 					<input type="text" name="nombre" class="form-control" placeholder="Nombre de la Cuenta">
 					<?php echo form_error('nombre'); ?>
 				</div>
+        <div class="text-danger">
+          <?php echo form_label('* Campos Obligatorios')?><br>
+        </div>
         <br>
         <div class="panel-footer text-center">
           <a href="<?php echo base_url()?>professor/account_catalog"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>

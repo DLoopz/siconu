@@ -1,6 +1,10 @@
 <div class="container col-4">
   <div class="text-center"><h3>Editar Contraseña</h3></div>
   <hr class="line_sep">
+  <?php
+          if($this->session->flashdata('msg'))
+            echo $this->session->flashdata('msg');
+        ?>
   <br>
   <div>
       <?php if ($profesor){?>

@@ -12,12 +12,12 @@
 					<?php echo form_error('nombre'); ?>
 				</div>
 				<div class="text-danger">
-        	<?php echo form_label('* Campos Obligatorios')?><br>
+        	<?php echo form_label('* Campo Obligatorio')?><br>
       	</div>
       	<br>
       	<div class="panel-footer text-center">
 	      	<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
-					<input type="submit" name="nombre_ejercicio" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+					<input type="submit" name="nombre_ejercicio" value="Guardar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
 				</div>
 				
 			</form>

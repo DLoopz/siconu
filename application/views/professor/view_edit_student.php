@@ -1,4 +1,4 @@
-<div class="container col-md-6">
+<div class="container col-md-4">
   <div class="text-center">
     <h3>Editar Alumno</h3>
   </div>
@@ -29,6 +29,7 @@
 				<input class="form-control" name="matricula" id="matricula" value="<?php echo $student->matricula?>" autofocus >
 				<?php echo form_error('matricula');?>
 			</div>
+			<br>
 			<div class="panel-footer text-center">
 				<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Cancelar </a>
 				<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
@@ -36,4 +37,5 @@
 			</div>
 		</form>
   </div>
+  	<hr>
 </div>

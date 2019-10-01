@@ -1,6 +1,6 @@
 <div class="container col-md-4">
   <div class="container">
-    <h3 class="text-center">Ingresar registro parcial</h3>
+    <h3 class="text-center"> Agregar Registros Parciales al Asiento</h3>
     <hr class="line_sep">
     <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
       <div class="form-group">

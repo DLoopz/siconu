@@ -127,3 +127,12 @@ table.table.table-hover.table-responsive-md.col-md-5.scheme tr th {
     word-wrap: break-word;
     width: 50%;
 }
+
+.margin_top_login
+{
+  margin-top: 100px !important;
+}
+
+.margin_right_btn{
+  margin-right: 15px !important; 
+}

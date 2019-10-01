@@ -12,26 +12,39 @@
         <?php //clasificacion_id ?>
 		<form method="post" action="<?php echo base_url();?>professor/create_account_catalog" class="col-12">
 			<?php foreach ($types as $type) {?>
-				<h3 class="text-center"><?php echo $type->nombre; ?></h3>
-				<hr class="line_sep">
-				<div class="row">
-				<?php foreach ($clasifications as $cla) {?>
-					<div class="col-6 espacio">
-						<?php if ($type->id_tipo!=3){?>
-							<h4 ><?php echo $cla->nombre; ?></h4>
-						<?php } ?>
-					
-						<?php foreach ($accounts as $account){
-							if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {?>
-								<div class="checkbox">
-          					<input class="checkitem" type="checkbox" name="cuenta<?php echo $account->id_catalogo_estandar;?>" value="<?php echo $account->id_catalogo_estandar;?>">
-          						<?php echo $account->nombre;?>
-        				</div>
-				<?php	}
-						}?>
-						</div>
-				<?php } ?>
-				</div>
+				<?php if ($type->id_tipo<4): ?>
+					<h3 class="text-center"><?php echo $type->nombre; ?></h3>
+					<hr class="line_sep">
+					<div class="row">
+					<?php foreach ($clasifications as $cla) {?>
+						<div class="col-6 espacio">
+							<?php if ($type->id_tipo!=3){?>
+								<h4 ><?php echo $cla->nombre; ?></h4>
+							<?php } ?>
+						
+							<?php foreach ($accounts as $account){
+								if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {?>
+									<div class="checkbox">
+					  					<input class="checkitem" type="checkbox" name="cuenta<?php echo $account->id_catalogo_estandar;?>" value="<?php echo $account->id_catalogo_estandar;?>">
+					  						<?php echo $account->nombre;?>
+									</div>
+					<?php	}
+							}?>
+							</div>
+					<?php } ?>
+					</div>
+				<?php else: ?>
+					<h3 class="text-center"><?php echo $type->nombre; ?></h3>
+					<hr class="line_sep">
+					<?php foreach ($accounts as $account){
+						if ($type->id_tipo==$account->tipo_id) {?>
+							<div class="checkbox">
+		  					<input class="checkitem" type="checkbox" name="cuenta<?php echo $account->id_catalogo_estandar;?>" value="<?php echo $account->id_catalogo_estandar;?>">
+  							<?php echo $account->nombre;?>
+							</div>
+					<?php	}
+					}?>
+				<?php endif ?>
 			<?php } ?>
 			<hr class="line_sep">
 			<div class="checkbox">

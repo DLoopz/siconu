@@ -9,10 +9,12 @@
         <?php echo form_error('password');?>
       </div>
       <div class="form-group">
-        <label>Confirmar Contraseña</label>
+        <label>Confirmar Nueva Contraseña</label>
         <input class="form-control" name="password_c" id="password_c" type="password" autofocus >
         <?php echo form_error('password_c');?>
       </div>
+      
+      <br>
       <div class="panel-footer text-center">
         <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Volver </a>
         <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
@@ -20,5 +22,6 @@
       </div>
     </form>    
   </div>
+  <hr>
   
 </div>
