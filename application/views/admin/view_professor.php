@@ -10,9 +10,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
-            <?php  if($this->session->flashdata('msg'))
-              echo $this->session->flashdata('msg'); ?>
-            <a href="<?php echo base_url('admin/add_professor'); ?>"class="btn btn-outline-success" aria-label="Left Align" title="Agregar Profesor"><i class="icon-plus-2"></i></a>
+            <a href="<?php echo base_url('admin/add_professor'); ?>"class="btn btn-outline-success" aria-label="Left Align" title="Agregar Profesor"><i class="icon-user-add"></i></a>
             </br>
             </br>
             <table class="table" id="user-table">

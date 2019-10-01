@@ -15,7 +15,7 @@
             <a href="<?php echo base_url()?>professor/account_catalog" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Catálogo de Cuentas"><i class="icon-book"></i></a>         
         <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
-            <a href="<?php echo base_url();?>student/edit_password" class="btn btn-outline-warning my-2 my-sm-0" title="Editar contraseña de alumno"><i class="icon-edit-1"></i></a>
+            <a href="<?php echo base_url();?>student/edit_password" class="btn btn-outline-warning my-2 my-sm-0" title="Editar contraseña de alumno"><i class="icon-edit"></i></a>
         <?php } ?>
 
 
