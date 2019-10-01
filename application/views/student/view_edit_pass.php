@@ -4,6 +4,11 @@
   <div>
     <form method="post" action="<?php echo base_url() ?>student/edit_password">
       <div class="form-group">
+        <label>Contraseña actual</label>
+        <input class="form-control" name="password_act" id="password_act" type="password" autofocus >
+        <?php echo form_error('password_act');?>
+      </div>
+      <div class="form-group">
         <label>Nueva Contraseña</label>
         <input class="form-control" name="password" id="password" type="password" autofocus >
         <?php echo form_error('password');?>
