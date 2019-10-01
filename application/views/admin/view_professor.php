@@ -10,7 +10,9 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
-            <a href="<?php echo base_url('admin/add_professor'); ?>"class="btn btn-outline-success" aria-label="Left Align" title="Agregar Profesor"><i class="icon-user-add-outline"></i></a>
+            <?php  if($this->session->flashdata('msg'))
+              echo $this->session->flashdata('msg'); ?>
+            <a href="<?php echo base_url('admin/add_professor'); ?>"class="btn btn-outline-success" aria-label="Left Align" title="Agregar Profesor"><i class="icon-plus-2"></i></a>
             </br>
             </br>
             <table class="table" id="user-table">
@@ -40,6 +42,9 @@
                 <?php } ?>
               </tbody>
             </table>
+            <?php if (!isset($profesor[0])): ?>
+              <div class="alert alert-danger text-center">No se han registrado Profesores</div>
+            <?php endif ?>
           </div>
         </div>
       </div>

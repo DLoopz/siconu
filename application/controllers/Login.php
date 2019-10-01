@@ -68,10 +68,14 @@ class Login extends CI_Controller
 					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña inválida</div');
 					redirect();
 				}
+				$fields = array(
+					'usuario_id' => $user->id_usuario
+				);
+				$info=$this->model_user->get_info_user($fields);
 				$newdata = array(    
 					'usuario' => $user->matricula,
 					'id_user' => $user->id_usuario,
-					'grupo' => $user->grupo_id,
+					'grupo' => $info->grupo_id,
 					'rol' => $user->rol,
 					'nombre'=> $user->nombre,
 					'activo' =>true

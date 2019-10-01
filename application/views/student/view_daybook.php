@@ -66,7 +66,7 @@
 					    	<td></td>
 					    	<td></td>
 					    	<td></td>
-					    	<th><?php echo $entry->descripcion;?></th>
+					    	<td class="font-weight-bold"><?php echo $entry->descripcion;?></td>
 					    	<td></td>
 					    	<td></td>
 					    	<td></td>

@@ -68,10 +68,6 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
     
 
     //echo "<pre>".print_r($data['asientos'][3], 1)."</pre>";
-
-
-    echo "<hr>";
-    
     $this->load->view('head',$data);
     $this->load->view('navbar');
     $this->load->view('student/nabvar_options');
