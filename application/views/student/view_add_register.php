@@ -1,5 +1,5 @@
 <div class="container col-md-6">
-<nav>
+<nav class="nav-fill">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Registro Normal</a>
     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Registro Parcial</a>
@@ -71,7 +71,7 @@
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">
           Tipo de cuenta
-          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasification()">
+          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasificationP()">
             <option value="0" selected disabled>Seleccione tipo de cuenta</option>
             <?php foreach ($types as $type) {?>
               <option value="<?php echo $type->id_tipo;?>"><?php echo $type->nombre;?></option>
@@ -80,7 +80,7 @@
         </div>
          <div class="form-group">
           Clasificacion de cuenta
-          <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta_p" onchange="activeCuenta()" disabled>
+          <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta_p" onchange="activeCuentaP()" disabled>
             <option value="0" selected disabled>Seleccione clasificacion de cuenta</option>
             <?php foreach ($clasifications as $clasification) {?>
               <option value="<?php echo $clasification->id_clasificacion;?>"><?php echo $clasification->nombre;?></option>
@@ -108,9 +108,9 @@
 <br>
 <script type="text/javascript">
   function activeClasification(){
-    if (document.getElementById('tipo_cuenta').value==3) {
+    if (document.getElementById('tipo_cuenta').value>2) {
       document.getElementById('clasificacion_cuenta').disabled=true;
-      document.getElementById('clasificacion_cuenta').options[0].selected=_ptrue;
+      document.getElementById('clasificacion_cuenta').options[0].selected=true;
       document.getElementById('cuenta').disabled=false;
       setCuenta();
     }
@@ -160,7 +160,7 @@
           console.log(nCuentas[i]+", "+idCuentas[i]);
         }
       }
-      else  if (idTipo[i]==tipo && idTipo[i]==3){
+      else  if (idTipo[i]==tipo && idTipo[i]>2){
         imprimir=true;
         for (var j = 0; j < registers.length; j++){
           if(nCuentas[i]==registers[j])
@@ -181,12 +181,12 @@
 </script>
 
 <script type="text/javascript">
-  function activeClasification(){
-    if (document.getElementById('tipo_cuenta_p').value==3) {
+  function activeClasificationP(){
+    if (document.getElementById('tipo_cuenta_p').value>2) {
       document.getElementById('clasificacion_cuenta_p').disabled=true;
-      document.getElementById('clasificacion_cuenta_p').options[0].selected=_ptrue;
-      document.getElementById('cuenta').disabled=false;
-      setCuenta();
+      document.getElementById('clasificacion_cuenta_p').options[0].selected=true;
+      document.getElementById('cuenta_p').disabled=false;
+      setCuentaP();
     }
     else
     {
@@ -196,17 +196,17 @@
     }
   }
 
-  function activeCuenta(){
+  function activeCuentaP(){
     document.getElementById('cuenta_p').disabled=false;
-    setCuenta();
+    setCuentaP();
   }
-  function resetCuenta(){
+  function resetCuentaP(){
     var x=document.getElementById('cuenta_p');
     x.length=1;
     x.options[0].value=0;
     x.options[0].text="Seleccione cuenta";
   }
-  function setCuenta()
+  function setCuentaP()
   {
     var tipo=document.getElementById('tipo_cuenta_p').value;
     var clas=document.getElementById('clasificacion_cuenta_p').value;
@@ -215,7 +215,7 @@
     var idTipo = [<?php foreach ($accounts as $account){echo '"'.$account->tipo_id.'",';} ?>];
     var idClas = [<?php foreach ($accounts as $account){echo '"'.$account->clasificacion_id.'",';} ?>];
     var registers = [<?php foreach ($registers as $register){echo '"'.$register->cuenta.'",';} ?>];
-    resetCuenta();
+    resetCuentaP();
     var x = document.getElementById("cuenta_p");
     for (var i = 0; i < nCuentas.length; i++) { 
       imprimir=true;

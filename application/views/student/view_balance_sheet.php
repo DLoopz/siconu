@@ -26,7 +26,7 @@
           $total_tipo[2]=0;
         ?>
         <?php foreach ($types as $type):?>
-          <?php if ($type->id_tipo != 3): ?>
+          <?php if ($type->id_tipo <3): ?>
             <tr>
               <td colspan="2" class="font-weight-bold"><?php echo $type->nombre; ?></td>
             </tr>
@@ -123,7 +123,7 @@
           <?php foreach ($types as $type): $total_tipo[2]=0;?>
             <?php if ($type->id_tipo == 2): ?>
              <div class="row td"><div class="font-weight-bold col-12"><?php echo $type->nombre; ?></div></div>
-              <?php foreach ($clasifications as $clasification): $total__clas=0 ?>
+              <?php foreach ($clasifications as $clasification): $total__clas=0; $total_tipo[2]=0?>
                 <div class="row td"><div class="font-italic"> <?php echo $clasification->nombre; ?></div></div>
                 <?php foreach ($accounts as $account): 
                   $cuenta="";

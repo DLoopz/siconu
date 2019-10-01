@@ -45,7 +45,7 @@
       <a class="nav-item nav-link <?php if(isset($mayor_schemas)) echo "active";?>  <?php //if(!isset($disabled)){echo "disabled";} ?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
       <a class="nav-item nav-link <?php if(isset($check_balance)) echo "active";?>" href="<?php echo base_url();?>check_balance/check/<?php echo $id_empresa; ?>" title="Balanza de Comprobacion">Balanza de Comprobacion</a>
       <a class="nav-item nav-link <?php if(isset($sheet_balance)) echo "active";?>" href="<?php echo base_url();?>/balance_sheet/sheet/<?php echo $id_empresa; ?>" title="Balance General">Balance General</a>
-      <a class="nav-item nav-link <?php if(isset($result_state)) echo "active"; ?> disabled" href="<?php echo base_url();?>result_state" title="Esatdo de resultados">Esatdo de resultados</a>
+      <a class="nav-item nav-link <?php if(isset($result_state)) echo "active"; ?>" href="<?php echo base_url();?>result_state/state/<?php echo $id_empresa ?>" title="Esatdo de resultados">Esatdo de resultados</a>
       <a class="nav-item nav-link <?php if(isset($stock_card)) echo "active";?>" href="<?php echo base_url();?>stock_card/list_sc/<?php echo $id_empresa ?>" title="Targeta de almacen">Tarjeta de almacen</a>
     </div>
   </nav>
