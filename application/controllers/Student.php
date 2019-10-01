@@ -30,12 +30,14 @@ class Student extends CI_Controller {
 
     public function edit_password(){
     //reglas de validacion
+    $this->form_validation->set_rules('password_act','contraseña actual','trim|required|min_length[8]|callback_thisPassword');
     $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
     $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo requerido');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
+    $this->form_validation->set_message('thisPassword', '%s es incorrecta');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     //$this->form_validation->set_message('required', 'El campo %s requerido');
@@ -163,5 +165,15 @@ class Student extends CI_Controller {
       $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
     }
     redirect('student');
+  }
+
+  public function thisPassword($str)
+  {
+    $fields = array('id_usuario' => $this->session->userdata('id_user'));
+    $us = $this->model_user->get_user($fields);
+    if ($us->contrasenia==md5($str)) {
+      return true;
+    }
+    return false;
   }
 }
