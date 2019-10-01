@@ -42,7 +42,7 @@
                     <!-- eliminar cuenta -->
                     <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                     <!--editar cuenta-->
-                    <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+                    <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
                     </td>
                     </tr>
                   <?php }

@@ -26,7 +26,7 @@
           <div class="text-danger">
             <?php echo form_label('* Campos Obligatorios')?><br>
           </div>
-          <br>
+          <hr>
           <div class="panel-footer text-center">
             <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>admin">Volver </a>
             <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn" value="Guardar" />              
