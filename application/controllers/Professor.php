@@ -502,9 +502,9 @@ class Professor extends CI_Controller {
       );
       $add=$this->model_account->insert_account($fields);
       if($add){
-          $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Cuenta agregado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Cuenta agregada correctamente</div>');
       }else{
-          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error cuenta no agregado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error cuenta no agregada</div>');
       }
       redirect('professor/account_catalog', 'refresh');
     }
