@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-09-2019 a las 16:49:25
+-- Tiempo de generación: 01-10-2019 a las 12:55:52
 -- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -84,7 +84,25 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 (27, 2, 2, 'Hipotecas por pagar'),
 (28, 2, 2, 'Documentos por pagar largo plazo'),
 (31, 3, 1, 'capital ganado'),
-(32, 3, 1, 'capital contribuido');
+(32, 3, 1, 'capital contribuido'),
+(33, 4, 1, 'Ventas'),
+(34, 4, 2, 'Devoluciones sobre compra'),
+(35, 4, 3, 'Rebajas sobre compra'),
+(36, 4, 3, 'Descuentos sobre compra'),
+(37, 4, 4, 'Productos  Financieros'),
+(38, 4, 5, 'Otros Productos/Otros Ingresos'),
+(39, 5, 1, 'Devoluciones  sobre ventas'),
+(40, 5, 1, 'Rebajas sobre ventas'),
+(41, 5, 1, 'Descuentos sobre venta'),
+(42, 5, 2, 'Compras'),
+(43, 5, 2, 'Gastos de Compra'),
+(44, 5, 3, 'Costo de ventas'),
+(45, 5, 4, 'Inventario Inicial'),
+(46, 5, 4, 'Inventario Final'),
+(47, 5, 5, 'Gastos de Administración'),
+(48, 5, 6, 'Gastos de venta'),
+(49, 5, 7, 'Gastos Financieros'),
+(51, 5, 8, 'Otros Gastos');
 
 -- --------------------------------------------------------
 
@@ -201,7 +219,7 @@ CREATE TABLE `parcial` (
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` double
+,`cantidad` float
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -259,7 +277,7 @@ CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` double NOT NULL
+  `cantidad` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -277,11 +295,11 @@ CREATE TABLE `tarjeta_almacen` (
   `entradas` int(11) NOT NULL,
   `salidas` int(11) NOT NULL,
   `existencia` int(11) NOT NULL,
-  `unitario` double NOT NULL,
-  `promedio` double NOT NULL,
-  `debe` double NOT NULL,
-  `haber` double NOT NULL,
-  `saldo` double NOT NULL
+  `unitario` float NOT NULL,
+  `promedio` float NOT NULL,
+  `debe` float NOT NULL,
+  `haber` float NOT NULL,
+  `saldo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -303,7 +321,9 @@ CREATE TABLE `tipo_cuenta` (
 INSERT INTO `tipo_cuenta` (`id_tipo`, `nombre`) VALUES
 (1, 'Activo'),
 (2, 'Pasivo'),
-(3, 'Capital contable');
+(3, 'Capital contable'),
+(4, 'Inventarios Acredores'),
+(5, 'Inventarios Deudores');
 
 -- --------------------------------------------------------
 
@@ -481,7 +501,7 @@ ALTER TABLE `asiento`
 -- AUTO_INCREMENT de la tabla `catalogo_estandar`
 --
 ALTER TABLE `catalogo_estandar`
-  MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT de la tabla `catalogo_usuario`
 --
@@ -521,7 +541,7 @@ ALTER TABLE `tarjeta_almacen`
 -- AUTO_INCREMENT de la tabla `tipo_cuenta`
 --
 ALTER TABLE `tipo_cuenta`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -546,8 +566,7 @@ ALTER TABLE `asiento`
 -- Filtros para la tabla `catalogo_usuario`
 --
 ALTER TABLE `catalogo_usuario`
-  ADD CONSTRAINT `catalogo_usuario_ibfk_2` FOREIGN KEY (`clasificacion_id`) REFERENCES `clasificacion_cuenta` (`id_clasificacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `catalogo_usuario_ibfk_3` FOREIGN KEY (`tipo_id`) REFERENCES `tipo_cuenta` (`id_tipo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `catalogo_usuario_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `registro_asiento`
