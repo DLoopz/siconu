@@ -59,6 +59,8 @@ class Stock_card extends CI_Controller {
             if($this->input->post('cantidad_existencia') != null)
             {
                 $bandera = false;
+
+
                 $fields = array
                 (
                     'empresa_id' => $id_empresa,
@@ -68,8 +70,7 @@ class Stock_card extends CI_Controller {
                     'salidas' => 0,
                     'existencia' => $this->input->post('cantidad_existencia'),
                     'unitario' => $this->input->post('cantidad_costos'),
-                    'promedio' => 0,
-                    'debe' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos'),
+                    'promedio' => $this->input->post('cantidad_costos'),
                     'haber' => 0,
                     'saldo' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos')
                 );
@@ -96,7 +97,7 @@ class Stock_card extends CI_Controller {
                         'salidas' => 0,
                         'existencia' => floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia),
                         'unitario' => $this->input->post('cantidad_costos'),
-                        'promedio' => 0,
+                        'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
                         'debe' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
                         'haber' => 0,
                         'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
@@ -112,7 +113,7 @@ class Stock_card extends CI_Controller {
                         'salidas' => $this->input->post('cantidad_unidades'),
                         'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
                         'unitario' => $this->input->post('cantidad_costos'),
-                        'promedio' => 0,
+                        'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
                         'debe' => 0,
                         'haber' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
                         'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))

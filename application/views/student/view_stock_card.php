@@ -27,7 +27,7 @@
                     <th scope="col">Salida</th>
                     <th scope="col">Existencia</th>
                     <th scope="col">Unitario</th>
-                    <th scope="col">Promedio</th>
+                    <th scope="col">Medio</th>
                     <th scope="col">Debe</th>
                     <th scope="col">Haber</th>
                     <th scope="col">Saldo</th>
