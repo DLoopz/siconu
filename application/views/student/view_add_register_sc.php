@@ -85,19 +85,20 @@
                     </label>
                     <div class="form-group">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="">
+                            <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="">
+                            <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="">
+                            <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="form-group">
                     <label for="">
@@ -105,13 +106,29 @@
                     </label>
                     <div class="form-group">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="devolucionesCompra" name="devolucion" class="custom-control-input" value="">
+                            <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="devolucionesVenta" name="devolucion" class="custom-control-input" value="">
+                            <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="content" style="display: none;">
+                    <label for="">
+                        <b>Afectación:</b>
+                    </label>
+                    <div class="form-group">
+                        <!--Cantidad:-->
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                        </div>
+                        <?php echo form_error('cantidad_costos') ?>
                     </div>
                 </div>
 
@@ -122,6 +139,28 @@
     </div>
     <hr>
 </div>
+
+<script type="text/javascript">
+    function showContent()
+    {
+        element = document.getElementById("content");
+
+        check1 = document.getElementById("gastosCompra");
+        check2 = document.getElementById("descuentosCompra");
+        check3 = document.getElementById("rebajasCompra");
+
+        check4 = document.getElementById("devolucionesCompra");
+        check5 = document.getElementById("devolucionesVenta");
+        //check = document.getElementById("gastosCompra, descuentosCompra, rebajasCompra");
+        if (check1.checked || check2.checked || check3.checked || check4.checked || check5.checked)
+        {
+            element.style.display='block';
+        }else
+        {
+            element.style.display='none';
+        }
+    }
+</script>
 
 
 <!--

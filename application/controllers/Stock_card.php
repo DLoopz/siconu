@@ -102,7 +102,8 @@ class Stock_card extends CI_Controller {
                         'haber' => 0,
                         'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
                     );
-                }else
+                }
+                if($this->input->post('unidades') == "salida")
                 {
                     $fields = array
                     (
@@ -118,6 +119,90 @@ class Stock_card extends CI_Controller {
                         'haber' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
                         'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
                     );
+                }
+                switch($this->input->post('otras_operaciones'))
+                {
+                    case "gastosCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'debe' => $this->input->post('afectacion'),
+                            'haber' => 0, //$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+                    case "descuentosCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => $this->input->post('cantidad_costos'),
+                            'promedio' => 0,//(floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'debe' => 0, //$this->input->post('otras_operaciones'),
+                            'haber' => $this->input->post('otras_operaciones'),
+                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+                    case "rebajasCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'debe' => $this->input->post('otras_operaciones'),
+                            'haber' => 0, //$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+                    case "devolucionesCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => $this->input->post('cantidad_unidades'),
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => $this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'debe' => 0,
+                            'haber' => $this->input->post('otras_operaciones'),//$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+                    case "devolucionesVenta":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => $this->input->post('cantidad_unidades'),
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => $this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'debe' => $this->input->post('otras_operaciones'),
+                            'haber' => 0,//$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+
                 }
             }
             
