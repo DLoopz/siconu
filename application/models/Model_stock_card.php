@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_stock_card extends CI_Model
 {
     /* Muestra la consulta de la Tarjeta de Almacén */
-    // insertar ingreso TA
+    // Insertar ingreso TA
     public function insert_ta($data)
     {
         return $this->db->insert('tarjeta_almacen', $data);
@@ -32,5 +32,19 @@ class Model_stock_card extends CI_Model
     public function get_sc(){
         $query = $this->db->get_where('tarjeta_almacen');        
         return $query->result();
+    }
+
+    public function get_sum_debe()
+    {
+        $sql = "SELECT sum(debe) as debe FROM tarjeta_almacen";
+        $result = $this->db->query($sql);
+        return $result->row()->debe;
+    }
+
+    public function get_sum_saldo()
+    {
+        $sql = "SELECT sum(saldo) as saldo FROM tarjeta_almacen";
+        $result = $this->db->query($sql);
+        return $result->row()->saldo;
     }
 }
