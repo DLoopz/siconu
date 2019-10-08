@@ -5,21 +5,15 @@
         </div>
     </p>
     <hr class="line_sep">
-      <?php
-    if($this->session->flashdata('msg'))
-      echo $this->session->flashdata('msg');
-  ?>
-    <!--
-    <h1 colspan="2" class="text-center text-uppercase"><?php echo $exercise->nombre; ?></h1>
-    -->
+    <?php
+        if($this->session->flashdata('msg'))
+            echo $this->session->flashdata('msg');
+    ?>
     <div class="row">
         <div class="col-6">
             <a href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
                 <i class="icon-plus-2"></i>
             </a>
-        </div>
-        <div class="col-6 text-right">
-            <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar"><i class="icon-home-1"></i></a>
         </div>
     </div>
     <br>
