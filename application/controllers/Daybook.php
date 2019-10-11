@@ -2,6 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Daybook extends CI_Controller {
+  
+  function __construct()
+  {
+    parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 3)
+    {
+      redirect('');
+    }
+  }
+
 	public function index()
 	{
 		/*$data['title']="Rayado Diario";

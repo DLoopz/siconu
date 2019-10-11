@@ -2,8 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Professor extends CI_Controller {
-	function __construct(){
+	function __construct()
+  {
     parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 2)
+    {
+      redirect('');
+    }
   }
   //vista principal
 	public function index()
@@ -461,6 +470,7 @@ class Professor extends CI_Controller {
     else
     {
      $this->form_validation->set_rules('clasificacion','Clasificación de Cuenta','required');
+     $aux=$this->input->post('clasificacion');
     }
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s debe tener un valor diferente al predeterminado');

@@ -1,4 +1,5 @@
 <div class="container">
+
 	<div class="row">
 
 		<?php 
@@ -24,8 +25,8 @@
 
 		
 		<?php foreach ($cuentas as $cu): ?>
-			
-			<table class="table table-hover table-responsive-md col-md-5">
+
+			<table class="table table-hover table-responsive-md col-md-5 scheme">
 				<thead class="text-center">
 					<tr>
 						<th colspan="2">
@@ -48,12 +49,8 @@
 
 						<?php if ($regs->cuenta == $cu->cuenta and $regs->registro_id==NULL): ?>
 							<tr>
-								<td class="border-right text-right">
-					      	$ <?php echo number_format($regs->debe,2,'.',','); ?>
-						    </td>
-						    <td class="">
-						      $ <?php echo number_format($regs->haber,2,'.',','); ?>
-						    </td>
+								<td class="border-right">$ <?php echo number_format($regs->debe,2,'.',','); ?></td>
+						    <td class="">$ <?php echo number_format($regs->haber,2,'.',','); ?></td>
 							</tr>
 
 							<?php $total_debe += $regs->debe; ?>
@@ -67,12 +64,8 @@
 
 						<?php if ($parc->cuenta == $cu->cuenta and $parc->registro_id!=NULL): ?>
 							<tr>
-								<td class="border-right ">
-						      $ <?php echo number_format($parc->debe,2,'.',','); ?>
-						    </td>
-						    <td class="">
-						      $ <?php echo number_format($parc->haber,2,'.',','); ?>
-						    </td>
+								<td class="border-right ">$ <?php echo number_format($parc->debe,2,'.',','); ?></td>
+						    <td class="">$ <?php echo number_format($parc->haber,2,'.',','); ?></td>
 							</tr>
 
 							<?php $total_debe += $parc->debe; ?>

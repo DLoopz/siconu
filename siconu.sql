@@ -219,7 +219,7 @@ CREATE TABLE `parcial` (
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` float
+,`cantidad` double
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -277,7 +277,7 @@ CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` float NOT NULL
+  `cantidad` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -295,11 +295,11 @@ CREATE TABLE `tarjeta_almacen` (
   `entradas` int(11) NOT NULL,
   `salidas` int(11) NOT NULL,
   `existencia` int(11) NOT NULL,
-  `unitario` float NOT NULL,
-  `promedio` float NOT NULL,
-  `debe` float NOT NULL,
-  `haber` float NOT NULL,
-  `saldo` float NOT NULL
+  `unitario` double NOT NULL,
+  `promedio` double NOT NULL,
+  `debe` double NOT NULL,
+  `haber` double NOT NULL,
+  `saldo` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
