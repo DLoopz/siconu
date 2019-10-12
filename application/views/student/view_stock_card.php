@@ -39,6 +39,7 @@
                     <th scope="col">Saldo</th>
                     
                 </tr>
+                <!--
                 <tr class="table-danger">
                     <th>Inventario inicial</th>
                     <th>1</th>
@@ -55,6 +56,7 @@
                 <tr class="table-danger">
                     <th>Costo de lo vendido</th>
                 </tr>
+                -->
             </thead>
             <tbody>
                 <?php foreach ($stock_card as $sc)
