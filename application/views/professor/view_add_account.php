@@ -4,9 +4,6 @@
 			<h3 class = "panel-title text-center">Agregar Nueva Cuenta </h3>
 		</div>
 		<hr class="line_sep"><br>
-		<?php
-        
-    ?>
 		<div class = "panel-body">
 			<form method="post"  action="<?php echo base_url();?>professor/add_account">
 				<div class="form-group">
