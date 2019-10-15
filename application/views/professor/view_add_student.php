@@ -36,8 +36,8 @@
 						<?php echo form_error('ap_materno');?>
 					</div>
 					<div class="form-group">
-						<label>Matricula *</label>
-						<input class="form-control" placeholder="Matricula" name="matricula" value="<?php echo set_value('matricula');?>" >
+						<label>Matrícula *</label>
+						<input class="form-control" placeholder="Matrícula" name="matricula" value="<?php echo set_value('matricula');?>" >
 						<?php echo form_error('matricula');?>
 					</div>
 					<div class="text-danger">
