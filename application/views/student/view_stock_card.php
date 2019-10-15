@@ -20,6 +20,12 @@
     <div class="table-responsive-md">
       <table class="table table-hover">
             <thead>
+                <tr class="">
+                    <th colspan="2" class="text-center"></th>
+                    <th colspan="3" class="text-center">Unidades</th>
+                    <th colspan="2" class="text-center">Costos</th>
+                    <th colspan="3" class="text-center">Valores</th>
+                </tr>
                 <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Referencia</th>
@@ -33,6 +39,24 @@
                     <th scope="col">Saldo</th>
                     
                 </tr>
+                <!--
+                <tr class="table-danger">
+                    <th>Inventario inicial</th>
+                    <th>1</th>
+                </tr>
+                <tr class="table-danger">
+                    <th>Compra</th>
+                </tr>
+                <tr class="table-danger">
+                    <th>Total de mercancías</th>
+                </tr>
+                <tr class="table-danger">
+                    <th>Inventario final</th>
+                </tr>
+                <tr class="table-danger">
+                    <th>Costo de lo vendido</th>
+                </tr>
+                -->
             </thead>
             <tbody>
                 <?php foreach ($stock_card as $sc)

@@ -26,7 +26,7 @@
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
-                        <input type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento">
+                        <input type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento" value="<?php echo set_value('referencia');?>">
                         <?php echo form_error('referencia') ?>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
-                        <input type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números">
+                        <input type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
                         <?php echo form_error('cantidad_existencia') ?>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
-                        <input type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números">
+                        <input type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
                         <?php echo form_error('cantidad_unidades') ?>
                     </div>
                     <div class="form-group">
@@ -73,7 +73,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
                             </div>
-                            <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                            <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('cantidad_costos');?>">
                         </div>
                         <?php echo form_error('cantidad_costos') ?>
                     </div>

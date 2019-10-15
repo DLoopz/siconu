@@ -29,11 +29,13 @@ class Stock_card extends CI_Controller {
     public function add_register_card($id_empresa = null)
     {
         // REGLAS
-        $this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
+        $this->form_validation->set_rules("start_date", "Start Date", 'trim|callback__check_date_valid');
+        //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
+        //$this->form_validation->set_rules('fecha_sc','fecha', array('regex_match[/^((0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d)$/]'));
         $this->form_validation->set_rules('referencia', 'referencia', 'required');
         $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
         $this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
-        $this->form_validation->set_rules('cantidad_costos', 'cantidad en costos', 'numeric|min_length[1]|max_length[11]');
+        $this->form_validation->set_rules('cantidad_costos', 'cantidad en costo unitario', 'numeric|min_length[1]|max_length[11]');
 
         // MENSAJE
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
@@ -216,5 +218,24 @@ class Stock_card extends CI_Controller {
             }
             redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
         }
+    }
+
+    public function _check_date_valid(){
+        $date=$this->input->post('fecha_sc');
+        $parts = explode("/", $date);
+        if (count($parts) == 3) {
+            if (is_numeric($parts[2])) {
+                if (is_numeric($parts[0])) {
+                    if (is_numeric($parts[1])) {
+                        if (checkdate($parts[1], $parts[0], $parts[2])){
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return false;
     }
 }
