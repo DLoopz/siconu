@@ -58,8 +58,8 @@
         </div>
         <br>
         <div class="text-center">
-          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-          <input type="submit" name="add_resgistry" value="Registrar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Volver</button></a>
+          <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
         </div>
       </form>
     </div>
@@ -81,7 +81,7 @@
          <div class="form-group">
           Clasificacion de cuenta
           <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta_p" onchange="activeCuentaP()" disabled>
-            <option value="0" selected disabled>Seleccione clasificacion de cuenta</option>
+            <option value="0" selected disabled>Seleccione clasificación de cuenta</option>
             <?php foreach ($clasifications as $clasification) {?>
               <option value="<?php echo $clasification->id_clasificacion;?>"><?php echo $clasification->nombre;?></option>
             <?php } ?>
@@ -96,8 +96,8 @@
         </div>
         <br>
         <div class="panel-footer text-center">
-          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-          <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Volver</button></a>
+          <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
         
         </div>
       </form>

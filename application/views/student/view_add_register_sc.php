@@ -132,8 +132,8 @@
                     </div>
                 </div>
 
-                <input type="submit" name="add_entry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0">
-				<a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+                <input type="submit" name="add_entry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
+				<a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
             </form>
         </div>
     </div>

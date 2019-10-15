@@ -56,7 +56,9 @@
       <?php else: ?>
         <h3 class="text-center" ><?php echo $type->nombre; ?></h3>
         <hr class="line_sep">
-         <table class="table col-6">
+         <div class="row">
+          <div class="col-6 espacio">
+         <table class="table">
           <head>
             <tr>
               <th>Folio</th>
@@ -74,19 +76,22 @@
             <tr>
             <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
             <td><?php echo $account->nombre;?></td>
-            <td colspan="2" class="row">
+            <td colspan="2" >
             <!-- eliminar cuenta -->
-            <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+            <a class="btn btn-outline-danger my-2 my-sm-0"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             <!--editar cuenta-->
-            <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+            <a class="btn btn-outline-secondary my-2 my-sm-0 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
             </td>
             </tr>
           <?php }
           }?>
           </tbody>
         </table>
+        </div>
+      </div>
       <?php endif ?>
     <?php } ?>
+
     <br><br>
   </div>
 </div>
