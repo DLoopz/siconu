@@ -57,7 +57,7 @@ class Stock_card extends CI_Controller {
             if($existencia_antes == NULL)
                 $data['exis'] = 0;
             else
-                $data['exis'] = $existencia_antes;
+                $data['exis'] = $existencia_antes->existencia;
 
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
