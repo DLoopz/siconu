@@ -31,14 +31,25 @@
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">
                         <b>Existencia:</b>
-                    </label>
-                    <div class="form-group">
-                        <!--Cantidad:-->
-                        <input type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
-                        <?php echo form_error('cantidad_existencia') ?>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <input id="existencia" type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
+                            <?php echo form_error('cantidad_existencia') ?>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">
+                        <b>Existencia actual</b>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <input id="existencia_actual" type="text" name="existencia_actual" class="form-control" placeholder="Cantidad en números" value="<?php echo $exis; ?>" disabled>
+                        </div>
                     </div>
                 </div>
                 
@@ -48,7 +59,7 @@
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
-                        <input type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
+                        <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
                         <?php echo form_error('cantidad_unidades') ?>
                     </div>
                     <div class="form-group">
@@ -160,6 +171,35 @@
             element.style.display='none';
         }
     }
+
+    ///////////////////////////////////////////
+
+        function habilitar(){
+
+            var ex = document.getElementById('existencia_actual');
+
+            var cu = document.getElementById('cantidad_unidades');
+            var en = document.getElementById('entrada');
+            var sa = document.getElementById('salida');
+
+            var ex = document.getElementById('existencia');
+
+            if(ex.value == 0)
+            {
+                cu.disabled = true;
+                en.disabled = true;
+                sa.disabled = true;
+
+                ex.disabled = false;
+            }else
+            {
+                cu.disabled = false;
+                en.disabled = false;
+                sa.disabled = false;
+
+                ex.disabled = true;
+            }
+        }
 </script>
 
 

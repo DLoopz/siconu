@@ -47,4 +47,13 @@ class Model_stock_card extends CI_Model
         $result = $this->db->query($sql);
         return $result->row()->saldo;
     }
+
+    public function consultar_exis(/*$rut_usu*/)
+    {
+        $query = $this->db->query("SELECT existencia FROM tarjeta_almacen WHERE existencia!=NULL");
+        $usuario = $query->row();
+
+        if(empty($usuario)) {echo false;} //Si existe devolvemos false
+        else {echo true; }//Si no existe, true.
+    }
 }

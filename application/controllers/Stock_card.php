@@ -29,9 +29,7 @@ class Stock_card extends CI_Controller {
     public function add_register_card($id_empresa = null)
     {
         // REGLAS
-        $this->form_validation->set_rules("start_date", "Start Date", 'trim|callback__check_date_valid');
-        //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
-        //$this->form_validation->set_rules('fecha_sc','fecha', array('regex_match[/^((0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d)$/]'));
+        $this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
         $this->form_validation->set_rules('referencia', 'referencia', 'required');
         $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
         $this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
@@ -51,6 +49,16 @@ class Stock_card extends CI_Controller {
             $data['id_empresa']=$id_empresa;
             $fields = array('id_empresa' => $id_empresa);
             $data['info'] = $this->model_exercise->get_exercise($fields);
+
+            $fields = array('empresa_id' => $id_empresa);
+            $ultimo_id = $this->model_stock_card->get_last_id($fields);
+            $fields = array('id_tarjeta' => intval($ultimo_id->id));
+            $existencia_antes = $this->model_stock_card->get_existencia($fields);
+            if($existencia_antes == NULL)
+                $data['exis'] = 0;
+            else
+                $data['exis'] = $existencia_antes;
+
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
 			$this->load->view('student/view_add_register_sc');
@@ -78,9 +86,6 @@ class Stock_card extends CI_Controller {
                 );
             }else
             {
-                // Se envía una bandera para que se deshabilite el campo de EXISTENCIA
-                $bandera = true;
-
                 $fields = array('empresa_id' => $id_empresa);
                 $ultimo_id = $this->model_stock_card->get_last_id($fields);
                 $fields = array('id_tarjeta' => intval($ultimo_id->id));
@@ -218,24 +223,5 @@ class Stock_card extends CI_Controller {
             }
             redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
         }
-    }
-
-    public function _check_date_valid(){
-        $date=$this->input->post('fecha_sc');
-        $parts = explode("/", $date);
-        if (count($parts) == 3) {
-            if (is_numeric($parts[2])) {
-                if (is_numeric($parts[0])) {
-                    if (is_numeric($parts[1])) {
-                        if (checkdate($parts[1], $parts[0], $parts[2])){
-                            return TRUE;
-                        }
-                    }
-                }
-            }
-        }
-
-
-        return false;
     }
 }
