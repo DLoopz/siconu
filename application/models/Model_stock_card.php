@@ -23,6 +23,12 @@ class Model_stock_card extends CI_Model
         return $aux->row();
     }
     
+    public function get_registro($data)
+    {
+        $aux=$this->db->get_where('tarjeta_almacen',$data);
+        return $aux->row();
+    }
+
     public function get_saldo($data)
     {
         $sql = $this->db->get_where('tarjeta_almacen', $data);

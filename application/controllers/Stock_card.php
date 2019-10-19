@@ -19,6 +19,13 @@ class Stock_card extends CI_Controller {
         $fields = array('id_empresa' => $id_empresa);
         $data['exercise'] = $this->model_exercise->get_exercise($fields);
 		$data['id_empresa'] = $id_empresa;
+
+        $fields = array('empresa_id' => $id_empresa);
+        $ultimo_id = $this->model_stock_card->get_last_id($fields);
+        $fields = array('id_tarjeta' => intval($ultimo_id->id));
+        $registro_antes = $this->model_stock_card->get_registro($fields);
+        $data['ultimo'] = $registro_antes->id_tarjeta;
+
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
         $this->load->view('student/nabvar_options');
