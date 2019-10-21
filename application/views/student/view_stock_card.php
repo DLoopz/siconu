@@ -9,6 +9,9 @@
         if($this->session->flashdata('msg'))
             echo $this->session->flashdata('msg');
     ?>
+    <div class="alert alert-warning text-center" role="alert">
+        Último ID: <?php echo $ultimo; ?>
+    </div>
     <div class="row">
         <div class="col-6">
             <a href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
@@ -37,6 +40,7 @@
                     <th scope="col">Debe</th>
                     <th scope="col">Haber</th>
                     <th scope="col">Saldo</th>
+                    <th scope="col">Opciones</th>
                     
                 </tr>
                 <!--
@@ -67,11 +71,26 @@
                         <td><?php echo $sc->entradas?></td>
                         <td><?php echo $sc->salidas?></td>
                         <td><?php echo $sc->existencia?></td>
-                        <td><?php echo $sc->unitario?></td>
-                        <td><?php echo $sc->promedio?></td>
-                        <td><?php echo $sc->debe?></td>
-                        <td><?php echo $sc->haber?></td>
-                        <td><?php echo $sc->saldo?></td>
+                        <td>$ <?php echo $sc->unitario?></td>
+                        <td>$ <?php echo $sc->promedio?></td>
+                        <td>$ <?php echo $sc->debe?></td>
+                        <td>$ <?php echo $sc->haber?></td>
+                        <td>$ <?php echo $sc->saldo?></td>
+                        <td>
+                            <!-- Eliminar registro -->
+                            <?php
+                                /*if($ultimo == $sc->id_tarjeta)
+                                {?>
+                                    <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                                <?php}*/
+                                if($ultimo == $sc->id_tarjeta){
+                                    echo '<a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>';
+                                }else{
+                                    echo '';
+                                }
+                            ?>
+
+                        </td>
                         
                     </tr>
                 <?php } ?>
@@ -79,3 +98,34 @@
         </table>
     </div>
 </div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_sc">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-tittle" id="modalTittle">Eliminar Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de eliminar el registro?
+            </div>
+            <div class="modal-footer">
+               <form method="post" action="<?php echo base_url() ?>stock_card/delete_register/<?php echo $id_empresa; ?>">
+                   <input type="hidden" id="eliminar" name="id_entry"></input>
+                   <input type="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" value="Si">
+                   <input type="reset" class="btn btn-outline-danger my-2 my-sm-0" data-dismiss="modal" value="No">
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function eliminar(id)
+    {
+        $('#eliminar').val(id);
+    }
+</script>

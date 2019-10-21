@@ -12,4 +12,4 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>source/css/styles.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('source/fontello/css/fontello.css')?>">
 	</head>
-	<body onload="habilitar();">
+	<body  onload="habilitar();">
