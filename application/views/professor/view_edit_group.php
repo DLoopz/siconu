@@ -9,7 +9,7 @@
       <?php if (isset($group)) {?>
       <form method="post"  action="<?php echo base_url();?>professor/edit_group/<?php echo $group->id_grupo?>">
         <div class="form-group">
-          Nombre del Grupo *
+          <label>Nombre del Grupo *</label>
           <input type="text" name="nombre" class="form-control" placeholder="Nombre del Grupo" value="<?php echo $group->nombre ?>" autofocus >
           <?php echo form_error('nombre'); ?>
         </div>
