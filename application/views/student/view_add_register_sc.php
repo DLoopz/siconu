@@ -12,11 +12,11 @@
         <p class="text-danger">* Campos obligatorios</p>
         <div class="panel-body">
             <form method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
-                <div class="form-group">
+                <div class="form-group" >
                     <label>
                         <b>Seleccione la fecha *</b>
                     </label>
-                    <input type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
+                    <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
                     <?php echo form_error('fecha_sc');?>
                 </div>
                 
@@ -26,12 +26,12 @@
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
-                        <input type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento" value="<?php echo set_value('referencia');?>">
+                        <input id="referencia" type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento" value="<?php echo set_value('referencia');?>">
                         <?php echo form_error('referencia') ?>
                     </div>
                 </div>
                 
-                <div class="form-row">
+                <div class="form-row" id="content_existencia">
                     <div class="form-group col-md-8">
                         <label for="">
                         <b>Existencia:</b>
@@ -53,9 +53,9 @@
                     </div>
                 </div>
                 
-                <div class="<form-g></form-g>roup">
+                <div class="form-group" id="content_unidades">
                     <label for="">
-                        <b>Unidades </b>
+                        <b>Unidades *</b>
                     </label>
                     <div class="form-group">
                         <!--Cantidad:-->
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="content_costo_unitario">
                     <label for="">
                         <b>Costo unitario *</b>
                     </label>
@@ -90,20 +90,20 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="content_otras">
                     <label for="">
                         <b>Otras operaciones</b>
                     </label>
                     <div class="form-group">
-                        <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio custom-control-inline col-5">
                             <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
                         </div>
-                        <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio custom-control-inline col-5">
                             <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                         </div>
-                        <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio custom-control-inline col-5">
                             <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                         </div>
@@ -111,16 +111,16 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group" id="content_devoluciones">
                     <label for="">
                         <b>Devolución</b>
                     </label>
                     <div class="form-group">
-                        <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio custom-control-inline col-5">
                             <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
                         </div>
-                        <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio custom-control-inline col-5">
                             <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
                             <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
                         </div>
@@ -156,70 +156,131 @@
     {
         element = document.getElementById("content");
 
+        content_existencia = document.getElementById("content_existencia");
+        content_unidades = document.getElementById("content_unidades");
+        content_costo_unitario = document.getElementById("content_costo_unitario");
+        referencia = document.getElementById("referencia");
+
         check1 = document.getElementById("gastosCompra");
         check2 = document.getElementById("descuentosCompra");
         check3 = document.getElementById("rebajasCompra");
 
         check4 = document.getElementById("devolucionesCompra");
         check5 = document.getElementById("devolucionesVenta");
+
+        //var check6 = document.getElementById("referencia");
+        var check7 = document.getElementById("cantidad_unidades");
+        var check8 = document.getElementById("entrada");
+        var check9 = document.getElementById("salida");
+        var check10 = document.getElementById("cantidad_costos");
+
         //check = document.getElementById("gastosCompra, descuentosCompra, rebajasCompra");
-        if (check1.checked || check2.checked || check3.checked || check4.checked || check5.checked)
+        if (check1.checked || check2.checked || check3.checked || /*check4.checked ||*/ check5.checked)
         {
             element.style.display='block';
         }else
         {
             element.style.display='none';
         }
+
+        if(check1.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
+
+            referencia.value = 'Gastos sobre compra';
+
+            check7.value = 0;
+            check10.value = 0;
+        }
+
+        if(check4.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'block';
+            content_costo_unitario.style.display = 'block';
+
+            referencia.value = 'Devoluciones sobre compra';
+
+            check7.value = '';
+            check10.value = '';
+            check8.disabled = true;
+            check9.checked = true;
+
+            check4.value = 'devolucionesCompra';
+            //check10.value = 0;
+        }
+
     }
 
     ///////////////////////////////////////////
 
-        function habilitar(){
-            var ex = document.getElementById('existencia_actual');
+    function habilitar(){
+        var ex = document.getElementById('existencia_actual');
 
-            var cu = document.getElementById('cantidad_unidades');
-            var en = document.getElementById('entrada');
-            var sa = document.getElementById('salida');
+        var cu = document.getElementById('cantidad_unidades');
+        var en = document.getElementById('entrada');
+        var sa = document.getElementById('salida');
 
-            var gc = document.getElementById('gastosCompra');
-            var dc = document.getElementById('descuentosCompra');
-            var rc = document.getElementById('rebajasCompra');
+        var gc = document.getElementById('gastosCompra');
+        var dc = document.getElementById('descuentosCompra');
+        var rc = document.getElementById('rebajasCompra');
 
-            var devc = document.getElementById('devolucionesCompra');
-            var devv = document.getElementById('devolucionesVenta');
+        var devc = document.getElementById('devolucionesCompra');
+        var devv = document.getElementById('devolucionesVenta');
 
-            var exis = document.getElementById('existencia');
+        var exis = document.getElementById('existencia');
 
-            if(ex.value != 0)
-            {
-                cu.disabled = false;
-                en.disabled = false;
-                sa.disabled = false;
+        content_existencia = document.getElementById("content_existencia");
+        content_unidades = document.getElementById("content_unidades");
+        content_otras = document.getElementById("content_otras");
+        content_devoluciones = document.getElementById("content_devoluciones");
 
-                gc.disabled = false;
-                dc.disabled = false;
-                rc.disabled = false;
+        if(ex.value != 0)
+        {
+            cu.disabled = false;
+            en.disabled = false;
+            sa.disabled = false;
 
-                devc.disabled = false;
-                devv.disabled = false;
+            gc.disabled = false;
+            dc.disabled = false;
+            rc.disabled = false;
 
-                exis.disabled = true;
-            }else
-            {
-                cu.disabled = true;
-                en.disabled = true;
-                sa.disabled = true;
+            devc.disabled = false;
+            devv.disabled = false;
 
-                gc.disabled = true;
-                dc.disabled = true;
-                rc.disabled = true;
+            exis.disabled = true;
 
-                devc.disabled = true;
-                devv.disabled = true;
+            content_existencia.style.display='none';
 
-                exis.disabled = false;
-            }
+        }else
+        {
+            cu.disabled = true;
+            en.disabled = true;
+            sa.disabled = true;
+
+            gc.disabled = true;
+            dc.disabled = true;
+            rc.disabled = true;
+
+            devc.disabled = true;
+            devv.disabled = true;
+
+            exis.disabled = false;
+
+            //content_existencia.style.display='none';
+            content_unidades.style.display='none';
+            content_otras.style.display='none';
+            content_devoluciones.style.display='none';
+
         }
+    }
+
+    function validate_radio()
+    {
+
+    }
 </script>
 
 
