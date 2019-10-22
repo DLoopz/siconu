@@ -1,6 +1,30 @@
 <div class="container">
 	<div class="text-center"><h3>Estado de Resultados</h3></div>
 	<hr class="line_sep">
+	<div class="">
+		<form >
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label>Fecha de inicio:</label>
+					<input class="form-control" type="date" name="fecha_inicio" id="fch">
+				</div>
+				<div class="form-group col-md-6">
+					<label>Fecha de fin:</label>
+					<input class="form-control" type="date" name="fecha_fin">
+				</div>
+			</div>
+			<input class="btn btn-outline-success my-2 my-sm-0 margin_left_btn" type="submit" name="submit_generar" value="Generar" onchange="printfecha();">
+			<input class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" type="button" name="cancel" value="cancel" onClick="window.location='';" />
+</form>
+<hr>
+<script type="text/javascript">
+	function printfecha(){
+		console.log(getElementsByTagName('fch').value);
+	}
+</script>
+
+		</form>
+	</div>
 	<table class="table">
 		<thead>
 			<tr>
