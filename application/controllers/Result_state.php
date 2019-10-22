@@ -15,7 +15,7 @@ class Result_state extends CI_Controller {
     $fields = array('id_empresa' => $id_empresa );
     $data['exercise']=$this->model_exercise->get_exercise($fields);
 		$data['id_empresa']=$id_empresa;
-		 $fields = array('empresa_id' => $id_empresa );
+		$fields = array('empresa_id' => $id_empresa );
     $data['registers']=$this->model_result->get_accounts_rslt($fields);
 		$fields = array('grupo_id' => $this->session->userdata('grupo'));
     $data['catalog']=$this->model_account->get_catalog_student($fields);
