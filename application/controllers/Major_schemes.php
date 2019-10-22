@@ -3,9 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Major_schemes extends CI_Controller
 {
+  
   function __construct()
   {
     parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 3)
+    {
+      redirect('');
+    }
   }
 
   /*
@@ -33,8 +42,6 @@ WHERE empresa.id_empresa = 15
 ORDER by registro_asiento.cuenta ASC
 
 //cuentas utilizadas
-
-
 SELECT registro_asiento.cuenta
 FROM empresa
 JOIN asiento
@@ -59,15 +66,6 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
     $data['parciales'] = $this->model_schemes->get_partials($fields);
     $data['id_empresa'] = $id_empresa;
     
-    //echo "<pre>".print_r($data['asientos'], 1)."</pre>";
-    //echo "<hr>";
-    //echo "<pre>".print_r($data['cuentas'], 1)."</pre>";
-    //echo "<hr>";
-    //echo "<pre>".print_r($data['registros'], 1)."</pre>";
-    //echo "<pre>".print_r($data['parciales'], 1)."</pre>";
-    
-
-    //echo "<pre>".print_r($data['asientos'][3], 1)."</pre>";
     $this->load->view('head',$data);
     $this->load->view('navbar');
     $this->load->view('student/nabvar_options');

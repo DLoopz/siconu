@@ -1,8 +1,9 @@
 <div class="container">
+	<a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 	<h3 class="text-center">Creación de catálogo de cuentas</h3>
 	<hr class="line_sep">
 	<p class="text-center alert alert-warning">A continuación le presentamos algunas cuentas que podrían ser útiles al crear su catálogo.<br>
-	Selecione las cuentas que desee incluir, de lo contrario pulse en crear para posteriormente crear sus cuentas personalizadas.</p>
+	Seleccione al menos una cuenta y pulse en crear para posteriormente agregar sus cuentas personalizadas.</p>
 	<div class="">
 		<?php
         if($this->session->flashdata('msg'))

@@ -2,8 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Professor extends CI_Controller {
-	function __construct(){
+	function __construct()
+  {
     parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') != 2)
+    {
+      redirect('');
+    }
   }
   //vista principal
 	public function index()
@@ -19,15 +28,15 @@ class Professor extends CI_Controller {
 
   public function edit_password_p($id=null){
     //reglas de validacion
-    $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
-    $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
+    $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','Confirmar Contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    //$this->form_validation->set_message('required', 'El campo %s requerido');
+    
     if($this->form_validation->run()==FAlSE)
     {
       $data['title']='Editar contraseña de profesor';
@@ -125,7 +134,7 @@ class Professor extends CI_Controller {
         $mod= $this->model_group->update_group($fields);
         //redirect('profesor');
         if($mod){
-          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> grupo editado correctamente</div>');
+          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupo editado correctamente</div>');
         }else{
           $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error grupo no editado </div>');
         }
@@ -142,7 +151,7 @@ class Professor extends CI_Controller {
     $fields = array('id_grupo' => $id );
     $del=$this->model_group->delete_group($fields);
     if($del){
-      $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> grupo eliminado correctamente</div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupo eliminado correctamente</div>');
     }else{
       $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error grupo no eliminado </div>');
     }
@@ -178,7 +187,7 @@ class Professor extends CI_Controller {
     $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|min_length[3]|callback_alpha_spaces',
       array('max_length'=>'%s debe contener al menos 3 caracteres'));
     $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|min_length[3]|callback_alpha_spaces');
-    $this->form_validation->set_rules('matricula', 'Matricula','trim|required|numeric|min_length[5]|is_unique[usuario.matricula]',
+    $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]|is_unique[usuario.matricula]',
       array('min_length'=>'%s debe contener al menos 5 caracteres'));
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('alpha', '%s solo debe contener letras');
@@ -197,7 +206,7 @@ class Professor extends CI_Controller {
     {
       $data['title']='Registrar Alumno';
       $data['id_grupo'] = $id_grupo;
-      $this->load->view('head',$data);
+      $this->load->view('head', $data);
       $this->load->view('navbar');
       $this->load->view('professor/view_add_student');
       $this->load->view('foot');
@@ -269,7 +278,7 @@ class Professor extends CI_Controller {
         }
         fclose($handle);
 
-        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Alumnos agregados correctamente<br>La contraseña del alumno es su matricula</div>');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Alumnos agregados correctamente<br>La contraseña del alumno es su matrícula</div>');
         
         redirect('professor/show_students/'.$id_grupo);
       }
@@ -285,14 +294,15 @@ class Professor extends CI_Controller {
   public function edit_student($id=null,$id_group=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|callback_alpha_spaces|min_length[3]');
-    $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|callback_alpha_spaces|min_length[3]',
+    $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|callback_alpha_spaces|min_length[3]|alpha');
+    $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|callback_alpha_spaces|min_length[3]|alpha',
       array('max_length'=>'%s debe contener mas de 3 caracteres'));
-    $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|callback_alpha_spaces|min_length[3]');
-    $this->form_validation->set_rules('matricula', 'Matricula','trim|required|numeric|min_length[5]',
+    $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|callback_alpha_spaces|min_length[3]|alpha');
+    $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]',
       array('min_length'=>'%s debe contener mas de 5 caracteres'));
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', '%s es un campo requerido');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('alpha', '%s no debe contener caracteres especiales');
     $this->form_validation->set_message('numeric', '%s debe contener solo números');
     $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
     $this->form_validation->set_message('is_unique', '%s ya existe');
@@ -337,14 +347,13 @@ class Professor extends CI_Controller {
   public function edit_password($id=null,$id_group=null){
     //reglas de validacion
     $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
-    $this->form_validation->set_rules('password_c','Confirmar Nueva contraseña','trim|required|matches[password]|min_length[8]');
+    $this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    //$this->form_validation->set_message('required', 'El campo %s requerido');
     if($this->form_validation->run()==FAlSE)
     {
       $data['title']='Editar contraseña de alumno';
@@ -381,7 +390,21 @@ class Professor extends CI_Controller {
     );
     $del=$this->model_user->delete_user($fields);
     if($del){
-      $this->session->set_flashdata('msg','<div class="alert alert-success text-center">alumno eliminado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Alumno eliminado correctamente</div>');
+    }else{
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error alumno no eliminado</div>');
+    }
+    redirect('professor/show_students/'.$id_group, 'refresh');
+  }
+
+  public function del_students($id_group)
+  {
+    $fields = array(
+      'id_usuario' => $this->input->post("id_alumno")
+    );
+    $del=$this->model_user->delete_users($fields);
+    if($del){
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Alumnos eliminadoscorrectamente</div>');
     }else{
       $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error alumno no eliminado</div>');
     }
@@ -428,7 +451,7 @@ class Professor extends CI_Controller {
           $acc=$this->model_account->insert_account($fields);
           $retVal++;
         }
-      ($retVal > 0 )? $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">No ha seleccionado ninguna cuenta</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Cuentas seleccionadas</div>');
+      ($retVal > 0 )? $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Ha seleccionado correctamente las cuentas</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Cuentas no seleccionadas</div>');
       }
       redirect('professor/account_catalog');
 
@@ -570,7 +593,7 @@ class Professor extends CI_Controller {
     $this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]|callback_alpha_spaces');
     $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'required|min_length[3]|callback_alpha_spaces');
     $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'required|min_length[3]|callback_alpha_spaces');
-    $this->form_validation->set_rules('usuario', 'Corrreo electronico','required|valid_email');
+    $this->form_validation->set_rules('usuario', 'Corrreo electrónico','required|valid_email');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('min_length','%s no debe contener menos de tres caracteres');

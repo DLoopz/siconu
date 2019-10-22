@@ -36,17 +36,17 @@
 						<?php echo form_error('ap_materno');?>
 					</div>
 					<div class="form-group">
-						<label>Matricula *</label>
-						<input class="form-control" placeholder="Matricula" name="matricula" value="<?php echo set_value('matricula');?>" >
+						<label>Matrícula *</label>
+						<input class="form-control" placeholder="Matrícula" name="matricula" value="<?php echo set_value('matricula');?>" >
 						<?php echo form_error('matricula');?>
 					</div>
 					<div class="text-danger">
-        	<?php echo form_label('* Campos Obligatorios')?><br>
+        		<?php echo form_label('* Campos Obligatorios')?><br>
       		</div>
       		<hr>
 					<br>
 					<div class="panel-footer text-center">
-						<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+						<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students"> Volver </a>
 						<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 					</div>
 				</form>
@@ -66,7 +66,7 @@
 				  <hr>
 				  <br>
 				  <div class="panel-footer text-center">
-				  	<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+				  	<a href="<?php echo base_url()?>professor/show_students"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 						
 				  </div>
