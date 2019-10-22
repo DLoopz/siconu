@@ -1,9 +1,16 @@
 <div class="container col-md-6">
-	<h3 class="text-center">Agregar Registros al Asiento</h3>
+	<h3 class="text-center">Editar Registros del Asiento</h3>
 	<hr class="line_sep">
+	<?php
+      if($this->session->flashdata('msg'))
+          echo $this->session->flashdata('msg');
+    ?>
 	<div>
 		<br>
-		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros al Asiento"><i class="icon-plus-2"></i></a>
+		<a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+
+		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Editar Registros del Asiento"><i class="icon-plus-2"></i></a>
+		
 		<br><br>
 		<table class="table table-hover" id="user-table">
 	    <thead>
@@ -26,12 +33,13 @@
 	          <td>
 	          	<!--editar asiento-->
 
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar Registro Parcial"><strong><em><i class="icon-edit"></i></em></strong></a>
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar Registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
 
             	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro Parcial"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>
 	        </tr>
+
 	      <?php foreach ($partials as $partial){
 	      		if ($register->id_registro==$partial->registro_id){?>
 	      			<tr class="table-secondary">

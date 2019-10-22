@@ -158,6 +158,21 @@ class Professor extends CI_Controller {
     redirect('professor', 'refresh');
   }
 
+  public function del_groups($group=NULL)
+  {
+    if ($this->input->post('del_groups')) {
+      
+      $del = $this->model_group->delete_groups();
+      if($del){
+        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupos eliminado correctamente</div>');
+      }else{
+        $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error grupo no eliminado </div>');
+      }
+      redirect('professor');
+    }
+    redirect('professor');
+  }
+
   //funciones de los alumnos
   public function show_students($id_grupo=null)
   {
@@ -166,7 +181,7 @@ class Professor extends CI_Controller {
       $fields = array(
         'grupo_id' => $id_grupo,
         'rol' => 3 );  
-      $data['students'] = $this->model_student->get_students_group($fields);            
+      $data['students'] = $this->model_student->get_students_group($fields);
       $data['title'] = 'Lista de alumnos en el grupo';
       $data['id_group'] = $id_grupo;
       $this->load->view('head',$data);
@@ -397,14 +412,24 @@ class Professor extends CI_Controller {
     redirect('professor/show_students/'.$id_group, 'refresh');
   }
 
-  public function del_students($id_group)
+  public function del_students($id_group=NULL)
   {
     $fields = array(
-      'id_usuario' => $this->input->post("id_alumno")
+      'grupo_id' => $id_group,
+      'rol' => 3
     );
-    $del=$this->model_user->delete_users($fields);
-    if($del){
-      $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Alumnos eliminadoscorrectamente</div>');
+
+    $list_group = $this->model_user->delete_users($fields);
+
+    //echo '<pre>'.print_r($list_group,1).'</pre>';
+
+    foreach ($list_group as $lg) {
+      $fields = array('id_usuario' => $lg->usuario_id );
+      $del = $this->model_user->delete_user($fields);
+    }
+
+    if(isset($del)){
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Alumnos eliminados</div>');
     }else{
       $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error alumno no eliminado</div>');
     }
@@ -435,12 +460,18 @@ class Professor extends CI_Controller {
 
   public function create_account_catalog()
   {
+    $fields = array('usuario_id' => $this->session->userdata('id_user'));
+    $catalog=$this->model_account->get_catalog($fields);
+    if ($catalog) {
+      redirect('professor/account_catalog');
+    }
+
     $accounts= $this->model_account->get_std_accounts();
     if($this->input->post('crear_catalogo'))
     {
+      $retVal=0;
       foreach ($accounts as $account) 
       {
-        $retVal=0;
         if($this->input->post('cuenta'.$account->id_catalogo_estandar)){
           $fields = array(
             'tipo_id' => $account->tipo_id,
@@ -451,10 +482,11 @@ class Professor extends CI_Controller {
           $acc=$this->model_account->insert_account($fields);
           $retVal++;
         }
-      ($retVal > 0 )? $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Ha seleccionado correctamente las cuentas</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Cuentas no seleccionadas</div>');
       }
-      redirect('professor/account_catalog');
 
+      ($retVal > 0 )? $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Catálogo creado</div>'):$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">No ha seleccionado ninguna cuenta</div>');
+
+      ($retVal)? redirect('professor/account_catalog') : redirect('professor/create_account_catalog') ;
     }
     else
     {
@@ -527,15 +559,38 @@ class Professor extends CI_Controller {
 
   public function del_account()
   {
+    $id_user = $this->session->userdata('id_user');
     $id = $this->input->post("id_catalogo_usuario");
-    $fields = array('id_catalogo_usuario' => $id );
+    $fields = array('id_catalogo_usuario' => $id, 'usuario_id' => $id_user);
+
     $del=$this->model_account->delete_account($fields);
+
     if($del){
       $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Cuenta eliminada correctamente</div>');
     }else{
-      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error cuenta no eliminada</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error, la cuenta esta siendo usada</div>');
     }
     redirect('professor/account_catalog', 'refresh');
+  }
+
+  public function del_accounts()
+  {
+    if ($this->input->post('del_cat'))
+    {
+      $fields = array('usuario_id' => $this->session->userdata('id_user'));      
+      $del = $this->model_account->delete_account($fields);
+      if($del){
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Catálogo eliminado correctamente</div>');
+        redirect('professor/create_account_catalog');
+      }else{
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error catálogo no eliminado</div>');
+        redirect('professor/account_catalog');
+      }
+    }
+    else
+    {
+      redirect('');
+    }
   }
 
    public function edit_account($id=null)

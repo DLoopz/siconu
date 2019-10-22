@@ -1,6 +1,9 @@
-	<!--body-->
 		<div class="container">
 			<div><h3 class="text-center">Rayado Diario</h3></div>
+			<?php
+	      if($this->session->flashdata('msg'))
+	        echo $this->session->flashdata('msg');
+	    ?>
 			<hr class="line_sep">
 			<div class="row">
 				<div class="col-6">
