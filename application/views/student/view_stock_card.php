@@ -99,19 +99,19 @@
 
 	<div class="form-group" id="content_result" style="display: none;">
         <label for="">
-            <b>Inventario inicial: </b><?php echo '$', $ii; ?>
+            <b>Inventario inicial: </b><?php echo '$', number_format($ii, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Compra: </b><?php echo $compra; ?>
+            <b>Compra: </b><?php echo number_format($compra, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Total de mercancías: </b><?php echo '$', $mercancias; ?>
+            <b>Total de mercancías: </b><?php echo '$', number_format($mercancias, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Inventario final: </b><?php echo $if; ?>
+            <b>Inventario final: </b><?php echo number_format($if, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Costo de lo vendido: </b><?php echo '$', $vendido; ?>
+            <b>Costo de lo vendido: </b><?php echo '$', number_format($vendido, 2, ".", ","); ?>
         </label><br>
     </div>
 </div>
