@@ -15,9 +15,9 @@ class Model_result extends CI_Model
   	$this->db->group_by('catalogo_usuario_id');
   	$this->db->group_by('cuenta');
   	$this->db->group_by('folio');
-    $this->db->group_by('fecha <= "'.$data['fecha_inicio'].'"');
-    $this->db->group_by('fecha <= "'.$data['fecha_fin'].'"');
-    $this->db->group_by('empresa_id',$data['empresa_id']);
+    $this->db->where('fecha >= "'.$data['fecha_inicio'].'"');
+    $this->db->where('fecha >= "'.$data['fecha_fin'].'"');
+    $this->db->where('empresa_id',$data['empresa_id']);
   	$sql = $this->db->get_where('rayado_diario');
     return $sql->result();
   }
