@@ -8,7 +8,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
-      <h3 class="text-center">Agregar Registros al Asiento</h3>
+      <h3 class="text-center">Editar Registros del Asiento</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">

@@ -13,7 +13,21 @@ class Model_account extends CI_Model
   //Eliminar cuenta
   public function delete_account($data)
   {
-    return $this->db->delete( 'catalogo_usuario' , $data );
+    //id_catalogog usario de la cuenta y el user_id
+    $sql = $this->db->query("
+      SELECT cu.id_catalogo_usuario, cu.nombre, ra.catalogo_usuario_id, ra.cuenta, cu.usuario_id, u.id_usuario, u.matricula from catalogo_usuario cu
+      JOIN registro_asiento ra
+      on cu.id_catalogo_usuario = ra.catalogo_usuario_id and ra.catalogo_usuario_id = {$data['id_catalogo_usuario']}
+      join usuario u
+      on u.id_usuario = cu.usuario_id and cu.usuario_id = {$data['usuario_id']}
+    ");
+    if ($sql->num_rows()>0) {
+      return false;
+    }
+    else
+    {
+      return $this->db->delete( 'catalogo_usuario' , $data );
+    }
   }
   //Actualizar cuentas
   public function update_account($data)

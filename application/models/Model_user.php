@@ -48,11 +48,11 @@ class Model_user extends CI_Model
   {
     return $this->db->delete( 'usuario' , $data );
   }
-   public function delete_users($data)
+
+  public function delete_users($data)
   {
-    $sql = $this->db->truncate('usuario' , $data);
-    return $sql;
-
+    $sql = $this->db->get_where('grupos_usuarios', $data);
+    return $sql->result();
   }
-
+  
 }
