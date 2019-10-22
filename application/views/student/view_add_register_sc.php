@@ -175,7 +175,7 @@
         var check10 = document.getElementById("cantidad_costos");
 
         //check = document.getElementById("gastosCompra, descuentosCompra, rebajasCompra");
-        if (check1.checked || check2.checked || check3.checked || /*check4.checked ||*/ check5.checked)
+        if (check1.checked || check2.checked || check3.checked)
         {
             element.style.display='block';
         }else
@@ -195,6 +195,30 @@
             check10.value = 0;
         }
 
+        if(check2.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
+
+            referencia.value = 'Descuentos sobre compra';
+
+            check7.value = 0;
+            check10.value = 0;
+        }
+
+        if(check3.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
+
+            referencia.value = 'Rebajas sobre compra';
+
+            check7.value = 0;
+            check10.value = 0;
+        }
+
         if(check4.checked)
         {
             content_existencia.style.display = 'none';
@@ -207,6 +231,22 @@
             check10.value = '';
             check8.disabled = true;
             check9.checked = true;
+
+            check4.value = 'devolucionesCompra';
+            //check10.value = 0;
+        }
+        if(check5.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'block';
+            content_costo_unitario.style.display = 'block';
+
+            referencia.value = 'Devoluciones sobre venta';
+
+            check7.value = '';
+            check10.value = '';
+            check8.checked = true;
+            check9.disabled = true;
 
             check4.value = 'devolucionesCompra';
             //check10.value = 0;
