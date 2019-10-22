@@ -9,11 +9,14 @@
         if($this->session->flashdata('msg'))
             echo $this->session->flashdata('msg');
     ?>
-<div class="row">
+    <div class="row">
         <div class="col-6">
             <a id="add_register" href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
                 <i class="icon-plus-2"></i>
             </a>
+        </div>
+        <div id="volver" class="col-6 text-right">
+            <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Empresas"><i class="icon-left-open"></i></a>
         </div>
     </div>
     <br>
@@ -45,16 +48,16 @@
                 <?php foreach ($stock_card as $sc)
                 {?>
                     <tr>
-                        <td><?php echo $sc->fecha?></td>
-                        <td><?php echo $sc->referencia?></td>
-                        <td><?php echo $sc->entradas?></td>
-                        <td><?php echo $sc->salidas?></td>
-                        <td><?php echo $sc->existencia?></td>
-                        <td>$ <?php echo $sc->unitario?></td>
-                        <td>$ <?php echo $sc->promedio?></td>
-                        <td>$ <?php echo $sc->debe?></td>
-                        <td>$ <?php echo $sc->haber?></td>
-                        <td>$ <?php echo $sc->saldo?></td>
+                        <td><?php echo $sc->fecha ?></td>
+                        <td><?php echo $sc->referencia ?></td>
+                        <td><?php echo $sc->entradas ?></td>
+                        <td><?php echo $sc->salidas ?></td>
+                        <td><?php echo $sc->existencia ?></td>
+                        <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
                         <td>
                             <!-- Eliminar registro -->
                             <?php
@@ -79,9 +82,6 @@
             if($terminar == 1)
             {?>
                 <div class="form-group text-center">
-                    <!--
-                    <a href=""> <button type="button" id="btn_end" class="btn btn-outline-primary my-2 my-sm-0" onclick="view_result();">Terminar registros</button></a>
-                    -->
                     <input id="btn_end" type="button" class="btn btn-outline-primary my-2 my-sm-0" value="Terminar" onclick="javascript:view_result();">
                 </div>
             <?php}else
@@ -97,21 +97,21 @@
 		</div>
 	<?php } ?>
 
-	<div class="form-group" id="content_result"  style="display: none;">
+	<div class="form-group" id="content_result" style="display: none;">
         <label for="">
-            <b>Inventario inicial: </b><?php echo '$', $ii; ?>
+            <b>Inventario inicial: </b><?php echo '$', number_format($ii, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Compra: </b><?php echo $compra; ?>
+            <b>Compra: </b><?php echo number_format($compra, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Total de mercancías: </b><?php echo '$', $mercancias; ?>
+            <b>Total de mercancías: </b><?php echo '$', number_format($mercancias, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Inventario final: </b><?php echo $if; ?>
+            <b>Inventario final: </b><?php echo number_format($if, 2, ".", ","); ?>
         </label><br>
         <label for="">
-            <b>Costo de lo vendido: </b><?php echo '$', $vendido; ?>
+            <b>Costo de lo vendido: </b><?php echo '$', number_format($vendido, 2, ".", ","); ?>
         </label><br>
     </div>
 </div>
@@ -152,6 +152,7 @@
         add_register = document.getElementById("add_register");
         delete_register = document.getElementById("delete_register");
         men_val = document.getElementById("men_val");
+        //volver = document.getElementById("volver");
 
         btn_end = document.getElementById("btn_end");
 
@@ -160,5 +161,6 @@
         delete_register.style.display = 'none';
         btn_end.style.display = 'none';
         men_val.style.display = 'none';
+        //volver.style.display = 'none';
     }
 </script>
