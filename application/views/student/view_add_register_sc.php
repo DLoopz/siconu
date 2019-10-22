@@ -1,4 +1,4 @@
-<div class="container col-md-4">
+<div class="container col-md-6">
     <div class="panel panel-primary col-md-offset-4">
         <div class="panel-heading">
             <h3 class="panel-tittle text-center">
@@ -11,140 +11,145 @@
         </div>
         <p class="text-danger">* Campos obligatorios</p>
         <div class="panel-body">
-            <form method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
-                <div class="form-group" >
-                    <label>
-                        <b>Seleccione la fecha *</b>
-                    </label>
-                    <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
-                    <?php echo form_error('fecha_sc');?>
-                </div>
-                
-                <div class="form-group">
-                    <label for="">
-                        <b>Referencia *</b>
-                    </label>
-                    <div class="form-group">
-                        <!--Cantidad:-->
-                        <input id="referencia" type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento" value="<?php echo set_value('referencia');?>">
-                        <?php echo form_error('referencia') ?>
+            <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
+                <div class="col-md-7">
+                    <div class="form-group" >
+                        <label>
+                            <b>Seleccione la fecha *</b>
+                        </label>
+                        <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
+                        <?php echo form_error('fecha_sc');?>
                     </div>
-                </div>
 
-                <div class="form-row" id="content_existencia">
-                    <div class="form-group col-md-8">
+                    <div class="form-group">
                         <label for="">
-                        <b>Existencia:</b>
+                            <b>Referencia *</b>
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="existencia" type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
-                            <?php echo form_error('cantidad_existencia') ?>
+                            <input id="referencia" type="text" name="referencia" class="form-control" placeholder="Tipo de movimiento" value="<?php echo set_value('referencia');?>">
+                            <?php echo form_error('referencia') ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+
+                    <div class="form-row" id="content_existencia">
+                        <div class="form-group col-md-8">
+                            <label for="">
+                            <b>Existencia:</b>
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <input id="existencia" type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
+                                <?php echo form_error('cantidad_existencia') ?>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">
+                            <b>Existencia actual</b>
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <input id="existencia_actual" type="text" name="existencia_actual" class="form-control" placeholder="Cantidad en números" value="<?php echo $exis; ?>" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="content_unidades">
                         <label for="">
-                        <b>Existencia actual</b>
+                            <b>Unidades *</b>
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="existencia_actual" type="text" name="existencia_actual" class="form-control" placeholder="Cantidad en números" value="<?php echo $exis; ?>" disabled>
+                            <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
+                            <?php echo form_error('cantidad_unidades') ?>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="form-group" id="content_unidades">
-                    <label for="">
-                        <b>Unidades *</b>
-                    </label>
-                    <div class="form-group">
-                        <!--Cantidad:-->
-                        <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
-                        <?php echo form_error('cantidad_unidades') ?>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" chequed>
-                            <label class="custom-control-label" for="entrada">Entrada</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida">
-                            <label class="custom-control-label" for="salida">Salida</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group" id="content_costo_unitario">
-                    <label for="">
-                        <b>Costo unitario *</b>
-                    </label>
-                    <div class="form-group">
-                        <!--Cantidad:-->
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio custom-control-inline col-5">
+                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" chequed onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="entrada">Entrada</label>
                             </div>
-                            <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('cantidad_costos');?>">
-                        </div>
-                        <?php echo form_error('cantidad_costos') ?>
-                    </div>
-                </div>
-
-                <div class="form-group" id="content_otras">
-                    <label for="">
-                        <b>Otras operaciones</b>
-                    </label>
-                    <div class="form-group">
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
-                            <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
-                            <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
-                            <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group" id="content_devoluciones">
-                    <label for="">
-                        <b>Devolución</b>
-                    </label>
-                    <div class="form-group">
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
-                            <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline col-5">
-                            <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
-                            <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group" id="content" style="display: none;">
-                    <label for="">
-                        <b>Afectación:</b>
-                    </label>
-                    <div class="form-group">
-                        <!--Cantidad:-->
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
+                            <div class="custom-control custom-radio custom-control-inline col-5">
+                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="salida">Salida</label>
                             </div>
-                            <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
                         </div>
-                        <?php echo form_error('cantidad_costos') ?>
+                    </div>
+
+                    <div class="form-group" id="content_costo_unitario">
+                        <label for="">
+                            <b>Costo unitario *</b>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('cantidad_costos');?>">
+                            </div>
+                            <?php echo form_error('cantidad_costos') ?>
+                        </div>
                     </div>
                 </div>
 
-                <input type="submit" name="add_entry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-				<a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+                <div class="col-md-5">
+                    <div class="form-group" id="content_otras">
+                        <label for="">
+                            <b>Otras operaciones</b>
+                        </label>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="content_devoluciones">
+                        <label for="">
+                            <b>Devolución</b>
+                        </label>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="content" style="display: none;">
+                        <label for="">
+                            <b>Afectación:</b>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                            </div>
+                            <?php echo form_error('cantidad_costos') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col align-self-center">
+                    <input type="submit" name="add_entry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
+                    <a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+                </div>
             </form>
         </div>
     </div>
@@ -161,12 +166,18 @@
         content_costo_unitario = document.getElementById("content_costo_unitario");
         referencia = document.getElementById("referencia");
 
+        content_otras = document.getElementById("content_otras");
+        content_devoluciones = document.getElementById("content_devoluciones");
+
         check1 = document.getElementById("gastosCompra");
         check2 = document.getElementById("descuentosCompra");
         check3 = document.getElementById("rebajasCompra");
 
         check4 = document.getElementById("devolucionesCompra");
         check5 = document.getElementById("devolucionesVenta");
+
+        check88 = document.getElementById("entrada");
+        check99 = document.getElementById("salida");
 
         //var check6 = document.getElementById("referencia");
         var check7 = document.getElementById("cantidad_unidades");
@@ -250,6 +261,11 @@
 
             check4.value = 'devolucionesCompra';
             //check10.value = 0;
+        }
+        if(check88.checked || check99.checked)
+        {
+            content_otras.style.display='none';
+            content_devoluciones.style.display='none';
         }
 
     }
