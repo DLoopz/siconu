@@ -52,7 +52,7 @@ class Model_user extends CI_Model
   {
     $sql = $this->db->truncate('usuario' , $data);
     return $sql;
-    
+
   }
 
 }

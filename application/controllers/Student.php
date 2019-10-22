@@ -40,7 +40,7 @@ class Student extends CI_Controller {
     $this->form_validation->set_message('thisPassword', '%s es incorrecta');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    
+
     if($this->form_validation->run()==FAlSE)
     {
       $data['title']='Editar contraseña de alumno';

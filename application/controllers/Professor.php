@@ -36,7 +36,7 @@ class Professor extends CI_Controller {
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    
+
     if($this->form_validation->run()==FAlSE)
     {
       $data['title']='Editar contraseña de profesor';

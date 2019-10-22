@@ -24,9 +24,6 @@ class Stock_card extends CI_Controller {
         $ultimo_id = $this->model_stock_card->get_last_id($fields);
         $fields = array('id_tarjeta' => intval($ultimo_id->id));
         $registro_antes = $this->model_stock_card->get_registro($fields);
-<<<<<<< HEAD
-        $data['ultimo'] = $registro_antes->id_tarjeta;
-=======
         if($registro_antes)
         {
             $data['ultimo'] = $registro_antes->id_tarjeta;
@@ -38,22 +35,25 @@ class Stock_card extends CI_Controller {
                 $primer_id = $this->model_stock_card->get_first_id($fields);
                 $fields = array('id_tarjeta' => intval($primer_id->id));
                 $ii = $this->model_stock_card->get_registro($fields);
-                echo 'Inventario_inicial: ', $ii->id_tarjeta;
+                $compra = $this->model_stock_card->get_sum_debe();
+                $mercancias = $ii->saldo + $compra;
+                $if = $registro_antes->saldo;
+                $vendido = $this->model_stock_card->get_sum_haber();
+                //echo 'Inventario_inicial: ', $ii->id_tarjeta;
 
                 $data['ii'] = $ii->saldo;
-                $data['compra'] = 1;
-                $data['mercancias'] = 1;
-                $data['if'] = 1;
-                $data['vendido'] = 1;
-            }
-            else
+                $data['compra'] = $compra;
+                $data['mercancias'] = $mercancias;
+                $data['if'] = $if;
+                $data['vendido'] = $vendido;
+            }else
                 $data['terminar'] = 0;
         }
         else
         {
             $data['ultimo'] = null;
+            $data['terminar'] = 0;
         }
->>>>>>> origin/primer_entrega
 
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
@@ -118,12 +118,6 @@ class Stock_card extends CI_Controller {
             // CONDICIÓN PARA INGRESAR EXISTENCIA (INVENTARIO INICIAL)
             if($this->input->post('cantidad_existencia') != null)
             {
-<<<<<<< HEAD
-                $bandera = false;
-
-
-=======
->>>>>>> origin/primer_entrega
                 $fields = array
                 (
                     'empresa_id' => $id_empresa,
@@ -146,7 +140,7 @@ class Stock_card extends CI_Controller {
 
                 $saldo_antes = $this->model_stock_card->get_saldo($fields);
 
-                if($this->input->post('unidades') == "entrada")
+                if($this->input->post('unidades') == "entrada" && $this->input->post('otras_operaciones') == null)
                 {
                     $fields = array
                     (
@@ -184,7 +178,6 @@ class Stock_card extends CI_Controller {
                 switch($this->input->post('otras_operaciones'))
                 {
                     case "gastosCompra":
-                        echo 'Gastos sobre compra';
                         $fields = array
                         (
                             'empresa_id' => $id_empresa,
@@ -201,24 +194,6 @@ class Stock_card extends CI_Controller {
                         );
                         break;
                     case "descuentosCompra":
-                        echo 'Descuentos sobre compra';
-                        $fields = array
-                        (
-                            'empresa_id' => $id_empresa,
-                            'fecha' => $this->input->post('fecha_sc'),
-                            'referencia' => $this->input->post('referencia'),
-                            'entradas' => 0,
-                            'salidas' => 0,
-                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
-                            'unitario' => $this->input->post('cantidad_costos'),
-                            'promedio' => 0,//(floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
-                            'debe' => 0, //$this->input->post('otras_operaciones'),
-                            'haber' => $this->input->post('otras_operaciones'),
-                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
-                        );
-                        break;
-                    case "rebajasCompra": //Afecta Haber
-                        echo 'Rebajas sobre compra';
                         $fields = array
                         (
                             'empresa_id' => $id_empresa,
@@ -228,14 +203,29 @@ class Stock_card extends CI_Controller {
                             'salidas' => 0,
                             'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
                             'unitario' => 0, //$this->input->post('cantidad_costos'),
-                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
                             'debe' => 0,
-                            'haber' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
-                            'saldo' => $this->model_stock_card->get_sum_saldo() - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                            'haber' => $this->input->post('afectacion'),
+                            'saldo' => floatval($existencia_antes->saldo) - $this->input->post('afectacion')
+                        );
+                        break;
+                    case "rebajasCompra": //Afecta Haber
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
+                            'debe' => 0,
+                            'haber' => $this->input->post('afectacion'),
+                            'saldo' => floatval($existencia_antes->saldo) - $this->input->post('afectacion')
                         );
                         break;
                     case "devolucionesCompra":
-                        echo 'DEVOLUCIONES SOBRE COMPRA!';
                         $fields = array
                         (
                             'empresa_id' => $id_empresa,
@@ -252,7 +242,6 @@ class Stock_card extends CI_Controller {
                         );
                         break;
                     case "devolucionesVenta":
-                        echo 'Devoluciones sobre venta';
                         $fields = array
                         (
                             'empresa_id' => $id_empresa,
@@ -262,10 +251,10 @@ class Stock_card extends CI_Controller {
                             'salidas' => 0,
                             'existencia' => floatval($existencia_antes->existencia) + floatval($this->input->post('cantidad_unidades')),
                             'unitario' => $this->input->post('cantidad_costos'),
-                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
-                            'debe' => $this->input->post('otras_operaciones'),
-                            'haber' => 0,//$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
-                            'saldo' => $this->model_stock_card->get_sum_saldo() + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                            'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($existencia_antes->existencia) - (floatval($this->input->post('cantidad_unidades')))),
+                            'debe' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'haber' => 0,
+                            'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
                         );
                         break;
 
@@ -275,7 +264,7 @@ class Stock_card extends CI_Controller {
             $info = $this->model_stock_card->insert_ta($fields);
             if($info)
             {
-                $this->session->set_flashdata('msg', '<div class="alert alert-success"> Registro nuevo agregado correctamente</div>' );
+                $this->session->set_flashdata('msg', '<div id="men_val" class="alert alert-success"> Registro nuevo agregado correctamente</div>' );
             }else
             {
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error al agregar registro</div>');

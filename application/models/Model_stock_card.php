@@ -56,6 +56,13 @@ class Model_stock_card extends CI_Model
         return $result->row()->debe;
     }
 
+    public function get_sum_haber()
+    {
+        $sql = "SELECT sum(haber) as haber FROM tarjeta_almacen";
+        $result = $this->db->query($sql);
+        return $result->row()->haber;
+    }
+
     public function get_sum_saldo()
     {
         $sql = "SELECT sum(saldo) as saldo FROM tarjeta_almacen";
