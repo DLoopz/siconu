@@ -48,16 +48,16 @@
                 <?php foreach ($stock_card as $sc)
                 {?>
                     <tr>
-                        <td><?php echo $sc->fecha?></td>
-                        <td><?php echo $sc->referencia?></td>
-                        <td><?php echo $sc->entradas?></td>
-                        <td><?php echo $sc->salidas?></td>
-                        <td><?php echo $sc->existencia?></td>
-                        <td>$ <?php echo $sc->unitario?></td>
-                        <td>$ <?php echo $sc->promedio?></td>
-                        <td>$ <?php echo $sc->debe?></td>
-                        <td>$ <?php echo $sc->haber?></td>
-                        <td>$ <?php echo $sc->saldo?></td>
+                        <td><?php echo $sc->fecha ?></td>
+                        <td><?php echo $sc->referencia ?></td>
+                        <td><?php echo $sc->entradas ?></td>
+                        <td><?php echo $sc->salidas ?></td>
+                        <td><?php echo $sc->existencia ?></td>
+                        <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                        <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
                         <td>
                             <!-- Eliminar registro -->
                             <?php
