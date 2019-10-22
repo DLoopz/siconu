@@ -34,13 +34,13 @@ class Student extends CI_Controller {
     $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
     $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
-    $this->form_validation->set_message('required', '%s es un campo requerido');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
     $this->form_validation->set_message('thisPassword', '%s es incorrecta');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    //$this->form_validation->set_message('required', 'El campo %s requerido');
+
     if($this->form_validation->run()==FAlSE)
     {
       $data['title']='Editar contraseña de alumno';

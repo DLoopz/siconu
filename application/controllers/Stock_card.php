@@ -24,6 +24,9 @@ class Stock_card extends CI_Controller {
         $ultimo_id = $this->model_stock_card->get_last_id($fields);
         $fields = array('id_tarjeta' => intval($ultimo_id->id));
         $registro_antes = $this->model_stock_card->get_registro($fields);
+<<<<<<< HEAD
+        $data['ultimo'] = $registro_antes->id_tarjeta;
+=======
         if($registro_antes)
         {
             $data['ultimo'] = $registro_antes->id_tarjeta;
@@ -54,6 +57,7 @@ class Stock_card extends CI_Controller {
             $data['ultimo'] = null;
             $data['terminar'] = 0;
         }
+>>>>>>> origin/primer_entrega
 
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
@@ -117,7 +121,17 @@ class Stock_card extends CI_Controller {
         {
             // CONDICIÓN PARA INGRESAR EXISTENCIA (INVENTARIO INICIAL)
             if($this->input->post('cantidad_existencia') != null)
+<<<<<<< HEAD
             {
+=======
+            {
+<<<<<<< HEAD
+                $bandera = false;
+
+
+=======
+>>>>>>> origin/primer_entrega
+>>>>>>> origin/primer_entrega
                 $fields = array
                 (
                     'empresa_id' => $id_empresa,

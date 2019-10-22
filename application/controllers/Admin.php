@@ -34,7 +34,7 @@ class Admin extends CI_Controller
     $this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña ','trim|required|matches[password]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
-    $this->form_validation->set_message('matches', 'Las Contraseñas no coinciden');
+    $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe tener como mínimo 8 caracteres');
     //personalizacion de delimitadores
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
