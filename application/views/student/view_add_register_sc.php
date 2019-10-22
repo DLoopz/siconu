@@ -30,12 +30,8 @@
                         <?php echo form_error('referencia') ?>
                     </div>
                 </div>
-                
-<<<<<<< HEAD
-                <div class="form-row">
-=======
+
                 <div class="form-row" id="content_existencia">
->>>>>>> origin/primer_entrega
                     <div class="form-group col-md-8">
                         <label for="">
                         <b>Existencia:</b>
@@ -260,62 +256,17 @@
 
     ///////////////////////////////////////////
 
-<<<<<<< HEAD
-        function habilitar(){
-            var ex = document.getElementById('existencia_actual');
-=======
     function habilitar(){
         var ex = document.getElementById('existencia_actual');
 
         var cu = document.getElementById('cantidad_unidades');
         var en = document.getElementById('entrada');
         var sa = document.getElementById('salida');
->>>>>>> origin/primer_entrega
 
         var gc = document.getElementById('gastosCompra');
         var dc = document.getElementById('descuentosCompra');
         var rc = document.getElementById('rebajasCompra');
 
-<<<<<<< HEAD
-            var gc = document.getElementById('gastosCompra');
-            var dc = document.getElementById('descuentosCompra');
-            var rc = document.getElementById('rebajasCompra');
-
-            var devc = document.getElementById('devolucionesCompra');
-            var devv = document.getElementById('devolucionesVenta');
-
-            var exis = document.getElementById('existencia');
-
-            if(ex.value != 0)
-            {
-                cu.disabled = false;
-                en.disabled = false;
-                sa.disabled = false;
-
-                gc.disabled = false;
-                dc.disabled = false;
-                rc.disabled = false;
-
-                devc.disabled = false;
-                devv.disabled = false;
-
-                exis.disabled = true;
-            }else
-            {
-                cu.disabled = true;
-                en.disabled = true;
-                sa.disabled = true;
-
-                gc.disabled = true;
-                dc.disabled = true;
-                rc.disabled = true;
-
-                devc.disabled = true;
-                devv.disabled = true;
-
-                exis.disabled = false;
-            }
-=======
         var devc = document.getElementById('devolucionesCompra');
         var devv = document.getElementById('devolucionesVenta');
 
@@ -363,7 +314,6 @@
             content_otras.style.display='none';
             content_devoluciones.style.display='none';
 
->>>>>>> origin/primer_entrega
         }
     }
 
