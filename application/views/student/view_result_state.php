@@ -38,208 +38,160 @@
 			</tr>	
 		</thead>
 		<tbody>
-
-		<!-- VENTAS TOTALES - [DEVOLUCIONES SOBRE VENTAS+REBAJAS SOBRE VENTAS] = VENTAS NETAS -->
-		<?php $ventas_netas=0; ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->folio > 4100  && $register->folio<4200):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>
-				<td></td>
-				<td></td>
-				<?php $aux=$register->haber-$register->debe;?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>
-			</tr>
-			<?php $ventas_netas=$ventas_netas+$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->folio > 5100  && $register->folio<5200):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>
-				<td></td>
-				<td></td>
-				<?php $aux=$register->debe-$register->haber; ?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>
-			</tr>
-			<?php $ventas_netas=$ventas_netas-$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<tr>
-			<td class="font-italic">Ventas Netas</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="text-right <?php if ($ventas_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($ventas_netas,2,'.',',');?></td>
-		</tr>
-
-		<!-- COMPRAS + GASTOS SOBRE COMPRAS = COMPRAS TOTALES -->
-		<?php $compras=0; ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->folio > 5200  && $register->folio<5300):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>
-				<td></td>
-				<td></td>
-				<?php $aux=$register->debe-$register->haber; ?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>
-			</tr>
-			<?php $compras=$compras+$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<tr>
-			<td class="font-italic">Compras Totales</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="text-right <?php if ($compras<0){echo 'text-danger';} ?>">$ <?php echo number_format($compras,2,'.',',');?></td>
-		</tr>
-
-		<!-- COMPRAS TOTALES - [DESCUENTOS SOBRE COMPRAS+REBAJAS SOBRE COMPRA] = COMPRAS NETAS -->
-		<?php $compras_netas=$compras; ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->folio > 4300  && $register->folio<4400):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>
-				<td></td>
-				<td></td>
-				<?php $aux=$register->debe-$register->haber; ?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>
-			</tr>
-			<?php $compras_netas=$compras_netas-$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<tr>
-			<td class="font-italic">Compras Netas</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="text-right <?php if ($compras_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($compras_netas,2,'.',',');?></td>
-		</tr>
-
-		<!-- MERCANCIA DISPONIBLE + NVENTARIO FINAL = COSTO DE VENTA -->
-		<?php $aux=0;if(isset($inventario_inicial)){?>
+			<!-- VENTAS TOTALES - [DEVOLUCIONES SOBRE VENTAS+REBAJAS SOBRE VENTAS] = VENTAS NETAS -->
+			<?php $ventas_netas=0; ?>
+			<?php foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio > 4100  && $register->folio<4200):?>
 				<tr>
-					<td>Inventario Inicial</td>				
+					<td><?php echo $register->cuenta;?></td>				
 					<td></td>
 					<td></td>
-					<td class="text-right <?php if ($register->haber<0){echo 'text-danger';} ?>">$ <?php echo number_format($register->haber,2,'.',',');$aux=$aux+$register->haber;?></td>
-					<td></td>
+					<?php $aux=$register->haber-$register->debe;?>
+					<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+					<td></td>								
 				</tr>
-			<?php }else{?>
+				<?php $ventas_netas=$ventas_netas+$aux; ?>
+			<?php endif ?>
+			<?php endforeach ?>
+			
+			<?php $sub_vent=0; foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio > 5100  && $register->folio<5200):?>
+				<?php if ($register->folio != 5101): ?>
+					<td></td>
+					<td></td>								
+				</tr>
+				<?php endif ?>
 				<tr>
-					<td>Inventario Inicial</td>				
+					<td class="offset-1"><?php echo $register->cuenta;?></td>				
 					<td></td>
-					<td  class="text-right">$ <?php echo number_format(0,2,'.',',');?></td>
-					<td></td>
-					<td></td>		
+					<?php $aux=$register->debe-$register->haber; ?>
+					<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+				<?php $ventas_netas=$ventas_netas-$aux; $sub_vent=$sub_vent+$aux;?>
+				<?php endif ?>
+			<?php endforeach ?>
+
+					<td class="text-right <?php if ($sub_vent<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_vent,2,'.',',');?> </td>
+					<td></td>			
 				</tr>
-			<?php }?>
+			<tr>
+				<td class="font-weight-bold">Ventas Netas</td>
+				<td></td>
+				<td></td>
+				<td></td>	
+				<td class="text-right font-weight-bold	 <?php if ($ventas_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($ventas_netas,2,'.',',');?></td>	
+			</tr>
+
+			<!-- INVENTARIO INICIAL - [DEVOLUCIONES SOBRE VENTAS+REBAJAS SOBRE VENTAS] = VENTAS NETAS -->
+			<?php $compras_totales=0;$inventario_inicial=0; ?>
+			<?php foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio == 5401):?>
+					<tr>
+						<td><?php echo $register->cuenta;?></td>				
+						<td></td>
+						<td></td>
+						<?php $aux=$register->debe-$register->haber;$inventario_inicial=$aux;?>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td></td>								
+					</tr>
+					<?php $compras_totales=$compras_totales+$aux; ?>
+				<?php endif ?>
+			<?php endforeach ?>
+
+			<?php $sub_comp=0; foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio > 5200  && $register->folio<5300):?>
+				<tr>
+					<td class="offset-1"><?php echo $register->cuenta;?></td>				
+					<?php $aux=$register->debe-$register->haber; ?>
+					<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+					<td></td>
+					<td></td>
+					<td></td>								
+				</tr>
+				<?php $compras_totales=$compras_totales-$aux; $sub_comp=$sub_comp+$aux;?>
+				<?php endif ?>
+			<?php endforeach ?>
 
 			<tr>
-				<td class="font-italic">Compras Netas</td>
+				<td class="font-weight-bold">Compras Totales</td>
 				<td></td>
-				<td class="text-right <?php if ($compras_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($compras_netas,2,'.',',');$aux=$aux+$compras_netas;?></td>
-				<td></td>		
-				<td></td>		
+				<td class="text-right font-weight-bold	 <?php if ($sub_comp<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_comp,2,'.',',');?></td>	
+				<td></td>
+				<td></td>	
+			</tr>
+
+
+
+			<?php $sub_deb_comp=0; foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio > 4200  && $register->folio<4400):?>
+				<?php if ($register->folio != 4201): ?>
+					<td></td>
+					<td></td>
+					<td></td>								
+				</tr>
+				<?php endif ?>
+				<tr>
+					<td class="offset-1"><?php echo $register->cuenta;?></td>				
+					<?php $aux=$register->haber-$register->debe; ?>
+					<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+				<?php $sub_deb_comp=$sub_deb_comp+$aux;?>
+				<?php endif ?>
+			<?php endforeach ?>
+					<td class="text-right <?php if ($sub_deb_comp<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_deb_comp,2,'.',',');?></td>
+					<td></td>
+					<td></td>								
+				</tr>
+
+			<tr>
+				<td class="font-weight-bold">Compras Netas</td>
+				<td></td>
+				<td></td>
+				<?php $compras_totales=$sub_comp-$sub_deb_comp;?>
+				<td class="text-right font-weight-bold	 <?php if ($compras_totales<0){echo 'text-danger';} ?>">$ <?php echo number_format($compras_totales,2,'.',',');?></td>
+				<td></td>	
 			</tr>
 
 			<tr>
-				<td class="font-italic">Total mercancia</td>
+				<td class="font-weight-bold">Suma total de mercancias</td>
 				<td></td>
+				<?php $total_merca=$inventario_inicial+$compras_totales;?>
 				<td></td>
-				<td class="text-right <?php if ($compras_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>		
+				<td class="text-right font-weight-bold	 <?php if ($total_merca<0){echo 'text-danger';} ?>">$ <?php echo number_format($total_merca,2,'.',',');?></td>
+				<td></td>	
 			</tr>
 
-		<?php $costo_venta=0; ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->cuenta=='Mercancias'||$register->cuenta=="Almacen"):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>
-				<td></td>
-				<td></td>
-				<?php $aux=$register->debe-$register->haber; ?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>
-			</tr>
-			<?php $costo_venta=$costo_venta-$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<tr>
-			<td class="font-italic">Costo de venta</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="text-right <?php //if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($costo_venta,2,'.',',');?></td>
-		</tr>
-
-		<!-- VENTAS NETAS - COSTO DE VENTAS = UTILIDAD O PERDIDA BRUTA  [ Si las ventas netas son > que el costo de ventas el resultado sera utilidad bruta. Si las ventas netas son <  que el costo de ventas el resultado sera pérdida bruta] 
-		-->
-		<?php $bruta=$ventas_netas-$costo_venta;?>
-		<tr>
-			<td class="font-italic">Ventas Netas</td>
-			<td></td>
-			<td class="text-right <?php if ($ventas_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($ventas_netas,2,'.',',');?></td>
-			<td></td>
-			<td></td>	
-		</tr>
-		<tr>
-			<td class="font-italic">Costo de venta</td>
-			<td></td>
-			<td class="text-right <?php if ($costo_venta<0){echo 'text-danger';} ?>">$ <?php echo number_format($costo_venta,2,'.',',');?></td>
-			<td></td>	
-			<td></td>	
-		</tr>
-		<tr>
-			<td class="font-italic"><?php if($bruta>=0){$estado="Utilidad";}else{$estado="Perdida";} echo $estado?> Bruta</td>
-			<td></td>
-			<td></td>
-			<td></td>	
-			<td class="text-right <?php if ($bruta<0){echo 'text-danger';} ?>">$ <?php echo number_format($bruta,2,'.',',');?></td>	
-		</tr>
-
-		<!-- UTILIDAD O PERDIDA BRUTA -/+ [GASTOS DE OPERACIÓN + GASTOS VENTA Y ADMINISTRACIÓN ] = UTILIDAD O PERDIDA DE LA OPERACION-->
-		<?php $operacion=0; ?>
-		<?php foreach ($registers as $register): ?>
-			<?php $aux=0; if ($register->folio > 5500  && $register->folio<5800):?>
-			<tr>
-				<td><?php echo $register->cuenta;?></td>				
-				<td></td>
-				<td></td>
-				<?php $aux=$register->haber-$register->debe;?>
-				<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-				<td></td>								
-			</tr>
-			<?php $operacion=$operacion+$aux; ?>
-			<?php endif ?>
-		<?php endforeach ?>
-		<?php if ($estado){
-			$operacion=$bruta-$operacion;
-		}else{
-			$operacion=$bruta-(-1*$operacion);
-		} ?>
-		<tr>
-			<td class="font-italic"><?php echo "$estado";?> de la Operacion</td>
-			<td></td>
-			<td></td>
-			<td></td>	
-			<td class="text-right <?php if ($operacion<0){echo 'text-danger';} ?>">$ <?php echo number_format($operacion,2,'.',',');?></td>	
-		</tr>
+			<?php $inventario_final=0; ?>
+			<?php foreach ($registers as $register): ?>
+				<?php $aux=0; if ($register->folio == 5402):?>
+					<tr>
+						<td><?php echo $register->cuenta;?></td>				
+						<td></td>
+						<td></td>
+						<?php $aux=$register->debe-$register->haber;?>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td></td>								
+					</tr>
+					<?php $inventario_final=$inventario_final+$aux; ?>
+				<?php endif ?>
+			<?php endforeach ?>
 		
-		<!-- UTILIDAD O PERDIDA DE LA OPERACIÓN +/- NGRESOS DE NO OPERACIÓN PRODUCTOS FINANCIEROS Y OTROS INGRESOS GASTOS DE NO OPERACIÓN GASTOS FINANCIERIOS Y OTROS GASTOS = UTILIDAD ANTES DE RESERVA LEGAL E IMPUESTO SOBRE LA RENTA O PERDIDA DEL EJERCICIO -->
-		<?php $utilidad=0; ?>
-		<tr>
-			<td class="font-italic">Compras Totales</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="text-right <?php //if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($utilidad,2,'.',',');?></td>
-		</tr>
+			<tr>
+				<td class="font-weight-bold">Costo de lo vendido</td>
+				<td></td>
+				<?php $costo_vendido=$total_merca-$inventario_final;?>
+				<td></td>
+				<td class="text-right font-weight-bold	 <?php if ($costo_vendido<0){echo 'text-danger';} ?>">$ <?php echo number_format($costo_vendido,2,'.',',');?></td>
+				<td></td>	
+			</tr>
+
+			<tr>
+				<td class="font-weight-bold">Utilidad Bruta</td>
+				<td></td>
+				<?php $Utilidad=$ventas_netas-$costo_vendido;?>
+				<td></td>
+				<td></td>	
+				<td class="text-right font-weight-bold	 <?php if ($Utilidad<0){echo 'text-danger';} ?>">$ <?php echo number_format($Utilidad,2,'.',',');?></td>
+			</tr>
+
 		</tbody>
 	</table>
 <?php } ?>
