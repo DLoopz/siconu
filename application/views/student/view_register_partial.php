@@ -3,7 +3,7 @@
 	<hr class="line_sep">
 	<div>
 
-    <?php 
+    <?php
     /*
     //agregar con siguiente vista
 
@@ -48,9 +48,9 @@
                 </div>
                 <br>
                 <div class="panel-footer text-center">
-                   <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Volver</button></a>
-                  <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
-                   
+                   <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
+                  <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Volver</button></a>
+                 
                 </div>
                 </form>
             </div>
@@ -121,8 +121,8 @@
       <div class="modal-footer">
        <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
          <input type="hidden" id="eliminar" name="id_register"></input>
-         <input type="reset" class="btn btn-outline-success my-2 my-sm-0"  data_dismiss="modal" value="No">
-         <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">                   
+         <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">
+          <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal"  data_dismiss="modal" value="No">                
        </form>
       </div>
     </div>

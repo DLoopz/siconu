@@ -1,6 +1,6 @@
 <?php $cuenta=0; ?>
 <div class="container">
-	<div class="text-center"><h3>Balanza de comprobacion</h3></div>
+	<div class="text-center"><h3>Balanza de comprobación</h3></div>
 	<hr class="line_sep">
 
 	<div class="row">

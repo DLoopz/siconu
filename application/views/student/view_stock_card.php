@@ -1,4 +1,24 @@
 <div class="container">
+    <p class="text-light bg-dark">
+        <div class="text-center">
+            <h3>Tarjeta de Almacén</h3>
+        </div>
+    </p>
+    <hr class="line_sep">
+    <?php
+        if($this->session->flashdata('msg'))
+            echo $this->session->flashdata('msg');
+    ?>
+    <div class="row">
+        <div class="col-6">
+            <a id="add_register" href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
+                <i class="icon-plus-2"></i>
+            </a>
+        </div>
+        <div id="volver" class="col-6 text-right">
+            <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Empresas"><i class="icon-left-open"></i></a>
+        </div>
+    </div>
     
     <div class="text-center">
         <h3>Tarjeta de Almacén</h3>
@@ -19,7 +39,7 @@
     ?>
     <div class="row">
         <div class="col-6">
-            <a href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
+            <a id="add_register" href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
                 <i class="icon-plus-2"></i>
             </a>
         </div>

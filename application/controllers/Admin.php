@@ -58,7 +58,7 @@ class Admin extends CI_Controller
         $fields = array('id_usuario' => $id );
         $correo = $this->model_user->get_user($fields);
         $correo = $correo->matricula;
-        
+
         $password = $this->input->post('password');/*md5($this->input->post('password'));*/
         $fields = array(
           'id_usuario' => $id,
@@ -66,19 +66,66 @@ class Admin extends CI_Controller
         );
         $mod= $this->model_user->update_user($fields);
 
-        $from = ' SICONU:Credenciales <e32wsaq1@gmail.com>';
-        $to = "Profesor <{$correo}>";
-        $subject = 'Usuario del sistema SICONU';
-        $message = "Su nueva contraseña es: ".$password;
-        $headers = 'From: ' . $from;
+        /*correo*/
 
-        if (!mail($to, $subject, $message, $headers))
+        /* If you installed PHPMailer without Composer do this instead: */
+        /*
+        require 'C:\PHPMailer\src\Exception.php';
+        require 'C:\PHPMailer\src\PHPMailer.php';
+        require 'C:\PHPMailer\src\SMTP.php';
+        */
+
+        require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+        require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+        //require '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
+
+        /* Create a new PHPMailer object. Passing TRUE to the constructor enables exceptions. */
+        $mail = new PHPMailer(TRUE);
+
+        /* Open the try/catch block. */
+        try {
+
+          /*configuraciones adicionales*/
+          $mail->IsSMTP();
+
+          //$mail->SMTPDebug = 2;
+          //$mail->Debugoutput = 'html';
+
+          $mail->SMTPSecure = 'tls';
+          $mail->Host = 'smtp.gmail.com';
+          $mail->Port = 587;
+          //or more succinctly:
+          $mail->Host = 'tls://smtp.gmail.com:587';
+
+          $mail->SMTPAuth = true;
+
+          $mail->Username = "e32wsaq1@gmail.com"; // My gmail username
+          $mail->Password = '1qasw23e'; // My Gmail Password
+
+
+          /* Set the mail sender. */
+          $mail->setFrom('e32wsaq1@gmail.com', 'SICONU:Credenciales');
+
+          /* Add a recipient. */
+          $mail->addAddress($correo, 'Profesor');
+
+          /* Set the subject. */
+          $mail->Subject = 'Usuario del sistema SICONU';
+
+          /* Set the mail message body. */
+          $mail->IsHTML(true); // Enviar como HTML
+          $mail->Body = '<font size=4>'.'Su usuario de ingreso es: <b>'.$correo.'</b> y su contraseña es: <b>profesor'.$num.'</b></font>';
+          $mail->AltBody = 'Su usuario de ingreso es: '.$correo.' y su contraseña es: profesor'.$num;
+
+          /* Finally send the mail. */
+          //$mail->send();
+        if($mail->send() and $mod==true)
         {
-          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
+          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
         }
         else
         {
-          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
+          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
         }
 
         if($mod){
@@ -89,6 +136,27 @@ class Admin extends CI_Controller
           $this->session->set_flashdata('msg', $msg_correo.'<div class="text-center alert alert-danger">Error contraseña no editada</div');
         }
         redirect('admin');
+           
+
+        }
+        catch (Exception $e)
+        {
+          /* PHPMailer exception. */
+          //echo $e->errorMessage();
+          /*Check you have the openssl extension*/
+          //echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+          echo '<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor"> Volver </a>';
+        }
+        catch (\Exception $e)
+        {
+          /* PHP exception (note the backslash to select the global namespace Exception class). */
+          //echo $e->getMessage();
+          /*Check you have the openssl extension*/
+          //echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+          echo '<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor"> Volver </a>';           
+        }
+
+        /*correo*/
       }
       else
       {
@@ -120,7 +188,7 @@ class Admin extends CI_Controller
 	  {
 	    if($this->input->post("submit"))
 	    {
-        
+
         $correo = $this->input->post("correo");
         $num = rand(100,999);
 	    	$fields = array(
@@ -131,21 +199,68 @@ class Admin extends CI_Controller
           'matricula' => $correo,
           'contrasenia' =>  md5('profesor'.$num)
 	      );
-        $add=$this->model_user->insert_user($fields);
+        $add = $this->model_user->insert_user($fields);
 
-        $from = ' SICONU:Credenciales <e32wsaq1@gmail.com>';
-        $to = "Profesor <{$correo}>";
-        $subject = 'Usuario del sistema SICONU';
-        $message = 'Su usuario de ingreso es: '.$correo.', Su contraseña es: profesor'.$num;
-        $headers = 'From: ' . $from;
+        /*correo*/
 
-        if (!mail($to, $subject, $message, $headers))
+        /* If you installed PHPMailer without Composer do this instead: */
+        /*
+        require 'C:\PHPMailer\src\Exception.php';
+        require 'C:\PHPMailer\src\PHPMailer.php';
+        require 'C:\PHPMailer\src\SMTP.php';
+        */
+
+        require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+        require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+        //require '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
+
+        /* Create a new PHPMailer object. Passing TRUE to the constructor enables exceptions. */
+        $mail = new PHPMailer(TRUE);
+
+        /* Open the try/catch block. */
+        try {
+
+          /*configuraciones adicionales*/
+          $mail->IsSMTP();
+
+          //$mail->SMTPDebug = 2;
+          //$mail->Debugoutput = 'html';
+
+          $mail->SMTPSecure = 'tls';
+          $mail->Host = 'smtp.gmail.com';
+          $mail->Port = 587;
+          //or more succinctly:
+          $mail->Host = 'tls://smtp.gmail.com:587';
+
+          $mail->SMTPAuth = true;
+
+          $mail->Username = "e32wsaq1@gmail.com"; // My gmail username
+          $mail->Password = '1qasw23e'; // My Gmail Password
+
+
+          /* Set the mail sender. */
+          $mail->setFrom('e32wsaq1@gmail.com', 'SICONU:Credenciales');
+
+          /* Add a recipient. */
+          $mail->addAddress($correo, 'Profesor');
+
+          /* Set the subject. */
+          $mail->Subject = 'Usuario del sistema SICONU';
+
+          /* Set the mail message body. */
+          $mail->IsHTML(true); // Enviar como HTML
+          $mail->Body = '<font size=4>'.'Su usuario de ingreso es: <b>'.$correo.'</b> y su contraseña es: <b>profesor'.$num.'</b></font>';
+          $mail->AltBody = 'Su usuario de ingreso es: '.$correo.' y su contraseña es: profesor'.$num;
+
+          /* Finally send the mail. */
+          //$mail->send();
+        if($mail->send() and $add==true)
         {
-          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
+          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
         }
         else
         {
-          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
+          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
         }
 
         if($add)
@@ -156,7 +271,28 @@ class Admin extends CI_Controller
         {
           $this->session->set_flashdata('msg', $msg_correo.'<div class="text-center alert alert-danger text-center">Error profesor no añadido</div>');
         }
-	      redirect('admin');
+        redirect('admin');
+           
+
+        }
+        catch (Exception $e)
+        {
+           /* PHPMailer exception. */
+           echo $e->errorMessage();
+          /*Check you have the openssl extension*/
+          //echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+          echo '<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor"> Volver </a>';
+        }
+        catch (\Exception $e)
+        {
+           /* PHP exception (note the backslash to select the global namespace Exception class). */
+           echo $e->getMessage();
+           /*Check you have the openssl extension*/
+           //echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+          echo '<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor"> Volver </a>';           
+        }
+
+        /*correo*/
 	    }
 	    else
 	    {

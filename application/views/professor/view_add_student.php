@@ -46,8 +46,8 @@
       		<hr>
 					<br>
 					<div class="panel-footer text-center">
-						<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
-						<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
+						<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 "value="Guardar" />
+						<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Volver</button></a>
 					</div>
 				</form>
 				<br>
@@ -68,9 +68,8 @@
 				  <hr>
 				  <br>
 				  <div class="panel-footer text-center">
-				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
-				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
-						
+				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 "value="Guardar" />
+				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Volver</button></a>
 				  </div>
 				</form>
 
