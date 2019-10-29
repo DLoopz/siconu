@@ -44,7 +44,7 @@ class Model_daybook extends CI_Model
   }
 
   //registros en los asientos contables
-   //Ver todos los registros de los asientos de la empresa
+  //Ver todos los registros de los asientos de la empresa
   public function get_all_registers($data)
   {
     $this->db->order_by('haber');
@@ -102,4 +102,24 @@ class Model_daybook extends CI_Model
   {
     return $this->db->insert('registro_parcial', $data);
   }
+
+  //estado de la empresa
+  public function get_status($data)
+  {
+    $sql = $this->db->get_where('empresa', $data);
+    return $sql->row();
+  }
+  //activar parcial
+  public function partial($data)
+  {
+    $this->db->where('id_registro', $data['registro_id']);
+    return $this->db->update('registro_asiento', $data);
+  }
+
+  public function get_partial($data)
+  {
+    $sql = $this->db->get_where('registro_asiento', $data);
+    return $sql->result();
+  }
+
 }

@@ -46,13 +46,15 @@
       		<hr>
 					<br>
 					<div class="panel-footer text-center">
-						<a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>professor/show_students"> Volver </a>
+						<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 						<input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 					</div>
 				</form>
 				<br>
 	    </div>
 	  </div>
+
+
 	  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 	    <div class="container">
 	    	<br>
@@ -66,7 +68,7 @@
 				  <hr>
 				  <br>
 				  <div class="panel-footer text-center">
-				  	<a href="<?php echo base_url()?>professor/show_students"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
 						
 				  </div>
@@ -74,6 +76,7 @@
 
 	    </div>
 	  </div>
+
 	</div>
 
 	

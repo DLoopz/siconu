@@ -2,8 +2,19 @@
 <div class="container">
 	<div class="text-center"><h3>Balanza de comprobacion</h3></div>
 	<hr class="line_sep">
+
+	<div class="row">
+    <div class="col-12 text-right">
+        <a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
+        <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
+    </div>
+	</div>
+  <br>
+
 	<h4 class="text-center"><?php echo $exercise->nombre; ?></h4>
 	<br>
+
+
 	<table class="table responsive-md">
 		<thead>
 			<tr>

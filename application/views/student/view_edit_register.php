@@ -12,6 +12,8 @@
     <div class="container">
       <br>
       <h3 class="text-center">Editar Registro</h3>
+      <a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+
       <hr class="line_sep">
 
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro ?>">
@@ -33,8 +35,13 @@
 
         <div class="form-group">
           Cantidad
-          <input type="text" name="cantidad" class="form-control" 
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input type="text" name="cantidad" class="form-control"  placeholder="0.00"
           value="<?php if ($register->debe > 0): echo $register->debe; $band_debe = true; else: echo $register->haber; $band_debe = false; endif ?>">
+          </div>
           <?php echo form_error('cantidad') ?>
         </div>
 

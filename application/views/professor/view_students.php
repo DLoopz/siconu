@@ -11,9 +11,8 @@
   
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
 
-  <!--<a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal2" onclick="eliminar(<?php echo $students->id_grupo;?>)" title="Eliminar Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></a>-->
+  <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#alumnos" title="Eliminar Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></button>
 
-  </br>
   </br>
   <table class="table" id="user-table">
     <thead>
@@ -72,29 +71,25 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function eliminar(id)
-    {
-        $('#eliminar').val(id);
-    }
-</script>
+<?php //modal eliminar grupos ?>
 
-<!-- Modal de confirmación  eliminar todos los alumnos-->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi_modal2">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="alumnos">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-tittle" id="modalTittle">Eliminar Alumnos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                ¿Está seguro de eliminar todos los alumnos?
+                 ¿Está seguro que desea eliminar los alumnos del grupo?
             </div>
             <div class="modal-footer">
-               <form method="POST" action="<?php echo base_url() ?>professor/del_students/<?php echo $id_group ?>">
-                   <input type="hidden" id="eliminar" name="id_alumno"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">
-               </form>
+               <form method="POST" action="<?php echo base_url()?>professor/del_students/<?php echo $id_group; ?>">
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
+                  <input type="submit" name="del_students" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">
+                </form>
             </div>
         </div>
     </div>

@@ -1,26 +1,33 @@
 <div class="container">
+	<div><h3 class="text-center">Esquemas de Mayor</h3></div>
+	<hr class="line_sep">
+	<div class="row">
+		<div class="col-12 text-right">
+      <a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
+      <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
+  	</div>
+	</div>
+	<br>
 
 	<div class="row">
 
 		<?php 
+
+		//no borraar
+
 		$aux_ases = 1;
 		$numero_asiento = array();
-				
 		//echo $asientos[0]->id_asiento;
 		//echo 'num asientos'.count($asientos);
-
 		for ($i=0; $i < count($asientos); $i++) { 
 			$numero_asiento[$asientos[$i]->id_asiento] = $i+1;
 		}
-
 		//print_r($numero_asiento);
 		//echo $numero_asiento[66];
-
 		/*if ($regs->debe>0): ?>
 				<?php echo $numero_asiento[$regs->id_asiento].')'; ?>
 			<?php endif 
 		*/
-
 		?>
 
 		
@@ -49,8 +56,8 @@
 
 						<?php if ($regs->cuenta == $cu->cuenta and $regs->registro_id==NULL): ?>
 							<tr>
-								<td class="border-right">$ <?php echo number_format($regs->debe,2,'.',','); ?></td>
-						    <td class="">$ <?php echo number_format($regs->haber,2,'.',','); ?></td>
+								<td class="border-right text-right">$ <?php echo number_format($regs->debe,2,'.',','); ?></td>
+						    <td class="text-right">$ <?php echo number_format($regs->haber,2,'.',','); ?></td>
 							</tr>
 
 							<?php $total_debe += $regs->debe; ?>
@@ -64,8 +71,8 @@
 
 						<?php if ($parc->cuenta == $cu->cuenta and $parc->registro_id!=NULL): ?>
 							<tr>
-								<td class="border-right ">$ <?php echo number_format($parc->debe,2,'.',','); ?></td>
-						    <td class="">$ <?php echo number_format($parc->haber,2,'.',','); ?></td>
+								<td class="border-right text-right">$ <?php echo number_format($parc->debe,2,'.',','); ?></td>
+						    <td class="text-right">$ <?php echo number_format($parc->haber,2,'.',','); ?></td>
 							</tr>
 
 							<?php $total_debe += $parc->debe; ?>
@@ -78,7 +85,7 @@
 
 					<tr>
 						<th class="  border-right text-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
-						<th class=" ">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
+						<th class=" text-right">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
 					</tr>
 
 					<tr>

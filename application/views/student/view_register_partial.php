@@ -1,13 +1,10 @@
 <div class="container col-md-6">
-	<h3 class="text-center">Ingresar Registro Parcial</h3>
+	<h3 class="text-center">Ingresar Registro Parcial <?php //echo $cuenta; ?></h3>
 	<hr class="line_sep">
 	<div>
 
-    <?php 
-
-
+    <?php
     /*
-  
     //agregar con siguiente vista
 
 		<a href="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
@@ -40,7 +37,12 @@
                     </div>
                     <div class="form-group">
                       Cantidad
-                      <input class="form-control" type="text" name="cantidad" value="<?php echo set_value('cantidad');?>">
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">$</div>
+                        </div>
+                        <input type="text" name="cantidad" class="form-control" placeholder="0.00">
+                      </div>
                       <?php echo form_error('cantidad') ?>
                     </div>
                 </div>

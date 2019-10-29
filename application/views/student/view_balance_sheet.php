@@ -3,6 +3,15 @@
 	setlocale(LC_ALL, 'es_MX');?>
 	<h3 class="text-center">Balance General</h3>
 	<hr class="line_sep">
+
+  <div class="row">
+    <div class="col-12 text-right">
+        <a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
+        <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
+    </div>
+  </div>
+  <br>
+
 	<nav class="nav-fill">
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Formato de Reporte</a>

@@ -55,34 +55,38 @@ class Admin extends CI_Controller
     {
       if($this->input->post("submit"))
       {
+        $fields = array('id_usuario' => $id );
+        $correo = $this->model_user->get_user($fields);
+        $correo = $correo->matricula;
+
         $password = $this->input->post('password');/*md5($this->input->post('password'));*/
         $fields = array(
-        	'id_usuario' => $id,
-        	'contrasenia' => md5($password)
+          'id_usuario' => $id,
+          'contrasenia' => md5($password)
         );
-        $config = Array(
-              'protocol' => 'smtp',
-              'smtp_host' => 'ssl://smtp.googlemail.com',
-              'smtp_port' => 465,
-              'smtp_user' => 'e32wsaq1@gmail.com',
-              'smtp_pass' => '1qasw23e',
-              'mailtype' => 'html',
-              'charset' => 'iso-8859-1',
-              'wordwrap' => TRUE
-        );
-        $this->load->library('email',$config);
         $mod= $this->model_user->update_user($fields);
-        $this->email->from('e32wsaq1@gmail.com', 'SICONU: Credenciales');
-        $this->email->to($correo);
-        $this->email->subject('Usuario del sistema FEP');
-        $this->email->message("Su nueva contraseña es: ".$password);
-        $this->email->send();
-        if($mod){
-          $this->session->set_flashdata('msg', '<div class="text-center alert alert-success">Contraseña editada exitosamente</div');
+
+        $from = ' SICONU:Credenciales <e32wsaq1@gmail.com>';
+        $to = "Profesor <{$correo}>";
+        $subject = 'Usuario del sistema SICONU';
+        $message = "Su nueva contraseña es: ".$password;
+        $headers = 'From: ' . $from;
+
+        if (!mail($to, $subject, $message, $headers))
+        {
+          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
         }
         else
         {
-          $this->session->set_flashdata('msg', '<div class="text-center alert alert-danger">Error contraseña no editada</div');
+          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
+        }
+
+        if($mod){
+          $this->session->set_flashdata('msg', $msg_correo.'<div class="text-center alert alert-success">Contraseña editada exitosamente</div');
+        }
+        else
+        {
+          $this->session->set_flashdata('msg', $msg_correo.'<div class="text-center alert alert-danger">Error contraseña no editada</div');
         }
         redirect('admin');
       }
@@ -116,6 +120,7 @@ class Admin extends CI_Controller
 	  {
 	    if($this->input->post("submit"))
 	    {
+
         $correo = $this->input->post("correo");
         $num = rand(100,999);
 	    	$fields = array(
@@ -127,28 +132,22 @@ class Admin extends CI_Controller
           'contrasenia' =>  md5('profesor'.$num)
 	      );
         $add=$this->model_user->insert_user($fields);
-        $config = array(
-          'protocol'  => 'smtp',
-          'smtp_host' => 'ssl://smtp.googlemail.com',
-          'smtp_port' => 465,
-          'smtp_user' => 'david_lopol@hotmail.com',
-          'smtp_pass' => 'musica1423da',
-          'mailtype'  => 'html',
-          'charset'   => 'utf-8'
-        );
-        $this->email->initialize($config);
-        $this->email->set_mailtype("html");
-        $this->email->set_newline("rn");
-        $this->email->from('dloopz17@gmail.com', 'SICONU: Credenciales');
-        $this->email->to($correo);
-        $this->email->subject('Usuario del sistema FEP');
-        $this->email->message('Su usuario de ingreso es: '.$correo.', Su contraseña es: profesor'.$num);
-        $send=$this->email->send();
-        if ($send) {
-          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
-        }else{
-           $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
+
+        $from = ' SICONU:Credenciales <e32wsaq1@gmail.com>';
+        $to = "Profesor <{$correo}>";
+        $subject = 'Usuario del sistema SICONU';
+        $message = 'Su usuario de ingreso es: '.$correo.', Su contraseña es: profesor'.$num;
+        $headers = 'From: ' . $from;
+
+        if (!mail($to, $subject, $message, $headers))
+        {
+          $msg_correo='<div class="alert alert-danger text-center">Correo no enviado</div>';
         }
+        else
+        {
+          $msg_correo='<div class="alert alert-success text-center">Correo enviado</div>';
+        }
+
         if($add)
         {
           $this->session->set_flashdata('msg', $msg_correo.'<div class="text-center alert alert-success text-center">Profesor añadido exitosamente</div>');

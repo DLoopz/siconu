@@ -33,15 +33,30 @@ class Daybook extends CI_Controller {
     $data['partials']=$this->model_daybook->get_partials($fields);
 		$data['id_empresa']=$id;
     $data['disabled']=false;
+
+
+    $fields = array('id_empresa' => $id );
+    $status = $this->model_daybook->get_status($fields);
+    $newdata = array(
+      'empresa' => $status->estado
+    );
+    $this->session->set_userdata($newdata);
+
+
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_daybook');
 		$this->load->view('foot');
+
 	}
 
 	public function add_entry($id_empresa=null)
 	{
+    if ($this->session->userdata('empresa') == 1) {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">No se puede editar el ejercicio</div>');
+      redirect('daybook/book/'.$id_empresa);
+    }
     //se establecen reglas de validacion
     $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
@@ -82,6 +97,10 @@ class Daybook extends CI_Controller {
 
   public function edit_entry($id_empresa=null,$id_asiento=null)
   {
+    if ($this->session->userdata('empresa') == 1) {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">No se puede editar el ejercicio</div>');
+      redirect('daybook/book/'.$id_empresa);
+    }
     //se establecen reglas de validacion
     $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
@@ -129,6 +148,10 @@ class Daybook extends CI_Controller {
 //-----------funciones para los registros en los asientos
   public function register($id_empresa=null, $id_asiento=null,$edit=null)
 	{
+    if ($this->session->userdata('empresa') == 1) {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">No se puede editar el ejercicio</div>');
+      redirect('daybook/book/'.$id_empresa);
+    }
 		$data['title']="Registros  de Asiento";
 		$fields = array('asiento_id' => $id_asiento);
 		$data['registers']=$this->model_daybook->get_registers($fields);
@@ -246,6 +269,14 @@ class Daybook extends CI_Controller {
         $data['id_asiento']=$id_asiento;
         $data['id_empresa']=$id_empresa;
         $data['accounts']=$accounts;
+
+        // para mostrar la cuenta
+        $fields = array('id_registro' => $id_registro);
+        $cuenta = $this->model_daybook->get_partial($fields);
+        $data['cuenta']= $cuenta->cuenta;
+
+
+
         $this->load->view('head',$data);
         $this->load->view('navbar');
         //$this->load->view('student/view_add_register_partial');
@@ -319,6 +350,8 @@ class Daybook extends CI_Controller {
       $fields = array('registro_id' => $id_registro);
       $data['partials']=$this->model_daybook->get_registers_partial($fields);
       $data['modal'] = 'parciales';
+
+
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('student/view_register_partial');
@@ -327,12 +360,21 @@ class Daybook extends CI_Controller {
     }
     else
     {
+      //para la tabla registro parcial
       $fields = array(
           'registro_id' => $id_registro,
           'concepto' => $this->input->post('concepto'),
           'cantidad' =>$this->input->post('cantidad')
         );
       $add=$this->model_daybook->insert_register_partial($fields);
+
+      $fields = array(
+        'id_registro' => $id_registro,
+        'parcial' => 1
+      );
+      $act_parc = $this->model_daybook->partial($fields);
+
+
       if($add)
       {
         $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
@@ -348,9 +390,6 @@ class Daybook extends CI_Controller {
       redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
     }
   }
-
-
-
 
 
   public function edit_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null)
@@ -393,7 +432,7 @@ class Daybook extends CI_Controller {
         $upd=$this->model_daybook->update_register($fields);
         if($upd)
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro modificado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro modificado correctamente</div>');
         }
         else
         {
@@ -438,6 +477,10 @@ class Daybook extends CI_Controller {
 
   public function delet_entry($id_empresa=null)
   {
+    if ($this->session->userdata('empresa') == 1) {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">No se puede editar el ejercicio</div>');
+      redirect('daybook/book/'.$id_empresa);
+    }
     $fields = array('id_asiento' => $this->input->post('id_entry'));
     $del=$this->model_daybook->delete_entry($fields);
     if($del)
@@ -482,11 +525,13 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
-    $this->form_validation->set_rules('cantidad','cantidad','numeric|required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
     $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
+    $this->form_validation->set_message('numeric', '%s debe ser un número');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
