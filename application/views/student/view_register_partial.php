@@ -3,7 +3,7 @@
 	<hr class="line_sep">
 	<div>
 
-    <?php 
+    <?php
     /*
     //agregar con siguiente vista
 

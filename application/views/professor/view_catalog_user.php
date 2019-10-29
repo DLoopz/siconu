@@ -139,7 +139,7 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url()?>/professor/del_accounts">
                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                  <input type="submit" name="del_cat" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">    
+                  <input type="submit" name="del_cat" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">
                 </form>
             </div>
         </div>

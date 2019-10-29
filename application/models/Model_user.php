@@ -54,5 +54,5 @@ class Model_user extends CI_Model
     $sql = $this->db->get_where('grupos_usuarios', $data);
     return $sql->result();
   }
-  
+
 }
