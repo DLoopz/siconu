@@ -6,9 +6,9 @@
             </h3>
         </div>
         <hr class="line_sep">
-        <div class="alert alert-warning text-center" role="alert">
-            Registro para <?php echo $info->nombre; ?>
-        </div>
+            <div class="alert alert-warning text-center" role="alert">
+                Registro para <?php echo $info->nombre; ?>
+            </div>
         <p class="text-danger">* Campos obligatorios</p>
         <div class="panel-body">
             <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
@@ -18,6 +18,7 @@
                             <b>Seleccione la fecha *</b>
                         </label>
                         <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
+                        <input id="fecha_anterior" type="date" name="fecha_anterior" class="form-control" value="<?php echo $fecha_anterior; ?>" style="display: none;">
                         <?php echo form_error('fecha_sc');?>
                     </div>
 
@@ -32,8 +33,8 @@
                         </div>
                     </div>
 
-                    <div class="form-row" id="content_existencia">
-                        <div class="form-group col-md-8">
+                    <div class="form-group" id="content_existencia">
+                        <div class="form-group">
                             <label for="">
                             <b>Existencia:</b>
                             </label>
@@ -43,13 +44,13 @@
                                 <?php echo form_error('cantidad_existencia') ?>
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group" style="display: none;">
                             <label for="">
                             <b>Existencia actual</b>
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
-                                <input id="existencia_actual" type="text" name="existencia_actual" class="form-control" placeholder="Cantidad en números" value="<?php echo $exis; ?>" disabled>
+                                <input id="existencia_actual" type="text" name="existencia_actual" class="form-control" placeholder="Cantidad en números" value="<?php echo $exis; ?>">
                             </div>
                         </div>
                     </div>
@@ -86,6 +87,7 @@
                                     <div class="input-group-text">$</div>
                                 </div>
                                 <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('cantidad_costos');?>">
+                                <input type="text" class="form-control" id="aux_cu" name="aux_cu" aria-describedby="inputGroupPrepend2" value="<?php echo $costo_unitario;?>" style="display: none;">
                             </div>
                             <?php echo form_error('cantidad_costos') ?>
                         </div>
@@ -232,6 +234,7 @@
 
         if(check4.checked)
         {
+            //alert("Devoluciones sobre compra");
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'block';
             content_costo_unitario.style.display = 'block';
@@ -268,6 +271,13 @@
             content_devoluciones.style.display='none';
         }
 
+        if(check99.checked && check4.checked == false)
+        {
+
+            check10.value = document.getElementById('aux_cu').value;
+            check10.disabled = true;
+        }
+
     }
 
     ///////////////////////////////////////////
@@ -293,7 +303,7 @@
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
 
-        if(ex.value != 0)
+        if(ex.value != '')
         {
             cu.disabled = false;
             en.disabled = false;
@@ -333,10 +343,6 @@
         }
     }
 
-    function validate_radio()
-    {
-
-    }
 </script>
 
 
