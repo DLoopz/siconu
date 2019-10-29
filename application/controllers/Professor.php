@@ -577,7 +577,9 @@ class Professor extends CI_Controller {
   {
     if ($this->input->post('del_cat'))
     {
-      $fields = array('usuario_id' => $this->session->userdata('id_user'));
+      $fields = array(
+        'usuario_id' => $this->session->userdata('id_user')
+      );
       $del = $this->model_account->delete_account($fields);
       if($del){
         $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Catálogo eliminado correctamente</div>');

@@ -39,7 +39,7 @@
     ?>
     <div class="row">
         <div class="col-6">
-            <a href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
+            <a id="add_register" href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
                 <i class="icon-plus-2"></i>
             </a>
         </div>
