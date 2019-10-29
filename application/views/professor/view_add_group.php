@@ -19,9 +19,9 @@
       	</div>
       	<hr><br>
 
-      	<div class="panel-footer text-center">
-      		<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 ">Volver</button></a>
-					<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+      	<div class="panel-footer text-center"> 
+					<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 ">
+					<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn ">Volver</button></a>
 				</div>
 			</form>
 		</div>

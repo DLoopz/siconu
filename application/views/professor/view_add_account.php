@@ -35,16 +35,15 @@
         <div class="text-danger">
           <?php echo form_label('* Campos Obligatorios')?><br>
         </div>
+        <hr>
         <br>
         <div class="panel-footer text-center">
-          <a href="<?php echo base_url()?>professor/account_catalog"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
-  				<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
-        </div>
-  				
+  				<input type="submit" name="nombre_grupo" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 ">
+          <a href="<?php echo base_url()?>professor/account_catalog"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0 margin_left_btn">Volver</button></a>
+        </div>	
 			</form>
 		</div>
 	</div>
-	<hr>
 </div>	
 <script type="text/javascript">
   function isCapital(){

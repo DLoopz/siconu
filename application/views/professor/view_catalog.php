@@ -1,9 +1,9 @@
 <div class="container">
-	<a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+	<a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 	<h3 class="text-center">Creación de catálogo de cuentas</h3>
 	<hr class="line_sep">
 	<p class="text-center alert alert-warning">A continuación le presentamos algunas cuentas que podrían ser útiles al crear su catálogo.<br>
-	Seleccione al menos una cuenta y pulse en crear para posteriormente agregar sus cuentas personalizadas.</p>
+	Seleccione al menos una cuenta y pulse en crear para agregar sus propias cuentas.</p>
 	<div class="">
 		<?php
         if($this->session->flashdata('msg'))
@@ -53,8 +53,9 @@
 			</div>
 
 		<div class="panel-footer text-center">
-			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Volver</button></a>
-			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0 ">
+			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0 margin_left_btn">Volver</button></a>
+			
 		</div >
 		</form>
 	</div><br><br>

@@ -8,7 +8,7 @@
     ?>
   </div>
   <div class="">
-    <a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+    <a href="<?php echo base_url('professor'); ?>" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
     <a href="<?php echo base_url('professor/add_account'); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Cuenta"><i class="icon-plus-2"></i></a>
 
@@ -114,8 +114,8 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_account">
                   <input type="hidden" id="eliminar" name="id_catalogo_usuario"></input>
-                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                  <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">    
+                  <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">    
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0  margin_left_modal" data-dismiss="modal" value="No">
                 </form>
             </div>
         </div>
@@ -129,17 +129,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-tittle" id="modalTittle">Eliminar Catálogo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                  ¿Está seguro que desea eliminar todo el catálogo?
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url()?>/professor/del_accounts">
-                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                  <input type="submit" name="del_cat" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">
+                  <input type="submit" name="del_cat" class="btn btn-outline-danger my-2 my-sm-0" value="Si">  
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">  
                 </form>
             </div>
         </div>

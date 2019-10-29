@@ -164,7 +164,7 @@ class Professor extends CI_Controller {
 
       $del = $this->model_group->delete_groups();
       if($del){
-        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupos eliminado correctamente</div>');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupos eliminados correctamente</div>');
       }else{
         $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error grupo no eliminado </div>');
       }

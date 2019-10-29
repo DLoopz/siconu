@@ -15,9 +15,9 @@
     </div>
     <hr><br>
     <div class="panel-footer text-center">
-      <a href="<?php echo base_url()?>admin"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 separacion">Volver</button></a>
-      <input class="btn btn-outline-success my-2 my-sm-0 margin_left_btn" type="submit" value="Agregar" name="submit" required> 
-    </div>       
+      <input class="btn btn-outline-success my-2 my-sm-0 " type="submit" value="Agregar" name="submit" required> 
+      <a href="<?php echo base_url()?>admin"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 separacion margin_left_btn">Volver</button></a>
+      </div>       
   </form>
 </div>
   

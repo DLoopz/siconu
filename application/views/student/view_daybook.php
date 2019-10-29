@@ -111,8 +111,8 @@
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delet_entry/<?php echo $id_empresa; ?>">
                    <input type="hidden" id="eliminar" name="id_entry"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">                   
+                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0  margin_left_modal" data-dismiss="modal" value="No">                   
                </form>
             </div>
         </div>
