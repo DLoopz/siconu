@@ -7,13 +7,12 @@
     if($this->session->flashdata('msg'))
       echo $this->session->flashdata('msg');
   ?>
-  <a href="<?php echo base_url() ?>professor " class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
+  <a href="<?php echo base_url() ?>professor " class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
   
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
 
-  <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#alumnos" title="Eliminar Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></button>
-
-  </br>
+  <button class="btn btn-outline-danger my-2 my-sm-0 " data-toggle="modal" data-target="#alumnos" title="Eliminar Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></button>
+  <br></br>
   <table class="table" id="user-table">
     <thead>
       <tr>
@@ -33,7 +32,7 @@
         <td><?php echo $student->matricula ?></td>
         <td>
           <!--EDITAR-->
-            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil"></i></em></strong></a>
+            <a class="btn btn-outline-info my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil"></i></em></strong></a>
           <!--EDITAR password-->
           <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit"></i></em></strong></a>
           <!-- eliminar confirmación -->
@@ -63,8 +62,8 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_student/<?php echo $id_group ?>">
                    <input type="hidden" id="eliminar" name="id_alumno"></input>
-                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 margin_left_modal" value="Si">                   
+                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 " value="Si">    
+                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">
                </form>
             </div>
         </div>

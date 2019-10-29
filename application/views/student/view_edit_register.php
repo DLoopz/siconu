@@ -12,7 +12,7 @@
     <div class="container">
       <br>
       <h3 class="text-center">Editar Registro</h3>
-      <a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
+      <a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
       <hr class="line_sep">
 
@@ -61,8 +61,8 @@
         </div>
         <br>
         <div class="panel-footer text-center">
-          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-          <input type="submit" name="add_resgistry" value="Actualizar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
+          <input type="submit" name="add_resgistry" value="Actualizar" class="btn btn-outline-success my-2 my-sm-0 ">
+          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Cancelar</button></a>
         </div>
 
       </form>

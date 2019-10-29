@@ -11,7 +11,7 @@ class Stock_card extends CI_Controller {
 		$this->load->view('student/view_stock_card');
 		$this->load->view('foot');
 	}
-    
+
     public function list_sc($id_empresa = null)
     {
 		$data['title']="Tarjeta de Almacén";
@@ -61,17 +61,20 @@ class Stock_card extends CI_Controller {
 		$this->load->view('student/view_stock_card');
 		$this->load->view('foot');
 	}
-    
+
     public function add_register_card($id_empresa = null)
     {
-        // REGLAS
-        $this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
-        $this->form_validation->set_rules('referencia', 'referencia', 'required');
-
         $fields = array('empresa_id' => $id_empresa);
         $ultimo_id = $this->model_stock_card->get_last_id($fields);
         $fields = array('id_tarjeta' => intval($ultimo_id->id));
         $existencia_antes = $this->model_stock_card->get_existencia($fields);
+
+        // REGLAS
+        //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
+        $this->form_validation->set_rules('fecha_sc', 'fecha', 'callback_date_check', 'required');
+        $this->form_validation->set_rules('referencia', 'referencia', 'required');
+
+
         if($existencia_antes == NULL)
         {
             $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
@@ -83,16 +86,19 @@ class Stock_card extends CI_Controller {
             /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
                 $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
         }
-        $this->form_validation->set_rules('cantidad_costos', 'cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+        if($this->input->post('unidades') != "salida")
+        {
+            $this->form_validation->set_rules('cantidad_costos', 'cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+        }
 
         // MENSAJE
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $this->form_validation->set_message('numeric', 'El campo %s debe ser numérico');
         $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 1 caracteres');
         $this->form_validation->set_message('max_length', 'El campo %s no debe de contener mas de 11 caracteres');
-        
+
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-        
+
         if(!$this->form_validation->run())
         {
             $data['title']="Alumno: Nuevo Registro de Tarjerta de Almacén";
@@ -104,10 +110,19 @@ class Stock_card extends CI_Controller {
             $ultimo_id = $this->model_stock_card->get_last_id($fields);
             $fields = array('id_tarjeta' => intval($ultimo_id->id));
             $existencia_antes = $this->model_stock_card->get_existencia($fields);
+
             if($existencia_antes == NULL)
-                $data['exis'] = 0;
+            {
+                $data['exis'] = '';
+                $data['fecha_anterior'] = '';
+                $data['$costo_unitario'] = '';
+            }
             else
+            {
                 $data['exis'] = $existencia_antes->existencia;
+                $data['fecha_anterior'] = $existencia_antes->fecha;
+                $data['costo_unitario'] = $existencia_antes->promedio;
+            }
 
 			$this->load->view('head',$data);
 			$this->load->view('navbar');
@@ -168,11 +183,12 @@ class Stock_card extends CI_Controller {
                         'entradas' => 0,
                         'salidas' => $this->input->post('cantidad_unidades'),
                         'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
-                        'unitario' => $this->input->post('cantidad_costos'),
-                        'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                        //'unitario' => $this->input->post('cantidad_costos'),
+                        'unitario' => $existencia_antes->promedio,
+                        'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) / ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades'))),
                         'debe' => 0,
-                        'haber' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
-                        'saldo' => floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        'haber' => $this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio),
+                        'saldo' => floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))
                     );
                 }
                 switch($this->input->post('otras_operaciones'))
@@ -260,7 +276,7 @@ class Stock_card extends CI_Controller {
 
                 }
             }
-            
+
             $info = $this->model_stock_card->insert_ta($fields);
             if($info)
             {
@@ -287,4 +303,41 @@ class Stock_card extends CI_Controller {
         }
         redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
     }
+
+    public function date_check($str)
+    {
+        echo('FECHA RECIBIDA: '.$str);
+        echo('FECHA IMPUT: '.$this->input->post('fecha_anterior'));
+
+        if($str == '' || $str == '0000-00-00')
+        {
+            $this->form_validation->set_message('date_check', 'El campo fecha es obligatorio');
+            return FALSE;
+        }
+        else
+        {
+            if($this->input->post('fecha_anterior'))
+            {
+                if($this->input->post('fecha_anterior') > ($str))
+                {
+                    $this->form_validation->set_message('date_check', 'No puede ser una fecha anterior, verifique de nuevo.');
+                    return FALSE;
+                }
+                else
+                {
+                    return TRUE;
+                }
+            }else
+            {
+                if($str == '' || $str == '0000-00-00')
+                {
+                    $this->form_validation->set_message('date_check', 'El campo fecha es obligatorio');
+                    return FALSE;
+                }else
+                    return TRUE;
+            }
+        }
+
+    }
+
 }

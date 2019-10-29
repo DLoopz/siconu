@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 01-10-2019 a las 12:55:52
--- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
--- Versión de PHP: 7.2.19-0ubuntu0.18.04.2
+-- Tiempo de generación: 28-10-2019 a las 14:48:53
+-- Versión del servidor: 5.7.26-0ubuntu0.18.10.1
+-- Versión de PHP: 7.2.19-0ubuntu0.18.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `siconu`
 --
-DROP DATABASE IF EXISTS `siconu`;
 CREATE DATABASE IF NOT EXISTS `siconu` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `siconu`;
 
@@ -29,7 +28,6 @@ USE `siconu`;
 -- Estructura de tabla para la tabla `asiento`
 --
 
-DROP TABLE IF EXISTS `asiento`;
 CREATE TABLE `asiento` (
   `id_asiento` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
@@ -43,7 +41,6 @@ CREATE TABLE `asiento` (
 -- Estructura de tabla para la tabla `catalogo_estandar`
 --
 
-DROP TABLE IF EXISTS `catalogo_estandar`;
 CREATE TABLE `catalogo_estandar` (
   `id_catalogo_estandar` int(11) NOT NULL,
   `tipo_id` int(11) NOT NULL,
@@ -83,26 +80,26 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 (26, 2, 1, 'Intereses cobrados por anticipado'),
 (27, 2, 2, 'Hipotecas por pagar'),
 (28, 2, 2, 'Documentos por pagar largo plazo'),
-(31, 3, 1, 'capital ganado'),
-(32, 3, 1, 'capital contribuido'),
+(31, 3, 1, 'Capital ganado'),
+(32, 3, 1, 'Capital contribuido'),
 (33, 4, 1, 'Ventas'),
 (34, 4, 2, 'Devoluciones sobre compra'),
 (35, 4, 3, 'Rebajas sobre compra'),
 (36, 4, 3, 'Descuentos sobre compra'),
-(37, 4, 4, 'Productos  Financieros'),
-(38, 4, 5, 'Otros Productos/Otros Ingresos'),
+(37, 4, 4, 'Productos  financieros'),
+(38, 4, 5, 'Otros productos/Otros ingresos'),
 (39, 5, 1, 'Devoluciones  sobre ventas'),
 (40, 5, 1, 'Rebajas sobre ventas'),
 (41, 5, 1, 'Descuentos sobre venta'),
 (42, 5, 2, 'Compras'),
 (43, 5, 2, 'Gastos de Compra'),
 (44, 5, 3, 'Costo de ventas'),
-(45, 5, 4, 'Inventario Inicial'),
-(46, 5, 4, 'Inventario Final'),
-(47, 5, 5, 'Gastos de Administración'),
+(45, 5, 4, 'Inventario inicial'),
+(46, 5, 4, 'Inventario final'),
+(47, 5, 5, 'Gastos de administración'),
 (48, 5, 6, 'Gastos de venta'),
-(49, 5, 7, 'Gastos Financieros'),
-(51, 5, 8, 'Otros Gastos');
+(49, 5, 7, 'Gastos financieros'),
+(51, 5, 8, 'Otros gastos');
 
 -- --------------------------------------------------------
 
@@ -110,7 +107,6 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 -- Estructura Stand-in para la vista `catalogo_grupo`
 -- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `catalogo_grupo`;
 CREATE TABLE `catalogo_grupo` (
 `id_catalogo_usuario` int(11)
 ,`tipo_id` int(11)
@@ -126,7 +122,6 @@ CREATE TABLE `catalogo_grupo` (
 -- Estructura de tabla para la tabla `catalogo_usuario`
 --
 
-DROP TABLE IF EXISTS `catalogo_usuario`;
 CREATE TABLE `catalogo_usuario` (
   `id_catalogo_usuario` int(11) NOT NULL,
   `tipo_id` int(11) NOT NULL,
@@ -141,7 +136,6 @@ CREATE TABLE `catalogo_usuario` (
 -- Estructura de tabla para la tabla `clasificacion_cuenta`
 --
 
-DROP TABLE IF EXISTS `clasificacion_cuenta`;
 CREATE TABLE `clasificacion_cuenta` (
   `id_clasificacion` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -161,7 +155,6 @@ INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `empresa`
 --
 
-DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id_empresa` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
@@ -175,7 +168,6 @@ CREATE TABLE `empresa` (
 -- Estructura de tabla para la tabla `grupo`
 --
 
-DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -187,7 +179,6 @@ CREATE TABLE `grupo` (
 -- Estructura Stand-in para la vista `grupos_usuarios`
 -- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `grupos_usuarios`;
 CREATE TABLE `grupos_usuarios` (
 `id_usuario_grupo` int(11)
 ,`usuario_id` int(11)
@@ -206,7 +197,6 @@ CREATE TABLE `grupos_usuarios` (
 -- Estructura Stand-in para la vista `parcial`
 -- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `parcial`;
 CREATE TABLE `parcial` (
 `id_registro` int(11)
 ,`asiento_id` int(11)
@@ -219,7 +209,7 @@ CREATE TABLE `parcial` (
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` double
+,`cantidad` float
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -232,7 +222,6 @@ CREATE TABLE `parcial` (
 -- Estructura Stand-in para la vista `rayado_diario`
 -- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `rayado_diario`;
 CREATE TABLE `rayado_diario` (
 `id_asiento` int(11)
 ,`empresa_id` int(11)
@@ -254,7 +243,6 @@ CREATE TABLE `rayado_diario` (
 -- Estructura de tabla para la tabla `registro_asiento`
 --
 
-DROP TABLE IF EXISTS `registro_asiento`;
 CREATE TABLE `registro_asiento` (
   `id_registro` int(11) NOT NULL,
   `asiento_id` int(11) NOT NULL,
@@ -272,12 +260,11 @@ CREATE TABLE `registro_asiento` (
 -- Estructura de tabla para la tabla `registro_parcial`
 --
 
-DROP TABLE IF EXISTS `registro_parcial`;
 CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` double NOT NULL
+  `cantidad` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -286,7 +273,6 @@ CREATE TABLE `registro_parcial` (
 -- Estructura de tabla para la tabla `tarjeta_almacen`
 --
 
-DROP TABLE IF EXISTS `tarjeta_almacen`;
 CREATE TABLE `tarjeta_almacen` (
   `id_tarjeta` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
@@ -295,11 +281,11 @@ CREATE TABLE `tarjeta_almacen` (
   `entradas` int(11) NOT NULL,
   `salidas` int(11) NOT NULL,
   `existencia` int(11) NOT NULL,
-  `unitario` double NOT NULL,
-  `promedio` double NOT NULL,
-  `debe` double NOT NULL,
-  `haber` double NOT NULL,
-  `saldo` double NOT NULL
+  `unitario` float NOT NULL,
+  `promedio` float NOT NULL,
+  `debe` float NOT NULL,
+  `haber` float NOT NULL,
+  `saldo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -308,7 +294,6 @@ CREATE TABLE `tarjeta_almacen` (
 -- Estructura de tabla para la tabla `tipo_cuenta`
 --
 
-DROP TABLE IF EXISTS `tipo_cuenta`;
 CREATE TABLE `tipo_cuenta` (
   `id_tipo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -321,9 +306,9 @@ CREATE TABLE `tipo_cuenta` (
 INSERT INTO `tipo_cuenta` (`id_tipo`, `nombre`) VALUES
 (1, 'Activo'),
 (2, 'Pasivo'),
-(3, 'Capital contable'),
-(4, 'Inventarios Acredores'),
-(5, 'Inventarios Deudores');
+(3, 'Capital Contable'),
+(4, 'Cuenta de Resultados Acreedores'),
+(5, 'Cuenta de Resultados Deudores');
 
 -- --------------------------------------------------------
 
@@ -331,7 +316,6 @@ INSERT INTO `tipo_cuenta` (`id_tipo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `rol` int(1) NOT NULL DEFAULT '3',
@@ -355,7 +339,6 @@ INSERT INTO `usuario` (`id_usuario`, `rol`, `nombre`, `apellido_paterno`, `apell
 -- Estructura de tabla para la tabla `usuario_grupo`
 --
 
-DROP TABLE IF EXISTS `usuario_grupo`;
 CREATE TABLE `usuario_grupo` (
   `id_usuario_grupo` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,

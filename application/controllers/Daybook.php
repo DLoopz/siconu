@@ -34,10 +34,10 @@ class Daybook extends CI_Controller {
 		$data['id_empresa']=$id;
     $data['disabled']=false;
 
-    
+
     $fields = array('id_empresa' => $id );
     $status = $this->model_daybook->get_status($fields);
-    $newdata = array(    
+    $newdata = array(
       'empresa' => $status->estado
     );
     $this->session->set_userdata($newdata);
@@ -48,7 +48,7 @@ class Daybook extends CI_Controller {
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_daybook');
 		$this->load->view('foot');
-  
+
 	}
 
 	public function add_entry($id_empresa=null)

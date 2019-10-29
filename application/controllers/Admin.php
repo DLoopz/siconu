@@ -58,7 +58,7 @@ class Admin extends CI_Controller
         $fields = array('id_usuario' => $id );
         $correo = $this->model_user->get_user($fields);
         $correo = $correo->matricula;
-        
+
         $password = $this->input->post('password');/*md5($this->input->post('password'));*/
         $fields = array(
           'id_usuario' => $id,
@@ -120,7 +120,7 @@ class Admin extends CI_Controller
 	  {
 	    if($this->input->post("submit"))
 	    {
-        
+
         $correo = $this->input->post("correo");
         $num = rand(100,999);
 	    	$fields = array(

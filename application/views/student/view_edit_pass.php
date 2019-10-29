@@ -19,9 +19,8 @@
         <?php echo form_error('password_c');?>
       </div>
       <div class="panel-footer text-center">
-        <a class="btn btn-outline-primary my-2 my-sm-0" href="<?php echo base_url() ?>student"> Volver </a>
-        <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn"value="Guardar" />
-        
+         <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0"value="Guardar" />
+        <a class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" href="<?php echo base_url() ?>student"> Volver </a>
       </div>
     </form>    
   </div>
