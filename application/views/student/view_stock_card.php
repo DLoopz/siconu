@@ -10,14 +10,14 @@
         <?php
             if($terminar == 0)
             {?>
+
+                <?php if ($this->session->userdata('rol')==3) { ?>
                 <div class="col-6">
                     <a id="add_register" href="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Nuevo Registro">
                         <i class="icon-plus-2"></i>
                     </a>
                 </div>
-                <div id="volver" class="col-6 text-right">
-                    <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Empresas"><i class="icon-home-1"></i></a>
-                </div>
+            <?php } ?>
             <?php}else
             {?>
             <?php
@@ -45,9 +45,10 @@
             <thead>
                 <tr class="">
                     <th colspan="2" class="text-center"></th>
-                    <th colspan="3" class="text-center">Unidades</th>
+                    <th colspan="3" class="text-center td-l">Unidades</th>
                     <th colspan="2" class="text-center">Costos</th>
                     <th colspan="3" class="text-center">Valores</th>
+                    <th></th>
                 </tr>
                 <tr>
                     <th scope="col">Fecha</th>
