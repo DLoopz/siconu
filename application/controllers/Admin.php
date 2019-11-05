@@ -92,19 +92,20 @@ class Admin extends CI_Controller
           //$mail->Debugoutput = 'html';
 
           $mail->SMTPSecure = 'tls';
-          $mail->Host = 'smtp.gmail.com';
+          $mail->Host = 'laahui.novauniversitas.edu.mx';
           $mail->Port = 587;
+          
           //or more succinctly:
-          $mail->Host = 'tls://smtp.gmail.com:587';
+          //$mail->Host = 'tls://smtp.gmail.com:587';
 
           $mail->SMTPAuth = true;
 
-          $mail->Username = "e32wsaq1@gmail.com"; // My gmail username
-          $mail->Password = '1qasw23e'; // My Gmail Password
+          $mail->Username = "siconu@novauniversitas.edu.mx"; // My gmail username
+          $mail->Password = 'sMg8wXLEGg6'; // My Gmail Password
 
 
           /* Set the mail sender. */
-          $mail->setFrom('e32wsaq1@gmail.com', 'SICONU:Credenciales');
+          $mail->setFrom('siconu@novauniversitas.edu.mx', 'SICONU:Credenciales');
 
           /* Add a recipient. */
           $mail->addAddress($correo, 'Profesor');
@@ -227,19 +228,20 @@ class Admin extends CI_Controller
           //$mail->Debugoutput = 'html';
 
           $mail->SMTPSecure = 'tls';
-          $mail->Host = 'smtp.gmail.com';
+          $mail->Host = 'laahui.novauniversitas.edu.mx';
           $mail->Port = 587;
+          
           //or more succinctly:
-          $mail->Host = 'tls://smtp.gmail.com:587';
+          //$mail->Host = 'tls://smtp.gmail.com:587';
 
           $mail->SMTPAuth = true;
 
-          $mail->Username = "e32wsaq1@gmail.com"; // My gmail username
-          $mail->Password = '1qasw23e'; // My Gmail Password
+          $mail->Username = "siconu@novauniversitas.edu.mx"; // My gmail username
+          $mail->Password = 'sMg8wXLEGg6'; // My Gmail Password
 
 
           /* Set the mail sender. */
-          $mail->setFrom('e32wsaq1@gmail.com', 'SICONU:Credenciales');
+          $mail->setFrom('siconu@novauniversitas.edu.mx', 'SICONU:Credenciales');
 
           /* Add a recipient. */
           $mail->addAddress($correo, 'Profesor');
