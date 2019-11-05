@@ -5,7 +5,9 @@
 	  if($this->session->flashdata('msg'))
 	    echo $this->session->flashdata('msg');
 	?>
+	<?php if ($this->session->userdata('rol')==3) { ?>
 	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Ejercicio"><i class="icon-plus-2"></i></a>
+	<?php } ?>
 	<br><br>
 	<div class="table-responsive-md">
 		<table class="table table-hover" id="user-table">
@@ -26,10 +28,12 @@
 	          <td><?php echo $exercise->nombre;?></td>
 	          <td><?php if (!$exercise->estado){ echo '<div class="text-success">Abierto</div>';} else{ echo '<div class="text-danger">Cerrado</div>';}?></td>
 	          <td>
+	          	<?php if ($this->session->userdata('rol')==3) { ?>
           		<!-- editar ejercicio -->
               <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/edit_exercise/<?php echo $exercise->id_empresa;?>" title="Editar Ejercicio"><strong><em><i class="icon-edit"></i></em></strong></a>
 	            <!-- eliminar ejercicio -->
               <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $exercise->id_empresa;?>)" href="" title="Eliminar Ejercicio"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <?php } ?>
               <!--editar password ejercicio-->
 	            <a class="btn btn-outline-info my-2 my-sm-0 " href="<?php echo base_url() ?>daybook/book/<?php echo $exercise->id_empresa;?>" title="Administrar Ejercicio"><strong><em><i class="icon-eye"></i></em></strong></a>
 	          </td>

@@ -9,7 +9,7 @@ class Professor extends CI_Controller {
     {
       redirect('');
     }
-    if ($this->session->userdata('rol') != 2)
+    if ($this->session->userdata('rol') != 2 )
     {
       redirect('');
     }
