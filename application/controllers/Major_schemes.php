@@ -66,6 +66,9 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
     $data['parciales'] = $this->model_schemes->get_partials($fields);
     $data['id_empresa'] = $id_empresa;
     
+    $data['catalog']=$this->model_account->get_std_accounts();
+
+    
     $this->load->view('head',$data);
     $this->load->view('navbar');
     $this->load->view('student/nabvar_options');
