@@ -84,6 +84,16 @@ class Model_stock_card extends CI_Model
         return $this->db->delete('tarjeta_almacen', $data);
     }
 
+    public function terminar($id_tarjeta)
+    {
+        echo "ID_TARJETA: ".$id_tarjeta;
+        //$sql = $this->db->query("SELECT min(id_tarjeta) as id_tarjeta FROM tarjeta_almacen");
+        $sql = $this->db->query("UPDATE tarjeta_almacen SET terminar = 1 WHERE tarjeta_almacen.id_tarjeta = $id_tarjeta");
+        return $sql;
+        //$result = $this->db->query($sql);
+        //return $result->row()->id_tarjeta;
+    }
+
     public function get_ii()
     {
         $sql = $this->db->query("SELECT min(id_tarjeta) as id_tarjeta FROM tarjeta_almacen");

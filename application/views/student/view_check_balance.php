@@ -23,7 +23,7 @@
 				<th>Cargo</th>
 				<th>Abono</th>
 				<th>Saldo deudor</th>
-				<th>Saldo acredor</th>
+				<th>Saldo acreedor</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -559,9 +559,12 @@ class Professor extends CI_Controller {
 
   public function del_account()
   {
-    $id_user = $this->session->userdata('id_user');
-    $id = $this->input->post("id_catalogo_usuario");
+    $id_user = $this->session->userdata('id_user'); //el profe
+
+    $id = $this->input->post("id_catalogo_usuario"); // el catal del usuario de l vista
     $fields = array('id_catalogo_usuario' => $id, 'usuario_id' => $id_user);
+    
+
 
     $del=$this->model_account->delete_account($fields);
 
@@ -571,21 +574,22 @@ class Professor extends CI_Controller {
       $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error, la cuenta esta siendo usada</div>');
     }
     redirect('professor/account_catalog', 'refresh');
+    
   }
 
-  public function del_accounts()
+  public function del_catalog()
   {
     if ($this->input->post('del_cat'))
     {
       $fields = array(
-        'usuario_id' => $this->session->userdata('id_user')
+        'usuario_id' => $this->session->userdata('id_user'),
       );
-      $del = $this->model_account->delete_account($fields);
+      $del = $this->model_account->delete_catalog($fields);
       if($del){
         $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Catálogo eliminado correctamente</div>');
         redirect('professor/create_account_catalog');
       }else{
-        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error catálogo no eliminado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error catálogo no eliminado, hay cuentas que pueden estar siendo usadas</div>');
         redirect('professor/account_catalog');
       }
     }

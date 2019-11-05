@@ -134,7 +134,7 @@
                  ¿Está seguro que desea eliminar todo el catálogo?
             </div>
             <div class="modal-footer">
-               <form method="POST" action="<?php echo base_url()?>/professor/del_accounts">
+               <form method="POST" action="<?php echo base_url()?>professor/del_catalog">
                   <input type="submit" name="del_cat" class="btn btn-outline-danger my-2 my-sm-0" value="Si">  
                   <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">  
                 </form>

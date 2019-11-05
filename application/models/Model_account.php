@@ -29,6 +29,25 @@ class Model_account extends CI_Model
       return $this->db->delete( 'catalogo_usuario' , $data );
     }
   }
+
+  public function delete_catalog($data)
+  {
+    
+    $sql = $this->db->query("
+      SELECT * FROM catalogo_usuario ca
+      JOIN registro_asiento ra
+      ON ca.id_catalogo_usuario = ra.catalogo_usuario_id and ca.usuario_id = {$data['usuario_id']}
+    ");
+    if ($sql->num_rows()>0) {
+      return false;
+    }
+    else
+    {
+      return $this->db->delete( 'catalogo_usuario' , $data );
+    }
+  }
+
+
   //Actualizar cuentas
   public function update_account($data)
   {
