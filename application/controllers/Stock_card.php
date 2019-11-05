@@ -29,7 +29,7 @@ class Stock_card extends CI_Controller {
             $data['ultimo'] = $registro_antes->id_tarjeta;
             if($registro_antes->entradas != 0 || $registro_antes->salidas != 0)
             {
-                $data['terminar'] = 1;
+                $data['terminar'] = $registro_antes->terminar;
 
                 $fields = array('empresa_id' => $id_empresa);
                 $primer_id = $this->model_stock_card->get_first_id($fields);
@@ -47,7 +47,7 @@ class Stock_card extends CI_Controller {
                 $data['if'] = $if;
                 $data['vendido'] = $vendido;
             }else
-                $data['terminar'] = 0;
+                $data['terminar'] = $registro_antes->terminar;
         }
         else
         {
@@ -115,7 +115,7 @@ class Stock_card extends CI_Controller {
             {
                 $data['exis'] = '';
                 $data['fecha_anterior'] = '';
-                $data['$costo_unitario'] = '';
+                $data['costo_unitario'] = '';
             }
             else
             {
@@ -304,11 +304,23 @@ class Stock_card extends CI_Controller {
         redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
     }
 
+    public function terminar($id_empresa=null)
+    {
+        $fields = $this->input->post('id_terminar');
+        $delete_register = $this->model_stock_card->terminar($fields);
+        if($delete_register)
+        {
+            $this->session->set_flashdata('msg','<div class="alert alert-success"> A continuación se muestra el resultado</div>');
+        }
+        else
+        {
+            $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error al mostrar el resultado</div>');
+        }
+        redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
+    }
+
     public function date_check($str)
     {
-        echo('FECHA RECIBIDA: '.$str);
-        echo('FECHA IMPUT: '.$this->input->post('fecha_anterior'));
-
         if($str == '' || $str == '0000-00-00')
         {
             $this->form_validation->set_message('date_check', 'El campo fecha es obligatorio');
@@ -320,7 +332,8 @@ class Stock_card extends CI_Controller {
             {
                 if($this->input->post('fecha_anterior') > ($str))
                 {
-                    $this->form_validation->set_message('date_check', 'No puede ser una fecha anterior, verifique de nuevo.');
+                    //$this->form_validation->set_message('date_check', 'No puede ser una fecha anterior, verifique de nuevo.');
+                    $this->form_validation->set_message('date_check', 'La fecha debe ser posterior al del último movimiento realizado, verifique de nuevo.');
                     return FALSE;
                 }
                 else
