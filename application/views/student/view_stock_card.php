@@ -81,7 +81,7 @@
                         <td>
                             <!-- Eliminar registro -->
                             <?php
-                                if($ultimo == $sc->id_tarjeta && $terminar == 0)
+                                if($ultimo == $sc->id_tarjeta and $terminar == 0)
                                 {?>
                                     <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                                 <?php}else
@@ -96,20 +96,16 @@
             </tbody>
         </table>
 
-        <?php
-            if($terminar == 0)
-            {?>
+        <?php if (isset($sc)){?>
+            <?php if ($terminar == 1 or $btn_end == 1){?>
                 <div class="form-group text-center">
 
                     <a id="_terminar" class="btn btn-outline-info" href="" data-toggle="modal" data-target="#modal_sc_terminar" onclick="terminar(<?php echo $sc->id_tarjeta;?>)" title="Terminar">Terminar</a>
 
                 </div>
-            <?php}else
-            {?>
-            <?php
-               echo '';
-            }
-        ?>
+            <?php } ?>
+        <?php } ?>
+
     </div>
     <?php if (!isset($sc)){?>
 		<div class="text-center">

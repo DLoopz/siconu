@@ -27,9 +27,11 @@ class Stock_card extends CI_Controller {
         if($registro_antes)
         {
             $data['ultimo'] = $registro_antes->id_tarjeta;
+            echo("Último registro: ".$registro_antes->id_tarjeta);
             if($registro_antes->entradas != 0 || $registro_antes->salidas != 0)
             {
                 $data['terminar'] = $registro_antes->terminar;
+                $data['btn_end'] = 1;
 
                 $fields = array('empresa_id' => $id_empresa);
                 $primer_id = $this->model_stock_card->get_first_id($fields);
@@ -47,12 +49,16 @@ class Stock_card extends CI_Controller {
                 $data['if'] = $if;
                 $data['vendido'] = $vendido;
             }else
+            {
+                $data['btn_end'] = 0;
                 $data['terminar'] = $registro_antes->terminar;
+            }
         }
         else
         {
             $data['ultimo'] = null;
             $data['terminar'] = 0;
+            $data['btn_end'] = 0;
         }
 
 		$this->load->view('head',$data);
