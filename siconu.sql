@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 28-10-2019 a las 14:48:53
--- Versión del servidor: 5.7.26-0ubuntu0.18.10.1
--- Versión de PHP: 7.2.19-0ubuntu0.18.10.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-11-2019 a las 18:27:00
+-- Versión del servidor: 10.1.40-MariaDB
+-- Versión de PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -55,7 +57,7 @@ CREATE TABLE `catalogo_estandar` (
 INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificacion_id`, `nombre`) VALUES
 (1, 1, 1, 'Caja'),
 (2, 1, 1, 'Bancos'),
-(3, 1, 1, 'Mercancías'),
+(3, 1, 1, 'Almacén/Mercancías'),
 (5, 1, 1, 'Clientes'),
 (6, 1, 1, 'Documentos por cobrar'),
 (7, 1, 1, 'Deudores diversos'),
@@ -80,7 +82,7 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 (26, 2, 1, 'Intereses cobrados por anticipado'),
 (27, 2, 2, 'Hipotecas por pagar'),
 (28, 2, 2, 'Documentos por pagar largo plazo'),
-(31, 3, 1, 'Capital ganado'),
+(31, 3, 1, 'Capital ganado '),
 (32, 3, 1, 'Capital contribuido'),
 (33, 4, 1, 'Ventas'),
 (34, 4, 2, 'Devoluciones sobre compra'),
@@ -285,7 +287,8 @@ CREATE TABLE `tarjeta_almacen` (
   `promedio` float NOT NULL,
   `debe` float NOT NULL,
   `haber` float NOT NULL,
-  `saldo` float NOT NULL
+  `saldo` float NOT NULL,
+  `terminar` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -480,61 +483,73 @@ ALTER TABLE `usuario_grupo`
 --
 ALTER TABLE `asiento`
   MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `catalogo_estandar`
 --
 ALTER TABLE `catalogo_estandar`
   MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
 --
 -- AUTO_INCREMENT de la tabla `catalogo_usuario`
 --
 ALTER TABLE `catalogo_usuario`
   MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `clasificacion_cuenta`
 --
 ALTER TABLE `clasificacion_cuenta`
   MODIFY `id_clasificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `registro_asiento`
 --
 ALTER TABLE `registro_asiento`
   MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `registro_parcial`
 --
 ALTER TABLE `registro_parcial`
   MODIFY `id_parcial` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_almacen`
 --
 ALTER TABLE `tarjeta_almacen`
   MODIFY `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_cuenta`
 --
 ALTER TABLE `tipo_cuenta`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario_grupo`
 --
 ALTER TABLE `usuario_grupo`
   MODIFY `id_usuario_grupo` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -570,6 +585,7 @@ ALTER TABLE `tarjeta_almacen`
 ALTER TABLE `usuario_grupo`
   ADD CONSTRAINT `usuario_grupo_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`id_grupo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_grupo_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

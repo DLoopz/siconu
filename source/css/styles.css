@@ -104,7 +104,13 @@ select{
   border-top: 1px solid #dee2e6;
   border-right: 1px solid #dee2e6;
 }
-
+.td-a
+{
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+}
 .margin_left_btn{ 
     margin-left: 60px !important; 
 }
@@ -140,4 +146,16 @@ table.table.table-hover.table-responsive-md.col-md-5.scheme tr th {
 
 .margin_right_btn{
   margin-right: 15px !important; 
+}
+.btn-navi {
+  color: #DE6262 !important;
+  /*background-color: transparent ;*/
+  background-image: none;
+  border-color: #DE6262;
+}
+.btn-nav {
+  color: #DE6262 !important;
+}
+.btn-nav:hover {
+  color: rgba(222, 98, 98,.4)!important;
 }

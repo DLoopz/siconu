@@ -6,14 +6,10 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" aria-label="Left Align" data-toggle="tooltip" data-placement="top" title=""><strong><em><i class="icon-user"></i></em><?=$this->session->userdata('nombre')?></strong></a>
-      </li>
-
+    <ul class="navbar-nav ml-auto menu">
       <?php if ($this->session->userdata('rol')!=1) {?>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        <a class="nav-link dropdown-toggle btn-nav" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <?php if ($this->session->userdata('rol')==2) {?>
             <!---------------botones del profesor------------>
@@ -21,30 +17,34 @@
             <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar Perfil de Profesor">Editar Perfil</a>      
           <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
-            <a class="dropdown-item btn btn-outline-warning my-2 my-sm-0" href="<?php echo base_url();?>student/edit_password" title="Editar contraseña de alumno">cambiar contraseña</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>student/edit_password" title="Editar contraseña de alumno">cambiar contraseña</a>
           <?php } ?>
         </div>
       </li>
       <?php } ?>
+      <li class="nav-item active">
+        <a class="nav-link btn-navi" aria-label="Left Align" data-toggle="tooltip" data-placement="top" title=""><strong><em><i class="icon-user"></i></em><?=$this->session->userdata('nombre')?></strong></a>
+      </li>
 
       <?php if ($this->session->userdata('rol')==1) {?>
             <!---------------botones del root------------>
             <li class="nav-item">
-            <a class="nav-link" aria-label="Left Align" data-toggle="modal" data-target="#cleanBD" data-placement="top" title="Limpiar Base de Datos"><strong><em><i class="icon-trash-1"></i></em></strong></a>
+            <a class="nav-link btn-nav" aria-label="Left Align" data-toggle="modal" data-target="#cleanBD" data-placement="top" title="Limpiar Base de Datos"><strong><em><i class="icon-trash-1"></i></em></strong></a>
             <li class="nav-item">
         <?php } elseif ($this->session->userdata('rol')==2) {?>
 
             <!---------------botones del profesor------------>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url()?>professor/account_catalog" aria-label="Left Align" title="Catálogo de Cuentas"><i class="icon-book"></i></a> 
+              <a class="nav-link btn-nav" href="<?php echo base_url()?>professor/account_catalog" aria-label="Left Align" title="Catálogo de Cuentas"><i class="icon-book"></i></a> 
             </li>        
         <?php }?>
 
       <li class="nav-item">
-        <a class="nav-link" aria-label="Left Align" data-toggle="modal" data-target="#cerrarSesion" data-placement="top" title="Cerrar Sesión"><strong><em><i class="icon-login"></i></em></strong></a>
+        <a class="nav-link btn-nav" aria-label="Left Align" data-toggle="modal" data-target="#cerrarSesion" data-placement="top" title="Cerrar Sesión"><strong><em><i class="icon-login"></i></em></strong></a>
       </li>
     </ul>
   </div>
+  <div class=""></div>
 </nav>
 
 <!-- Modal para confirmación de cierre de sesión-->
