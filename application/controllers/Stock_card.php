@@ -20,6 +20,9 @@ class Stock_card extends CI_Controller {
         $data['exercise'] = $this->model_exercise->get_exercise($fields);
 		$data['id_empresa'] = $id_empresa;
 
+		$data['articulo'] = null;
+		$data['unidad'] = null;
+
         $fields = array('empresa_id' => $id_empresa);
         $ultimo_id = $this->model_stock_card->get_last_id($fields);
         $fields = array('id_tarjeta' => intval($ultimo_id->id));
@@ -27,9 +30,10 @@ class Stock_card extends CI_Controller {
         if($registro_antes)
         {
             $data['ultimo'] = $registro_antes->id_tarjeta;
-            echo("Último registro: ".$registro_antes->id_tarjeta);
+
             if($registro_antes->entradas != 0 || $registro_antes->salidas != 0)
-            {
+            {   if($registro_antes->terminar == 1)
+                    $data['btn_end'] = 0;
                 $data['terminar'] = $registro_antes->terminar;
                 $data['btn_end'] = 1;
 
@@ -48,10 +52,24 @@ class Stock_card extends CI_Controller {
                 $data['mercancias'] = $mercancias;
                 $data['if'] = $if;
                 $data['vendido'] = $vendido;
+
+                $data['articulo'] = $ii->nombre_articulo;
+                $data['unidad'] = $ii->tipo_unidad;
             }else
             {
+                $fields = array('empresa_id' => $id_empresa);
+                $primer_id = $this->model_stock_card->get_first_id($fields);
+                $fields = array('id_tarjeta' => intval($primer_id->id));
+                $ii = $this->model_stock_card->get_registro($fields);
+
+                $data['articulo'] = $ii->nombre_articulo;
+                $data['unidad'] = $ii->tipo_unidad;
+
                 $data['btn_end'] = 0;
                 $data['terminar'] = $registro_antes->terminar;
+
+                $data['compra'] = 0;
+                $data['vendido'] = 0;
             }
         }
         else
@@ -85,6 +103,8 @@ class Stock_card extends CI_Controller {
         {
             $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
             $this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
+            $this->form_validation->set_rules('articulo', 'nombre del artículo', 'min_length[0]|max_length[50]|required');
+            $this->form_validation->set_rules('unidad', 'tipo de unidad', 'min_length[1]|max_length[11]|required');
         }else
         {
             $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
@@ -150,7 +170,9 @@ class Stock_card extends CI_Controller {
                     'unitario' => $this->input->post('cantidad_costos'),
                     'promedio' => $this->input->post('cantidad_costos'),
                     'haber' => 0,
-                    'saldo' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos')
+                    'saldo' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos'),
+                    'nombre_articulo' => $this->input->post('articulo'),
+                    'tipo_unidad' => $this->input->post('unidad')
                 );
             }else
             {
@@ -278,7 +300,7 @@ class Stock_card extends CI_Controller {
                             'haber' => 0,
                             'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
                         );
-                        break;
+                    break;
 
                 }
             }
