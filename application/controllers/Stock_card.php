@@ -29,6 +29,9 @@ class Stock_card extends CI_Controller {
         $registro_antes = $this->model_stock_card->get_registro($fields);
         if($registro_antes)
         {
+            $data['id_empresa']=$id_empresa;
+            $fields = array('id_empresa' => $id_empresa);
+            $data['empresa'] = $this->model_exercise->get_exercise($fields);
             $data['ultimo'] = $registro_antes->id_tarjeta;
 
             if($registro_antes->entradas != 0 || $registro_antes->salidas != 0)

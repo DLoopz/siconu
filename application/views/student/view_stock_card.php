@@ -41,6 +41,9 @@
     <?php if(isset($articulo) or isset($unidad)){?>
         <div class="form-group text-center">
             <label for="">
+                <b>Nombre de la empresa: </b><?php echo $empresa->nombre ?>
+            </label><br>
+            <label for="">
                 <b>Nombre del artículo: </b><?php echo $articulo; ?>
             </label><br>
             <label for="">
