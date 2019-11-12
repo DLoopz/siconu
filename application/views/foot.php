@@ -1,6 +1,6 @@
 <?php 
-require_once("/home/santiago/dompdf/autoload.inc.php");
-use Dompdf\Dompdf;
+//require_once("/home/santiago/dompdf/autoload.inc.php");
+//use Dompdf\Dompdf;
 
 function generar()
 {
