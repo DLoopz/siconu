@@ -12,7 +12,8 @@
 		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Editar Registros del Asiento"><i class="icon-plus-2"></i></a>
 
 		<br><br>
-		<table class="table table-hover" id="user-table">
+		<div class="row">
+		<table class="table table-hover table-responsive" id="user-table">
 	    <thead>
 	      <tr>
 	        <th>Cuenta</th>
@@ -31,13 +32,16 @@
 	          <td class="text-right">$ <?php echo number_format($register->debe, 2, '.', ','); $d=$register->debe+$d;?></td>
 	          <td class="text-right">$ <?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
 	          <td>
+	          	<div class="row"> 
 	          	<!--editar asiento-->
 
 	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
 
             	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+              <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+            </div>
             </td>
+          </div>
 	        </tr>
 
 	      <?php foreach ($partials as $partial){
@@ -61,6 +65,7 @@
 	      </tr>
 	    </tbody>
 	  </table>
+	  </div>
 
 		<?php if ($d!=$h) {?>
 			<div class="alert alert-danger text-center">Las sumas no son iguales ( Diferencia:<?php echo abs($d-$h);?>)</div>

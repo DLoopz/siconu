@@ -37,8 +37,20 @@
             }
         ?>
 
-
     </div>
+    <?php if(isset($articulo) or isset($unidad)){?>
+        <div class="form-group text-center">
+            <label for="">
+                <b>Nombre de la empresa: </b><?php echo $empresa->nombre ?>
+            </label><br>
+            <label for="">
+                <b>Nombre del artículo: </b><?php echo $articulo; ?>
+            </label><br>
+            <label for="">
+                <b>Tipo de unidad: </b><?php echo $unidad; ?>
+            </label><br>
+        </div>
+    <?php } ?>
     <br>
     <div class="table-responsive-md">
       <table class="table table-hover">
@@ -82,7 +94,7 @@
                         <td>
                             <!-- Eliminar registro -->
                             <?php
-                                if($ultimo == $sc->id_tarjeta && $terminar == 0)
+                                if($ultimo == $sc->id_tarjeta and $terminar == 0)
                                 {?>
                                     <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                                 <?php}else
@@ -94,23 +106,36 @@
                         </td>
                     </tr>
                 <?php } ?>
+                <?php if(isset($sc)){?>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th scope="row">Total</th>
+                        <td class="text-info">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
+                        <td class="text-info">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
 
-        <?php
-            if($terminar == 0)
-            {?>
-                <div class="form-group text-center">
+        <?php if (isset($sc)){?>
+            <?php if ($btn_end == 1){?>
+                <?php if ($terminar == 0){?>
+                    <div class="form-group text-center">
 
-                    <a id="_terminar" class="btn btn-outline-info" href="" data-toggle="modal" data-target="#modal_sc_terminar" onclick="terminar(<?php echo $sc->id_tarjeta;?>)" title="Terminar">Terminar</a>
+                        <a id="_terminar" class="btn btn-outline-info" href="" data-toggle="modal" data-target="#modal_sc_terminar" onclick="terminar(<?php echo $sc->id_tarjeta;?>)" title="Terminar">Terminar</a>
 
-                </div>
-            <?php}else
-            {?>
-            <?php
-               echo '';
-            }
-        ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        <?php } ?>
+
     </div>
     <?php if (!isset($sc)){?>
 		<div class="text-center">
@@ -129,7 +154,8 @@
                     <b>Compra: </b><?php echo number_format($compra, 2, ".", ","); ?>
                 </label><br>
                 <label for="">
-                    <b>Total de mercancías: </b><?php echo '$', number_format($mercancias, 2, ".", ","); ?>
+                    <!--<b>Total de mercancías: </b><?php //echo '$', number_format($mercancias, 2, ".", ","); ?>-->
+                    <b>Total de mercancías: </b><?php echo '$', number_format($ii + $compra, 2, ".", ","); ?>
                 </label><br>
                 <label for="">
                     <b>Inventario final: </b><?php echo number_format($if, 2, ".", ","); ?>
@@ -206,23 +232,4 @@
         $('#terminar').val(id);
     }
 
-    function view_result()
-    {
-        content_result = document.getElementById("content_result");
-        add_register = document.getElementById("add_register");
-        delete_register = document.getElementById("delete_register");
-        _terminar = document.getElementById("_terminar");
-        men_val = document.getElementById("men_val");
-        //volver = document.getElementById("volver");
-
-        btn_end = document.getElementById("btn_end");
-
-        content_result.style.display = 'block';
-        add_register.style.display = 'none';
-        delete_register.style.display = 'none';
-        _terminar.style.display = 'none';
-        btn_end.style.display = 'none';
-        men_val.style.display = 'none';
-        //volver.style.display = 'none';
-    }
 </script>
