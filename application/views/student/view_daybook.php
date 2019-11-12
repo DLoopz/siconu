@@ -15,8 +15,8 @@
 				</div>
 			</div>
 			<br>
-			<div class="table-responsive-md">
-			  <table class="table table-hover">
+			<div class="row">
+			  <table class="table table-hover table-responsive">
 				  <thead>
 				    <tr>
 				      <th scope="col">No.</th>
@@ -74,12 +74,14 @@
 					    	<td></td>
 					    	<td></td>
 					    	<td>
+					    		<div class="row">
 					    		<!--editar descripcion del asiento-->
                   <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil"></i></em></strong></a>
                   <!--editar asiento-->
-                  <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
+                  <a class="btn btn-outline-secondary margin_left" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
 					    		<!-- eliminar asiento -->
-                  <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                  <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                </div>
                 </td>
 					    </tr>
 				  	<?php } ?>
