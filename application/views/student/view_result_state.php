@@ -97,6 +97,7 @@
 				<?php endif ?>
 			<?php endforeach ?>
 
+
 			<?php $sub_comp=0; foreach ($registers as $register): ?>
 				<?php $aux=0; if ($register->folio > 5200  && $register->folio<5300):?>
 				<tr>
