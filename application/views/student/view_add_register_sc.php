@@ -13,6 +13,27 @@
         <div class="panel-body">
             <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
                 <div class="col-md-7">
+                    <div class="form-group" id="content_articulo">
+                        <label for="">
+                            <b>Nombre del artículo *</b>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
+                            <?php echo form_error('articulo') ?>
+                        </div>
+                    </div>
+                    <div class="form-group" id="content_unidad">
+                        <label for="">
+                            <b>Tipo de unidad *</b>
+                        </label>
+                        <div class="form-group">
+                            <!--Cantidad:-->
+                            <input id="unidad" type="text" name="unidad" class="form-control" placeholder="kg, pieza, etc" value="<?php echo set_value('unidad');?>">
+                            <?php echo form_error('unidad') ?>
+                        </div>
+                        <br>
+                    </div>
                     <div class="form-group" >
                         <label>
                             <b>Seleccione la fecha *</b>
@@ -66,7 +87,7 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" chequed onchange="javascript:showContent()">
+                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" checked>
                                 <label class="custom-control-label" for="entrada">Entrada</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline col-5">
@@ -198,6 +219,7 @@
 
         if(check1.checked)
         {
+            alert("Seleccionado: Gastos sobre compra");
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -303,6 +325,9 @@
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
 
+        content_articulo = document.getElementById("content_articulo");
+        content_unidad = document.getElementById("content_unidad");
+
         if(ex.value != '')
         {
             cu.disabled = false;
@@ -318,7 +343,9 @@
 
             exis.disabled = true;
 
-            content_existencia.style.display='none';
+            content_existencia.style.display = 'none';
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
 
         }else
         {

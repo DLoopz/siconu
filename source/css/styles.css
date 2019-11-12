@@ -159,3 +159,6 @@ table.table.table-hover.table-responsive-md.col-md-5.scheme tr th {
 .btn-nav:hover {
   color: rgba(222, 98, 98,.4)!important;
 }
+.margin_left{ 
+    margin-left: 10px !important; 
+}

@@ -103,8 +103,8 @@
 								<th class=" border-right table-success text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 								<th class="table-secondary"></th>
 							<?php else: ?>
-								<th class=" border-right table-secondary"></th>
-								<th class="table-danger">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+								<th class=" border-right table-secondary text-right"></th>
+								<th class="table-danger text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 							<?php endif ?>						
 						</tr>
 						
