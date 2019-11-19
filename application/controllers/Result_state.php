@@ -45,29 +45,41 @@ class Result_state extends CI_Controller {
 				$this->load->view('student/view_result_state');
 				$this->load->view('foot');
 	    }else{
+				$data['id_empresa']=$id_empresa;				
+	    	$fields = array('id_empresa' => $id_empresa );
+				$data['exercise']=$this->model_exercise->get_exercise($fields);
 
 	    	$inicio=$this->input->post("fecha_inicio");
 	    	$fin=$this->input->post("fecha_fin");
+
 	    	$fields = array('empresa_id' => $id_empresa,'fecha_inicio' => $inicio,'fecha_fin' => $inicio );
 	    	$inventario_inical=$this->model_result->get_accounts_rslt($fields);
-				$fields = array('id_empresa' => $id_empresa );
-				$data['exercise']=$this->model_exercise->get_exercise($fields);
-				$data['id_empresa']=$id_empresa;
+				
 				$fields = array(
 					'empresa_id' => $id_empresa,
 					'fecha_inicio' => $inicio,
 					'fecha_fin' => $fin
 				);
 				$data['registers']=$this->model_result->get_accounts_rslt($fields);
+
 				$fields = array('grupo_id' => $this->session->userdata('grupo'));
 				$data['catalog']=$this->model_account->get_catalog_student($fields);
+
 				$data['title']="Estado de resultados";
 				$data['fecha_inicio']=$inicio;
 				$data['fecha_fin']=$fin;
 				$this->load->view('head',$data);
 				$this->load->view('navbar');
 				$this->load->view('student/nabvar_options');
-				$this->load->view('student/view_result_state');
+				if ($data['exercise']->procedimiento==1) {
+	    		$this->load->view('student/view_result_state_perpetuos');
+	    	}
+	    	if ($data['exercise']->procedimiento==2) {
+	    		$this->load->view('student/view_result_state');
+	    	}
+	    	if ($data['exercise']->procedimiento==3) {
+	    		$this->load->view('student/view_result_state_mercancias');
+	    	}
 				$this->load->view('foot');
 
    		}

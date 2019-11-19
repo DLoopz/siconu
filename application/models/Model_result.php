@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_result extends CI_Model
 {
+  public function get_accounts_perpetuos($data){
+    
+  }
   //Insertar cuentas
   public function get_accounts_rslt($data)
   {

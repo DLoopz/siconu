@@ -82,9 +82,25 @@ class Model_account extends CI_Model
     $sql = $this->db->get_where('tipo_cuenta');
     return $sql->result();
   }
+  public function get_tipo_cuenta_basica()
+  {
+    $this->db->where('id_tipo != 4');
+    $this->db->where('id_tipo != 5');
+    $sql = $this->db->get_where('tipo_cuenta');
+    return $sql->result();
+  }
   public function get_clasificacion_cuenta()
   {
     $sql = $this->db->get_where('clasificacion_cuenta');
+    return $sql->result();
+  }
+  public function get_catalog_student_inventarios($data)
+  {
+    $this->db->order_by('tipo_id');
+    $this->db->order_by('clasificacion_id');
+    $this->db->order_by('id_catalogo_usuario');
+    $this->db->where('fecha >= "'.$data['fecha_inicio'].'"');
+    $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }
   public function get_catalog_student($data)
@@ -92,6 +108,16 @@ class Model_account extends CI_Model
     $this->db->order_by('tipo_id');
     $this->db->order_by('clasificacion_id');
     $this->db->order_by('id_catalogo_usuario');
+    $sql = $this->db->get_where('catalogo_grupo',$data);
+    return $sql->result();
+  }
+  public function get_catalog_student_mercancias($data)
+  {
+    $this->db->order_by('tipo_id');
+    $this->db->order_by('clasificacion_id');
+    $this->db->order_by('id_catalogo_usuario');
+    $this->db->where('tipo_id != 4');
+    $this->db->where('tipo_id != 5');
     $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }

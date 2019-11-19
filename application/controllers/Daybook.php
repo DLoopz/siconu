@@ -180,8 +180,27 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    $fields = array('grupo_id' => $this->session->userdata('grupo'));
-    $accounts=$this->model_account->get_catalog_student($fields);
+
+    $fields = array('id_empresa' => $id_empresa);
+    $exercise=$this->model_exercise->get_exercise($fields);
+
+    if ($exercise->procedimiento==1) {      
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student_inventarios($fields);
+    }
+    if ($exercise->procedimiento==2) {      
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student($fields);
+    }
+    if ($exercise->procedimiento==3) {
+
+      $data['types']=$this->model_account->get_tipo_cuenta_basica();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student_mercancias($fields);
+    }
+   
 
     if (!$this->form_validation->run())
     {
@@ -189,7 +208,6 @@ class Daybook extends CI_Controller {
 			$data['id_asiento']=$id_asiento;
       $data['id_empresa']=$id_empresa;
 			$data['accounts']=$accounts;
-      $data['types']=$this->model_account->get_tipo_cuenta();
       $data['clasifications']=$this->model_account->get_clasificacion_cuenta();
       $fields = array('asiento_id' => $id_asiento);
       $data['registers']=$this->model_daybook->get_registers($fields);

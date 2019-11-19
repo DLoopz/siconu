@@ -8,7 +8,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
-      <h3 class="text-center">Editar Registros del Asiento</h3>
+      <h3 class="text-center">Registro del Asiento</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">
@@ -44,7 +44,7 @@
             </div>
             <input type="text" name="cantidad" class="form-control" placeholder="0.00">
           </div>
-          <?php echo form_error('cantidad') ?>
+          <?php echo form_error('cantidad');?>
         </div>
         <div class="form-group">
           <div class="custom-control custom-radio custom-control-inline col-5">
@@ -56,9 +56,15 @@
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
         </div>
+        <div class="form-check alert-warning text-center">
+           <hr>
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="ajuste" value="<?php //echo form_error('ajuste');?>">
+          <label class="form-check-label" for="exampleCheck1">Asiento de ajuste</label>
+           <hr> 
+        </div>
         <br>
         <div class="text-center">
-          <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
+          <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
           <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Volver</button></a>
         </div>
       </form>
