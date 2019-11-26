@@ -93,18 +93,56 @@
 				  	<?php } ?>
 				    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
 				    	<td></td>
-				    	<td></td>
-				    	<td></td>
-				    	<td class="float-right font-weight-bold">Total:</td>
-				    	<td></td>
-				    	<td class="text-right">$ <?php echo number_format($d,2, '.', ',');?></td>
-				    	<td class="text-right">$ <?php echo number_format($h,2, '.', ',');?></td>
-				    	<td></td>
-				    </tr>
-				  </tbody>
-				</table>
-			</div>
-		</div>
+					   </tr>
+			    <?php 
+			    foreach ($partials as $partial) {
+			    		if ($register->id_registro==$partial->registro_id) {?>
+			    			<tr class="table-secondary">
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td><?php echo $partial->concepto;?></td>
+				    		 	<td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ',');?></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		</tr>
+			    		<?php }	
+			    		}
+			    	 }
+			     } ?>
+			    <tr>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td class="font-weight-bold"><?php echo $entry->descripcion;?></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td>	
+			    		<!--editar descripcion del asiento-->
+	            <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil"></i></em></strong></a>
+	            <!--editar asiento-->
+	            <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
+			    		<!-- eliminar asiento -->
+	            <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+	          </td>
+			    </tr>
+		  	<?php } ?>
+		    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
+		    	<td></td>
+		    	<td></td>
+		    	<td></td>
+		    	<td class="float-right font-weight-bold">Total:</td>
+		    	<td></td>
+		    	<td class="text-right">$ <?php echo number_format($d,2, '.', ',');?></td>
+		    	<td class="text-right">$ <?php echo number_format($h,2, '.', ',');?></td>
+		    	<td></td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
 
 <!-- Modal de confirmación -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_del_entry">

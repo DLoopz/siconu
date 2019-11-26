@@ -17,7 +17,7 @@
             <a href="<?php echo base_url();?>professor/edit_professor" class="dropdown-item" title="Editar Perfil de Profesor">Editar Perfil</a>      
           <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
-            <a class="dropdown-item" href="<?php echo base_url();?>student/edit_password" title="Editar contraseña de alumno">cambiar contraseña</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>student/edit_password" title="Editar contraseña de alumno">Cambiar Contraseña</a>
           <?php } ?>
         </div>
       </li>

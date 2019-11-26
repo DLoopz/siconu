@@ -13,13 +13,12 @@ function generar()
   $dompdf->render();
   $dompdf->stream('archivo');
   */
-  echo "<script>alert(generado)</script>";
+  //echo "<script>alert(generado)</script>";
 }
 
 ?>
 
 
-<input type="submit" id="cola" name="" value="Generar">
 <div id="resultado"></div>
 
 

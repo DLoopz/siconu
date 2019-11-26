@@ -9,8 +9,8 @@
 	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Ejercicio"><i class="icon-plus-2"></i></a>
 	<?php } ?>
 	<br><br>
-	<div class="table-responsive-md">
-		<table class="table table-hover" id="user-table">
+	<div class="table-responsive">
+		<table class="table table-md table-hover" id="user-table">
 	    <thead>
 	      <tr>
 	      	<th>No.</th>
@@ -44,6 +44,7 @@
 	    </tbody>
 	  </table>
 	</div>
+</div>
 	<?php if (!isset($exercise)){?>
 		<div class="text-center">
 			<p class="text-danger">No se han registrado ejercicios</p>
@@ -62,11 +63,11 @@
 					¿Está seguro de eliminar el ejercicio?
 				</div>
 				<div class="modal-footer">
-				<form method="POST" action="<?php echo base_url() ?>student/del_exercise">
-					<input type="hidden" id="eliminar" name="id_empresa"></input>
-					<input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">
-					<input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">           	
-				</form>
+					<form method="POST" action="<?php echo base_url() ?>student/del_exercise">
+						<input type="hidden" id="eliminar" name="id_empresa"></input>
+						<input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">
+						<input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">           	
+					</form>
 			</div>
 		</div>
 	</div>
