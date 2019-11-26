@@ -72,7 +72,7 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_student/<?php echo $id_group ?>">
                    <input type="hidden" id="eliminar" name="id_alumno"></input>
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 " value="Si">    
+                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 tam" value="Si">    
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">
                </form>
             </div>
@@ -96,8 +96,9 @@
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url()?>professor/del_students/<?php echo $id_group; ?>">
-                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                  <input type="submit" name="del_students" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">    
+                  <input type="submit" name="del_students" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si"> 
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0  margin_left_modal" data-dismiss="modal" value="No">
+   
                 </form>
             </div>
         </div>

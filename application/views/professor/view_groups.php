@@ -59,7 +59,7 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_group">
                    <input type="hidden" id="eliminar" name="id_grupo"></input>
-                    <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 " value="Si">
+                    <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 tam" value="Si">
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">
                                      
                </form>
@@ -99,7 +99,7 @@
             </div>
             <div class="modal-footer">
               <form method="POST" action="<?php echo base_url()?>professor/del_groups">
-                <input type="submit" name="del_groups" class="btn btn-outline-danger my-2 my-sm-0" value="Si">  
+                <input type="submit" name="del_groups" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si">  
                 <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">  
               </form>
             </div>
