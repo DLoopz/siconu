@@ -12,7 +12,7 @@
 		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Editar Registros del Asiento"><i class="icon-plus-2"></i></a>
 
 		<br><br>
-		<div class="row">
+		<div class="">
 		<table class="table table-hover table-responsive" id="user-table">
 	    <thead>
 	      <tr>
@@ -84,7 +84,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-tittle" id="modalTittle">Eliminar Asiento</h5>
+                <h5 class="modal-tittle" id="modalTittle">Eliminar Registro</h5>
             </div>
             <div class="modal-body">
                 ¿Está seguro de eliminar el registro?

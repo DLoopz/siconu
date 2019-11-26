@@ -1,105 +1,106 @@
-		<div class="container">
-			<div><h3 class="text-center">Rayado Diario</h3></div>
-			<?php
-	      if($this->session->flashdata('msg'))
-	        echo $this->session->flashdata('msg');
-	    ?>
-			<hr class="line_sep">
-			<div class="row">
-				<?php if ($this->session->userdata('rol')==3) { ?>
-				<div class="col-6">
-						<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
-				</div>
-				<div class="col-6 text-right">
-					<a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
-				</div>
-			<?php } ?>
-			</div>
-			<br>
-			<div class="row">
-			  <table class="table table-hover table-responsive">
-				  <thead>
-				    <tr>
-				      <th scope="col">No.</th>
-				      <th scope="col">Fecha</th>
-				      <th scope="col">Folio</th>
-				      <th scope="col">Cuenta</th>
-				      <th scope="col">Parcial</th>
-				      <th scope="col">Debe</th>
-				      <th scope="col">Haber</th>
-				      <th scope="col">opciones</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  	<?php 
-				  		$d=0;$h=0;
-				  		$i=0;$aux=0;foreach ($entries as $entry) {$i++;?>
-					    <?php foreach ($registers as $register){
-					    	if ($entry->id_asiento==$register->asiento_id){ ?>
-					    		<tr>
-							    	<td><?php if ($i!=$aux) {echo $i; $aux=$i;} ?></td>
-							    	<td><?php echo $entry->fecha;?></td>
-							    	<td><?php echo $register->folio; ?></td>
-							    	<td>
-							    		<div class="<?php if ($register->haber>0){ echo "offset-2";}?>">
-							    			<?php echo $register->cuenta; ?></td>
-							    		</div>
-							    	<td class="text-right">$ <?php echo  number_format($register->parcial, 2, '.', ','); ?></td>
-							    	<td class="text-right">$ <?php echo  number_format($register->debe, 2, '.', ','); $d=$d+$register->debe; ?></td>
-							    	<td class="text-right">$ <?php echo  number_format($register->haber, 2, '.', ','); $h=$h+$register->haber;?></td>
-							    	<td></td>
-							    </tr>
-					    <?php 
-					    foreach ($partials as $partial) {
-					    		if ($register->id_registro==$partial->registro_id) {?>
-					    			<tr class="table-secondary">
-						    		 	<td></td>
-						    		 	<td></td>
-						    		 	<td></td>
-						    		 	<td><?php echo $partial->concepto;?></td>
-						    		 	<td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ',');?></td>
-						    		 	<td></td>
-						    		 	<td></td>
-						    		 	<td></td>
-						    		</tr>
-					    		<?php }	
-					    		}
-					    	 }
-					     } ?>
-					     <tr>
-					    	<td></td>
-					    	<td></td>
-					    	<td></td>
-					    	<td class="font-weight-bold"><?php echo $entry->descripcion;?></td>
-					    	<td></td>
-					    	<td></td>
-					    	<td></td>
-					    	<td>
-					    		<div class="row">
-					    		<!--editar descripcion del asiento-->
-                  <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil"></i></em></strong></a>
-                  <!--editar asiento-->
-                  <a class="btn btn-outline-secondary margin_left" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
-					    		<!-- eliminar asiento -->
-                  <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-                </div>
-                </td>
-					    </tr>
-				  	<?php } ?>
-				    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
-				    	<td></td>
-				    	<td></td>
-				    	<td></td>
-				    	<td class="float-right font-weight-bold">Total:</td>
-				    	<td></td>
-				    	<td class="text-right">$ <?php echo number_format($d,2, '.', ',');?></td>
-				    	<td class="text-right">$ <?php echo number_format($h,2, '.', ',');?></td>
-				    	<td></td>
-				    </tr>
-				  </tbody>
-				</table>
-			</div>
+<div class="container">
+	<div>
+		<h3 class="text-center">Rayado Diario</h3>
+	</div>
+	<?php
+    if($this->session->flashdata('msg'))
+      echo $this->session->flashdata('msg');
+  ?>
+	<hr class="line_sep">
+	<div class="row">
+		<?php if ($this->session->userdata('rol')==3) { ?>
+		<div class="col-6">
+				<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 		</div>
+		<div class="col-6 text-right">
+			<a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
+		</div>
+	<?php } ?>
+	</div>
+	<br>
+	<div class="table-responsive">
+	  <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">No.</th>
+		      <th scope="col">Fecha</th>
+		      <th scope="col">Folio</th>
+		      <th scope="col">Cuenta</th>
+		      <th scope="col">Parcial</th>
+		      <th scope="col">Debe</th>
+		      <th scope="col">Haber</th>
+		      <th scope="col">opciones</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<?php 
+		  		$d=0;$h=0;
+		  		$i=0;$aux=0;foreach ($entries as $entry) {$i++;
+		  	?>
+			  <?php foreach ($registers as $register){
+			    if ($entry->id_asiento==$register->asiento_id){ ?>
+			    	<tr>
+				    	<td><?php if ($i!=$aux) {echo $i; $aux=$i;} ?></td>
+				    	<td><?php echo $entry->fecha;?></td>
+				    	<td><?php echo $register->folio; ?></td>
+				    	<td>
+				    		<div class="<?php if ($register->haber>0){ echo "offset-2";}?>">
+				    			<?php echo $register->cuenta; ?></td>
+				    		</div>
+				    	<td class="text-right">$ <?php echo  number_format($register->parcial, 2, '.', ','); ?></td>
+				    	<td class="text-right">$ <?php echo  number_format($register->debe, 2, '.', ','); $d=$d+$register->debe; ?></td>
+				    	<td class="text-right">$ <?php echo  number_format($register->haber, 2, '.', ','); $h=$h+$register->haber;?></td>
+				    	<td></td>
+					   </tr>
+			    <?php 
+			    foreach ($partials as $partial) {
+			    		if ($register->id_registro==$partial->registro_id) {?>
+			    			<tr class="table-secondary">
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td><?php echo $partial->concepto;?></td>
+				    		 	<td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ',');?></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		 	<td></td>
+				    		</tr>
+			    		<?php }	
+			    		}
+			    	 }
+			     } ?>
+			    <tr>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td class="font-weight-bold"><?php echo $entry->descripcion;?></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td>	
+			    		<!--editar descripcion del asiento-->
+	            <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil"></i></em></strong></a>
+	            <!--editar asiento-->
+	            <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
+			    		<!-- eliminar asiento -->
+	            <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+	          </td>
+			    </tr>
+		  	<?php } ?>
+		    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
+		    	<td></td>
+		    	<td></td>
+		    	<td></td>
+		    	<td class="float-right font-weight-bold">Total:</td>
+		    	<td></td>
+		    	<td class="text-right">$ <?php echo number_format($d,2, '.', ',');?></td>
+		    	<td class="text-right">$ <?php echo number_format($h,2, '.', ',');?></td>
+		    	<td></td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
 
 <!-- Modal de confirmación -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_del_entry">
