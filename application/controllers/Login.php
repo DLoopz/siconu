@@ -78,7 +78,8 @@ class Login extends CI_Controller
 					'grupo' => $info->grupo_id,
 					'rol' => $user->rol,
 					'nombre'=> $user->nombre,
-					'activo' =>true
+					'activo' =>true,
+					'id_org' => $user->id_usuario
 				);
 				$this->session->set_userdata($newdata);
 				if($newdata['rol'] == 1 )

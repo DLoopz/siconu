@@ -26,14 +26,22 @@ class Professor extends CI_Controller {
 		$this->load->view('foot');
 	}
 
-  public function edit_password_p($id=null){
+  public function edit_password_p(){
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0
+    );
+    $this->session->set_userdata($newdata);
+    $id=$this->session->userdata('id_user');
     //reglas de validacion
-    $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
-    $this->form_validation->set_rules('password_c','Confirmar Contraseña','trim|required|matches[password]|min_length[8]');
+    $this->form_validation->set_rules('password_act','Contraseña actual','trim|required|min_length[8]|callback_thisPassword');
+    $this->form_validation->set_rules('password','Contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','Confirmacion de contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
     $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
+    $this->form_validation->set_message('thisPassword', '%s es incorrecta');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -439,6 +447,11 @@ class Professor extends CI_Controller {
   //funciones del catalogo de cuentas
   public function account_catalog()
   {
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0
+    );
+    $this->session->set_userdata($newdata);
     $fields = array('usuario_id' => $this->session->userdata('id_user'));
     $catalog=$this->model_account->get_catalog($fields);
     $data['types']=$this->model_account->get_tipo_cuenta();
@@ -648,18 +661,24 @@ class Professor extends CI_Controller {
     }   
   }
 
-  public function edit_professor($id=null)
+  public function edit_professor()
   {
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0
+    );
+    $this->session->set_userdata($newdata);
+    $id=$this->session->userdata('id_user');
     //reglas de validacion
     $this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[3]|callback_alpha_spaces');
     $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'required|min_length[3]|callback_alpha_spaces');
     $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'required|min_length[3]|callback_alpha_spaces');
-    $this->form_validation->set_rules('usuario', 'Corrreo electrónico','required|valid_email');
+    $this->form_validation->set_rules('usuario', 'Correo electrónico','required|valid_email');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('min_length','%s no debe contener menos de tres caracteres');
     $this->form_validation->set_message('alpha_spaces', '%s no debe tener caracteres especiales');
-    $this->form_validation->set_message('valid_email', '%s no es un formato de correo válido');
+    $this->form_validation->set_message('valid_email', '%s nformato de correo inválido');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');    
     if($this->form_validation->run()==FAlSE)
@@ -714,5 +733,14 @@ class Professor extends CI_Controller {
     {
       return TRUE;
     }
+  }
+  public function thisPassword($str)
+  {
+    $fields = array('id_usuario' => $this->session->userdata('id_user'));
+    $us = $this->model_user->get_user($fields);
+    if ($us->contrasenia==md5($str)) {
+      return true;
+    }
+    return false;
   }
 }

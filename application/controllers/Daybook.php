@@ -31,6 +31,8 @@ class Daybook extends CI_Controller {
 		$data['entries']=$this->model_daybook->get_entries($fields);
     $data['registers']=$this->model_daybook->get_all_registers($fields);
     $data['partials']=$this->model_daybook->get_partials($fields);
+    $fields = array('id_empresa' => $id );
+    $data['exercise']=$this->model_exercise->get_exercise($fields);
 		$data['id_empresa']=$id;
     $data['disabled']=false;
     $fields = array('id_empresa' => $id );

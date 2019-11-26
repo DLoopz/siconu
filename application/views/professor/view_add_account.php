@@ -47,7 +47,7 @@
 </div>	
 <script type="text/javascript">
   function isCapital(){
-    if (document.getElementById("tipo").value==3){
+    if (document.getElementById("tipo").value>=3){
       document.getElementById("clas").disabled=true;
     }
     else

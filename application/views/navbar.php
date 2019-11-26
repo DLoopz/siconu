@@ -9,12 +9,12 @@
     <ul class="navbar-nav ml-auto menu">
       <?php if ($this->session->userdata('rol')!=1) {?>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn-nav" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="nav-link dropdown-toggle btn-nav" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Acciones del Usuario"></a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
           <?php if ($this->session->userdata('rol')==2) {?>
             <!---------------botones del profesor------------>
-            <a href="<?php echo base_url();?>professor/edit_password_p/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar Contraseña de Profesor">Cambiar Contraseña</a>
-            <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar Perfil de Profesor">Editar Perfil</a>      
+            <a href="<?php echo base_url();?>professor/edit_password_p" class="dropdown-item" title="Editar Contraseña de Profesor">Cambiar Contraseña</a>
+            <a href="<?php echo base_url();?>professor/edit_professor" class="dropdown-item" title="Editar Perfil de Profesor">Editar Perfil</a>      
           <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
             <a class="dropdown-item" href="<?php echo base_url();?>student/edit_password" title="Editar contraseña de alumno">cambiar contraseña</a>
@@ -23,7 +23,7 @@
       </li>
       <?php } ?>
       <li class="nav-item active">
-        <a class="nav-link btn-navi" aria-label="Left Align" data-toggle="tooltip" data-placement="top" title=""><strong><em><i class="icon-user"></i></em><?=$this->session->userdata('nombre')?></strong></a>
+        <a class="nav-link btn-navi" aria-label="Left Align" data-toggle="tooltip" data-placement="top" title="Usuario del Sistema"><strong><em><i class="icon-user"></i></em><?=$this->session->userdata('nombre')?></strong></a>
       </li>
 
       <?php if ($this->session->userdata('rol')==1) {?>
