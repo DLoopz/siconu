@@ -295,7 +295,7 @@ class Daybook extends CI_Controller {
         // para mostrar la cuenta
         $fields = array('id_registro' => $id_registro);
         $cuenta = $this->model_daybook->get_partial($fields);
-        $data['cuenta']= $cuenta->cuenta;
+        $data['cuenta']= $cuenta;
 
 
 
@@ -342,6 +342,12 @@ class Daybook extends CI_Controller {
       $data['id_registro']=$id_registro;
       $fields = array('registro_id' => $id_registro);
       $data['partials']=$this->model_daybook->get_registers_partial($fields);
+      // para mostrar la cuenta
+      $fields = array('id_registro' => $id_registro);
+      $data['cuenta'] = $this->model_daybook->get_partial($fields);
+
+      $fields = array('id_empresa' => $id_empresa);
+      $data['exercise']= $this->model_exercise->get_exercise($fields);
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('student/view_register_partial');

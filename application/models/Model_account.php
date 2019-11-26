@@ -13,9 +13,8 @@ class Model_account extends CI_Model
   //Eliminar cuenta
   public function delete_account($data)
   {
-    //id_catalogog usario de la cuenta y el user_id
-    $sql = $this->db->query("
-      SELECT cu.id_catalogo_usuario, cu.nombre, ra.catalogo_usuario_id, ra.cuenta, cu.usuario_id, u.id_usuario, u.matricula from catalogo_usuario cu
+    //id_catalogo usario de la cuenta y el user_id
+    $sql = $this->db->query("SELECT cu.id_catalogo_usuario, cu.nombre, ra.catalogo_usuario_id, ra.cuenta, cu.usuario_id, u.id_usuario, u.matricula from catalogo_usuario cu
       JOIN registro_asiento ra
       on cu.id_catalogo_usuario = ra.catalogo_usuario_id and ra.catalogo_usuario_id = {$data['id_catalogo_usuario']}
       join usuario u
@@ -99,7 +98,6 @@ class Model_account extends CI_Model
     $this->db->order_by('tipo_id');
     $this->db->order_by('clasificacion_id');
     $this->db->order_by('id_catalogo_usuario');
-    $this->db->where('fecha >= "'.$data['fecha_inicio'].'"');
     $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }

@@ -1,5 +1,5 @@
 <div class="container col-md-6">
-	<h3 class="text-center">Ingresar Registro Parcial <?php //echo $cuenta; ?></h3>
+	<h3 class="text-center">Ingresar Registro Parcial a <?php if (isset($cuenta)){echo $cuenta->cuenta;} ?></h3>
 	<hr class="line_sep">
 	<div>
 
@@ -19,32 +19,48 @@
     <div class="modal fade" id="parciales" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
-                <div class="modal-header">
+              <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Cerrar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
                   <h3 class="text-center">Ingresar Registro Parcial </h3>
                   <hr class="line_sep">
-                    <div class="form-group">
+              <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
+                <?php if ($cuenta->cuenta=="Almacén/Mercancías" and $exercise->procedimiento==3) {?>
+                  <div class="form-group">
+                    Concepto
+                    <select class="form-control" name="concepto">
+                      <option value="Ventas totales">Ventas totales</option>
+                      <option value="Devoluciones sobre Ventas">Devoluciones sobre Ventas</option>
+                      <option value="Descuentos sobre Ventas">Descuentos sobre Ventas</option>
+                      <option value="Inventario inicial">Inventario inicial</option>
+                      <option value="Compras">Compras</option>
+                      <option value="Gastos de compra">Gastos de compra</option>
+                      <option value="Devoluciones sobre compra">Devoluciones sobre compra</option>
+                      <option value="Descuentos sobre compra">Descuentos sobre compra</option>
+                      <option value="Inventario final">Inventario final</option>
+                    </select>
+                  </div>
+                <?php }else{?>
+                  <div class="form-group">
                       Concepto
                       <input class="form-control" type="text" name="concepto" value="<?php echo set_value('concepto');?>">
                       <?php echo form_error('concepto') ?>
                     </div>
-                    <div class="form-group">
+                <?php } ?>
+                  <div class="form-group">
                       Cantidad
                       <div class="input-group mb-2">
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input type="text" name="cantidad" class="form-control" placeholder="0.00">
-                      </div>
-                      <?php echo form_error('cantidad') ?>
+                      <input type="text" name="cantidad" class="form-control" placeholder="0.00">
                     </div>
+                    <?php echo form_error('cantidad') ?>
+                  </div>
                 </div>
                 <br>
                 <div class="panel-footer text-center">

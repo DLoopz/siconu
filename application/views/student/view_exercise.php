@@ -1,4 +1,4 @@
-<div class="container col-md-6">
+<div class="container col-md-8">
 	<div><h3 class="text-center">Ejercicios</h3></div>
 	<hr class="line_sep">
 	<?php
@@ -17,6 +17,7 @@
 	        <th>Nombre del ejercicio</th>
 	        <th>Estatus</th>
 	        <th>Acciones</th>
+	        <th>Procedimiento</th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -27,7 +28,7 @@
 	          </td>
 	          <td><?php echo $exercise->nombre;?></td>
 	          <td><?php if (!$exercise->estado){ echo '<div class="text-success">Abierto</div>';} else{ echo '<div class="text-danger">Cerrado</div>';}?></td>
-	          <td><?php echo $exercise->procedimiento;?><</td>
+	          <td><?php if($exercise->procedimiento==1){echo "Inventarios perpetuos";}if($exercise->procedimiento==2){echo "Analitico";}if($exercise->procedimiento==3){echo "Mercancias generales";}?></td>
 	          <td>
 	          	<?php if ($this->session->userdata('rol')==3) { ?>
           		<!-- editar ejercicio -->
