@@ -56,12 +56,6 @@
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
         </div>
-        <div class="form-check alert-warning text-center">
-           <hr>
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="ajuste" value="<?php //echo form_error('ajuste');?>">
-          <label class="form-check-label" for="exampleCheck1">Asiento de ajuste</label>
-           <hr> 
-        </div>
         <br>
         <div class="text-center">
           <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">

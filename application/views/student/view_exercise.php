@@ -27,6 +27,7 @@
 	          </td>
 	          <td><?php echo $exercise->nombre;?></td>
 	          <td><?php if (!$exercise->estado){ echo '<div class="text-success">Abierto</div>';} else{ echo '<div class="text-danger">Cerrado</div>';}?></td>
+	          <td><?php echo $exercise->procedimiento;?><</td>
 	          <td>
 	          	<?php if ($this->session->userdata('rol')==3) { ?>
           		<!-- editar ejercicio -->

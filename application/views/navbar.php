@@ -13,7 +13,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <?php if ($this->session->userdata('rol')==2) {?>
             <!---------------botones del profesor------------>
-            <a href="<?php echo base_url();?>professor/edit_password_p/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar contraseña de Profesor">Cambiar contraseña</a>
+            <a href="<?php echo base_url();?>professor/edit_password_p/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar Contraseña de Profesor">Cambiar Contraseña</a>
             <a href="<?php echo base_url();?>professor/edit_professor/<?php echo $this->session->userdata('id_user');?>" class="dropdown-item" title="Editar Perfil de Profesor">Editar Perfil</a>      
           <?php } elseif ($this->session->userdata('rol')==3) {?>
             <!---------------botones del alumno------------>
@@ -60,7 +60,6 @@
             <div class="modal-footer">
                <a href="<?php echo base_url()?>login/logout"><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0" type="button">Si</button></a>
                 <button type="button" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal">No</button>
-                
                 <!--<button type="button" class="btn btn-primary">Si</button>-->
             </div>
         </div>

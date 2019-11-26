@@ -16,6 +16,12 @@
           <input type="date" name="fecha_asiento" class="form-control" value="<?php echo set_value('fecha_asiento');?>">
           <?php echo form_error('fecha_asiento'); ?>
         </div>
+        <div class="form-check alert-warning text-center">
+          <hr>
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="ajuste">
+          <label class="form-check-label" for="exampleCheck1">Asiento de ajuste</label>
+          <hr> 
+        </div>
         <div class="text-danger">
         	<?php echo form_label('* Campos Obligatorios')?><br>
       	</div>

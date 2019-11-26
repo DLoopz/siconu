@@ -33,8 +33,6 @@ class Daybook extends CI_Controller {
     $data['partials']=$this->model_daybook->get_partials($fields);
 		$data['id_empresa']=$id;
     $data['disabled']=false;
-
-
     $fields = array('id_empresa' => $id );
     $status = $this->model_daybook->get_status($fields);
     $newdata = array(
@@ -77,10 +75,16 @@ class Daybook extends CI_Controller {
     }
     else
     {
+      if ($this->input->post('ajuste')) {
+        $ajuste=1;
+      }else{
+        $ajuste=0;
+      }
       $fields = array(
         'empresa_id' => $id_empresa,
         'descripcion' => $this->input->post('concepto'),
-        'fecha' => $this->input->post('fecha_asiento') 
+        'fecha' => $this->input->post('fecha_asiento'), 
+        'ajuste' => $ajuste
       );
       $add=$this->model_daybook->insert_entry($fields);
       if($add)
