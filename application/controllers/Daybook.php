@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once("/home/santiago/dompdf/autoload.inc.php");
+use Dompdf\Dompdf;
 
 class Daybook extends CI_Controller {
   
@@ -14,6 +16,7 @@ class Daybook extends CI_Controller {
     {
       redirect('');
     }
+    */
   }
 
 	public function index()
@@ -635,9 +638,31 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
     }
   }
 
-}
 
+  public function pdf()
+  {
+    /*
+    require_once("/home/santiago/dompdf/autoload.inc.php");
+    use Dompdf\Dompdf;
+    */
 
+    if ($this->input->post('sendcont'))
+    {
 
+      $cont = $this->input->post('contpdf');
+      $dompdf = new Dompdf();
+      //$dompdf->loadHtml($cont);
+      $dompdf->loadHtml($cont);
+      $dompdf->setPaper('A4', 'landscape');
+      //ini_set("memory_limit","50M");//aumentar memoria
+      $dompdf->render();
+      $dompdf->stream('archivo.pdf', array('Attachment' => true));
+    }
+    else
+    {
+      redirect('');
+    }
 
+  }
 
+}//fin clase

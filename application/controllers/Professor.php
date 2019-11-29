@@ -280,7 +280,7 @@ class Professor extends CI_Controller {
         $filename = $_FILES['file']['tmp_name'];
         $handle = fopen($filename, "r");
 
-        while( ($data = fgetcsv($handle, 1000, '"') ) !== FALSE )
+        while( ($data = fgetcsv($handle, 200, '"') ) !== FALSE )
         {
           $fields = array(
             'matricula' => $data[0],
@@ -310,6 +310,10 @@ class Professor extends CI_Controller {
         $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error alumno no agregado</div>');
         redirect('professor/show_students/'.$id_grupo);
       }
+    }
+    else
+    {
+      redirect('');
     }
 
   }
