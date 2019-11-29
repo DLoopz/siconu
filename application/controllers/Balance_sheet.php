@@ -10,7 +10,7 @@ class Balance_sheet extends CI_Controller
     {
       redirect('');
     }
-    if ($this->session->userdata('rol') != 3)
+    if ($this->session->userdata('rol') == 1)
     {
       redirect('');
     }

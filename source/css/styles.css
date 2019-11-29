@@ -8,6 +8,7 @@
 	color: #fff !important;
 	background-color: #DE6262;
 	border-color: #DE6262;
+
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
   color: #fff;
@@ -161,4 +162,7 @@ table.table.table-hover.table-responsive-md.col-md-5.scheme tr th {
 }
 .margin_left{ 
     margin-left: 10px !important; 
+}
+.tam{
+  width: 46px;
 }

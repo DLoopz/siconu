@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2019 a las 18:27:00
--- Versión del servidor: 10.1.40-MariaDB
--- Versión de PHP: 7.3.5
+-- Servidor: localhost:3306
+-- Tiempo de generación: 26-11-2019 a las 14:07:34
+-- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.24-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `siconu`
 --
+DROP DATABASE IF EXISTS `siconu`;
 CREATE DATABASE IF NOT EXISTS `siconu` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `siconu`;
 
@@ -30,11 +29,13 @@ USE `siconu`;
 -- Estructura de tabla para la tabla `asiento`
 --
 
+DROP TABLE IF EXISTS `asiento`;
 CREATE TABLE `asiento` (
   `id_asiento` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
-  `fecha` date NOT NULL
+  `fecha` date NOT NULL,
+  `ajuste` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,6 +44,7 @@ CREATE TABLE `asiento` (
 -- Estructura de tabla para la tabla `catalogo_estandar`
 --
 
+DROP TABLE IF EXISTS `catalogo_estandar`;
 CREATE TABLE `catalogo_estandar` (
   `id_catalogo_estandar` int(11) NOT NULL,
   `tipo_id` int(11) NOT NULL,
@@ -109,6 +111,7 @@ INSERT INTO `catalogo_estandar` (`id_catalogo_estandar`, `tipo_id`, `clasificaci
 -- Estructura Stand-in para la vista `catalogo_grupo`
 -- (Véase abajo para la vista actual)
 --
+DROP VIEW IF EXISTS `catalogo_grupo`;
 CREATE TABLE `catalogo_grupo` (
 `id_catalogo_usuario` int(11)
 ,`tipo_id` int(11)
@@ -124,6 +127,7 @@ CREATE TABLE `catalogo_grupo` (
 -- Estructura de tabla para la tabla `catalogo_usuario`
 --
 
+DROP TABLE IF EXISTS `catalogo_usuario`;
 CREATE TABLE `catalogo_usuario` (
   `id_catalogo_usuario` int(11) NOT NULL,
   `tipo_id` int(11) NOT NULL,
@@ -138,6 +142,7 @@ CREATE TABLE `catalogo_usuario` (
 -- Estructura de tabla para la tabla `clasificacion_cuenta`
 --
 
+DROP TABLE IF EXISTS `clasificacion_cuenta`;
 CREATE TABLE `clasificacion_cuenta` (
   `id_clasificacion` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -157,11 +162,13 @@ INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `empresa`
 --
 
+DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id_empresa` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT '0'
+  `estado` int(11) NOT NULL DEFAULT '0',
+  `procedimiento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -170,6 +177,7 @@ CREATE TABLE `empresa` (
 -- Estructura de tabla para la tabla `grupo`
 --
 
+DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -181,6 +189,7 @@ CREATE TABLE `grupo` (
 -- Estructura Stand-in para la vista `grupos_usuarios`
 -- (Véase abajo para la vista actual)
 --
+DROP VIEW IF EXISTS `grupos_usuarios`;
 CREATE TABLE `grupos_usuarios` (
 `id_usuario_grupo` int(11)
 ,`usuario_id` int(11)
@@ -199,6 +208,7 @@ CREATE TABLE `grupos_usuarios` (
 -- Estructura Stand-in para la vista `parcial`
 -- (Véase abajo para la vista actual)
 --
+DROP VIEW IF EXISTS `parcial`;
 CREATE TABLE `parcial` (
 `id_registro` int(11)
 ,`asiento_id` int(11)
@@ -224,8 +234,10 @@ CREATE TABLE `parcial` (
 -- Estructura Stand-in para la vista `rayado_diario`
 -- (Véase abajo para la vista actual)
 --
+DROP VIEW IF EXISTS `rayado_diario`;
 CREATE TABLE `rayado_diario` (
 `id_asiento` int(11)
+,`ajuste` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
 ,`fecha` date
@@ -245,6 +257,7 @@ CREATE TABLE `rayado_diario` (
 -- Estructura de tabla para la tabla `registro_asiento`
 --
 
+DROP TABLE IF EXISTS `registro_asiento`;
 CREATE TABLE `registro_asiento` (
   `id_registro` int(11) NOT NULL,
   `asiento_id` int(11) NOT NULL,
@@ -262,6 +275,7 @@ CREATE TABLE `registro_asiento` (
 -- Estructura de tabla para la tabla `registro_parcial`
 --
 
+DROP TABLE IF EXISTS `registro_parcial`;
 CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
@@ -275,6 +289,7 @@ CREATE TABLE `registro_parcial` (
 -- Estructura de tabla para la tabla `tarjeta_almacen`
 --
 
+DROP TABLE IF EXISTS `tarjeta_almacen`;
 CREATE TABLE `tarjeta_almacen` (
   `id_tarjeta` int(11) NOT NULL,
   `empresa_id` int(11) NOT NULL,
@@ -297,6 +312,7 @@ CREATE TABLE `tarjeta_almacen` (
 -- Estructura de tabla para la tabla `tipo_cuenta`
 --
 
+DROP TABLE IF EXISTS `tipo_cuenta`;
 CREATE TABLE `tipo_cuenta` (
   `id_tipo` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
@@ -319,6 +335,7 @@ INSERT INTO `tipo_cuenta` (`id_tipo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `rol` int(1) NOT NULL DEFAULT '3',
@@ -342,6 +359,7 @@ INSERT INTO `usuario` (`id_usuario`, `rol`, `nombre`, `apellido_paterno`, `apell
 -- Estructura de tabla para la tabla `usuario_grupo`
 --
 
+DROP TABLE IF EXISTS `usuario_grupo`;
 CREATE TABLE `usuario_grupo` (
   `id_usuario_grupo` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
@@ -382,7 +400,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `rayado_diario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rayado_diario`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`descripcion` AS `descripcion`,`asiento`.`fecha` AS `fecha`,`registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber` from (`asiento` join `registro_asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rayado_diario`  AS  select `asiento`.`id_asiento` AS `id_asiento`,`asiento`.`ajuste` AS `ajuste`,`asiento`.`empresa_id` AS `empresa_id`,`asiento`.`descripcion` AS `descripcion`,`asiento`.`fecha` AS `fecha`,`registro_asiento`.`id_registro` AS `id_registro`,`registro_asiento`.`asiento_id` AS `asiento_id`,`registro_asiento`.`folio` AS `folio`,`registro_asiento`.`catalogo_usuario_id` AS `catalogo_usuario_id`,`registro_asiento`.`cuenta` AS `cuenta`,`registro_asiento`.`parcial` AS `parcial`,`registro_asiento`.`debe` AS `debe`,`registro_asiento`.`haber` AS `haber` from (`asiento` join `registro_asiento` on((`asiento`.`id_asiento` = `registro_asiento`.`asiento_id`))) ;
 
 --
 -- Índices para tablas volcadas
@@ -483,73 +501,61 @@ ALTER TABLE `usuario_grupo`
 --
 ALTER TABLE `asiento`
   MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `catalogo_estandar`
 --
 ALTER TABLE `catalogo_estandar`
   MODIFY `id_catalogo_estandar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
 --
 -- AUTO_INCREMENT de la tabla `catalogo_usuario`
 --
 ALTER TABLE `catalogo_usuario`
   MODIFY `id_catalogo_usuario` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `clasificacion_cuenta`
 --
 ALTER TABLE `clasificacion_cuenta`
   MODIFY `id_clasificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `registro_asiento`
 --
 ALTER TABLE `registro_asiento`
   MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `registro_parcial`
 --
 ALTER TABLE `registro_parcial`
   MODIFY `id_parcial` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tarjeta_almacen`
 --
 ALTER TABLE `tarjeta_almacen`
   MODIFY `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_cuenta`
 --
 ALTER TABLE `tipo_cuenta`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario_grupo`
 --
 ALTER TABLE `usuario_grupo`
   MODIFY `id_usuario_grupo` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -585,7 +591,6 @@ ALTER TABLE `tarjeta_almacen`
 ALTER TABLE `usuario_grupo`
   ADD CONSTRAINT `usuario_grupo_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`id_grupo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_grupo_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

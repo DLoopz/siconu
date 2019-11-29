@@ -37,6 +37,16 @@
           <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit"></i></em></strong></a>
           <!-- eliminar confirmación -->
           <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
+          <!-- Ver Ejercicios -->
+          <?php 
+            $newdata = array(
+              'id_user' => $student->usuario_id,
+              'grupo' => $id_group,
+              'id_org' =>$this->session->userdata('id_user')
+            );
+            $this->session->set_userdata($newdata);
+          ?>
+          <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student" title="Ver Ejercicios"><strong><em><i class="icon-eye"></i></em></strong></a>
         </td>
       </tr>
       <?php } ?>
@@ -62,7 +72,7 @@
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url() ?>professor/del_student/<?php echo $id_group ?>">
                    <input type="hidden" id="eliminar" name="id_alumno"></input>
-                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 " value="Si">    
+                   <input type="submit" class="btn btn-outline-primary my-2 my-sm-0 tam" value="Si">    
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">
                </form>
             </div>
@@ -86,8 +96,9 @@
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url()?>professor/del_students/<?php echo $id_group; ?>">
-                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0" data-dismiss="modal" value="No">
-                  <input type="submit" name="del_students" class="btn btn-outline-danger my-2 my-sm-0 margin_left_modal" value="Si">    
+                  <input type="submit" name="del_students" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si"> 
+                  <input type="reset" class="btn btn-outline-success my-2 my-sm-0  margin_left_modal" data-dismiss="modal" value="No">
+   
                 </form>
             </div>
         </div>

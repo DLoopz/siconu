@@ -10,7 +10,7 @@ class Daybook extends CI_Controller {
     {
       redirect('');
     }
-    if ($this->session->userdata('rol') != 3)
+    if ($this->session->userdata('rol') == 1)
     {
       redirect('');
     }
@@ -31,10 +31,10 @@ class Daybook extends CI_Controller {
 		$data['entries']=$this->model_daybook->get_entries($fields);
     $data['registers']=$this->model_daybook->get_all_registers($fields);
     $data['partials']=$this->model_daybook->get_partials($fields);
+    $fields = array('id_empresa' => $id );
+    $data['exercise']=$this->model_exercise->get_exercise($fields);
 		$data['id_empresa']=$id;
     $data['disabled']=false;
-
-
     $fields = array('id_empresa' => $id );
     $status = $this->model_daybook->get_status($fields);
     $newdata = array(
@@ -77,10 +77,16 @@ class Daybook extends CI_Controller {
     }
     else
     {
+      if ($this->input->post('ajuste')) {
+        $ajuste=1;
+      }else{
+        $ajuste=0;
+      }
       $fields = array(
         'empresa_id' => $id_empresa,
         'descripcion' => $this->input->post('concepto'),
-        'fecha' => $this->input->post('fecha_asiento') 
+        'fecha' => $this->input->post('fecha_asiento'), 
+        'ajuste' => $ajuste
       );
       $add=$this->model_daybook->insert_entry($fields);
       if($add)
@@ -180,8 +186,27 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    $fields = array('grupo_id' => $this->session->userdata('grupo'));
-    $accounts=$this->model_account->get_catalog_student($fields);
+
+    $fields = array('id_empresa' => $id_empresa);
+    $exercise=$this->model_exercise->get_exercise($fields);
+
+    if ($exercise->procedimiento==1) {      
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student_inventarios($fields);
+    }
+    if ($exercise->procedimiento==2) {      
+      $data['types']=$this->model_account->get_tipo_cuenta();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student($fields);
+    }
+    if ($exercise->procedimiento==3) {
+
+      $data['types']=$this->model_account->get_tipo_cuenta_basica();
+      $fields = array('grupo_id' => $this->session->userdata('grupo'));
+      $accounts=$this->model_account->get_catalog_student_mercancias($fields);
+    }
+   
 
     if (!$this->form_validation->run())
     {
@@ -189,7 +214,6 @@ class Daybook extends CI_Controller {
 			$data['id_asiento']=$id_asiento;
       $data['id_empresa']=$id_empresa;
 			$data['accounts']=$accounts;
-      $data['types']=$this->model_account->get_tipo_cuenta();
       $data['clasifications']=$this->model_account->get_clasificacion_cuenta();
       $fields = array('asiento_id' => $id_asiento);
       $data['registers']=$this->model_daybook->get_registers($fields);
@@ -273,7 +297,7 @@ class Daybook extends CI_Controller {
         // para mostrar la cuenta
         $fields = array('id_registro' => $id_registro);
         $cuenta = $this->model_daybook->get_partial($fields);
-        $data['cuenta']= $cuenta->cuenta;
+        $data['cuenta']= $cuenta;
 
 
 
@@ -320,6 +344,12 @@ class Daybook extends CI_Controller {
       $data['id_registro']=$id_registro;
       $fields = array('registro_id' => $id_registro);
       $data['partials']=$this->model_daybook->get_registers_partial($fields);
+      // para mostrar la cuenta
+      $fields = array('id_registro' => $id_registro);
+      $data['cuenta'] = $this->model_daybook->get_partial($fields);
+
+      $fields = array('id_empresa' => $id_empresa);
+      $data['exercise']= $this->model_exercise->get_exercise($fields);
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('student/view_register_partial');

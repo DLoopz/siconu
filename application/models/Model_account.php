@@ -13,9 +13,8 @@ class Model_account extends CI_Model
   //Eliminar cuenta
   public function delete_account($data)
   {
-    //id_catalogog usario de la cuenta y el user_id
-    $sql = $this->db->query("
-      SELECT cu.id_catalogo_usuario, cu.nombre, ra.catalogo_usuario_id, ra.cuenta, cu.usuario_id, u.id_usuario, u.matricula from catalogo_usuario cu
+    //id_catalogo usario de la cuenta y el user_id
+    $sql = $this->db->query("SELECT cu.id_catalogo_usuario, cu.nombre, ra.catalogo_usuario_id, ra.cuenta, cu.usuario_id, u.id_usuario, u.matricula from catalogo_usuario cu
       JOIN registro_asiento ra
       on cu.id_catalogo_usuario = ra.catalogo_usuario_id and ra.catalogo_usuario_id = {$data['id_catalogo_usuario']}
       join usuario u
@@ -82,9 +81,24 @@ class Model_account extends CI_Model
     $sql = $this->db->get_where('tipo_cuenta');
     return $sql->result();
   }
+  public function get_tipo_cuenta_basica()
+  {
+    $this->db->where('id_tipo != 4');
+    $this->db->where('id_tipo != 5');
+    $sql = $this->db->get_where('tipo_cuenta');
+    return $sql->result();
+  }
   public function get_clasificacion_cuenta()
   {
     $sql = $this->db->get_where('clasificacion_cuenta');
+    return $sql->result();
+  }
+  public function get_catalog_student_inventarios($data)
+  {
+    $this->db->order_by('tipo_id');
+    $this->db->order_by('clasificacion_id');
+    $this->db->order_by('id_catalogo_usuario');
+    $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }
   public function get_catalog_student($data)
@@ -92,6 +106,16 @@ class Model_account extends CI_Model
     $this->db->order_by('tipo_id');
     $this->db->order_by('clasificacion_id');
     $this->db->order_by('id_catalogo_usuario');
+    $sql = $this->db->get_where('catalogo_grupo',$data);
+    return $sql->result();
+  }
+  public function get_catalog_student_mercancias($data)
+  {
+    $this->db->order_by('tipo_id');
+    $this->db->order_by('clasificacion_id');
+    $this->db->order_by('id_catalogo_usuario');
+    $this->db->where('tipo_id != 4');
+    $this->db->where('tipo_id != 5');
     $sql = $this->db->get_where('catalogo_grupo',$data);
     return $sql->result();
   }

@@ -3,13 +3,6 @@
 	setlocale(LC_ALL, 'es_MX');?>
 	<h3 class="text-center">Balance General</h3>
 	<hr class="line_sep">
-
-  <div class="row">
-    <div class="col-12 text-right">
-        <a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
-        <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
-    </div>
-  </div>
   <br>
 
 	<nav class="nav-fill">
@@ -127,13 +120,15 @@
                   <?php endif ?>
                 <?php endforeach ?>
                 <div class="row td-b font-italic font-weight-light">
-                  <div class="col-6">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
-                  <div class="col-6">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
+                  <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
+                  <div class="col-4"></div>
+                  <div class="col-4 text-right">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td-b font-weight-bold">
-                <div class="col-6">Total <?php echo $type->nombre; ?>s</div>
-                <div class="col-6"><?php echo number_format($total_tipo[1],2,'.',','); ?></div>
+                <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
+                <div class="col-4"></div>
+                <div class="col-4 text-right">$  <?php echo number_format($total_tipo[1],2,'.',','); ?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>
@@ -165,13 +160,15 @@
                   <?php endif ?>
                 <?php endforeach ?>
                 <div class="row td font-italic font-weight-light">
-                  <div class="col-6">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
-                  <div class="col-6">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[2]=$total_tipo[2]+$total_clas;$total_clas=0;?></div>
+                  <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
+                <div class="col-4"></div>
+                  <div class="col-4 text-right">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[2]=$total_tipo[2]+$total_clas;$total_clas=0;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td font-weight-bold">
-                <div class="col-6">Total <?php echo $type->nombre; ?>s</div>
-                <div class="col-6">$ <?php echo number_format($total_tipo[2],2,'.',','); $totla_pasivo=$total_tipo[2]?></div>
+                <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
+                <div class="col-4"></div>
+                <div class="col-4 text-right">$ <?php echo number_format($total_tipo[2],2,'.',','); $totla_pasivo=$total_tipo[2]?></div>
               </div>
             <?php endif ?>
             <?php if ($type->id_tipo == 3): $total_tipo[3]=0;?>
@@ -195,14 +192,16 @@
                   <?php endif ?>
                 <?php endforeach ?>
                  <div class="row td-a font-weight-bold">
-                <div class="col-6">Total <?php echo $type->nombre; ?></div>
-                <div class="col-6">$ <?php echo number_format($total_tipo[3],2,'.',','); $total_capital=$total_tipo[3];?></div>
+                <div class="col-4">Total <?php echo $type->nombre; ?></div>
+                <div class="col-4"></div>
+                <div class="col-4 text-right">$ <?php echo number_format($total_tipo[3],2,'.',','); $total_capital=$total_tipo[3];?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>
           <div class="row td-a">
-            <div class="col-6">Total Pasivo + Capital</div>
-            <div class="col-6">$ <?php echo number_format(($totla_pasivo+$total_capital),2,'.',',');?></div>
+            <div class="col-4">Total Pasivo + Capital</div>
+            <div class="col-4"></div>
+            <div class="col-4 text-right">$ <?php echo number_format(($totla_pasivo+$total_capital),2,'.',',');?></div>
           </div>
         </div>
       </div>

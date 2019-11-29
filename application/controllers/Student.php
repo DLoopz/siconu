@@ -10,7 +10,7 @@ class Student extends CI_Controller {
     {
       redirect('');
     }
-    if ($this->session->userdata('rol') != 3)
+    if ($this->session->userdata('rol') == 1)
     {
       redirect('');
     }
@@ -73,6 +73,7 @@ class Student extends CI_Controller {
     $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('procedimiento','Procedimiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
@@ -94,7 +95,8 @@ class Student extends CI_Controller {
     {
       $fields = array(
         'usuario_id' => $id,
-        'nombre' => $this->input->post('nombre')
+        'nombre' => $this->input->post('nombre'),
+        'procedimiento' => $this->input->post('procedimiento')
       );
       $add=$this->model_exercise->insert_exercise($fields);
       if($add){

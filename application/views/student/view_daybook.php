@@ -5,15 +5,16 @@
 	        echo $this->session->flashdata('msg');
 	    ?>
 			<hr class="line_sep">
+			<?php if ($this->session->userdata('rol')==3 and $exercise->estado!=1) { ?>
 			<div class="row">
 				<div class="col-6">
-						<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
+					<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 				</div>
 				<div class="col-6 text-right">
-					<a href="<?php echo base_url();?>student/close_exercise/<?php echo $id_empresa;?>" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Empresa"><i class="icon-cancel-circled"></i></a>
-					<a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Regresar a Empresas"><i class="icon-home-1"></i></a>
+					<a href="" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Ejercicio" data-toggle="modal" data-target="#cerrarEmpresa"><i class="icon-cancel-circled"></i></a>
 				</div>
 			</div>
+			<?php } ?>
 			<br>
 			<div class="row">
 			  <table class="table table-hover table-responsive">
@@ -26,7 +27,9 @@
 				      <th scope="col">Parcial</th>
 				      <th scope="col">Debe</th>
 				      <th scope="col">Haber</th>
+				      <?php if ($this->session->userdata('rol')==3 and $exercise->estado!=1) { ?>
 				      <th scope="col">opciones</th>
+				    	<?php } ?>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -73,6 +76,7 @@
 					    	<td></td>
 					    	<td></td>
 					    	<td></td>
+					    	<?php if ($this->session->userdata('rol')==3 and $exercise->estado!=1) { ?>
 					    	<td>
 					    		<div class="row">
 					    		<!--editar descripcion del asiento-->
@@ -83,6 +87,7 @@
                   <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
                 </div>
                 </td>
+              	<?php } ?>
 					    </tr>
 				  	<?php } ?>
 				    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
@@ -127,3 +132,21 @@
         $('#eliminar').val(id);
     }
 </script>
+
+	<!-- Modal para confirmación de cierre de sesión-->
+<div class="modal fade" id="cerrarEmpresa" tabindex="-1" role="dialog" aria-labelledby="cerrarEmpresaLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Cerrar Ejercicio</h5>
+			</div>
+			<div class="modal-body">
+				¿Está seguro que desea cerrar Ejercicio?
+			</div>
+			<div class="modal-footer">
+				<a href="<?php echo base_url()?>student/close_exercise/<?php echo $id_empresa;?>"><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0" type="button">Si</button></a>
+				<button type="button" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>

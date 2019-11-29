@@ -97,6 +97,7 @@
 				<?php endif ?>
 			<?php endforeach ?>
 
+
 			<?php $sub_comp=0; foreach ($registers as $register): ?>
 				<?php $aux=0; if ($register->folio > 5200  && $register->folio<5300):?>
 				<tr>
@@ -166,9 +167,10 @@
 						<td><?php echo $register->cuenta;?></td>				
 						<td></td>
 						<td></td>
+						<td></td>
 						<?php $aux=$register->debe-$register->haber;?>
 						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
-						<td></td>								
+														
 					</tr>
 					<?php $inventario_final=$inventario_final+$aux; ?>
 				<?php endif ?>
@@ -184,7 +186,7 @@
 			</tr>
 
 			<tr>
-				<td class="font-weight-bold">Utilidad Bruta</td>
+				<td class="font-weight-bold">Utilidad o Pérdida Bruta</td>
 				<td></td>
 				<?php $Utilidad=$ventas_netas-$costo_vendido;?>
 				<td></td>

@@ -119,7 +119,7 @@ class Model_daybook extends CI_Model
   public function get_partial($data)
   {
     $sql = $this->db->get_where('registro_asiento', $data);
-    return $sql->result();
+    return $sql->row();
   }
 
 }
