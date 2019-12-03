@@ -193,7 +193,15 @@ class Admin extends CI_Controller
 
   public function clean_data()
   {
-    $this->model_system->empty_db();
+    $del=$this->model_system->empty_db();
+    if($del)
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-success text-center">Limpieza ejecutada</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-danger text-center">Error La base no se limpio</div>');
+    }
     redirect('admin', 'refresh');
   }
 

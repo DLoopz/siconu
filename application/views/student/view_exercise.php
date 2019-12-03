@@ -5,8 +5,11 @@
 	  if($this->session->flashdata('msg'))
 	    echo $this->session->flashdata('msg');
 	?>
+
 	<?php if ($this->session->userdata('rol')==3) { ?>
 	<a href="<?php echo base_url();?>student/add_exercise" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Ejercicio"><i class="icon-plus-2"></i></a>
+	<?php }else{ ?>
+		<a href="<?php echo base_url() ?>professor/show_students/<?php echo $this->session->userdata('grupo') ?> " class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
 	<?php } ?>
 	<br><br>
 	<div class="table-responsive">
