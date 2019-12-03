@@ -35,7 +35,7 @@
 	          	<div class="row"> 
 	          	<!--editar asiento-->
 
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>/<?php echo $edit;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
 
             	<!-- eliminar asiento -->
               <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
@@ -72,9 +72,7 @@
 		<?php } ?>
 		<div class="panel-footer text-center">
 			<a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa;?>"> <button type="button" class="btn btn-outline-success my-2 my-sm-0" <?php if ($d!=$h or $d==0) {echo "disabled";}?>>Cerrar Asiento</button></a>
-			<?php if (!$edit){?>
-				<a href="<?php echo base_url()?>daybook/delete_entry/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a>
-			<?php } ?>
+			<a href="<?php if($edit==null){echo base_url()."daybook/delete_entry/".$id_empresa."/".$id_asiento;}else{echo base_url()."daybook/book/".$id_empresa;} ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a>
 		</div>
 	</div>
 </div>

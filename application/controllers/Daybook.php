@@ -551,7 +551,7 @@ class Daybook extends CI_Controller {
 
 
 
-public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null)
+public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null,$edit=null)
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
@@ -577,7 +577,9 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
       $data['id_empresa']=$id_empresa;
       $data['accounts']=$accounts;
       $data['register'] = $register;
-
+      if (!$edit==null) {
+        $data['edit'] = 1;
+      }
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('student/view_edit_register');
@@ -631,7 +633,11 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
       }
-      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+      $xdir='daybook/register/'.$id_empresa.'/'.$id_asiento;
+      if ($edit==1){
+        $xdir=$xdir.'/1';
+      }
+      redirect($xdir, 'refresh');
     }
   }
 
