@@ -72,7 +72,7 @@ class Admin extends CI_Controller
         //$this->email->cc('another@another-example.com');
         //$this->email->bcc('them@their-example.com');
         $this->email->subject('Usuario del sistema SICONU');
-        $this->email->message("Su usuario de ingreso es: <b>{$correo}</b> y su contraseña es <b>{$password}</b>");
+        $this->email->message("Su usuario de ingreso es: {$correo} y su contraseña es {$password}");
         
         $this->email->send();
 
@@ -146,7 +146,7 @@ class Admin extends CI_Controller
         //$this->email->cc('another@another-example.com');
         //$this->email->bcc('them@their-example.com');
         $this->email->subject('Usuario del sistema SICONU');
-        $this->email->message("Su usuario de ingreso es: <b>{$correo}</b> y su contraseña es <b>profesor{$num}</b>");
+        $this->email->message("Su usuario de ingreso es: {$correo} y su contraseña es profesor{$num}");
         
         $this->email->send();
         if($add==true)
@@ -193,7 +193,15 @@ class Admin extends CI_Controller
 
   public function clean_data()
   {
-    $this->model_system->empty_db();
+    $del=$this->model_system->empty_db();
+    if($del)
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-success text-center">Limpieza ejecutada</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-danger text-center">Error La base no se limpio</div>');
+    }
     redirect('admin', 'refresh');
   }
 

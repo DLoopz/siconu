@@ -1,70 +1,63 @@
-<?php 
-//require_once("/home/santiago/dompdf/autoload.inc.php");
-//use Dompdf\Dompdf;
-
-function generar()
-{
-/*
-  $cont = "<script>cont</script>";
-  $dompdf = new Dompdf();
-  $dompdf->loadHtml($cont);
-  $dompdf->setPaper('A4', 'landscape');
-  //ini_set("memory_limit","50M");//aumentar memoria
-  $dompdf->render();
-  $dompdf->stream('archivo');
-  */
-  //echo "<script>alert(generado)</script>";
-}
-
-?>
+<form action="<?php echo base_url();?>daybook/pdf" method='post' class="invisible">
+  <input type="text" id="contpdf" name="contpdf" class="invisible">
+  <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar">
+</form>
 
 
-<div id="resultado"></div>
-
-
-
-
-<footer class="espacio-footer">
-	<div class="fondo-rosa text-center">
-		<br>
-		Copyright © Derechos Reservados <?php echo date('Y'); ?>  SICONU
-	</div>
-</footer>
-</body>
+    <footer class="espacio-footer">
+    	<div class="fondo-rosa text-center">
+    		<br>
+    		Copyright © Derechos Reservados <?php echo date('Y'); ?>  SICONU
+    	</div>
+    </footer>
+  </body>
 </html>
-
 
 
 <script type="text/javascript">
 
   $(window).ready(function(){
 
-    $(<?php if(isset($modal)) echo "'#".$modal."'";?>).modal("show");
+    habilitar();
+
+    <?php if(isset($modal)) echo "$('#".$modal."').modal('show')";?>    
+
+    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');      
 
     
-    /*
-    $(".exito:first-child, .error:first-child").append("<span class='confirmacion' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></span>");
 
-    $(".confirmacion").click(function() {
-  		$(".exito:first-child, .error:first-child").hide();
-		});
+    $("#sendcont").click(function() {
+      
+      //console.log($('body').html());
+      
+      var heads = $('head').html();
+      //var body = $('body').html();
+      //var container = $('.container').html();
 
-    */
+      var ntablas = $('table');
+      var tables;
+      tables = $('table').html(); //1
 
-    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
+      for (var i = 0; i < ntablas.length; i++) {
+        //tables += $('table:nth-child(i)').nextAll().html();
+      }
+      
+      
 
-    $("#cola").click(function() {
-     
-      console.log($('body').html());
-      var cont = $('body').html();
-      alert(cont);
-      document.write('<?php echo generar(); ?>');
+      alert('tables');
+      alert(Object.values(tables));
+
+      //var contpdf = heads+table1+tables;
+      //$("#contpdf").val(contpdf);
+      console.log('');
       
     })
 
-    
-
   });
+  
+
+  
+
   
 
 </script>

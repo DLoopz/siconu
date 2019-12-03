@@ -58,7 +58,7 @@
                 ¿Está seguro que desea cerrar sesión?
             </div>
             <div class="modal-footer">
-               <a href="<?php echo base_url()?>login/logout"><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0" type="button">Si</button></a>
+               <a href="<?php echo base_url()?>login/logout"><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0 tam" type="button">Si</button></a>
                 <button type="button" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal">No</button>
                 <!--<button type="button" class="btn btn-primary">Si</button>-->
             </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="text-center alert alert-warning">Tenga en cuenta que se eliminaran todos los registros, usuarios e informacion importante almacenada en ella</div>
             <div class="modal-footer">
-                <a href="<?php echo base_url()?>admin/clean_data"><span class="glyphicon glyphicon-user" style="font-size:20px;" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0 " type="button">Si</button></a>
+                <a href="<?php echo base_url()?>admin/clean_data"><span class="glyphicon glyphicon-user" style="font-size:20px;" data-toggle="modal" data-target="#cerrarSesion"></span><button class="btn btn-outline-primary my-2 my-sm-0 tam" type="button">Si</button></a>
                 <!--<button type="button" class="btn btn-primary">Si</button>-->
                 <button type="button" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal">No</button>
                 

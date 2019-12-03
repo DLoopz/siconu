@@ -11,12 +11,12 @@
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
       <br>
-      <h3 class="text-center">Editar Registro</h3>
+      <h3 class="text-center">Editar Registro del Asiento</h3>
       <a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
       <hr class="line_sep">
 
-      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro ?>">
+      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro ?><?php echo "/".isset($edit);?>">
 
         <div class="form-group">
           Cuenta
@@ -62,7 +62,7 @@
         <br>
         <div class="panel-footer text-center">
           <input type="submit" name="add_resgistry" value="Actualizar" class="btn btn-outline-success my-2 my-sm-0 ">
-          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Cancelar</button></a>
+          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?><?php if( isset($edit)) echo "/1"; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Cancelar</button></a>
         </div>
 
       </form>
