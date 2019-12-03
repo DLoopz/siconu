@@ -6,12 +6,19 @@
 	Seleccione al menos una cuenta y pulse en crear para agregar sus propias cuentas.</p>
 	<div class="">
 		<?php
-        if($this->session->flashdata('msg'))
-            echo $this->session->flashdata('msg');
-        ?>
+      if($this->session->flashdata('msg'))
+          echo $this->session->flashdata('msg');
+    ?>
 
-        <?php //clasificacion_id ?>
+    <?php //clasificacion_id ?>
 		<form method="post" action="<?php echo base_url();?>professor/create_account_catalog" class="col-12">
+			
+			<hr class="line_sep">
+			<div class="checkbox">
+				<input  class="checkitem" type="checkbox" id="checkall"/>Seleccionar todos<br>
+			</div>
+			<hr class="line_sep">
+
 			<?php foreach ($types as $type) {?>
 				<?php if ($type->id_tipo<4): ?>
 					<h3 class="text-center"><?php echo $type->nombre; ?></h3>
