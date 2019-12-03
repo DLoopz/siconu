@@ -11,9 +11,17 @@
       <h3 class="text-center">Registro del Asiento</h3>
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+        <?php if ($accounts==null) { ?>
+          <div class="form-check alert-warning text-center">
+            <br>
+            El Catalog de cuentas no ha sido dado de alta, avisa a tu Profesor(a). <br>
+            <br>
+          </div>
+          <hr>
+        <?php } ?>
          <div class="form-group">
           Tipo de cuenta
-          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta" onchange="activeClasification()">
+          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta" onchange="activeClasification()" <?php if($accounts==null){echo "disabled";} ?>>
             <option value="0" selected disabled>Seleccione tipo de cuenta</option>
             <?php foreach ($types as $type) {?>
               <option value="<?php echo $type->id_tipo;?>"><?php echo $type->nombre;?></option>

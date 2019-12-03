@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="content">
     <div><h3 class="text-center">Tarjeta de Almacén</h3></div>
     <hr class="line_sep">
     <?php
@@ -163,6 +163,9 @@
                 <label for="">
                     <b>Costo de lo vendido: </b><?php echo '$', number_format($vendido, 2, ".", ","); ?>
                 </label><br>
+
+                <div id="editor"></div>
+                <button id="cmd" class="btn btn-danger">Generar PDF</button>
             </div>
         <?php}else
         {?>
@@ -231,5 +234,21 @@
     {
         $('#terminar').val(id);
     }
+
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#cmd').click(function () {
+        doc.fromHTML($('#content').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+
 
 </script>

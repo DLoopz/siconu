@@ -373,16 +373,19 @@ class Professor extends CI_Controller {
 
   public function edit_password($id=null,$id_group=null){
     //reglas de validacion
+    
     $this->form_validation->set_rules('password','Nueva Contraseña','trim|required|min_length[8]');
-    $this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña','trim|required|matches[password]|min_length[8]');
+    //$this->form_validation->set_rules('password_c','Confirmar Nueva Contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
-    $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
-    $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
+    //$this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
+    //$this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+    
     if($this->form_validation->run()==FAlSE)
     {
+
       $data['title']='Editar contraseña de alumno';
       $data['id_student']=$id;
       $data['id_group']=$id_group;
@@ -391,10 +394,16 @@ class Professor extends CI_Controller {
       $this->load->view('professor/view_edit_pass_student');
       $this->load->view('foot');
     }else{
+
+      $fields = array(
+        'id_usuario' => $id
+      );
+      $pass = $this->model_user->get_user($fields);
+
       if($this->input->post("submit")){
         $fields = array(
           'id_usuario' => $id,
-          'contrasenia' =>md5($this->input->post('password'))
+          'contrasenia' =>md5($pass->matricula)
         );
         $mod= $this->model_user->update_user($fields);
         //redirect('profesor');
@@ -406,8 +415,9 @@ class Professor extends CI_Controller {
         redirect('professor/show_students/'.$id_group);
       }else{
         redirect('professor/show_students/'.$id_group);
-      }    
-    }   
+      }
+      
+    }
   }
 
   public function del_student($id_group)
