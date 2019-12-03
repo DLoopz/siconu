@@ -16,26 +16,6 @@
 
 <script type="text/javascript">
 
-  
-  $(document).ready(function(){
-
-      $("form").submit(function(e){
-          var condicion = $("#rgpd").is(":checked");
-          if(!condicion){
-              e.preventDefault();
-          }else{
-              $("[name='enviar']").click(function(){
-                  $(this).attr("disabled","disabled");
-              });
-          };  
-      });
-      $("input").blur(function(){
-          $("[name='enviar']").removeAttr("disabled");
-      })
-      
-  });
-
-
   $(window).ready(function(){
 
     habilitar();
