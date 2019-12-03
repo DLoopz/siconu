@@ -42,31 +42,7 @@
 
     <?php if(isset($modal)) echo "$('#".$modal."').modal('show')";?>    
 
-    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
-
-    //no editar
-
-      //echo print_r($exercises,1);
-      /*
-      [id_empresa] => 2
-      [estado] => 0
-      */
-      
-      var ejs = new Array();
-      <?php 
-        /*
-        echo $asientos[0]->id_asiento;
-        echo 'num asientos'.count($asientos);
-        */
-      ?>
-      <?php 
-      
-        if (isset($exercises)) {
-          for ($i=0; $i < count($exercises); $i++) { 
-      ?>
-        var ejs.push(<?php echo $exercises[$i]->id_empresa;?>) = <?php echo $exercises[$i]->id_empresa; ?>
-      <?php  }} ?>
-          
+    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');      
 
     
 
