@@ -16,7 +16,6 @@ class Daybook extends CI_Controller {
     {
       redirect('');
     }
-    */
   }
 
 	public function index()
