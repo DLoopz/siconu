@@ -16,7 +16,7 @@
       		<select class="form-control" name="procedimiento">
       			<option selected disabled>Seleccione procedimiento</option>
       			<option value="1" <?php echo  set_select('procedimiento', 1, TRUE); ?>>Inventarios Perpetuos</option>
-      			<option value="2" <?php echo  set_select('procedimiento', 2, TRUE); ?>>Analitico</option>
+      			<option value="2" <?php echo  set_select('procedimiento', 2, TRUE); ?>>Analítico</option>
       			<option value="3" <?php echo  set_select('procedimiento', 3, TRUE); ?>>Mercancias Generales</option>
       		</select>
       		<?php echo form_error('procedimiento');?>
@@ -24,11 +24,11 @@
 				<div class="text-danger">
         	<?php echo form_label('* Campo Obligatorio')?><br>
       	</div>
-      	<hr>
       	<br>
+      	<hr>
       	<div class="panel-footer text-center">
       		<input type="submit" name="nombre_ejercicio" value="Guardar" class="btn btn-outline-success my-2 my-sm-0">
-	      	<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn"">Volver</button></a>
+	      	<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
 				</div>
 			</form>
 		</div>

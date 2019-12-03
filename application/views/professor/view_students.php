@@ -11,47 +11,49 @@
   
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
 
-  <button class="btn btn-outline-danger my-2 my-sm-0 " data-toggle="modal" data-target="#alumnos" title="Eliminar Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></button>
+  <button class="btn btn-outline-danger my-2 my-sm-0 " data-toggle="modal" data-target="#alumnos" title="Eliminar Todos los Alumnos"><strong><em><i class="icon-trash-empty"></i></em></strong></button>
   <br></br>
-  <table class="table" id="user-table">
-    <thead>
-      <tr>
-        <th>Nombre del alumno</th>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>Matrícula</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($students as $student){?>
-      <tr>
-        <td><?php echo $student->nombre ?></td>
-        <td><?php echo $student->apellido_paterno ?></td>
-        <td><?php echo $student->apellido_materno ?></td>
-        <td><?php echo $student->matricula ?></td>
-        <td>
-          <!--EDITAR-->
-            <a class="btn btn-outline-info my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil"></i></em></strong></a>
-          <!--EDITAR password-->
-          <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit"></i></em></strong></a>
-          <!-- eliminar confirmación -->
-          <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
-          <!-- Ver Ejercicios -->
-          <?php 
-            $newdata = array(
-              'id_user' => $student->usuario_id,
-              'grupo' => $id_group,
-              'id_org' =>$this->session->userdata('id_user')
-            );
-            $this->session->set_userdata($newdata);
-          ?>
-          <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student" title="Ver Ejercicios"><strong><em><i class="icon-eye"></i></em></strong></a>
-        </td>
-      </tr>
-      <?php } ?>
-    </tbody>
-  </table>     
+  <div class="table-responsive">
+    <table class="table" id="user-table">
+      <thead>
+        <tr>
+          <th>Nombre del alumno</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Matrícula</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($students as $student){?>
+        <tr>
+          <td><?php echo $student->nombre ?></td>
+          <td><?php echo $student->apellido_paterno ?></td>
+          <td><?php echo $student->apellido_materno ?></td>
+          <td><?php echo $student->matricula ?></td>
+          <td>
+            <!--EDITAR-->
+              <a class="btn btn-outline-info my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_student/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Alumno"><strong><em><i class="icon-pencil"></i></em></strong></a>
+            <!--EDITAR password-->
+            <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php echo base_url() ?>professor/edit_password/<?php echo $student->usuario_id;?>/<?php echo $id_group;?>" title="Editar Contraseña Alumno"><strong><em><i class="icon-edit"></i></em></strong></a>
+            <!-- eliminar confirmación -->
+            <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
+            <!-- Ver Ejercicios -->
+            <?php 
+              $newdata = array(
+                'id_user' => $student->usuario_id,
+                'grupo' => $id_group,
+                'id_org' =>$this->session->userdata('id_user')
+              );
+              $this->session->set_userdata($newdata);
+            ?>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student" title="Ver Ejercicios"><strong><em><i class="icon-eye"></i></em></strong></a>
+          </td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>    
 </div>
 <?php if (!isset($student)){?>
     <div class="text-center">
@@ -92,7 +94,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                 ¿Está seguro que desea eliminar los alumnos del grupo?
+                 ¿Está seguro que desea eliminar todos los alumnos del grupo?
             </div>
             <div class="modal-footer">
                <form method="POST" action="<?php echo base_url()?>professor/del_students/<?php echo $id_group; ?>">

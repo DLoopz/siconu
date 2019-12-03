@@ -16,8 +16,8 @@
 			</div>
 			<?php } ?>
 			<br>
-			<div class="row">
-			  <table class="table table-hover table-responsive">
+			<div class="table-responsive">
+			  <table class="table" id="user-table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No.</th>
@@ -28,7 +28,7 @@
 				      <th scope="col">Debe</th>
 				      <th scope="col">Haber</th>
 				      <?php if ($this->session->userdata('rol')==3 and $exercise->estado!=1) { ?>
-				      <th scope="col">opciones</th>
+				      <th scope="col">Opciones</th>
 				    	<?php } ?>
 				    </tr>
 				  </thead>
@@ -78,14 +78,14 @@
 					    	<td></td>
 					    	<?php if ($this->session->userdata('rol')==3 and $exercise->estado!=1) { ?>
 					    	<td>
-					    		<div class="row">
+					    		
 					    		<!--editar descripcion del asiento-->
                   <a class="btn btn-outline-success" href="<?php echo base_url() ?>daybook/edit_entry/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>" title="Editar Descripción del Asiento"><strong><em><i class="icon-pencil"></i></em></strong></a>
                   <!--editar asiento-->
                   <a class="btn btn-outline-secondary margin_left" href="<?php echo base_url() ?>daybook/register/<?php echo $id_empresa;?>/<?php echo $entry->id_asiento;?>/1" title="Editar Cuentas del Asiento"><strong><em><i class="icon-edit"></i></em></strong></a>
 					    		<!-- eliminar asiento -->
                   <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_entry" onclick="eliminar(<?php echo $entry->id_asiento;?>)" title="Eliminar Asiento"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-                </div>
+               
                 </td>
               	<?php } ?>
 					    </tr>
@@ -102,6 +102,7 @@
 				    </tr>
 				  </tbody>
 				</table>
+				
 			</div>
 		</div>
 
@@ -118,7 +119,7 @@
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delet_entry/<?php echo $id_empresa; ?>">
                    <input type="hidden" id="eliminar" name="id_entry"></input>
-                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">
+                   <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si">
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0  margin_left_modal" data-dismiss="modal" value="No">                   
                </form>
             </div>

@@ -68,7 +68,7 @@
 				<div class="modal-footer">
 					<form method="POST" action="<?php echo base_url() ?>student/del_exercise">
 						<input type="hidden" id="eliminar" name="id_empresa"></input>
-						<input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Si">
+						<input type="submit" class="btn btn-outline-primary my-2 my-sm-0 tam" value="Si">
 						<input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">           	
 					</form>
 			</div>

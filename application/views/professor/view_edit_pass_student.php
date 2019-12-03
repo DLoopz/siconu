@@ -27,7 +27,7 @@
 
       <div class="panel-footer text-center">
         <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0 "value="Guardar" />
-        <a class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Volver </a>
+        <a class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" href="<?php echo base_url() ?>professor/show_students/<?php echo $id_group;?>"> Volver </a>
       </div>
     </form>
   </div>

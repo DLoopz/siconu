@@ -19,7 +19,7 @@
          <hr>
         <div class="panel-footer text-center">
           <input type="submit" name="edit_grupo" value="Guardar" class="btn btn-outline-success my-2 my-sm-0 ">
-          <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Volver</button></a>
+          <a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
         </div>
       </form>
     <?php } ?>
