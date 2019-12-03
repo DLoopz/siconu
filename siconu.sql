@@ -303,7 +303,9 @@ CREATE TABLE `tarjeta_almacen` (
   `debe` float NOT NULL,
   `haber` float NOT NULL,
   `saldo` float NOT NULL,
-  `terminar` int(1) NOT NULL DEFAULT '0'
+  `terminar` int(1) NOT NULL DEFAULT '0',
+  `nombre_articulo` varchar(50) NOT NULL,
+  `tipo_unidad` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
