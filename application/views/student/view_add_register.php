@@ -14,13 +14,13 @@
         <?php if ($accounts==null) { ?>
           <div class="form-check alert-warning text-center">
             <br>
-            El Catalog de cuentas no ha sido dado de alta, avisa a tu Profesor(a). <br>
+            El Catalogo de cuentas no ha sido dado de alta, avisa a tu Profesor(a). <br>
             <br>
           </div>
           <hr>
         <?php } ?>
          <div class="form-group">
-          Tipo de cuenta
+          Tipo de cuenta *
           <select class="form-control" name="tipo_cuenta" id="tipo_cuenta" onchange="activeClasification()" <?php if($accounts==null){echo "disabled";} ?>>
             <option value="0" selected disabled>Seleccione tipo de cuenta</option>
             <?php foreach ($types as $type) {?>
