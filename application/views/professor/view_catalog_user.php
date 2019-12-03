@@ -1,6 +1,5 @@
 <div class="container">
 	<h3 class="text-center">Catálogo de Cuentas</h3>
-	<!--<hr class="line_sep">-->
 	<div class="">
 		<?php
       if($this->session->flashdata('msg'))
