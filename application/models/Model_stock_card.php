@@ -44,8 +44,15 @@ class Model_stock_card extends CI_Model
         return $sql->result();
     }
     
+    /*
     public function get_sc(){
         $query = $this->db->get_where('tarjeta_almacen');        
+        return $query->result();
+    }
+    */
+
+    public function get_sc($data){
+        $query = $this->db->get_where('tarjeta_almacen', $data);
         return $query->result();
     }
 
