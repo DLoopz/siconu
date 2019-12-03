@@ -29,7 +29,7 @@
           </select>
         </div>
          <div class="form-group">
-          Clasificación de cuenta
+          Clasificación de cuenta *
           <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta" onchange="activeCuenta()" disabled>
             <option value="0" selected disabled>Seleccione clasificación de cuenta</option>
             <?php foreach ($clasifications as $clasification) {?>
@@ -38,14 +38,14 @@
           </select>
         </div>
         <div class="form-group">
-          Cuenta
+          Cuenta *
           <select class="form-control" name="cuenta" disabled id="cuenta">
             <option value="0" selected disabled>Seleccione cuenta</option>
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
         <div class="form-group">
-          Cantidad
+          Cantidad *
           <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">$</div>
@@ -64,10 +64,14 @@
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
         </div>
+        <div class="text-danger">
+          <?php echo form_label('* Campos Obligatorios')?><br>
+        </div>
+        <hr>
         <br>
         <div class="text-center">
           <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
-          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn" name="cancelar">Volver</button></a>
+          <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" name="cancelar">Volver</button></a>
         </div>
       </form>
     </div>
@@ -78,7 +82,7 @@
       <hr class="line_sep">
       <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
          <div class="form-group">
-          Tipo de cuenta
+          Tipo de cuenta *
           <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasificationP()">
             <option value="0" selected disabled>Seleccione tipo de cuenta</option>
             <?php foreach ($types as $type) {?>
@@ -87,7 +91,7 @@
           </select>
         </div>
          <div class="form-group">
-          Clasificacion de cuenta
+          Clasificacion de cuenta *
           <select class="form-control" name="clasificacion_cuenta" id="clasificacion_cuenta_p" onchange="activeCuentaP()" disabled>
             <option value="0" selected disabled>Seleccione clasificación de cuenta</option>
             <?php foreach ($clasifications as $clasification) {?>
@@ -96,12 +100,16 @@
           </select>
         </div>
         <div class="form-group">
-          Cuenta
+          Cuenta *
           <select class="form-control" name="cuenta" disabled id="cuenta_p">
-            <option value="0" selected disabled>Seleccione cuenta</option>
+            <option value="0" selected disabled>Seleccione cuenta </option>
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
+         <div class="text-danger">
+          <?php echo form_label('* Campos Obligatorios')?><br>
+        </div>
+        <hr>
         <br>
         <div class="panel-footer text-center">
            <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">

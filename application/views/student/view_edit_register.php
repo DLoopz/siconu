@@ -11,7 +11,7 @@
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container">
       <br>
-      <h3 class="text-center">Editar Registro</h3>
+      <h3 class="text-center">Editar Registro del Asiento</h3>
       <a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
       <hr class="line_sep">

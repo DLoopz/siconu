@@ -65,7 +65,7 @@
       <div class="modal-footer">
        <form method="POST" action="<?php echo base_url() ?>admin/eliminar_professor">
          <input type="hidden" id="eliminar" name="id_profesor"></input>
-          <input type="submit" class="btn btn-outline-primary" value="Si">
+          <input type="submit" class="btn btn-outline-primary tam" value="Si">
          <input type="reset" class="btn btn-outline-success  margin_left_modal" data-dismiss="modal" value="No">                   
        </form>
       </div>
