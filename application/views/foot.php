@@ -1,4 +1,4 @@
-<form action="<?php echo base_url();?>daybook/pdf" method='post'>
+<form action="<?php echo base_url();?>daybook/pdf" method='post' class="invisible">
   <input type="text" id="contpdf" name="contpdf" class="invisible">
   <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar">
 </form>
@@ -15,6 +15,25 @@
 
 
 <script type="text/javascript">
+
+  
+  $(document).ready(function(){
+          $("form").submit(function(e){
+              var condicion = $("#rgpd").is(":checked");
+              if(!condicion){
+                  e.preventDefault();
+              }else{
+                  $("[name='enviar']").click(function(){
+                      $(this).attr("disabled","disabled");
+                  });
+              };  
+          });
+          $("input").blur(function(){
+              $("[name='enviar']").removeAttr("disabled");
+          })
+          
+      });
+
 
   $(window).ready(function(){
 
