@@ -187,9 +187,10 @@
                 </label><br>
 
                 <div id="editor"></div>
-                <button id="cmd" class="btn btn-danger">Generar PDF</button>
+                
             </div>
         <?php}else
+
         {?>
         <?php
            echo '';

@@ -33,6 +33,7 @@ class Balance_sheet extends CI_Controller
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_balance_sheet');
+    $this->load->view('pdf');
 		$this->load->view('foot');
 	}
 }
