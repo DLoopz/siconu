@@ -1,8 +1,9 @@
+    
     <div class="container">
-        <div class="row margin_top_login text-center">
+        <div class="row margin_top_login text-center back-white h-75">
             <div class="col-md-6 col-md-offset-6">
                 <figure class="figure"><br/><br/>
-                    <img src="<?php echo base_url();?>source/img/fondologin.png" class="figure-img img-fluid rounded" alt="img-siconu" width="500px">                
+                    <img src="<?php echo base_url();?>source/img/fondologin-blanco.png" class="figure-img img-fluid rounded" alt="img-siconu" width="500px">                
                 </figure>
             </div>
             <div class="col-md-4 col-md-offset-4">

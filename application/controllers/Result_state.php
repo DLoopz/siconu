@@ -68,6 +68,12 @@ class Result_state extends CI_Controller {
 				$data['title']="Estado de resultados";
 				$data['fecha_inicio']=$inicio;
 				$data['fecha_fin']=$fin;
+	    	if ($data['exercise']->procedimiento==3) {
+	    		$fields = array(
+						'empresa_id' => $id_empresa
+					);
+					$data['registers']=$this->model_result->get_partials($fields);
+				}
 				$this->load->view('head',$data);
 				$this->load->view('navbar');
 				$this->load->view('student/nabvar_options');

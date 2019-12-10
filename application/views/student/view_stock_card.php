@@ -81,29 +81,51 @@
                 <?php foreach ($stock_card as $sc)
                 {?>
                     <tr>
-                        <td><?php echo $sc->fecha ?></td>
-                        <td><?php echo $sc->referencia ?></td>
-                        <td><?php echo $sc->entradas ?></td>
-                        <td><?php echo $sc->salidas ?></td>
-                        <td><?php echo $sc->existencia ?></td>
-                        <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
-                        <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
-                        <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
-                        <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
-                        <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
-                        <td>
-                            <!-- Eliminar registro -->
-                            <?php
-                                if($ultimo == $sc->id_tarjeta and $terminar == 0)
-                                {?>
-                                    <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-                                <?php}else
-                                {?>
+                        <?php if(isset($sc->fecha)){?>
+                            <td><?php echo $sc->fecha ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->referencia)){?>
+                            <td><?php echo $sc->referencia ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->entradas)){?>
+                            <td><?php echo $sc->entradas ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->salidas)){?>
+                            <td><?php echo $sc->salidas ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->existencia)){?>
+                            <td><?php echo $sc->existencia ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->unitario)){?>
+                            <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->promedio)){?>
+                            <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->debe)){?>
+                            <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->haber)){?>
+                            <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->saldo)){?>
+                            <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
+                        <?php } ?>
+                        <?php if(isset($sc->id_tarjeta)){?>
+                            <td>
+                                <!-- Eliminar registro -->
                                 <?php
-                                   echo '';
-                                }
-                            ?>
-                        </td>
+                                    if($ultimo == $sc->id_tarjeta and $terminar == 0)
+                                    {?>
+                                        <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                                    <?php}else
+                                    {?>
+                                    <?php
+                                       echo '';
+                                    }
+                                ?>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
                 <?php if(isset($sc)){?>
