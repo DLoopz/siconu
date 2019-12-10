@@ -24,4 +24,17 @@ class Model_result extends CI_Model
   	$sql = $this->db->get_where('rayado_diario');
     return $sql->result();   
   }
+
+  //Insertar cuentas
+  public function get_partials($data)
+  {
+    $this->db->select('concepto');
+    $this->db->select_sum('parcial');
+    $this->db->select_sum('debe');
+    $this->db->select_sum('haber');
+    $this->db->group_by('concepto');
+    $this->db->where('empresa_id',$data['empresa_id']);
+    $sql = $this->db->get_where('parcial');
+    return $sql->result();   
+  }
 }

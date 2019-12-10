@@ -33,7 +33,7 @@
                   <div class="form-group">
                     Concepto
                     <select class="form-control" name="concepto">
-                      <option value="Ventas totales">Ventas totales</option>
+                      <option value="Ventas totales">Ventas</option>
                       <option value="Devoluciones sobre Ventas">Devoluciones sobre Ventas</option>
                       <option value="Descuentos sobre Ventas">Descuentos sobre Ventas</option>
                       <option value="Inventario inicial">Inventario inicial</option>

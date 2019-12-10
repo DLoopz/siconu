@@ -24,6 +24,7 @@ class Login extends CI_Controller
 		else
 		{
 			$data['title']="Siconu";
+			$data["logo"]=true;
 			$this->load->view('head',$data);
 			$this->load->view('login');
 			$this->load->view('foot');
