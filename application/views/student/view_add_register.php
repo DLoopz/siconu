@@ -56,7 +56,7 @@
         </div>
         <div class="form-group">
           <div class="custom-control custom-radio custom-control-inline col-5">
-            <input type="radio" id="cargo" name="movimiento" class="custom-control-input" value="cargo" checked>
+            <input type="radio" id="cargo" name="movimiento" class="custom-control-input" value="cargo">
             <label class="custom-control-label" for="cargo">Cargo</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline col-5">

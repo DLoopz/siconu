@@ -182,6 +182,22 @@ table.table.table-hover.table-responsive-md.col-md-5.scheme tr th {
   background-color: rgba(255,255,255,.6);
   border-radius: 8px;
 }
+.custom-file-label::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: block;
+  height: calc(1.5em + 0.75rem);
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #495057;
+  content: "Buscar";
+  background-color: #e9ecef;
+  border-left: inherit;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
 
 .fondo-logo
 {
@@ -195,4 +211,11 @@ background-image: linear-gradient(
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active
 {
   background-color: rgba(0,0,0,0);  
+}
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "Buscar";
+}
+
+.custom-file-input ~ .custom-file-label[data-browse]::after {
+  content: attr(data-browse);
 }
