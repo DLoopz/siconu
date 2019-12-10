@@ -15,9 +15,11 @@ class Stock_card extends CI_Controller {
     public function list_sc($id_empresa = null)
     {
 		$data['title']="Tarjeta de Almacén";
+
         $fields = array('empresa_id' => $id_empresa);
-        $data['stock_card'] = $this->model_stock_card->get_sc($fields);
-        //$fields = array('id_empresa' => $id_empresa);
+        $id_exercise = $fields['empresa_id'];
+        $data['stock_card'] = $this->model_stock_card->get_sc($id_exercise);
+        $fields = array('id_empresa' => $id_empresa);
         $data['exercise'] = $this->model_exercise->get_exercise($fields);
 		$data['id_empresa'] = $id_empresa;
 
