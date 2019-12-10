@@ -52,9 +52,6 @@ class Model_stock_card extends CI_Model
     */
 
     public function get_sc($id_empresa){
-        echo ("MODELO | ID_EMPRESA: ".$id_empresa);
-        //$query = $this->db->get_where('tarjeta_almacen', $data);
-        //$query = $this->db->get_where('tarjeta_almacen',$data['id_empresa']);
         $sql = $this->db->query("SELECT * FROM tarjeta_almacen WHERE tarjeta_almacen.empresa_id  = $id_empresa");
         return $sql->result();
         //return $sql;
