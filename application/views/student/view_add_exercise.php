@@ -14,10 +14,10 @@
 				<div class="form-group">
       		Procedimiento *
       		<select class="form-control" name="procedimiento">
-      			<option selected disabled>Seleccione procedimiento</option>
-      			<option value="1" <?php echo  set_select('procedimiento', 1, TRUE); ?>>Inventarios Perpetuos</option>
-      			<option value="2" <?php echo  set_select('procedimiento', 2, TRUE); ?>>Analítico</option>
-      			<option value="3" <?php echo  set_select('procedimiento', 3, TRUE); ?>>Mercancias Generales</option>
+      			<option selected="true">Seleccione procedimiento</option>
+      			<option value="1" <?php echo  set_select('procedimiento', 1); ?>>Inventarios Perpetuos</option>
+      			<option value="2" <?php echo  set_select('procedimiento', 2); ?>>Analítico</option>
+      			<option value="3" <?php echo  set_select('procedimiento', 3); ?>>Mercancias Generales</option>
       		</select>
       		<?php echo form_error('procedimiento');?>
       	</div>
@@ -33,5 +33,4 @@
 			</form>
 		</div>
 	</div>
-
 </div>	

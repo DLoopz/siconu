@@ -1,3 +1,7 @@
+<form action="<?php echo base_url();?>daybook/pdf" method='post' class="invisible">
+  <input type="text" id="contpdf" name="contpdf" class="invisible">
+  <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar">
+</form>
 
 
     <footer class="espacio-footer">
@@ -14,14 +18,47 @@
 
   $(window).ready(function(){
 
-    <?php if (isset($stock_card)) {echo "habilitar();";} ?>
+    habilitar();
 
     <?php if(isset($modal)) echo "$('#".$modal."').modal('show')";?>    
 
-    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
+    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');      
+
+    
+
+    $("#sendcont").click(function() {
+      
+      //console.log($('body').html());
+      
+      var heads = $('head').html();
+      //var body = $('body').html();
+      //var container = $('.container').html();
+
+      var ntablas = $('table');
+      var tables;
+      tables = $('table').html(); //1
+
+      for (var i = 0; i < ntablas.length; i++) {
+        //tables += $('table:nth-child(i)').nextAll().html();
+      }
+      
+      
+
+      alert('tables');
+      alert(Object.values(tables));
+
+      //var contpdf = heads+table1+tables;
+      //$("#contpdf").val(contpdf);
+      console.log('');
+      
+    })
 
   });
+  
+
+  
+
+  
 
 </script>
-
 

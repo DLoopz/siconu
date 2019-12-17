@@ -17,7 +17,7 @@
       	</div>
       	<hr><br>
 				<div class="panel-footer text-center">
-					<input type="submit" name="edit_exercise" value="Guardar" class="btn btn-outline-success my-2 my-sm-0">
+					<input type="submit" name="edit_exercise" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
 					<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
 				</div>
 			</form>

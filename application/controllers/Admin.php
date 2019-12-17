@@ -71,9 +71,8 @@ class Admin extends CI_Controller
         $this->email->to($correo);                   //para quien
         //$this->email->cc('another@another-example.com');
         //$this->email->bcc('them@their-example.com');
-        $this->email->set_mailtype("html");
         $this->email->subject('Usuario del sistema SICONU');
-        $this->email->message("<h1>Su usuario de ingreso al sistema SICONU es: {$correo} y su contraseña es: {$password}</h1>");
+        $this->email->message("Su usuario de ingreso es: {$correo} y su contraseña es {$password}");
         
         $this->email->send();
 
@@ -146,9 +145,8 @@ class Admin extends CI_Controller
         $this->email->to($correo);                   //para quien
         //$this->email->cc('another@another-example.com');
         //$this->email->bcc('them@their-example.com');
-        $this->email->set_mailtype("html");
         $this->email->subject('Usuario del sistema SICONU');
-        $this->email->message("<h1>Su usuario de ingreso al sistema SICONU es: {$correo} y su contraseña es: profesor{$num}</h1>");
+        $this->email->message("Su usuario de ingreso es: {$correo} y su contraseña es profesor{$num}");
         
         $this->email->send();
         if($add==true)

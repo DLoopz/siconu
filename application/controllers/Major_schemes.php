@@ -73,7 +73,6 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
     $this->load->view('navbar');
     $this->load->view('student/nabvar_options');
     $this->load->view('student/view_major_schemes');
-    $this->load->view('pdf');
     $this->load->view('foot');
     
 	}

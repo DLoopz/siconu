@@ -32,8 +32,6 @@
 		<?php //echo '<pre>'.print_r($catalog,1).'</pre>'?>
 		<?php //echo '<pre>'.print_r($registros,1).'</pre>'?>
 
-
-
 		
 		<?php foreach ($catalog as $cu): ?>
 			
@@ -43,11 +41,13 @@
 				<table class="table table-hover table-responsive-md col-md-5 scheme">
 					<thead class="text-center">
 						<tr>
-							<th colspan="2"><?php echo $cu->nombre; ?></th>
+							<th colspan="2">
+								<?php echo $cu->nombre; ?>
+							</th>
 						</tr>
 						<tr>
-							<th>Debe</th>
-							<th>Haber</th>
+							<th colspan="">Debe</th>
+							<th colspan="">Haber</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -90,16 +90,16 @@
 						<?php endforeach //parciales ?>
 
 						<tr>
-							<th class="border-right text-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
-							<th class="text-right">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
+							<th class="  border-right text-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
+							<th class=" text-right">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
 						</tr>
 
 						<tr>
 							<?php if ($total_debe>=$total_haber): ?>
-								<th class="border-right table-success text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+								<th class=" border-right table-success text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 								<th class="table-secondary"></th>
 							<?php else: ?>
-								<th class="border-right table-secondary text-right"></th>
+								<th class=" border-right table-secondary text-right"></th>
 								<th class="table-danger text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 							<?php endif ?>						
 						</tr>

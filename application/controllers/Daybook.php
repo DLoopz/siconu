@@ -1,89 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
-require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
+//require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
-
-$usuario_local = get_current_user();
-require_once("/home/{$usuario_local}/fpdf/fpdf.php");
-$usuario_local = get_current_user();
-require_once("/home/{$usuario_local}/html2pdf/src/Html2Pdf.php");
-
-require_once("/home/{$usuario_local}/html2pdf/tcpdf.php");
-require_once("/home/{$usuario_local}/html2pdf/tcpdf_parser.php");
-require_once("/home/{$usuario_local}/html2pdf/tcpdf_import.php");
-require_once("/home/{$usuario_local}/html2pdf/tcpdf_barcodes_1d.php");
-require_once("/home/{$usuario_local}/html2pdf/tcpdf_barcodes_2d.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_colors.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_filters.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_font_data.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_fonts.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_images.php");
-require_once("/home/{$usuario_local}/html2pdf/include/tcpdf_static.php");
-require_once("/home/{$usuario_local}/html2pdf/include/barcodes/datamatrix.php");
-require_once("/home/{$usuario_local}/html2pdf/include/barcodes/pdf417.php");
-require_once("/home/{$usuario_local}/html2pdf/include/barcodes/qrcode.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Locale.php");
-require_once("/home/{$usuario_local}/html2pdf/src/MyPdf.php");
-require_once("/home/{$usuario_local}/html2pdf/src/CssConverter.php");
-require_once("/home/{$usuario_local}/html2pdf/src/SvgDrawer.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Exception/Html2PdfException.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Exception/ImageException.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Exception/LongSentenceException.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Exception/HtmlParsingException.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Exception/TableException.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Extension/ExtensionInterface.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Extension/AbstractExtension.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Extension/Core/HtmlExtension.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Extension/Core/SvgExtension.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/Css.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/Html.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/HtmlLexer.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/Token.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/Node.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/TagParser.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Parsing/TextParser.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/TagInterface.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/AbstractTag.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/AbstractHtmlTag.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/I.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/B.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Big.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Bookmark.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Cite.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Em.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Span.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Font.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Label.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Samp.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Small.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Strong.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Sup.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Sub.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/U.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Ins.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/S.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Del.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Html/Address.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/AbstractSvgTag.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Circle.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Ellipse.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/G.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Line.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Path.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Polygon.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Polyline.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Tag/Svg/Rect.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Debug/DebugInterface.php");
-require_once("/home/{$usuario_local}/html2pdf/src/Debug/Debug.php");
-
-
-
-use Spipu\Html2Pdf\Debug\Debug;
-use Spipu\Html2Pdf\Html2Pdf;
-use Spipu\Html2Pdf\Exception\Html2PdfException;
-use Spipu\Html2Pdf\Exception\ExceptionFormatter;
-require_once("/home/{$usuario_local}/html2pdf/src/Html2Pdf.php");
 
 class Daybook extends CI_Controller {
   
@@ -127,11 +46,11 @@ class Daybook extends CI_Controller {
     );
     $this->session->set_userdata($newdata);
 
+
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_daybook');
-    $this->load->view('pdf');
 		$this->load->view('foot');
 
 	}
@@ -726,298 +645,31 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
     }
   }
 
-  public function pdf_no_html()
-  {
-
-
-    if ($this->input->post('sendcont'))
-    {
-      
-      $cont = $this->input->post('contpdf');
-
-      $pdf = new FPDF();
-      $pdf->AddPage();
-      $pdf->SetFont('Arial','B',16);
-      $pdf->Cell(40,10, $cont);
-      $pdf->Output();
-      
-    }
-    else
-    {
-      redirect('');
-    }
-  }
-
 
   public function pdf()
-        {
-          if ($this->input->post('sendcont'))
-          {
-            
-            //$head = $this->input->post('contpdf');
-            $id_empresa = $this->input->post('id_empresa');
-
-
-            $title="Esquemas de mayor";
-            $fields = array('empresa_id' => $id_empresa);
-            $asientos = $this->model_schemes->get_asientos($fields);
-            $registros = $this->model_schemes->get_all($fields);
-            $cuentas = $this->model_schemes->get_cuentas($fields);
-            $parciales = $this->model_schemes->get_partials($fields);
-            $id_empresa = $id_empresa;
-            
-            $catalog = $this->model_account->get_std_accounts();
-
-
-            $head = "
-            <!DOCTYPE html>
-            ".setlocale(LC_MONETARY, 'es_MX.UTF-8')."
-            <html lang='es'>
-              <head>
-                <title>".$title."</title>
-                <meta charset='utf-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
-                <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
-                <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
-                <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-                <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
-                <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-              </head>
-            <body>
-            <style>
-            
-            </style>
-            ";
-
-
-            $cont = $head;
-
-                foreach ($catalog as $cu){
-                  
-                  foreach ($cuentas as $accs){
-                    if ($accs->cuenta == $cu->nombre){
-                  
-                  $cont .= "<table class='table table-hover table-responsive-md col-md-5 scheme'>
-                      <thead class='text-center'>
-                        <tr>
-                          <th colspan='2'>".$cu->nombre."</th>
-                        </tr>
-                        <tr>
-                          <th>Debe</th>
-                          <th>Haber</th>
-                        </tr>
-                      </thead>
-                      <tbody>";
-
-                        $total_debe = 0;
-                        $total_haber = 0;
-                        
-                      
-                        foreach ($registros as $regs){
-
-                          if ($regs->cuenta == $cu->nombre and $regs->registro_id==NULL){
-                            $cont .= "<tr>
-                              <td class='border-right text-right'>$ ".number_format($regs->debe,2,'.',',')."</td>
-                              <td class='text-right'>$ ".number_format($regs->haber,2,'.',',')."</td>
-                            </tr>";
-
-                            $total_debe += $regs->debe;
-                            $total_haber += $regs->haber;
-
-                          }
-
-                        } //registros
-
-                        foreach ($parciales as $parc){
-
-                          if ($parc->cuenta == $cu->nombre and $parc->registro_id!=NULL){
-                            
-                            $cont.="<tr>
-                              <td class='border-right text-right'>$ ".number_format($parc->debe,2,'.',',')."</td>
-                              <td class='text-right'>$ ".number_format($parc->haber,2,'.',',')."</td>
-                            </tr>";
-
-                            $total_debe += $parc->debe;
-                            $total_haber += $parc->haber;
-
-                          }
-
-                        } //parciales
-
-                        $cont .= "<tr>
-                          <th class='border-right text-right'>$".number_format($total_debe,2,'.',',')."</th>
-                          <th class='text-right'>$ ".number_format($total_haber,2,'.',',')."</th>
-                          </tr>
-                          
-                          <tr>";
-                          if ($total_debe>=$total_haber){
-                            $cont.="<th class='border-right table-success text-right'>$ ".number_format(abs($total_debe-$total_haber),2,'.',',')."</th>".
-                            "<th class='table-secondary'></th>";
-                          }
-                          else
-                          {
-                            $cont.="<th class='border-right table-secondary text-right'></th>".
-                            "<th class='table-danger text-right'>$ ".number_format(abs($total_debe-$total_haber),2,'.',',')."</th>";
-                          }
-                        $cont .= "</tr>
-                        
-                      </tbody>
-                    </table>";
-                    
-                    }
-                  }
-                  
-                }
-
-              $cont .= "</div>
-            </div>";
-
-
-
-            $foot = "
-              <footer class='espacio-footer'>
-                <div class='text-center'>
-                  <br>
-                  Copyright © Derechos Reservados ".date('Y')."  SICONU
-                </div>
-              </footer>
-            </body>
-          </html>
-
-          <script type='text/javascript'>
-            $(window).ready(function(){
-              $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2'); 
-          </script>
-          ";
-
-            
-            //echo $cont.$foot;
-            //echo $head;
-            ///*
-            $dompdf = new Dompdf();
-            //$dompdf->loadHtml($cont);
-            $contenido = $cont.$foot;
-            //$dompdf->loadHtml($contenido);
-            //$contenido = $head.'<div class="cola">dfghjk</div>';
-            $dompdf->loadHtml($contenido);
-            $dompdf->setPaper('A4', 'landscape');
-            //ini_set("memory_limit","50M");//aumentar memoria
-            $dompdf->render();
-            $dompdf->stream('archivo.pdf', array('Attachment' => true));
-            //$dompdf->stream('archivo.pdf');
-            //*/
-          }
-          else
-          {
-            redirect('');
-          }
-        }
-
-  public function pdf_balance()
   {
+    /*
+    require_once("/home/santiago/dompdf/autoload.inc.php");
+    use Dompdf\Dompdf;
+    */
+
     if ($this->input->post('sendcont'))
     {
-      //$head = $this->input->post('contpdf');
+
       $cont = $this->input->post('contpdf');
-      $id_empresa = $this->input->post('id_empresa');
-
-      $head = "
-      <!DOCTYPE html>
-      <html lang='es'>
-        <head>
-          <title>".''."</title>
-          <meta charset='utf-8'>
-          <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
-          <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
-          <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
-          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
-          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-        </head>
-      <style>
-      
-      </style>
-      ";
-
-      $foot = "
-          <footer class='espacio-footer'>
-            <div class='text-center'>
-              <br>
-              Copyright © Derechos Reservados ".date('Y')."  SICONU
-            </div>
-          </footer>
-        </body>
-      </html>
-
-        <script type='text/javascript'>
-            $(window).ready(function(){
-              $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2'); 
-          </script>
-        <body>
-      ";
-
-      
-
-      $contenido = $head.$cont.$foot;
-      //echo $cont;
-      //echo $contenido;
-      
-      ///*
       $dompdf = new Dompdf();
-      
-      $dompdf->loadHtml($contenido);
+      //$dompdf->loadHtml($cont);
+      $dompdf->loadHtml($cont);
       $dompdf->setPaper('A4', 'landscape');
       //ini_set("memory_limit","50M");//aumentar memoria
       $dompdf->render();
       $dompdf->stream('archivo.pdf', array('Attachment' => true));
-      //$dompdf->stream('archivo.pdf');
-      //*/
     }
     else
     {
       redirect('');
     }
-}
 
-
-  public function html2pdf()
-  {
-
-    if ($this->input->post('sendcont'))
-    {
-      $cont = $this->input->post('contpdf');
-        
-          ob_start();        
-
-          $content = ob_get_clean();
-
-          if (! empty ( $_GET ['html'] )) {
-              echo $content;
-              return;
-            }
-          
-          try
-          {
-            $html2pdf = new HTML2PDF('P', 'A4', 'es', true, 'UTF-8', 3);
-            $html2pdf->pdf->SetDisplayMode('fullpage');
-            //$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-            $html2pdf->writeHTML($cont);
-            $html2pdf->Output('Archivo.pdf');
-          }
-          catch(HTML2PDF_exception $e) {
-              echo $e;
-              $formatter = new ExceptionFormatter ( $e );
-                echo $formatter->getHtmlMessage ();
-              exit;
-          }
-    }
-    else
-    {
-      redirect('');
-    }
-    
   }
 
 }//fin clase

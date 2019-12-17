@@ -71,24 +71,10 @@
 	      			<a href="<?php echo base_url();?>source/downloads/Plantilla.csv">Descargar la plantilla para el archivo CSV</a>
 	      		</label>
 	      	</div>
-
-				  <!--div class="form-group">
+				  <div class="form-group">
 				  	<label for="">Archivo en formato .csv</label>
 				  	<input class="form-control-file" type="file" name="file" id="file">
-				  </div-->
-
-				  <div class="input-group">
-				    <div class="input-group-prepend">
-				      <span class="input-group-text" id="">Subir</span>
-				    </div>
-				    <div class="custom-file">
-				      <input type="file" class="custom-file-input" name="file" id="file"
-				        aria-describedby="">
-				      <label class="custom-file-label" for="" id="nombre_f">Elegir Archivo .csv</label>
-				    </div>
 				  </div>
-
-
 				  <br><hr><br>
 				  <div class="panel-footer text-center">
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 "value="Agregar" />

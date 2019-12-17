@@ -43,18 +43,10 @@ class Model_stock_card extends CI_Model
         $sql = $this->db->get_where('tarjeta_almacen', $data);
         return $sql->result();
     }
-    
-    /*
-    public function get_sc(){
-        $query = $this->db->get_where('tarjeta_almacen');        
-        return $query->result();
-    }
-    */
 
     public function get_sc($id_empresa){
         $sql = $this->db->query("SELECT * FROM tarjeta_almacen WHERE tarjeta_almacen.empresa_id  = $id_empresa");
         return $sql->result();
-        //return $sql;
     }
 
     public function get_sum_debe()
@@ -94,11 +86,8 @@ class Model_stock_card extends CI_Model
 
     public function terminar($id_tarjeta)
     {
-        //$sql = $this->db->query("SELECT min(id_tarjeta) as id_tarjeta FROM tarjeta_almacen");
         $sql = $this->db->query("UPDATE tarjeta_almacen SET terminar = 1 WHERE tarjeta_almacen.id_tarjeta = $id_tarjeta");
         return $sql;
-        //$result = $this->db->query($sql);
-        //return $result->row()->id_tarjeta;
     }
 
     public function id_ex($id_exercise)
