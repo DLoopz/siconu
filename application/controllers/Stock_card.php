@@ -9,6 +9,7 @@ class Stock_card extends CI_Controller {
 		$this->load->view('navbar');
 		$this->load->view('student/nabvar_options');
 		$this->load->view('student/view_stock_card');
+    $this->load->view('pdf');
 		$this->load->view('foot');
 	}
 

@@ -187,7 +187,7 @@
                 </label><br>
 
                 <div id="editor"></div>
-                <button id="cmd" class="btn btn-danger">Generar PDF</button>
+                <?php $this->load->view('pdf'); ?>
             </div>
         <?php}else
         {?>

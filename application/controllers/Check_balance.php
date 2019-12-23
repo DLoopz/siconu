@@ -30,6 +30,7 @@ class Check_balance extends CI_Controller
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_check_balance');
+    $this->load->view('pdf');
 		$this->load->view('foot');
 	}
 }

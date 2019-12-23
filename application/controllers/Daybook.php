@@ -1,8 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$usuario_local = get_current_user();
+//$usuario_local = get_current_user();
 //require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
-use Dompdf\Dompdf;
+//use Dompdf\Dompdf;
+
+
 
 class Daybook extends CI_Controller {
   
@@ -46,11 +48,11 @@ class Daybook extends CI_Controller {
     );
     $this->session->set_userdata($newdata);
 
-
 		$this->load->view('head',$data);
 		$this->load->view('navbar');
     $this->load->view('student/nabvar_options');
 		$this->load->view('student/view_daybook');
+    $this->load->view('pdf');
 		$this->load->view('foot');
 
 	}
@@ -555,7 +557,7 @@ class Daybook extends CI_Controller {
 
 
 
-public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null,$edit=null)
+  public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=null,$edit=null)
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
@@ -645,31 +647,73 @@ public function edit_register($id_empresa=null,$id_asiento=null,$id_registro=nul
     }
   }
 
+  
 
   public function pdf()
   {
-    /*
-    require_once("/home/santiago/dompdf/autoload.inc.php");
-    use Dompdf\Dompdf;
-    */
-
     if ($this->input->post('sendcont'))
     {
-
+      //$head = $this->input->post('contpdf');
       $cont = $this->input->post('contpdf');
+      $id_empresa = $this->input->post('id_empresa');
+
+      $head = "
+        <!DOCTYPE html>
+        <html lang='es'>
+          <head>
+            <title>".''."</title>
+            <meta charset='utf-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
+            <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
+            <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
+            <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
+            <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+            <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+          </head>
+          <body>
+      ";
+
+      $foot = "
+            <footer class='espacio-footer'>
+              <div class='text-center'>
+                <br>
+                Copyright © Derechos Reservados ".date('Y')."  SICONU
+              </div>
+            </footer>
+          </body>
+        </html>
+
+        <script type='text/javascript'>
+          $(window).ready(function(){
+            $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2'); 
+        </script>
+      ";
+
+      
+
+      $contenido = $head.$cont.$foot;
+      //echo $cont;
+      //echo $contenido;
+      
+      
       $dompdf = new Dompdf();
-      //$dompdf->loadHtml($cont);
-      $dompdf->loadHtml($cont);
+      
+      $dompdf->loadHtml($contenido);
       $dompdf->setPaper('A4', 'landscape');
       //ini_set("memory_limit","50M");//aumentar memoria
       $dompdf->render();
       $dompdf->stream('archivo.pdf', array('Attachment' => true));
+      //$dompdf->stream('archivo.pdf');
+      
     }
     else
     {
       redirect('');
     }
+}
 
-  }
+
+  
 
 }//fin clase
