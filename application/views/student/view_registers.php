@@ -1,4 +1,4 @@
-<div class="container col-md-6">
+<div class="container col-md-10">
 	<h3 class="text-center">Registros del Asiento</h3>
 	<hr class="line_sep">
 	<?php
