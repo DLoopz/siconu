@@ -5,7 +5,7 @@
 		</div>
 		<hr class="line_sep"><br>
 		<div class = "panel-body">
-			<form method="post"  action="<?php echo base_url();?>student/add_exercise/<?php echo $id_user;?>">
+			<form method="post"  action="<?php echo base_url();?>student/add_exercise">
 				<div class="form-group">
 					Nombre del Ejercicio *
 					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Ejercicio">
@@ -14,10 +14,10 @@
 				<div class="form-group">
       		Procedimiento *
       		<select class="form-control" name="procedimiento">
-      			<option selected="true">Seleccione procedimiento</option>
-      			<option value="1" <?php echo  set_select('procedimiento', 1); ?>>Inventarios Perpetuos</option>
-      			<option value="2" <?php echo  set_select('procedimiento', 2); ?>>Analítico</option>
-      			<option value="3" <?php echo  set_select('procedimiento', 3); ?>>Mercancias Generales</option>
+      			<option value="0" <?php echo set_select('', 0, TRUE); ?> disabled>Seleccione procedimiento</option>
+      			<option value="1" <?php echo set_select('procedimiento', 1); ?>>Inventarios Perpetuos</option>
+      			<option value="2" <?php echo set_select('procedimiento', 2); ?>>Analítico</option>
+      			<option value="3" <?php echo set_select('procedimiento', 3); ?>>Mercancias Generales</option>
       		</select>
       		<?php echo form_error('procedimiento');?>
       	</div>
