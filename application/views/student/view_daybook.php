@@ -90,7 +90,7 @@
               	<?php } ?>
 					    </tr>
 				  	<?php } ?>
-				    <tr class="<?php if ($d=$h) echo"table-success"; else echo "table-danger";?>">
+				    <tr class="<?php if ($d==$h) echo"table-success"; else echo "table-danger";?>">
 				    	<td></td>
 				    	<td></td>
 				    	<td></td>

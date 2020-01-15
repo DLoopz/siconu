@@ -15,7 +15,8 @@
 			
 			<hr class="line_sep">
 			<div class="checkbox">
-				<input  class="checkitem" type="checkbox" id="checkall"/>Seleccionar todos<br>
+				<input class="checkitem" type="checkbox" id="checkall" name="checkall">
+				<label class="form-check-label" for="checkall">Seleccionar todas las cuentas</label>
 			</div>
 			<hr class="line_sep">
 
@@ -55,9 +56,6 @@
 				<?php endif ?>
 			<?php } ?>
 			<hr class="line_sep">
-			<div class="checkbox">
-				<input  class="checkitem" type="checkbox" id="checkall"/>Seleccionar todos<br>
-			</div>
 
 		<div class="panel-footer text-center">
 			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0 ">

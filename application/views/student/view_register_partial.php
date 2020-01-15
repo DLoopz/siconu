@@ -20,7 +20,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cerrar</h5>
+                    
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -61,6 +61,9 @@
                     </div>
                     <?php echo form_error('cantidad') ?>
                   </div>
+                  <div class="text-danger">
+                    <?php echo form_label('* Campos Obligatorios')?><br>
+                  </div>
                 </div>
                 <br>
                 <div class="panel-footer text-center">
@@ -90,7 +93,7 @@
 	          <td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
 	          <td>
 	          	<!--editar asiento-->
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $partial->id_parcial;?>" title="Editar Registro"><strong><em><i class="icon-edit-1"></i></em></strong></a>
+	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $partial->id_parcial;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
             	<!-- eliminar asiento -->
               <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_del_partial" onclick="eliminar(<?php echo $partial->id_parcial;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
             </td>
@@ -105,12 +108,13 @@
 	  </table>
 	  <form method="post" action="<?php echo base_url()?>daybook/edit_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>/<?php echo $total;?>">
       <div class="form-group">
+        
         <div class="custom-control custom-radio custom-control-inline col-5">
-          <input type="radio" id="cargo" name="operacion" class="custom-control-input" value="cargo" checked>
+          <input type="radio" id="cargo" name="operacion" class="custom-control-input" value="cargo" <?php echo  set_radio('movimiento', 'cargo', 'checked');?>>
           <label class="custom-control-label" for="cargo">Cargo</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline col-5">
-          <input type="radio" id="abono" name="operacion" class="custom-control-input" value="abono">
+          <input type="radio" id="abono" name="operacion" class="custom-control-input" value="abono" <?php echo  set_radio('movimiento', 'cargo', 'checked');?>>
           <label class="custom-control-label" for="abono">Abono</label>
         </div>
         <?php echo form_error('operacion'); ?>

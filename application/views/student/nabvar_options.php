@@ -44,9 +44,9 @@
       <a class="nav-item nav-link <?php if(isset($book)) echo "active";?>" href="<?php echo base_url();?>daybook/book/<?php echo $id_empresa; ?>" title="Rayado Diario">Rayado Diario</a>
       <a class="nav-item nav-link <?php if(isset($mayor_schemas)) echo "active";?>  <?php //if(!isset($disabled)){echo "disabled";} ?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
       <a class="nav-item nav-link <?php if(isset($check_balance)) echo "active";?>" href="<?php echo base_url();?>check_balance/check/<?php echo $id_empresa; ?>" title="Balanza de Comprobacion">Balanza de Comprobación</a>
-      <a class="nav-item nav-link <?php if(isset($sheet_balance)) echo "active";?>" href="<?php echo base_url();?>/balance_sheet/sheet/<?php echo $id_empresa; ?>" title="Balance General">Balance General</a>
-      <a class="nav-item nav-link <?php if(isset($result_state)) echo "active"; ?>" href="<?php echo base_url();?>result_state/state/<?php echo $id_empresa ?>" title="Esatdo de resultados">Estado de resultados</a>
-      <a class="nav-item nav-link <?php if(isset($stock_card)) echo "active";?>" href="<?php echo base_url();?>stock_card/list_sc/<?php echo $id_empresa ?>" title="Targeta de almacen">Tarjeta de almacén</a>
+      <a class="nav-item nav-link <?php if(isset($sheet_balance)) echo "active";?>" href="<?php echo base_url();?>balance_sheet/sheet/<?php echo $id_empresa; ?>" title="Balance General">Balance General</a>
+      <a class="nav-item nav-link <?php if(isset($result_state)) echo "active"; ?>" href="<?php echo base_url();?>result_state/state/<?php echo $id_empresa ?>" title="Estado de resultados">Estado de resultados</a>
+      <a class="nav-item nav-link <?php if(isset($stock_card)) echo "active";?>" href="<?php echo base_url();?>stock_card/list_sc/<?php echo $id_empresa ?>" title="Tarjeta de almacen">Tarjeta de almacén</a>
       <a class="nav-item nav-link" href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Ejercicios"><i class="icon-home-1"></i></a>
     </div>
   </nav>

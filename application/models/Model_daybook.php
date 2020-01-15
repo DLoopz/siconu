@@ -79,6 +79,11 @@ class Model_daybook extends CI_Model
   {
     return $this->db->delete( 'registro_asiento' , $data );
   }
+  //borrar parciales
+  public function delete_parciales($data)
+  {
+    return $this->db->delete( 'registro_parcial' , $data );
+  }
   //Actualizar registro de asiento
   public function update_register($data)
   {
@@ -109,6 +114,7 @@ class Model_daybook extends CI_Model
     $sql = $this->db->get_where('empresa', $data);
     return $sql->row();
   }
+  
   //activar parcial
   public function partial($data)
   {

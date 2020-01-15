@@ -16,7 +16,7 @@ $(window).ready(function(){
 
 	$("#sendcont").click(function() {
 
-		var titulo_pdf = $('.nav-item.nav-link.active').attr("title");
+		var titulo_pdf = $('.nav-item.nav-link.active').attr("title"); //sacar title
 		var titulo = '<div><h3 class="text-center">'+titulo_pdf+'</h3></div><hr class="line_sep">';
 
 	  var container = '<div class="container">';
@@ -24,23 +24,27 @@ $(window).ready(function(){
 	  
 	  var tablas = '';
 	  tablas +=  titulo;
+	  console.log(titulo_pdf);
 
 	  if (titulo_pdf != 'Esquemas de Mayor')
 	  {
 	  	$(".table").each(function(){
 	  	  //alert($(this).html());
 	  	  //console.log($(this).html());
-	  	  if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén') 
-	  	 	{
+	  	  if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén'){
 	  	 		$('table tr th:last-child, tbody tr td:last-child').toggle();
 	  	  }
-	  	  tablas += '<table class="table table-hover">' + 
+	  	  tablas += '<table class="table table-hover table-bordered">' + 
 	  	  $(".table").html().trim() + '</table>'
 	  	}); //fin each
-	  	$('table tr th:last-child, tbody tr td:last-child').toggle();
+	  	
+		  	if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén'){
+		  		$('table tr th:last-child, tbody tr td:last-child').toggle();
+	  	}
 	  }
 	  else
 	  {
+	  	<?php //para esquemas de mayor ?>
 	  	tablas += container;
 	  	$(".table").each(function(){
 	  	  //alert($(this).html());
@@ -58,9 +62,9 @@ $(window).ready(function(){
 
 	  contpdf = tablas;
 	  $("#contpdf").val(String(contpdf));
-	  console.log('valor asignado');
-	  console.log($("#contpdf").val().trim());
-	  console.log('fin');
+	  //console.log('valor asignado');
+	  //console.log($("#contpdf").val().trim());
+	  //console.log('fin');
 	  
 	    
 	}); //fin clic
