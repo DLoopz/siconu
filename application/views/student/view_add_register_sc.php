@@ -219,7 +219,6 @@
 
         if(check1.checked)
         {
-            alert("Seleccionado: Gastos sobre compra");
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
