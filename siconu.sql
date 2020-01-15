@@ -154,7 +154,7 @@ CREATE TABLE `clasificacion_cuenta` (
 
 INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 (1, 'Circulante'),
-(2, 'No circulante');
+(2, 'No Circulante');
 
 -- --------------------------------------------------------
 

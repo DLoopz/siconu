@@ -257,12 +257,14 @@
         $('#terminar').val(id);
     }
 
+    /*
     var doc = new jsPDF();
     var specialElementHandlers = {
         '#editor': function (element, renderer) {
             return true;
         }
     };
+    */
 
     $('#cmd').click(function () {
         doc.fromHTML($('#content').html(), 15, 15, {
@@ -271,6 +273,5 @@
         });
         doc.save('sample-file.pdf');
     });
-
 
 </script>

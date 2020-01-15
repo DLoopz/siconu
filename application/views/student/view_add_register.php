@@ -56,13 +56,14 @@
         </div>
         <div class="form-group">
           <div class="custom-control custom-radio custom-control-inline col-5">
-            <input type="radio" id="cargo" name="movimiento" class="custom-control-input" value="cargo" checked>
+            <input type="radio" id="cargo" name="movimiento" class="custom-control-input" value="cargo" <?php echo  set_radio('movimiento', 'cargo', 'checked');?> >
             <label class="custom-control-label" for="cargo">Cargo</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline col-5">
-            <input type="radio" id="abono" name="movimiento" class="custom-control-input" value="abono">
+            <input type="radio" id="abono" name="movimiento" class="custom-control-input" value="abono" <?php echo  set_radio('movimiento', 'abono', 'checked');?> >
             <label class="custom-control-label" for="abono">Abono</label>
           </div>
+          <?php echo form_error('movimiento'); ?>
         </div>
         <div class="text-danger">
           <?php echo form_label('* Campos Obligatorios')?><br>

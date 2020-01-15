@@ -1,10 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//$usuario_local = get_current_user();
-//require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
-//use Dompdf\Dompdf;
-
-
+$usuario_local = get_current_user();
+require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
+use Dompdf\Dompdf;
 
 class Daybook extends CI_Controller {
   
@@ -19,7 +17,6 @@ class Daybook extends CI_Controller {
     {
       redirect('');
     }
-    
   }
 
 	public function index()
@@ -184,6 +181,7 @@ class Daybook extends CI_Controller {
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
+    $this->form_validation->set_rules('movimiento','Movimiento','required');
     $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
@@ -278,6 +276,7 @@ class Daybook extends CI_Controller {
 
 
   //-----------funciones para los registros parciales
+  //guardar la cuenta vacia
   public function register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
   {
 
@@ -306,10 +305,8 @@ class Daybook extends CI_Controller {
         $data['cuenta']= $cuenta;
 
 
-
         $this->load->view('head',$data);
         $this->load->view('navbar');
-        //$this->load->view('student/view_add_register_partial');
         $this->load->view('student/view_register_partial');
         $this->load->view('foot');
       }
@@ -326,7 +323,8 @@ class Daybook extends CI_Controller {
             'asiento_id' => $id_asiento,
             'folio'      => $folio,
             'catalogo_usuario_id' =>$id,
-            'cuenta' => $accounts[$a]->nombre
+            'cuenta' => $accounts[$a]->nombre,
+            'parcial' => 1
           );
         $add=$this->model_daybook->insert_register($fields);
         if($add)
@@ -364,14 +362,17 @@ class Daybook extends CI_Controller {
     
   }
 
-  public function add_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null)
+
+  //llenar los parciales actualizando la cuenta en registro parcial
+  public function add_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cuenta=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
     $this->form_validation->set_rules('cantidad','Cantidad','required|numeric');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
+    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
@@ -385,13 +386,17 @@ class Daybook extends CI_Controller {
       $data['id_registro']=$id_registro;
       $fields = array('registro_id' => $id_registro);
       $data['partials']=$this->model_daybook->get_registers_partial($fields);
+      
+      $fields = array('id_registro' => $id_registro);
+      $cuenta = $this->model_daybook->get_partial($fields);
+      $data['cuenta']= $cuenta;
+
       $data['modal'] = 'parciales';
 
 
       $this->load->view('head',$data);
       $this->load->view('navbar');
       $this->load->view('student/view_register_partial');
-      //$this->load->view('student/view_add_register_partial');
       $this->load->view('foot');
     }
     else
@@ -404,11 +409,14 @@ class Daybook extends CI_Controller {
         );
       $add=$this->model_daybook->insert_register_partial($fields);
 
+      
+      /*
       $fields = array(
         'id_registro' => $id_registro,
         'parcial' => 1
       );
       $act_parc = $this->model_daybook->partial($fields);
+      */
 
 
       if($add)
@@ -446,6 +454,12 @@ class Daybook extends CI_Controller {
         $data['id_registro']=$id_registro;
         $fields = array('registro_id' => $id_registro);
         $data['partials']=$this->model_daybook->get_registers_partial($fields);
+
+        $fields = array('id_registro' => $id_registro);
+        $cuenta = $this->model_daybook->get_partial($fields);
+        $data['cuenta']= $cuenta;
+
+
         $this->load->view('head',$data);
         $this->load->view('navbar');
         $this->load->view('student/view_register_partial');
@@ -456,13 +470,15 @@ class Daybook extends CI_Controller {
         if ($this->input->post('operacion')=='cargo') {
           $fields = array(
             'id_registro' => $id_registro,
-            'debe' => $cantidad
+            'debe' => $cantidad,
+            'haber' => 0
           );
         }
         else{
           $fields = array(
             'id_registro' => $id_registro,
-            'haber' => $cantidad
+            'haber' => $cantidad,
+            'debe' => 0
           );
         }
         $upd=$this->model_daybook->update_register($fields);
@@ -498,17 +514,28 @@ class Daybook extends CI_Controller {
 
   public function delete_register($id_empresa=null,$id_asiento=null)
   {
+    //verificamos si es parcial, entonces borramos los aprciales
+    $fields = array('id_registro' => $this->input->post('id_register'));
+    $ver = $this->model_daybook->get_register($fields);
+    if ($ver->parcial > 0) {
+      //parcial y borrar con registro_id los parciales
+      $fields = array('registro_id' => $this->input->post('id_register'));
+      $del_par = $this->model_daybook->delete_parciales($fields);
+    }
+
+    //eliminamos del asiento
     $fields = array('id_registro' => $this->input->post('id_register'));
     $del=$this->model_daybook->delete_register($fields);
     if($del)
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
-      }
-      else
-      {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
-      }
-      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+    }
+    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+      
   }
 
   public function delet_entry($id_empresa=null)
@@ -689,13 +716,10 @@ class Daybook extends CI_Controller {
             $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2'); 
         </script>
       ";
-
       
-
       $contenido = $head.$cont.$foot;
       //echo $cont;
       //echo $contenido;
-      
       
       $dompdf = new Dompdf();
       
@@ -705,7 +729,6 @@ class Daybook extends CI_Controller {
       $dompdf->render();
       $dompdf->stream('archivo.pdf', array('Attachment' => true));
       //$dompdf->stream('archivo.pdf');
-      
     }
     else
     {
