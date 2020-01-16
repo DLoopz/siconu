@@ -24,18 +24,6 @@
                echo '';
             }
         ?>
-        <?php
-            if($terminar == 1)
-            {?>
-                <div id="volver" class="col-12 text-right">
-                    <a href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Empresas"><i class="icon-home-1"></i></a>
-                </div>
-            <?php}else
-            {?>
-            <?php
-               echo '';
-            }
-        ?>
 
     </div>
     <?php if(isset($articulo) or isset($unidad)){?>
@@ -258,12 +246,14 @@
         $('#terminar').val(id);
     }
 
+    /*
     var doc = new jsPDF();
     var specialElementHandlers = {
         '#editor': function (element, renderer) {
             return true;
         }
     };
+    */
 
     $('#cmd').click(function () {
         doc.fromHTML($('#content').html(), 15, 15, {
@@ -272,6 +262,5 @@
         });
         doc.save('sample-file.pdf');
     });
-
 
 </script>

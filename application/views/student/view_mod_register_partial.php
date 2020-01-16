@@ -1,3 +1,4 @@
+<?php //para la modificacion de parcials ?>
 <div class="container col-md-4">
   <div class="container">
     <h3 class="text-center"> Agregar Registros Parciales al Asiento</h3>

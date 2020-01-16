@@ -15,7 +15,8 @@
 			
 			<hr class="line_sep">
 			<div class="checkbox">
-				<input  class="checkitem" type="checkbox" id="checkall"/> Seleccionar todas las cuentas<br>
+				<input class="checkitem" type="checkbox" id="checkall" name="checkall">
+				<label class="form-check-label" for="checkall">Seleccionar todas las cuentas</label>
 			</div>
 			<hr class="line_sep">
 
