@@ -37,8 +37,8 @@
 			
 			<?php foreach ($cuentas as $accs): ?>
 				<?php if ($accs->cuenta == $cu->nombre): ?>
-			
-				<table class="table table-hover table-responsive-md col-md-5 scheme">
+			<div class="table-responsive">
+				<table class="table table-hover col-md-5 scheme">
 					<thead class="text-center">
 						<tr>
 							<th colspan="2">
@@ -106,7 +106,7 @@
 						
 					</tbody>
 				</table>
-				
+				</div>
 				<?php endif ?>
 			<?php endforeach ?>
 			
