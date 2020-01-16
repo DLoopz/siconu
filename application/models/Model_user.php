@@ -25,6 +25,11 @@ class Model_user extends CI_Model
     $sql = $this->db->get_where('usuario', $data);
     return $sql->row();
   }
+  public function get_info_user($data)
+  {
+    $sql = $this->db->get_where('grupos_usuarios', $data);
+    return $sql->row();
+  }
   //obtner ultimo usuario registrado
   public function last_user()
   {
@@ -43,4 +48,11 @@ class Model_user extends CI_Model
   {
     return $this->db->delete( 'usuario' , $data );
   }
+
+  public function delete_users($data)
+  {
+    $sql = $this->db->get_where('grupos_usuarios', $data);
+    return $sql->result();
+  }
+
 }

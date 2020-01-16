@@ -42,4 +42,18 @@ class Model_group extends CI_Model
   {
     return $this->db->delete( 'grupo' , $data );
   }
+
+  //eliminar grupos
+  public function delete_groups()
+  {
+    $this->db->where('id_grupo>0');
+    $sql=$this->db->delete('grupo');
+
+    $this->db->where('rol=3');
+    $sql=$this->db->delete('usuario');
+
+    return $sql;
+  }
+
+
 }

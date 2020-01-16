@@ -2,6 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller {
+  
+  function __construct()
+  {
+    parent:: __construct();
+    if ($this->session->userdata('activo') != TRUE)
+    {
+      redirect('');
+    }
+    if ($this->session->userdata('rol') == 1)
+    {
+      redirect('');
+    }
+  }
+
 	//vista principal
 	public function index()
 	{
@@ -14,15 +28,58 @@ class Student extends CI_Controller {
 		$this->load->view('foot');
 	}
 
+    public function edit_password(){
+    //reglas de validacion
+    $this->form_validation->set_rules('password_act','contraseña actual','trim|required|min_length[8]|callback_thisPassword');
+    $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
+    //personalizacion de reglas
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
+    $this->form_validation->set_message('min_length', '%s debe contener más de 8 caracteres');
+    $this->form_validation->set_message('thisPassword', '%s es incorrecta');
+    //personalizacion de delimitadores
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+
+    if($this->form_validation->run()==FAlSE)
+    {
+      $data['title']='Editar contraseña de alumno';
+      $this->load->view('head',$data);
+      $this->load->view('navbar');
+      $this->load->view('student/view_edit_pass');
+      $this->load->view('foot');
+    }else{
+      if($this->input->post("submit")){
+        $fields = array(
+          'id_usuario' => $this->session->userdata('id_user'),
+          'contrasenia' =>md5($this->input->post('password'))
+        );
+        $mod= $this->model_user->update_user($fields);
+        //redirect('profesor');
+        if($mod){
+          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Contraseña editada correctamente</div>');
+        }else{
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error contraseña no editada</div>');
+        }
+        redirect('student');
+      }else{
+        redirect('student');
+      }    
+    }   
+  }
+
 	public function add_exercise()
 	{
     $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','ejercicio','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('procedimiento','Procedimiento','required');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -38,7 +95,8 @@ class Student extends CI_Controller {
     {
       $fields = array(
         'usuario_id' => $id,
-        'nombre' => $this->input->post('nombre')
+        'nombre' => $this->input->post('nombre'),
+        'procedimiento' => $this->input->post('procedimiento')
       );
       $add=$this->model_exercise->insert_exercise($fields);
       if($add){
@@ -50,14 +108,16 @@ class Student extends CI_Controller {
     }
   }
 
-    public function edit_exercise($id=null)
+  public function edit_exercise($id=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','ejercicio','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
-    $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if($this->form_validation->run()==FAlSE){       
@@ -95,5 +155,30 @@ class Student extends CI_Controller {
     $fields = array('id_empresa' => $id );
     $this->model_exercise->delete_exercise($fields);
     redirect('student', 'refresh');
+  }
+
+  public function close_exercise($id=null)
+  {
+    $fields = array(
+      'id_empresa' => $id,
+      'estado' =>  1
+    );
+    $mod= $this->model_exercise->update_exercise($fields);
+    if($mod){
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+    }else{
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+    }
+    redirect('student');
+  }
+
+  public function thisPassword($str)
+  {
+    $fields = array('id_usuario' => $this->session->userdata('id_user'));
+    $us = $this->model_user->get_user($fields);
+    if ($us->contrasenia==md5($str)) {
+      return true;
+    }
+    return false;
   }
 }

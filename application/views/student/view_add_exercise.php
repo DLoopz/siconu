@@ -1,20 +1,36 @@
 <div class="container col-md-4" >
 	<div class = "panel panel-primary col-md-offset-4">
 		<div class = "panel-heading" >
-			<h3 class = "panel-title">Agregar nuevo ejercicio </h3>
+			<h3 class = "panel-title text-center">Agregar Nuevo Ejercicio </h3>
 		</div>
-		<hr class="line_sep">
+		<hr class="line_sep"><br>
 		<div class = "panel-body">
 			<form method="post"  action="<?php echo base_url();?>student/add_exercise/<?php echo $id_user;?>">
 				<div class="form-group">
-					Nombre del ejercicio:
-					<input type="text" name="nombre" class="form-control" placeholder="Nombre del ejercicio">
+					Nombre del Ejercicio *
+					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Ejercicio">
 					<?php echo form_error('nombre'); ?>
 				</div>
-				<input type="submit" name="nombre_ejercicio" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-				<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Volver</button></a>
+				<div class="form-group">
+      		Procedimiento *
+      		<select class="form-control" name="procedimiento">
+      			<option selected="true">Seleccione procedimiento</option>
+      			<option value="1" <?php echo  set_select('procedimiento', 1); ?>>Inventarios Perpetuos</option>
+      			<option value="2" <?php echo  set_select('procedimiento', 2); ?>>Analítico</option>
+      			<option value="3" <?php echo  set_select('procedimiento', 3); ?>>Mercancias Generales</option>
+      		</select>
+      		<?php echo form_error('procedimiento');?>
+      	</div>
+				<div class="text-danger">
+        	<?php echo form_label('* Campo Obligatorio')?><br>
+      	</div>
+      	<br>
+      	<hr>
+      	<div class="panel-footer text-center">
+      		<input type="submit" name="nombre_ejercicio" value="Guardar" class="btn btn-outline-success my-2 my-sm-0">
+	      	<a href="<?php echo base_url()?>student"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
+				</div>
 			</form>
 		</div>
 	</div>
-	<hr>
 </div>	

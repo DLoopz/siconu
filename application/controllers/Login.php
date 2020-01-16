@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 	function __construct()
-	{
-		parent:: __construct();
-	}
+  {
+    parent:: __construct();
+  }
 
 	public function index()
 	{
@@ -24,6 +24,7 @@ class Login extends CI_Controller
 		else
 		{
 			$data['title']="Siconu";
+			$data["logo"]=true;
 			$this->load->view('head',$data);
 			$this->load->view('login');
 			$this->load->view('foot');
@@ -34,10 +35,10 @@ class Login extends CI_Controller
 	{
 		if ($this->input->post('login')) {
 			//se establecen reglas de validacion
-			$this->form_validation->set_rules('usuario', 'usuario', 'required');
-			$this->form_validation->set_rules('password', 'contraseña', 'required');
+			$this->form_validation->set_rules('usuario', 'Usuario', 'required');
+			$this->form_validation->set_rules('password', 'Contraseña', 'required');
 			//personalizacion de reglas de validacion
-			$this->form_validation->set_message('required', 'El campo %s es oblligatorio');
+			$this->form_validation->set_message('required', '%s es un campo obligatorio');
 			//personalizacion de delimitadores
 			$this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 			if ($this->form_validation->run() == FALSE)
@@ -50,20 +51,36 @@ class Login extends CI_Controller
 			else
 			{
 				$fields = array(
-					'matricula' => $this->input->post('usuario'),
+					'matricula' => $this->input->post('usuario')
+				);
+				$fields1 = array(
 					'contrasenia' => md5($this->input->post('password'))
 				);
+
 				$user=$this->model_user->get_user($fields);
-				if (!$user){
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario o contraseña invalidos</div');
+				$pass=$this->model_user->get_user($fields1);
+				if (!$user && !$pass){
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario y contraseña inválidos</div');
+					redirect();
+				}elseif (!$user) {
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario inválido</div');
+					redirect();
+				}elseif (!$pass) {
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña incorrecta</div');
 					redirect();
 				}
+				$fields = array(
+					'usuario_id' => $user->id_usuario
+				);
+				$info=$this->model_user->get_info_user($fields);
 				$newdata = array(    
 					'usuario' => $user->matricula,
 					'id_user' => $user->id_usuario,
+					'grupo' => $info->grupo_id,
 					'rol' => $user->rol,
 					'nombre'=> $user->nombre,
-					'activo' =>true
+					'activo' =>true,
+					'id_org' => $user->id_usuario
 				);
 				$this->session->set_userdata($newdata);
 				if($newdata['rol'] == 1 )
