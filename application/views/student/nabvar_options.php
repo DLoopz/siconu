@@ -38,9 +38,9 @@
 <div class="container">
   <nav class="nav-fill">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <?php if ($this->session->userdata('rol')==2) {?>
+      <!--<?php if ($this->session->userdata('rol')==2) {?>
         <a class="nav-item nav-link icon-reply" href="<?php echo base_url();?>professor/list_project/<?php echo $this->session->userdata('id_grupo');?>/" title="Rayado Diario"></a>
-      <?php } ?>
+      <?php } ?> -->
       <a class="nav-item nav-link <?php if(isset($book)) echo "active";?>" href="<?php echo base_url();?>daybook/book/<?php echo $id_empresa; ?>" title="Rayado Diario">Rayado Diario</a>
       <a class="nav-item nav-link <?php if(isset($mayor_schemas)) echo "active";?>  <?php //if(!isset($disabled)){echo "disabled";} ?>" title="Esquemas de Mayor"href="<?php echo base_url();?>major_schemes/schemes/<?php echo $id_empresa;?>">Esquemas de Mayor</a>
       <a class="nav-item nav-link <?php if(isset($check_balance)) echo "active";?>" href="<?php echo base_url();?>check_balance/check/<?php echo $id_empresa; ?>" title="Balanza de Comprobacion">Balanza de Comprobación</a>

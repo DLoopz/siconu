@@ -12,6 +12,16 @@
 					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Ejercicio" value="<?php echo $exercise->nombre;?>">
 					<?php echo form_error('nombre'); ?>
 				</div>
+				<div class="form-group">
+      		Procedimiento *
+      		<select class="form-control" name="procedimiento">
+      			<option value="0" disabled>Seleccione procedimiento</option>
+      			<option value="1" <?php if($exercise->procedimiento==1) { echo 'Selected';} ?> >Inventarios Perpetuos</option>
+      			<option value="2" <?php if ($exercise->procedimiento==2) { echo 'Selected';} ?>>Analítico</option>
+      			<option value="3" <?php if ($exercise->procedimiento==3) { echo 'Selected';} ?>>Mercancias Generales</option>
+      		</select>
+      		<?php echo form_error('procedimiento');?>
+      	</div>
 				<div class="text-danger">
         	<?php echo form_label('* Campos Obligatorios')?><br>
       	</div>
