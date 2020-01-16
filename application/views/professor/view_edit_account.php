@@ -8,10 +8,14 @@
       <?php if (isset($account)) {?>
       <form method="post"  action="<?php echo base_url();?>professor/edit_account/<?php echo $account->id_catalogo_usuario?>">
         <div class="form-group">
-          Nombre de la Cuenta
+          <label>Nombre de la Cuenta</label>
           <input type="text" name="nombre" class="form-control" placeholder="Nombre de la Cuenta" value="<?php echo $account->nombre ?>" autofocus >
           <?php echo form_error('nombre'); ?>
         </div>
+         <div class="text-danger">
+          <?php echo form_label('* Campos Obligatorios')?><br>
+        </div>
+        <hr>
         <br>
         <div class="panel-footer text-center">
           <input type="submit" name="edit_cuenta" value="Guardar" class="btn btn-outline-success my-2 my-sm-0 ">

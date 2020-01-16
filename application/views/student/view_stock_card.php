@@ -40,7 +40,7 @@
         </div>
     <?php } ?>
     <br>
-    <div class="table-responsive-md">
+    <div class="table-responsive">
       <table class="table table-hover">
             <thead>
                 <tr class="">
@@ -133,6 +133,7 @@
                 <?php } ?>
             </tbody>
         </table>
+        </div>
 
         <?php if (isset($sc)){?>
             <?php if ($btn_end == 1){?>
