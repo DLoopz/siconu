@@ -13,33 +13,35 @@
             <a href="<?php echo base_url('admin/add_professor'); ?>"class="btn btn-outline-success" aria-label="Left Align" title="Agregar Profesor"><i class="icon-user-add"></i></a>
             </br>
             </br>
-            <table class="table" id="user-table">
-              <thead>
-                <tr>
-                  <th>Nombre del Profesor</th>
-                  <th>Usuario</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($profesor as $row) {?>
+            <div class="table-responsive">
+              <table class="table" id="user-table">
+                <thead>
                   <tr>
-                    <td>
-                      <?php echo $row->nombre ?>
-                      <?php echo $row->apellido_paterno ?>
-                      <?php echo $row->apellido_materno ?>
-                    </td>
-                    <td><?php echo $row->matricula ?></td>
-                    <td>
-                        <!-- eliminar profesor -->
-                        <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $row->id_usuario;?>)" title="Eliminar Profesor"><strong><em><i class="icon-user-delete-outline"></i></em></strong></a>
-                        <!--editar password profesor-->
-                      <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>admin/edit_password/<?php echo $row->id_usuario;?>" title="Editar Contraseña Profesor"><strong><em><i class="icon-edit"></i></em></strong></a>
-                    </td>
+                    <th>Nombre del Profesor</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
                   </tr>
-                <?php } ?>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <?php foreach ($profesor as $row) {?>
+                    <tr>
+                      <td>
+                        <?php echo $row->nombre ?>
+                        <?php echo $row->apellido_paterno ?>
+                        <?php echo $row->apellido_materno ?>
+                      </td>
+                      <td><?php echo $row->matricula ?></td>
+                      <td>
+                          <!-- eliminar profesor -->
+                          <a class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $row->id_usuario;?>)" title="Eliminar Profesor"><strong><em><i class="icon-user-delete-outline"></i></em></strong></a>
+                          <!--editar password profesor-->
+                        <a class="btn btn-outline-secondary" href="<?php echo base_url() ?>admin/edit_password/<?php echo $row->id_usuario;?>" title="Editar Contraseña Profesor"><strong><em><i class="icon-edit"></i></em></strong></a>
+                      </td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
             <?php if (!isset($profesor[0])): ?>
               <div class="alert alert-danger text-center">No se han registrado Profesores</div>
             <?php endif ?>

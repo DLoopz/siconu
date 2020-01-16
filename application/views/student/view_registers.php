@@ -13,54 +13,54 @@
 
 		<br><br>
 		<div class="table-responsive">
-		<table class="table table-hover" id="user-table">
-	    <thead>
-	      <tr>
-	        <th>Cuenta</th>
-	        <th>Parcial</th>
-	        <th>Debe</th>
-	        <th>Haber</th>
-	        <th>Opciones</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <?php $d=0;$h=0;
-	      foreach ($registers as $register){?>
-	        <tr>
-	          <td><div class="<?php if($register->haber>0){echo 'offset-2';}?>"><?php echo $register->cuenta;?></div></td>
-	          <td class="text-right">$ <?php echo number_format($register->parcial, 2, '.', ',');?></td>
-	          <td class="text-right">$ <?php echo number_format($register->debe, 2, '.', ','); $d=$register->debe+$d;?></td>
-	          <td class="text-right">$ <?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
-	          <td>
-	          	<!--editar asiento-->
+			<table class="table table-hover" id="user-table">
+		    <thead>
+		      <tr>
+		        <th>Cuenta</th>
+		        <th>Parcial</th>
+		        <th>Debe</th>
+		        <th>Haber</th>
+		        <th>Opciones</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <?php $d=0;$h=0;
+		      foreach ($registers as $register){?>
+		        <tr>
+		          <td><div class="<?php if($register->haber>0){echo 'offset-2';}?>"><?php echo $register->cuenta;?></div></td>
+		          <td class="text-right">$ <?php echo number_format($register->parcial, 2, '.', ',');?></td>
+		          <td class="text-right">$ <?php echo number_format($register->debe, 2, '.', ','); $d=$register->debe+$d;?></td>
+		          <td class="text-right">$ <?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
+		          <td>
+		          	<!--editar asiento-->
 
-	          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>/<?php echo $edit;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+		          	<a class="btn btn-outline-secondary" href="<?php echo base_url() ?>daybook/edit_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>/<?php echo $edit;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
 
-            	<!-- eliminar asiento -->
-              <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-            </td>
-	        </tr>
-					<?php foreach ($partials as $partial){
-	      		if ($register->id_registro==$partial->registro_id){?>
-	      			<tr class="table-secondary">
-      				  <td><?php echo $partial->concepto;?></td>
-    				    <td class="text-right">$ <?php echo number_format($partial->cantidad,2,'.',',');?></td>
-  				      <td></td>
-				        <td></td>
-				        <td></td>
-	      			</tr>
-    		<?php }
-	      	} ?>
-	      <?php } ?>
-	      <tr class="<?php if($d==$h and $d!=0) echo "table-success"; else echo "table-danger";?>">
-	        <th>Total</th>
-	        <th></th>
-	        <th class="text-right">$ <?php echo number_format($d,2,'.',','); ?></th>
-	        <th class="text-right">$ <?php echo number_format($h,2,'.',','); ?></th>
-	        <th></th>
-	      </tr>
-	    </tbody>
-	  </table>
+	            	<!-- eliminar asiento -->
+	              <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+	            </td>
+		        </tr>
+						<?php foreach ($partials as $partial){
+		      		if ($register->id_registro==$partial->registro_id){?>
+		      			<tr class="table-secondary">
+	      				  <td><?php echo $partial->concepto;?></td>
+	    				    <td class="text-right">$ <?php echo number_format($partial->cantidad,2,'.',',');?></td>
+	  				      <td></td>
+					        <td></td>
+					        <td></td>
+		      			</tr>
+	    		<?php }
+		      	} ?>
+		      <?php } ?>
+		      <tr class="<?php if($d==$h and $d!=0) echo "table-success"; else echo "table-danger";?>">
+		        <th>Total</th>
+		        <th></th>
+		        <th class="text-right">$ <?php echo number_format($d,2,'.',','); ?></th>
+		        <th class="text-right">$ <?php echo number_format($h,2,'.',','); ?></th>
+		        <th></th>
+		      </tr>
+		    </tbody>
+	  	</table>
 	  </div>
 	  </div>
 
