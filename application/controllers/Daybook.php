@@ -681,24 +681,25 @@ class Daybook extends CI_Controller {
     if ($this->input->post('sendcont'))
     {
       //$head = $this->input->post('contpdf');
+      $titulo_pdf = $this->input->post('titulo_pdf');
       $cont = $this->input->post('contpdf');
       $id_empresa = $this->input->post('id_empresa');
 
       $head = "
         <!DOCTYPE html>
         <html lang='es'>
-          <head>
-            <title>".''."</title>
-            <meta charset='utf-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
-            <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
-            <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
-            <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
-            <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-            <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
-          </head>
-          <body>
+        <head>
+          <title>".$titulo_pdf."</title>
+          <meta charset='utf-8'>
+          <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
+          <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
+          <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+        </head>
+        <body>
       ";
 
       $foot = "

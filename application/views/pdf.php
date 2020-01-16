@@ -1,10 +1,13 @@
 
+<div class="row">
 	<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
 	  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
+	  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
 	  <input type="text" id="titulo" name="titulo" value="" class="invisible">
 	  <input type="text" id="contpdf" name="contpdf" class="invisible">
 	  <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar PDF">
 	</form>
+</div>
 
 
 <script>
@@ -24,7 +27,7 @@ $(window).ready(function(){
 	  
 	  var tablas = '';
 	  tablas +=  titulo;
-	  console.log(titulo_pdf);
+	  //console.log(titulo_pdf);
 
 	  if (titulo_pdf != 'Esquemas de Mayor')
 	  {
@@ -40,7 +43,7 @@ $(window).ready(function(){
 	  	
 		  	if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén'){
 		  		$('table tr th:last-child, tbody tr td:last-child').toggle();
-	  	}
+	  		}
 	  }
 	  else
 	  {
@@ -62,6 +65,7 @@ $(window).ready(function(){
 
 	  contpdf = tablas;
 	  $("#contpdf").val(String(contpdf));
+	  $("#titulo_pdf").val(String(titulo_pdf));
 	  //console.log('valor asignado');
 	  //console.log($("#contpdf").val().trim());
 	  //console.log('fin');
