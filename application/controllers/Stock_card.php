@@ -254,7 +254,7 @@ class Stock_card extends CI_Controller {
                             'salidas' => 0,
                             'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
                             'unitario' => 0, //$this->input->post('cantidad_costos'),
-                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
+                            'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
                             'debe' => 0,
                             'haber' => $this->input->post('afectacion'),
                             'saldo' => floatval($existencia_antes->saldo) - $this->input->post('afectacion')

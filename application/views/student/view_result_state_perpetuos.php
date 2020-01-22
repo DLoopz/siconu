@@ -1,5 +1,6 @@
 <div class="container">
-	<table class="table table-responsive">
+	<div class="table-responsive">
+	<table class="table ">
 		<thead>
 			<tr>
 				<th colspan="100%" class="text-center text-uppercase"><?php echo $exercise->nombre; ?></th>

@@ -13,10 +13,21 @@ class Professor extends CI_Controller {
     {
       redirect('');
     }
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0,
+      'id_org' =>$this->session->userdata('id_org')
+    );
   }
   //vista principal
 	public function index()
 	{
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0,
+      'id_org' =>$this->session->userdata('id_org')
+    );
+    $this->session->set_userdata($newdata);
 		$data['title']="Profesor";
 		$fields = array('usuario_id' => $this->session->userdata('id_user'));
 		$data['groups']=$this->model_group->get_groups($fields);
