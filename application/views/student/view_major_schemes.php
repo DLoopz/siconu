@@ -7,38 +7,13 @@
 
 	<div class="row">
 
-		<?php 
-
-		//no borraar
-		$aux_ases = 1;
-		$numero_asiento = array();
-		//echo $asientos[0]->id_asiento;
-		//echo 'num asientos'.count($asientos);
-		for ($i=0; $i < count($asientos); $i++) { 
-			$numero_asiento[$asientos[$i]->id_asiento] = $i+1;
-		}
-		//print_r($numero_asiento);
-		//echo $numero_asiento[66];
-		/*if ($regs->debe>0): ?>
-				<?php echo $numero_asiento[$regs->id_asiento].')'; ?>
-			<?php endif 
-
-		<?php echo '<pre>'.print_r($,1).'</pre>'?>
-
-		*/
-		?>
-
-		<?php //echo '<pre>'.print_r($cuentas,1).'</pre>'?>		
-		<?php //echo '<pre>'.print_r($catalog,1).'</pre>'?>
-		<?php //echo '<pre>'.print_r($registros,1).'</pre>'?>
-
 		
 		<?php foreach ($catalog as $cu): ?>
 			
 			<?php foreach ($cuentas as $accs): ?>
 				<?php if ($accs->cuenta == $cu->nombre): ?>
-			<div class="table-responsive">
-				<table class="table table-hover col-md-5 scheme">
+			
+				<table class="table table-hover table-responsive-md col-md-5 scheme">
 					<thead class="text-center">
 						<tr>
 							<th colspan="2">
@@ -106,7 +81,7 @@
 						
 					</tbody>
 				</table>
-				</div>
+			
 				<?php endif ?>
 			<?php endforeach ?>
 			
