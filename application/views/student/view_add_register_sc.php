@@ -6,26 +6,28 @@
             </h3>
         </div>
         <hr class="line_sep">
-            <div class="alert alert-warning text-center" role="alert">
-                Registro para <?php echo $info->nombre; ?>
-            </div>
+        <div class="alert alert-warning text-center" role="alert">
+            Registro para <?php echo $info->nombre; ?>
+        </div>
+        <button class="btn btn-outline-primary my-2 my-sm-0" onclick="location.reload()" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Cancelar procedimiento">Limpiar</button>
         <p class="text-danger">* Campos obligatorios</p>
         <div class="panel-body">
             <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
                 <div class="col-md-7">
                     <div class="form-group" id="content_articulo">
                         <label for="">
-                            <b>Nombre del artículo *</b>
+                            Nombre del artículo *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
+                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" val                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
+ue="<?php echo set_value('articulo');?>">
                             <?php echo form_error('articulo'); ?>
                         </div>
                     </div>
                     <div class="form-group" id="content_unidad">
                         <label for="">
-                            <b>Tipo de unidad *</b>
+                            Tipo de unidad *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -36,7 +38,7 @@
                     </div>
                     <div class="form-group" >
                         <label>
-                            <b>Seleccione la fecha *</b>
+                            Seleccione la fecha *
                         </label>
                         <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
                         <input id="fecha_anterior" type="date" name="fecha_anterior" class="form-control" value="<?php echo $fecha_anterior; ?>" style="display: none;">
@@ -45,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="">
-                            <b>Referencia *</b>
+                            Referencia *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -57,7 +59,7 @@
                     <div class="form-group" id="content_existencia">
                         <div class="form-group">
                             <label for="">
-                            <b>Existencia:</b>
+                            Existencia
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
@@ -67,7 +69,7 @@
                         </div>
                         <div class="form-group" style="display: none;">
                             <label for="">
-                            <b>Existencia actual</b>
+                            Existencia actual
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
@@ -78,7 +80,7 @@
 
                     <div class="form-group" id="content_unidades">
                         <label for="">
-                            <b>Unidades *</b>
+                            Unidades *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -99,7 +101,7 @@
 
                     <div class="form-group" id="content_costo_unitario">
                         <label for="">
-                            <b>Costo unitario *</b>
+                            Costo unitario *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -118,7 +120,7 @@
                 <div class="col-md-5">
                     <div class="form-group" id="content_otras">
                         <label for="">
-                            <b>Otras operaciones</b>
+                            Otras operaciones
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
@@ -139,7 +141,7 @@
 
                     <div class="form-group" id="content_devoluciones">
                         <label for="">
-                            <b>Devolución</b>
+                            Devolución
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
@@ -155,7 +157,7 @@
 
                     <div class="form-group" id="content" style="display: none;">
                         <label for="">
-                            <b>Afectación:</b>
+                            Afectación
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -292,9 +294,13 @@
             content_devoluciones.style.display='none';
         }
 
+        if(check88.checked)
+        {
+            check10.value = "";
+        }
+
         if(check99.checked && check4.checked == false)
         {
-
             check10.value = document.getElementById('aux_cu').value;
             check10.disabled = true;
         }

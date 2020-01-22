@@ -9,6 +9,13 @@ class Model_stock_card extends CI_Model
     {
         return $this->db->insert('tarjeta_almacen', $data);
     }
+
+    public function update_ta($data)
+    {
+        $this->db->where('id_tarjeta', $data['id_tarjera']);
+        return $this->db->update('tarjeta_almacen', $data);
+    }
+
     public function get_last_id($data)
     {
         $this->db->select_max('id_tarjeta','id');
@@ -107,5 +114,11 @@ class Model_stock_card extends CI_Model
         $sql = $this->db->query("SELECT saldo FROM tarjeta_almacen WHERE id_tarjeta = $id_tarjeta");
         $result = $this->db->query($sql);
         return $result->row()->saldo;
+    }
+
+    public function get_info($data)
+    {
+        $sql = $this->db->get_where('tarjeta_almacen', $data);
+        return $sql->row();
     }
 }
