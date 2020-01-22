@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <!--Cantidad:-->
                             <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
-                            <?php echo form_error('articulo') ?>
+                            <?php echo form_error('articulo'); ?>
                         </div>
                     </div>
                     <div class="form-group" id="content_unidad">
@@ -219,7 +219,6 @@
 
         if(check1.checked)
         {
-            alert("Seleccionado: Gastos sobre compra");
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
