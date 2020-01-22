@@ -13,6 +13,11 @@ class Professor extends CI_Controller {
     {
       redirect('');
     }
+    $newdata = array(
+      'id_user' => $this->session->userdata('id_org'),
+      'grupo' => 0,
+      'id_org' =>$this->session->userdata('id_org')
+    );
   }
   //vista principal
 	public function index()
