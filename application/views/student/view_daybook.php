@@ -46,7 +46,7 @@
 							    		<div class="<?php if ($register->haber>0){ echo "offset-2";}?>">
 							    			<?php echo $register->cuenta; ?></td>
 							    		</div>
-							    	<td class="text-right">$ <?php echo  number_format($register->parcial, 2, '.', ','); ?></td>
+							    	<td class="text-right"> <?php //echo  number_format($register->parcial, 2, '.', ','); ?></td>
 							    	<td class="text-right">$ <?php echo  number_format($register->debe, 2, '.', ','); $d=$d+$register->debe; ?></td>
 							    	<td class="text-right">$ <?php echo  number_format($register->haber, 2, '.', ','); $h=$h+$register->haber;?></td>
 							    	<td></td>
