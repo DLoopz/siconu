@@ -1,5 +1,5 @@
 <div class="container col-md-10">
-	<h3 class="text-center">Registros del Asiento</h3>
+	<h3 class="text-center">Editar Registros del Asiento</h3>
 	<hr class="line_sep">
 	<?php
       if($this->session->flashdata('msg'))
@@ -9,7 +9,7 @@
 		<br>
 		<a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info  my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
-		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Editar Registros del Asiento"><i class="icon-plus-2"></i></a>
+		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros del Asiento"><i class="icon-plus-2"></i></a>
 
 		<br><br>
 		<div class="table-responsive">

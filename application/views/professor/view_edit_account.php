@@ -8,7 +8,7 @@
       <?php if (isset($account)) {?>
       <form method="post"  action="<?php echo base_url();?>professor/edit_account/<?php echo $account->id_catalogo_usuario?>">
         <div class="form-group">
-          <label>Nombre de la Cuenta</label>
+          <label>Nombre de la Cuenta * </label>
           <input type="text" name="nombre" class="form-control" placeholder="Nombre de la Cuenta" value="<?php echo $account->nombre ?>" autofocus >
           <?php echo form_error('nombre'); ?>
         </div>

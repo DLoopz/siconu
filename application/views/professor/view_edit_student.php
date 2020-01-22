@@ -41,5 +41,5 @@
 			</div>
 		</form>
   </div>
-  	<hr>
 </div>
+<br>

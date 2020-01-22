@@ -19,12 +19,6 @@
     <div class="modal fade" id="parciales" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
                   <h3 class="text-center">Ingresar Registro Parcial </h3>
                   <hr class="line_sep">
@@ -46,13 +40,13 @@
                   </div>
                 <?php }else{?>
                   <div class="form-group">
-                      Concepto
+                      Concepto *
                       <input class="form-control" type="text" name="concepto" value="<?php echo set_value('concepto');?>">
                       <?php echo form_error('concepto') ?>
                     </div>
                 <?php } ?>
                   <div class="form-group">
-                      Cantidad
+                      Cantidad *
                       <div class="input-group mb-2">
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
@@ -64,8 +58,8 @@
                   <div class="text-danger">
                     <?php echo form_label('* Campos Obligatorios')?><br>
                   </div>
+                  <hr>
                 </div>
-                <br>
                 <div class="panel-footer text-center">
                    <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
                   <a href="<?php echo base_url()?>/daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" name="cancelar">Volver</button></a>
