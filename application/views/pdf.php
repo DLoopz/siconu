@@ -14,7 +14,7 @@
 
 $(window).ready(function(){
 
-	$('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
+	
 
 
 	$("#sendcont").click(function() {
@@ -36,6 +36,7 @@ $(window).ready(function(){
 	  	  //console.log($(this).html());
 	  	  if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén'){
 	  	 		$('table tr th:last-child, tbody tr td:last-child').toggle();
+	  	 		console.log('esntra en ta');
 	  	  }
 	  	  tablas += '<table class="table table-hover table-bordered">' + 
 	  	  $(".table").html().trim() + '</table>'
@@ -43,6 +44,7 @@ $(window).ready(function(){
 	  	
 		  	if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén'){
 		  		$('table tr th:last-child, tbody tr td:last-child').toggle();
+		  		console.log('esntra en ta');
 	  		}
 	  }
 	  else
@@ -61,7 +63,6 @@ $(window).ready(function(){
 
 	  //tablas += '</div></div>'; //CON CONtainer
 	  //tablas += '</div></div>';
-
 
 	  contpdf = tablas;
 	  $("#contpdf").val(String(contpdf));

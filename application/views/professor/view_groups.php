@@ -27,7 +27,7 @@
           <?php foreach ($groups as $group) {?>
           <tr >
             <td><?php echo $group->grupo ?></td>
-            <td colspan="2">
+            <td colspan="2" class="text-center">
               <!--EDITAR-->
               <a class="btn btn-outline-success my-2 my-sm-0 " href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil"></i></em></strong></a>
               <!--ELIMINAR-->

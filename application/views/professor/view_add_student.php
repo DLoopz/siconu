@@ -50,7 +50,6 @@
 						<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn tam_btn">Volver</a>
 					</div>
 				</form>
-				<br>
 	    </div>
 	  </div>
 
@@ -81,14 +80,11 @@
 				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
 				  </div>
 				</form>
-
-	    </div>
+			</div>
 	  </div>
-
 	</div>
-
-	
 </div>
+<br>
 
 
 
