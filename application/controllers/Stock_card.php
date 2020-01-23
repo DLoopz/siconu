@@ -111,7 +111,7 @@ class Stock_card extends CI_Controller {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
             $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
             $this->form_validation->set_rules('articulo', 'Nombre del artículo', 'min_length[0]|max_length[50]|required');
-            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required|alpha');
         }else
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
@@ -130,6 +130,7 @@ class Stock_card extends CI_Controller {
         $this->form_validation->set_message('numeric', '%s debe ser numérico');
         $this->form_validation->set_message('min_length', '%s no debe de contener menos de 1 caracter');
         $this->form_validation->set_message('max_length', '%s no debe de contener más de 11 caracteres');
+        $this->form_validation->set_message('alpha', '%s no debe de contener caracteres alfanuméricos');
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -343,7 +344,7 @@ class Stock_card extends CI_Controller {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
             $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
             $this->form_validation->set_rules('articulo', 'Nombre del artículo', 'min_length[0]|max_length[50]|required');
-            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required|alpha');
         }else
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
@@ -362,6 +363,7 @@ class Stock_card extends CI_Controller {
         $this->form_validation->set_message('numeric', '%s debe ser numérico');
         $this->form_validation->set_message('min_length', '%s no debe de contener menos de 1 caracter');
         $this->form_validation->set_message('max_length', '%s no debe de contener más de 11 caracteres');
+        $this->form_validation->set_message('alpha', '%s no debe de contener caracteres alfanuméricos');
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -373,9 +375,9 @@ class Stock_card extends CI_Controller {
             $data['info'] = $this->model_exercise->get_exercise($fields);
 
             $fields = array('empresa_id' => $id_empresa);
-            $data['info_edit']=$this->model_stock_card->get_info($fields);
             $ultimo_id = $this->model_stock_card->get_last_id($fields);
             $fields = array('id_tarjeta' => intval($ultimo_id->id));
+            $data['info_edit']=$this->model_stock_card->get_info($fields);
             $existencia_antes = $this->model_stock_card->get_existencia($fields);
 
             if($existencia_antes == NULL)

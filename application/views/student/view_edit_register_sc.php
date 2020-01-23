@@ -6,39 +6,25 @@
             </h3>
         </div>
         <hr class="line_sep">
-            <div class="alert alert-warning text-center" role="alert">
-                Registro para <?php echo $info->nombre; ?>
-            </div>
-            <div class="alert alert-info text-center" role="alert">
-                Datos que contiene el registro:
-                <?php echo "</br>".$info_edit->id_tarjeta; ?>
-                <?php echo "</br>".$info_edit->empresa_id; ?>
-                <?php echo "</br>".$info_edit->fecha; ?>
-                <?php echo "</br>".$info_edit->entradas; ?>
-                <?php echo "</br>".$info_edit->salidas; ?>
-                <?php echo "</br>".$info_edit->existencia; ?>
-                <?php echo "</br>".$info_edit->unitario; ?>
-                <?php echo "</br>".$info_edit->promedio; ?>
-                <?php echo "</br>".$info_edit->debe; ?>
-                <?php echo "</br>".$info_edit->haber; ?>
-                <?php echo "</br>".$info_edit->saldo; ?>
-                <?php echo "</br>".$info_edit->terminar; ?>
-                <?php echo "</br>".$info_edit->nombre_articulo; ?>
-                <?php echo "</br>".$info_edit->tipo_unidad; ?>
-            </div>
-        <p class="text-danger">* Campos obligatorios</p>
+        <div class="alert alert-warning text-center" role="alert">
+            Registro para <?php echo $info->nombre; ?>
+        </div>
+
+
+        <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento"  style="display: none;">Cancelar</button>
+
+        <br>
         <div class="panel-body">
             <?php if (isset($info_edit)) { ?>
-            <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
-                <div class="col-md-7">
+            <form class="row justify-content-center" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
+                <div class="form-group col-md-7">
                     <div class="form-group" id="content_articulo">
                         <label for="">
                             Nombre del artículo *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" val                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
-ue="<?php echo set_value('articulo');?>">
+                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
                             <?php echo form_error('articulo'); ?>
                         </div>
                     </div>
@@ -57,10 +43,7 @@ ue="<?php echo set_value('articulo');?>">
                         <label>
                             Seleccione la fecha *
                         </label>
-                        <!--
-                        <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php //echo set_value('fecha_sc');?>">
-                        -->
-                        <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php $info_edit->fecha;?>">
+                        <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo $info_edit->fecha;?>">
                         <input id="fecha_anterior" type="date" name="fecha_anterior" class="form-control" value="<?php echo $fecha_anterior; ?>" style="display: none;">
                         <?php echo form_error('fecha_sc');?>
                     </div>
@@ -83,7 +66,7 @@ ue="<?php echo set_value('articulo');?>">
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
-                                <input id="existencia" type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->existencia;?>">
+                                <input id="existencia" type="text" name="cantidad_existencia" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_existencia');?>">
                                 <?php echo form_error('cantidad_existencia') ?>
                             </div>
                         </div>
@@ -137,7 +120,7 @@ ue="<?php echo set_value('articulo');?>">
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="form-group col-md-5">
                     <div class="form-group" id="content_otras">
                         <label for="">
                             Otras operaciones
@@ -191,9 +174,14 @@ ue="<?php echo set_value('articulo');?>">
                         </div>
                     </div>
                 </div>
-                <div class="col align-self-center">
-                    <input type="submit" name="add_entry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-                    <a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 tam_btn">Volver</button></a>
+                <div class="col-md-12 text-danger">
+        	        <?php echo form_label('* Campo Obligatorio')?>
+      	        </div>
+      	        <br/>
+      	        <hr class="col-md-11">
+                <div class="panel-footer text-center">
+                    <input type="submit" name="add_entry" value="Guardar" class="btn btn-outline-success my-2 my-sm-0">
+                    <a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
                 </div>
             </form>
             <?php } ?>
@@ -214,6 +202,7 @@ ue="<?php echo set_value('articulo');?>">
 
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
+        btn_cancelar = document.getElementById("btn_cancelar");
 
         check1 = document.getElementById("gastosCompra");
         check2 = document.getElementById("descuentosCompra");
@@ -235,9 +224,11 @@ ue="<?php echo set_value('articulo');?>">
         if (check1.checked || check2.checked || check3.checked)
         {
             element.style.display='block';
+            btn_cancelar.style.display='block';
         }else
         {
             element.style.display='none';
+            btn_cancelar.style.display='none';
         }
 
         if(check1.checked)
@@ -313,11 +304,16 @@ ue="<?php echo set_value('articulo');?>">
         {
             content_otras.style.display='none';
             content_devoluciones.style.display='none';
+            btn_cancelar.style.display='block';
+        }
+
+        if(check88.checked)
+        {
+            check10.value = "";
         }
 
         if(check99.checked && check4.checked == false)
         {
-
             check10.value = document.getElementById('aux_cu').value;
             check10.disabled = true;
         }
