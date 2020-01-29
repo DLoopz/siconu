@@ -30,6 +30,7 @@ class Daybook extends CI_Controller {
 	public function book($id=null)
 	{
 		$data['title']="Rayado Diario";
+    echo "esto es una prueba";
 		$fields = array('empresa_id' => $id );
 		$data['entries']=$this->model_daybook->get_entries($fields);
     $data['registers']=$this->model_daybook->get_all_registers($fields);

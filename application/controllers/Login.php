@@ -28,11 +28,13 @@ class Login extends CI_Controller
 			$this->load->view('head',$data);
 			$this->load->view('login');
 			$this->load->view('foot');
+				echo "ESTO ES OTRA PRUEBA";
 		}
 	}
  
 	public function login()
 	{
+
 		if ($this->input->post('login')) {
 			//se establecen reglas de validacion
 			$this->form_validation->set_rules('usuario', 'Usuario', 'required');
