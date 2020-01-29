@@ -1,19 +1,12 @@
 <div class="container col-md-6">
-  <h3 class="text-center">Ingresar Registro Parcial a <?php if (isset($cuenta)){echo $cuenta->cuenta;} ?></h3>
+  <h3 class="text-center">Registro Parcial a <?php if (isset($cuenta)){echo $cuenta->cuenta;} ?></h3>
   <hr class="line_sep">
   <div>
 
-    <?php
-    /*
-    //agregar con siguiente vista
+    <?php if($this->session->flashdata('msg')) echo $this->session->flashdata('msg'); ?>
 
-    <a href="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar catálogo de cuentas"><i class="icon-plus-2"></i></a>
-    */
-
-     ?>
-
-     <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar Parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
-     <br><br>
+    <button type="button" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" data-toggle="modal" data-target="#parciales" data-placement="top" title="Agregar Parciales"><strong><em><i class="icon-plus-2"></i></em></strong></button>
+    <br><br>
 
     <!-- Modal para registros parciales -->
     <div class="modal fade" id="parciales" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionLabel" aria-hidden="true">
@@ -62,15 +55,13 @@
                 </div>
                 <div class="panel-footer text-center">
                    <input type="submit" name="add_resgistry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-                  <input type="reset" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" name="cancelar" value="Volver"></input>
-
+                  <input type="reset" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" name="cancelar" data-dismiss="modal" value="Volver"></input>
                  
                 </div>
                 </form>
             </div>
         </div>
     </div>
-
 
     <table class="table table-hover" id="user-table">
       <thead>
@@ -102,25 +93,41 @@
         </tr>
       </tbody>
     </table>
+
     <form method="post" action="<?php echo base_url()?>daybook/edit_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>/<?php echo $total;?>">
+      
       <div class="form-group">
-        
-        <div class="custom-control custom-radio custom-control-inline col-5">
-          <input type="radio" id="cargo" name="operacion" class="custom-control-input" value="cargo" <?php echo  set_radio('movimiento', 'cargo', 'checked');?>>
+        <div class="form-group text-danger">
+          <label for="">Seleccione si la cuenta es cargo o abono</label>
+        </div>           
+        <div class="form-group custom-control custom-radio custom-control-inline col-5">
+          <input type="radio" id="cargo" name="operacion" class="custom-control-input" value="cargo" <?php if ($cuenta->debe > 0) {
+            echo "checked";
+          } ?>/>
           <label class="custom-control-label" for="cargo">Cargo</label>
         </div>
-        <div class="custom-control custom-radio custom-control-inline col-5">
-          <input type="radio" id="abono" name="operacion" class="custom-control-input" value="abono" <?php echo  set_radio('movimiento', 'cargo', 'checked');?>>
+        <div class="form-group custom-control custom-radio custom-control-inline col-5">
+          <input type="radio" id="abono" name="operacion" class="custom-control-input" value="abono" <?php if ($cuenta->haber>0) {
+            echo "checked";
+          } ?>/>
           <label class="custom-control-label" for="abono">Abono</label>
         </div>
         <?php echo form_error('operacion'); ?>
       </div>
-      <br>
+
+      <?php 
+      /*
       <div class="panel-footer text-center">
         <a href="<?php echo base_url()?>daybook/delet_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
         <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">  
       </div>
+      */?>
+      <div class="panel-footer text-center">
+        <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
+        <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">  
+      </div>
     </form>
+
   </div>
 </div>
 
@@ -129,16 +136,16 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-tittle" id="modalTittle">Eliminar Asiento</h5>
+        <h5 class="modal-tittle" id="modalTittle">Eliminar Registro</h5>
       </div>
       <div class="modal-body">
         ¿Está seguro de eliminar el registro?
       </div>
       <div class="modal-footer">
-       <form method="post" action="<?php echo base_url() ?>daybook/delete_parcial_rp/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
+       <form method="post" action="<?php echo base_url() ?>daybook/delete_parcial_rp/<?php echo $id_empresa; ?>/<?php echo $id_asiento?>/<?php echo $id_registro; ?>">
          <input type="hidden" id="eliminar" name="id_parcial"></input>
          <input type="submit" class="btn btn-outline-danger my-2 my-sm-0" value="Si">
-          <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal"  data_dismiss="modal" value="No">                
+          <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal"  data-dismiss="modal" value="No">                
        </form>
       </div>
     </div>

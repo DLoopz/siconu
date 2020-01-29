@@ -1,4 +1,5 @@
-
+<?php 
+/*
 <div class="row">
 	<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
 	  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
@@ -8,14 +9,13 @@
 	  <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar PDF">
 	</form>
 </div>
+*/ 
+?>
 
 
 <script>
 
 $(window).ready(function(){
-
-	
-
 
 	$("#sendcont").click(function() {
 
