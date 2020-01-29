@@ -224,14 +224,11 @@ class Professor extends CI_Controller {
     $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]|is_unique[usuario.matricula]',
       array('min_length'=>'%s debe contener al menos 5 caracteres'));
     //personalizacion de reglas de validacion
-    $this->form_validation->set_message('alpha', '%s solo debe contener letras');
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
-    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('is_unique', '%s ya existe');
-    $this->form_validation->set_message('alpha_numeric', '%s no debe contener caracteres especiales');
     $this->form_validation->set_message('min_length', '%s debe contener más de 3 caracteres');
     $this->form_validation->set_message('numeric', '%s debe contener solo números');
-    //$this->form_validation->set_message('alpha_spaces', '%s no debe contener numeros');
 
 
     //personalizacion de delimitadores
@@ -332,17 +329,16 @@ class Professor extends CI_Controller {
   public function edit_student($id=null,$id_group=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|callback_alpha_spaces|min_length[3]|alpha');
-    $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|callback_alpha_spaces|min_length[3]|alpha',
+    $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|callback_alpha_spaces|min_length[3]');
+    $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|callback_alpha_spaces|min_length[3]',
       array('max_length'=>'%s debe contener mas de 3 caracteres'));
-    $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|callback_alpha_spaces|min_length[3]|alpha');
+    $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|callback_alpha_spaces|min_length[3]');
     $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]',
       array('min_length'=>'%s debe contener mas de 5 caracteres'));
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
-    $this->form_validation->set_message('alpha', '%s no debe contener caracteres especiales');
     $this->form_validation->set_message('numeric', '%s debe contener solo números');
-    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('is_unique', '%s ya existe');
     $this->form_validation->set_message('matches', '%s no coincide con el campo contraseña');
     $this->form_validation->set_message('min_length', 'El campo %s debe contener más de 3 caracteres');
@@ -546,7 +542,7 @@ class Professor extends CI_Controller {
   {
     $aux=$this->input->post('tipo');
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|alpha_numeric_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]',array('required' => '%s es un campo obligatorio' ));
+    $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|callback_alpha_spaces|max_length[50]|trim|callback_account_exists',array('required' => '%s es un campo obligatorio' ));
     $this->form_validation->set_rules('tipo','Tipo de Cuenta','required');
     if ($aux==3) {
       $aux=1;
@@ -559,9 +555,10 @@ class Professor extends CI_Controller {
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s debe tener un valor diferente al predeterminado');
     $this->form_validation->set_message('is_unique', '%s ya existe');
-    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('max_length', '%s no debe de contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe de contener menos de 3 caracteres');
+    $this->form_validation->set_message('account_exists', '%s ya esta registrado en tu catalogo');
    
 
     //personalizacion de delimitadores
@@ -637,14 +634,14 @@ class Professor extends CI_Controller {
     }
   }
 
-   public function edit_account($id=null)
+  public function edit_account($id=null)
   {
     //reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|alpha_numeric_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|callback_alpha_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('is_unique', '%s ya existe');
-    $this->form_validation->set_message('alpha_numeric_spaces', '%s solo debe contener letras');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
@@ -702,7 +699,7 @@ class Professor extends CI_Controller {
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('min_length','%s no debe contener menos de tres caracteres');
-    $this->form_validation->set_message('alpha_spaces', '%s no debe tener caracteres especiales');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('valid_email', '%s nformato de correo inválido');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');    
@@ -749,14 +746,15 @@ class Professor extends CI_Controller {
   }
   public function alpha_spaces($str)
   {
-    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
-    if ($resultado)
+    $resultado=preg_match('/^([A-Za-z\sÑñáéíóú])*+$/i', $str);
+    //$resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
+    if ($resultado==1)
     {
-      return FALSE;
+      return TRUE;
     }
     else
     {
-      return TRUE;
+      return FALSE;
     }
   }
   public function thisPassword($str)
@@ -767,5 +765,19 @@ class Professor extends CI_Controller {
       return true;
     }
     return false;
+  }
+  public function account_exists($str)
+  {
+    $fields = array('usuario_id' => $this->session->userdata('id_user'),'nombre' => $str);
+    $status = $this->model_account->get_account($fields);
+    //echo $status;
+    if ($status)
+    {
+      return FALSE;
+    }
+    else
+    {
+      return TRUE;
+    }
   }
 }
