@@ -14,6 +14,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                   <h3 class="text-center">Ingresar Registro Parcial </h3>
+                  <h3 class="text-center">Ingresar Registro Parcial </h3>
                   <hr class="line_sep">
               <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
                 <?php if ($cuenta->cuenta=="Almacén/Mercancías" and $exercise->procedimiento==3) {?>
