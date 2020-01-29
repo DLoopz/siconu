@@ -62,7 +62,7 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|add_entry');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
