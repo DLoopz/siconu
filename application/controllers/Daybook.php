@@ -831,11 +831,7 @@ class Daybook extends CI_Controller {
 }
 
 
-  
-
-}//fin clase
-
-public function alpha_spaces($str)
+  public function alpha_spaces($str)
   {
     $resultado=preg_match('/^([A-Za-z\sÑñáéíóú])*+$/i', $str);
     if ($resultado==1)
@@ -847,3 +843,6 @@ public function alpha_spaces($str)
       return FALSE;
     }
   }
+
+}//fin clase
+

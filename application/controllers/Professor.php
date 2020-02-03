@@ -328,13 +328,20 @@ class Professor extends CI_Controller {
   
   public function edit_student($id=null,$id_group=null)
   {
+    $fields = array('id_usuario' => $id);
+    $info=$this->model_user->get_user($fields);
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|callback_alpha_spaces|min_length[3]');
     $this->form_validation->set_rules('ap_paterno', 'Apellido Paterno', 'trim|required|callback_alpha_spaces|min_length[3]',
       array('max_length'=>'%s debe contener mas de 3 caracteres'));
     $this->form_validation->set_rules('ap_materno', 'Apellido Materno', 'trim|required|callback_alpha_spaces|min_length[3]');
-    $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]',
+    if($info->id_usuario == $id and $info->matricula == $this->input->post('matricula')){
+      $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]',
       array('min_length'=>'%s debe contener mas de 5 caracteres'));
+    }else{
+      $this->form_validation->set_rules('matricula', 'Matrícula','trim|required|numeric|min_length[5]|is_unique[usuario.matricula]',
+      array('min_length'=>'%s debe contener mas de 5 caracteres'));
+    }
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('numeric', '%s debe contener solo números');
@@ -636,8 +643,16 @@ class Professor extends CI_Controller {
 
   public function edit_account($id=null)
   {
+
+    $fields = array('id_catalogo_usuario' => $id);
+    $info = $this->model_account->get_account($fields);
     //reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|callback_alpha_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    if ($info->id_catalogo_usuario == $id and $info->nombre == $this->input->post('nombre')) {
+      $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|callback_alpha_spaces|max_length[50]|trim');
+    }else{
+      $this->form_validation->set_rules('nombre','Nombre','required|min_length[3]|callback_alpha_spaces|max_length[50]|trim|is_unique[catalogo_usuario.nombre]');
+    }
+    
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('is_unique', '%s ya existe');
