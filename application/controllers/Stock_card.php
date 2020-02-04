@@ -15,6 +15,8 @@ class Stock_card extends CI_Controller {
 
     public function list_sc($id_empresa = null)
     {
+        $fields = array('empresa_id' => $id_empresa );
+        $data['entries']=$this->model_daybook->get_entries($fields);
 		$data['title']="Tarjeta de Almacén";
 
         $fields = array('empresa_id' => $id_empresa);
