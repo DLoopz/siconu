@@ -65,15 +65,33 @@
 				?>
 	      <form enctype="multipart/form-data" method="post" action="<?php echo base_url();?>professor/students_file/<?php echo $id_grupo; ?>"> 
 	      	<br>
+	      	
 	      	<div class="form-group">
 	      		<label for="plantilla">
-	      			<a href="<?php echo base_url();?>source/downloads/Plantilla.csv">Descargar la plantilla para el archivo CSV</a>
+	      			<a class="plantilla" href="<?php echo base_url();?>source/downloads/Plantilla.csv">Clic aquí para descargar la plantilla del archivo CSV</a>
 	      		</label>
 	      	</div>
-				  <div class="form-group">
-				  	<label for="">Archivo en formato .csv</label>
-				  	<input class="form-control-file" type="file" name="file" id="file">
+
+				  <div class="input-group">
+				    <div class="input-group-prepend">
+				      <span class="input-group-text" id="">	</span>
+				    </div>
+				    <div class="custom-file">
+				      <input type="file" class="custom-file-input" name="file" id="file"
+				        aria-describedby="">
+				      <label class="custom-file-label" for="" id="nombre_f">Elegir Archivo .csv</label>
+				      <script>
+				      	$(window).ready(function(){
+				      		$("#file").change(function(){
+				      		  var fichero_seleccionado = $(this).val();
+				      		  var nombre_fichero_seleccionado = fichero_seleccionado.replace(/.*[\/\\]/, ''); //Eliminamos el path hasta el fichero seleccionado
+				      		  $("#nombre_f").text(nombre_fichero_seleccionado);
+				      		});
+				      	});
+				      </script>
+				    </div>
 				  </div>
+
 				  <br><hr><br>
 				  <div class="panel-footer text-center">
 				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 "value="Agregar" />

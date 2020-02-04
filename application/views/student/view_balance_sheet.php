@@ -1,9 +1,19 @@
 <div class="container">
 	<?php
 	setlocale(LC_ALL, 'es_MX');?>
-	<h3 class="text-center">Balance General</h3>
-	<hr class="line_sep">
-  <br>
+  
+  
+    <form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
+      <input type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" value="Generar PDF">
+      <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
+      <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
+      <input type="text" id="contpdf" name="contpdf" class="invisible">
+    </form>
+      
+    <h3 class="text-center">Balance General</h3>
+    <hr class="line_sep">
+    <br>
+  
 
 	<nav class="nav-fill">
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
