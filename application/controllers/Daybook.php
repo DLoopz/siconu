@@ -61,10 +61,11 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
@@ -111,12 +112,13 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -188,6 +190,7 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
+    $this->form_validation->set_message('numeric', '%s debe ser numérico');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -829,6 +832,18 @@ class Daybook extends CI_Controller {
 }
 
 
-  
+  public function alpha_spaces($str)
+  {
+    $resultado=preg_match('/^([A-Za-z\sÑñáéíóú])*+$/i', $str);
+    if ($resultado==1)
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
 
 }//fin clase
+

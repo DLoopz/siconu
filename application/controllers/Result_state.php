@@ -25,6 +25,8 @@ class Result_state extends CI_Controller {
 
 	public function state($id_empresa=null)
 	{
+		$fields = array('empresa_id' => $id_empresa );
+		$data['entries']=$this->model_daybook->get_entries($fields);
 		if ($this->input->post("submit_generar")) {
 			//reglas de validacion
 			$this->form_validation->set_rules('fecha_inicio','Fecha de inicio','required|callback_down_date|callback_up_date');
