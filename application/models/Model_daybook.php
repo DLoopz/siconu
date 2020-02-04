@@ -122,6 +122,7 @@ class Model_daybook extends CI_Model
     return $this->db->update('registro_asiento', $data);
   }
 
+  //obtener datos de un parcial
   public function get_partial($data)
   {
     $sql = $this->db->get_where('registro_asiento', $data);
@@ -134,6 +135,14 @@ class Model_daybook extends CI_Model
     $sql = $this->db->get_where('registro_parcial', $data);
     return $sql->row();
   }
+
+  //obtene parciales de registro parcial
+  public function get_partials_rp($data)
+  {
+    $sql = $this->db->get_where('registro_parcial', $data);
+    return $sql->result();
+  }
+
   //actulaizar parcial en rp
   public function update_parcial($data)
   {

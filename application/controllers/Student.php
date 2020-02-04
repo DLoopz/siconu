@@ -82,7 +82,7 @@ class Student extends CI_Controller {
 	{
     $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|callback_alpha_spaces|trim');
     $this->form_validation->set_rules('procedimiento','Procedimiento del ejercicio','required');
 
     //personalizacion de reglas de validacion
@@ -90,6 +90,7 @@ class Student extends CI_Controller {
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
 
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
@@ -193,5 +194,18 @@ class Student extends CI_Controller {
       return true;
     }
     return false;
+  }
+
+  public function alpha_spaces($str)
+  {
+    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
+    if ($resultado)
+    {
+      return FALSE;
+    }
+    else
+    {
+      return TRUE;
+    }
   }
 }
