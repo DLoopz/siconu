@@ -58,6 +58,8 @@ SELECT asiento.id_asiento, empresa.id_empresa, asiento.fecha, empresa.nombre, re
   
   public function schemes($id_empresa)
 	{
+    $fields = array('empresa_id' => $id_empresa );
+    $data['entries']=$this->model_daybook->get_entries($fields);
     $data['title']="Esquemas de mayor";
     $fields = array('empresa_id' => $id_empresa);
     $data['asientos'] = $this->model_schemes->get_asientos($fields);
