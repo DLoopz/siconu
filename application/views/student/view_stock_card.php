@@ -111,7 +111,10 @@
                                 <?php
                                     if($ultimo == $sc->id_tarjeta and $terminar == 0)
                                     {?>
+                                        <a id="edit_register" class="btn btn-outline-success" href="<?php echo base_url() ?>stock_card/edit_register/<?php echo $id_empresa;?>/<?php echo $sc->id_tarjeta;?>/1" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+
                                         <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+
                                     <?php}else
                                     {?>
                                     <?php
