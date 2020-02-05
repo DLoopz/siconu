@@ -90,13 +90,14 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" checked>
+                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
                                 <label class="custom-control-label" for="entrada">Entrada</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()">
+                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'salida', 'checked');?>>
                                 <label class="custom-control-label" for="salida">Salida</label>
                             </div>
+                            <?php echo form_error('unidades'); ?>
                         </div>
                     </div>
 

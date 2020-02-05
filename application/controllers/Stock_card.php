@@ -103,7 +103,7 @@ class Stock_card extends CI_Controller {
         // REGLAS
         //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
         $this->form_validation->set_rules('fecha_sc', 'Fecha', 'callback_date_check', 'required');
-        $this->form_validation->set_rules('referencia', 'Referencia', 'required');
+        $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
 
 
         if($existencia_antes == NULL)
@@ -115,22 +115,37 @@ class Stock_card extends CI_Controller {
         }else
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
-            $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+
+            if($this->input->post('unidades') == "salida" && $existencia_antes->existencia == 0)
+            {
+                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+            }else
+            {
+                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+            }
+            $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
             /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
                 $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
         }
         if($this->input->post('unidades') != "salida")
         {
             //$this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
-            $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check', 'required|numeric|min_length[1]|max_length[11]');
+            if($this->input->post('cantidad_existencia') == 0)
+            {
+                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+            }else
+            {
+                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check', 'required|numeric|min_length[1]|max_length[11]');
+            }
         }
 
         // MENSAJE
         $this->form_validation->set_message('required', '%s es un campo obligatorio');
         $this->form_validation->set_message('numeric', '%s debe ser numérico');
-        $this->form_validation->set_message('min_length', '%s no debe de contener menos de 1 caracter');
-        $this->form_validation->set_message('max_length', '%s no debe de contener más de 11 caracteres');
-        $this->form_validation->set_message('alpha', '%s no debe de contener caracteres alfanuméricos');
+        $this->form_validation->set_message('min_length', '%s no debe contener menos de 1 caracter');
+        $this->form_validation->set_message('max_length', '%s no debe contener más de 11 caracteres');
+        $this->form_validation->set_message('alpha', '%s no debe contener caracteres alfanuméricos');
+        $this->form_validation->set_message('is_unique', '%s debe tener otro nombre porque ya existe uno');
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -602,6 +617,23 @@ class Stock_card extends CI_Controller {
             if($str == 0)
             {
                 $this->form_validation->set_message('cost_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function venta_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('venta_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == 0)
+            {
+                $this->form_validation->set_message('venta_check', '%s debe ser distinto a 0');
                 return FALSE;
             }else
                 return TRUE;
