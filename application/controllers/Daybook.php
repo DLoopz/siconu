@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
-require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
-use Dompdf\Dompdf;
+//require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
+//use Dompdf\Dompdf;
 
 class Daybook extends CI_Controller {
   
@@ -30,7 +30,6 @@ class Daybook extends CI_Controller {
 	public function book($id=null)
 	{
 		$data['title']="Rayado Diario";
-    echo "esto es una prueba";
 		$fields = array('empresa_id' => $id );
 		$data['entries']=$this->model_daybook->get_entries($fields);
     $data['registers']=$this->model_daybook->get_all_registers($fields);
@@ -96,11 +95,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->insert_entry($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no agregado</div>');
       }
       redirect('daybook/register/'.$id_empresa.'/'.$add->id_asiento, 'refresh');
     }
@@ -144,11 +143,11 @@ class Daybook extends CI_Controller {
       $upd=$this->model_daybook->update_entry($fields);
       if($upd)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento modificado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento modificado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no modificado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no modificado</div>');
       }
       redirect('daybook/book/'.$id_empresa,'refresh');
     }
@@ -268,11 +267,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->insert_register($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
     }
@@ -333,11 +332,11 @@ class Daybook extends CI_Controller {
         $add=$this->model_daybook->insert_register($fields);
         if($add)
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
         }
         $fields = array('asiento_id' =>$id_asiento);
         $add=$this->model_daybook->last_register($fields);
@@ -417,11 +416,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->insert_register_partial($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
       $fields = array('asiento_id' =>$id_asiento);
       $add=$this->model_daybook->last_register($fields);
@@ -524,7 +523,7 @@ class Daybook extends CI_Controller {
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no modificado</div>');
         }
         redirect("daybook/edit_register_partial/{$id_empresa}/{$id_asiento}/{$id_registro}/{$cantidad}");
         //redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
@@ -589,7 +588,7 @@ class Daybook extends CI_Controller {
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no modificado</div>');
         }
         redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
 
@@ -636,11 +635,11 @@ class Daybook extends CI_Controller {
 
     if($del)
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Parcial borrado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Parcial borrado correctamente</div>');
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger">Error parcial no borado</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error parcial no borado</div>');
     }
     redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
   }
@@ -652,11 +651,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_register($fields);
     if($del)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borrado</div>');
       }
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/1', 'refresh');
   }
@@ -677,11 +676,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_register($fields);
     if($del)
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
     redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
       
@@ -697,11 +696,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_entry($fields);
     if($del)
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
     redirect('daybook/book/'.$id_empresa, 'refresh');
   }
@@ -714,11 +713,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_entry($fields);
     if($del)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
       }
       redirect('daybook/book/'.$id_empresa, 'refresh');
   }
@@ -809,11 +808,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->update_register($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
       $xdir='daybook/register/'.$id_empresa.'/'.$id_asiento;
       if ($edit==1){
