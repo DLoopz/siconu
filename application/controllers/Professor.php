@@ -328,6 +328,7 @@ class Professor extends CI_Controller {
   
   public function edit_student($id=null,$id_group=null)
   {
+   
     $fields = array('id_usuario' => $id);
     $info=$this->model_user->get_user($fields);
     //se establecen reglas de validacion
