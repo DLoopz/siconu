@@ -1,8 +1,11 @@
 <?php
+
+/*
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
-//require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
-//use Dompdf\Dompdf;
+require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
+use Dompdf\Dompdf;
+*/
 
 class Daybook extends CI_Controller {
   
@@ -868,17 +871,25 @@ class Daybook extends CI_Controller {
       ";
       
       $contenido = $head.$cont.$foot;
-      //echo $cont;
-      //echo $contenido;
       
+      /*
+      echo $head;
+      echo $cont;
+      echo $foot;
+      */
+      echo $contenido;
+
+
+
+      /*
       $dompdf = new Dompdf();
-      
       $dompdf->loadHtml($contenido);
       $dompdf->setPaper('A4', 'landscape');
       //ini_set("memory_limit","50M");//aumentar memoria
       $dompdf->render();
       $dompdf->stream( $titulo_pdf.'.pdf' , array('Attachment' => true));
-      //$dompdf->stream('archivo.pdf');
+      
+      //*/
     }
     else
     {
@@ -886,18 +897,7 @@ class Daybook extends CI_Controller {
     }
   }
 
-  /*public function alpha_spaces($str)
-  {
-    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
-    if ($resultado)
-    {
-      return FALSE;
-    }
-    else
-    {
-      return TRUE;
-    }
-  }*/
+  
 
   public function alpha_spaces($str)
   {
