@@ -94,8 +94,8 @@
 
 				  <br><hr><br>
 				  <div class="panel-footer text-center">
-				  	<input type="submit" name="archivo" class="btn btn-outline-success my-2 my-sm-0 "value="Agregar" />
-				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
+				  	<input type="submit" name="archivo" class="btn btn-outline-success col-3  "value="Subir" />
+				  	<a href="<?php echo base_url()?>professor/show_students/<?php echo $id_grupo;?>"> <button type="button" class="btn btn-outline-primary col-3 offset-2 ">Volver</button></a>
 				  </div>
 				</form>
 			</div>

@@ -6,6 +6,7 @@
 	  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
 	  <input type="text" id="contpdf" name="contpdf" class="invisible">
 	  <input type="submit" id="sendcont" name="sendcont" class="btn btn-info" value="Generar PDF">
+	  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
 	</form>
 </div>
 */ 
@@ -50,14 +51,14 @@ $(window).ready(function(){
 	  	if (titulo_pdf == 'Balance General' && $("#nav-profile").hasClass('active'))
 	  	{
   			var tablas = '';
-  			tablas +=  titulo;
+  			tablas += container + titulo;
 		  	//balance f cuenta
 		  	$(".tab-pane.fade.show.active").each(function(){
 		  		console.log('entra al activo');
 		  		//tablas += container;
 			  	tablas += $(".bg-cuenta").html();
 			  	console.log($(".bg-cuenta").html());
-		  		//tablas += '</div>';
+		  		tablas += '</div>';
 		  		console.log('entra al formato');
 		  	}); //fin each nav
 

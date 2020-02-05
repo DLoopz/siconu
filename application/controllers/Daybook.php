@@ -895,18 +895,7 @@ class Daybook extends CI_Controller {
     }
   }
 
-  public function alpha_spaces($str)
-  {
-    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
-    if ($resultado)
-    {
-      return FALSE;
-    }
-    else
-    {
-      return TRUE;
-    }
-  }
+  
 
   public function alpha_spaces($str)
   {
