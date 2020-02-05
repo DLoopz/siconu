@@ -12,8 +12,11 @@ class Model_stock_card extends CI_Model
 
     public function update_ta($data)
     {
-        $this->db->where('id_tarjeta', $data['id_tarjera']);
-        return $this->db->update('tarjeta_almacen', $data);
+        /*$this->db->where('id_tarjeta', $data['id_tarjera']);
+        return $this->db->update('tarjeta_almacen', $data);*/
+        $this->db->where(['id' => $id]);
+        $update_data = $this->db->update('tarjeta_almacen', $data);
+        return $update_data;
     }
 
     public function get_last_id($data)
