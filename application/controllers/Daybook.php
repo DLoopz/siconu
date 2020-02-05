@@ -869,17 +869,25 @@ class Daybook extends CI_Controller {
       ";
       
       $contenido = $head.$cont.$foot;
-      //echo $cont;
-      //echo $contenido;
       
+      /*
+      echo $head;
+      echo $cont;
+      echo $foot;
+      */
+      echo $contenido;
+
+
+
+      /*
       $dompdf = new Dompdf();
-      
       $dompdf->loadHtml($contenido);
       $dompdf->setPaper('A4', 'landscape');
       //ini_set("memory_limit","50M");//aumentar memoria
       $dompdf->render();
       $dompdf->stream( $titulo_pdf.'.pdf' , array('Attachment' => true));
-      //$dompdf->stream('archivo.pdf');
+      
+      //*/
     }
     else
     {

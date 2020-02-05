@@ -100,7 +100,7 @@
   </div>
 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <div>
+    <div class="bg-cuenta">
       <div class="text-center text-uppercase font-weight-bold td"><?php echo $exercise->nombre;?></div>
       <div class="text-center td">Balance general al <?php echo date('j/m/Y'); ?></div>
       <div class="row">
