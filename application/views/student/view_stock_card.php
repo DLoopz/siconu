@@ -1,4 +1,10 @@
 <div class="container" id="content">
+    <form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
+      <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
+      <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
+      <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
+      <input type="text" id="contpdf" name="contpdf" class="invisible">
+    </form>
     <div><h3 class="text-center">Tarjeta de Almacén</h3></div>
     <hr class="line_sep">
     <?php
@@ -85,19 +91,19 @@
                             <td><?php echo $sc->existencia ?></td>
                         <?php } ?>
                         <?php if(isset($sc->unitario)){?>
-                            <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                            <td>$<?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->promedio)){?>
-                            <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                            <td>$<?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->debe)){?>
-                            <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                            <td>$<?php echo number_format($sc->debe, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->haber)){?>
-                            <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                            <td>$<?php echo number_format($sc->haber, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->saldo)){?>
-                            <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
+                            <td>$<?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->id_tarjeta)){?>
                             <td>
@@ -105,7 +111,10 @@
                                 <?php
                                     if($ultimo == $sc->id_tarjeta and $terminar == 0)
                                     {?>
+                                        <a id="edit_register" class="btn btn-outline-success" href="<?php echo base_url() ?>stock_card/edit_register/<?php echo $id_empresa;?>/<?php echo $sc->id_tarjeta;?>/1" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+
                                         <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+
                                     <?php}else
                                     {?>
                                     <?php
@@ -125,8 +134,8 @@
                         <th></th>
                         <th></th>
                         <th scope="row">Total</th>
-                        <td class="text-info">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
-                        <td class="text-info">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
+                        <td class="text-info">$<?php echo number_format($compra, 2, ".", ","); ?></td>
+                        <td class="text-info">$<?php echo number_format($vendido, 2, ".", ","); ?></td>
                         <th></th>
                         <th></th>
                     </tr>

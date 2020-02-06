@@ -2,6 +2,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Stock_card extends CI_Controller {
+
+    function __construct()
+    {
+        parent:: __construct();
+        if ($this->session->userdata('activo') != TRUE)
+        {
+            redirect('');
+        }
+        if ($this->session->userdata('rol') == 1)
+        {
+            redirect('');
+        }
+    }
 	public function index($id=null)
 	{
 		$data['title']="Tarjeta de Almacén";
@@ -15,6 +28,8 @@ class Stock_card extends CI_Controller {
 
     public function list_sc($id_empresa = null)
     {
+        $fields = array('empresa_id' => $id_empresa );
+        $data['entries']=$this->model_daybook->get_entries($fields);
 		$data['title']="Tarjeta de Almacén";
 
         $fields = array('empresa_id' => $id_empresa);
@@ -102,33 +117,50 @@ class Stock_card extends CI_Controller {
 
         // REGLAS
         //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
-        $this->form_validation->set_rules('fecha_sc', 'fecha', 'callback_date_check', 'required');
-        $this->form_validation->set_rules('referencia', 'referencia', 'required');
+        $this->form_validation->set_rules('fecha_sc', 'Fecha', 'callback_date_check', 'required');
+        $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
 
 
         if($existencia_antes == NULL)
         {
-            $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
-            $this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
-            $this->form_validation->set_rules('articulo', 'nombre del artículo', 'min_length[0]|max_length[50]|required');
-            $this->form_validation->set_rules('unidad', 'tipo de unidad', 'min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
+            $this->form_validation->set_rules('articulo', 'Nombre del artículo', 'min_length[0]|max_length[50]|required');
+            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required|alpha');
         }else
         {
-            $this->form_validation->set_rules('cantidad_existencia', 'cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
-            $this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
+
+            if($this->input->post('unidades') == "salida" && $existencia_antes->existencia == 0)
+            {
+                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+            }else
+            {
+                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+            }
+            $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
             /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
                 $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
         }
         if($this->input->post('unidades') != "salida")
         {
-            $this->form_validation->set_rules('cantidad_costos', 'cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+            //$this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+            if($this->input->post('cantidad_existencia') == 0)
+            {
+                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+            }else
+            {
+                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check', 'required|numeric|min_length[1]|max_length[11]');
+            }
         }
 
         // MENSAJE
-        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-        $this->form_validation->set_message('numeric', 'El campo %s debe ser numérico');
-        $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 1 caracteres');
-        $this->form_validation->set_message('max_length', 'El campo %s no debe de contener mas de 11 caracteres');
+        $this->form_validation->set_message('required', '%s es un campo obligatorio');
+        $this->form_validation->set_message('numeric', '%s debe ser numérico');
+        $this->form_validation->set_message('min_length', '%s no debe contener menos de 1 caracter');
+        $this->form_validation->set_message('max_length', '%s no debe contener más de 11 caracteres');
+        $this->form_validation->set_message('alpha', '%s no debe contener caracteres alfanuméricos');
+        $this->form_validation->set_message('is_unique', '%s debe tener otro nombre porque ya existe uno');
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
 
@@ -324,6 +356,241 @@ class Stock_card extends CI_Controller {
         }
     }
 
+    public function edit_register($id_empresa = null, $id_register = null)
+    {
+        $fields = array('empresa_id' => $id_empresa);
+        $ultimo_id = $this->model_stock_card->get_last_id($fields);
+        $fields = array('id_tarjeta' => intval($ultimo_id->id));
+        $existencia_antes = $this->model_stock_card->get_existencia($fields);
+
+        // REGLAS
+        //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
+        $this->form_validation->set_rules('fecha_sc', 'Fecha', 'callback_date_check', 'required');
+        $this->form_validation->set_rules('referencia', 'Referencia', 'required');
+
+
+        if($existencia_antes == NULL)
+        {
+            $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
+            $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]');
+            $this->form_validation->set_rules('articulo', 'Nombre del artículo', 'min_length[0]|max_length[50]|required');
+            $this->form_validation->set_rules('unidad', 'Tipo de unidad', 'min_length[1]|max_length[11]|required|alpha');
+        }else
+        {
+            $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
+            $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+            /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
+                $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
+        }
+        if($this->input->post('unidades') != "salida")
+        {
+            //$this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
+            $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check', 'required|numeric|min_length[1]|max_length[11]');
+        }
+
+        // MENSAJE
+        $this->form_validation->set_message('required', '%s es un campo obligatorio');
+        $this->form_validation->set_message('numeric', '%s debe ser numérico');
+        $this->form_validation->set_message('min_length', '%s no debe de contener menos de 1 caracter');
+        $this->form_validation->set_message('max_length', '%s no debe de contener más de 11 caracteres');
+        $this->form_validation->set_message('alpha', '%s no debe de contener caracteres alfanuméricos');
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
+
+        if(!$this->form_validation->run())
+        {
+            $data['title']="Alumno: Nuevo Registro de Tarjerta de Almacén";
+            $data['id_empresa']=$id_empresa;
+            $fields = array('id_empresa' => $id_empresa);
+            $data['info'] = $this->model_exercise->get_exercise($fields);
+
+            $fields = array('empresa_id' => $id_empresa);
+            $ultimo_id = $this->model_stock_card->get_last_id($fields);
+            $fields = array('id_tarjeta' => intval($ultimo_id->id));
+            $data['info_edit']=$this->model_stock_card->get_info($fields);
+            $existencia_antes = $this->model_stock_card->get_existencia($fields);
+
+            if($existencia_antes == NULL)
+            {
+                $data['exis'] = '';
+                $data['fecha_anterior'] = '';
+                $data['costo_unitario'] = '';
+            }
+            else
+            {
+                $data['exis'] = $existencia_antes->existencia;
+                $data['fecha_anterior'] = $existencia_antes->fecha;
+                $data['costo_unitario'] = $existencia_antes->promedio;
+            }
+
+			$this->load->view('head',$data);
+			$this->load->view('navbar');
+			$this->load->view('student/view_edit_register_sc');
+			$this->load->view('foot');
+        }else
+        {
+            // CONDICIÓN PARA INGRESAR EXISTENCIA (INVENTARIO INICIAL)
+            if($this->input->post('cantidad_existencia') != null)
+            {
+                $fields = array
+                (
+                    'empresa_id' => $id_empresa,
+                    'fecha' => $this->input->post('fecha_sc'),
+                    'referencia' => $this->input->post('referencia'),
+                    'entradas' => 0,
+                    'salidas' => 0,
+                    'existencia' => $this->input->post('cantidad_existencia'),
+                    'unitario' => $this->input->post('cantidad_costos'),
+                    'promedio' => $this->input->post('cantidad_costos'),
+                    'haber' => 0,
+                    'saldo' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos'),
+                    'nombre_articulo' => $this->input->post('articulo'),
+                    'tipo_unidad' => $this->input->post('unidad')
+                );
+            }else
+            {
+                $fields = array('empresa_id' => $id_empresa);
+                $ultimo_id = $this->model_stock_card->get_last_id($fields);
+                $fields = array('id_tarjeta' => intval($ultimo_id->id));
+                $existencia_antes = $this->model_stock_card->get_existencia($fields);
+
+                $saldo_antes = $this->model_stock_card->get_saldo($fields);
+
+                if($this->input->post('unidades') == "entrada" && $this->input->post('otras_operaciones') == null)
+                {
+                    $fields = array
+                    (
+                        'empresa_id' => $id_empresa,
+                        'fecha' => $this->input->post('fecha_sc'),
+                        'referencia' => $this->input->post('referencia'),
+                        'entradas' => $this->input->post('cantidad_unidades'),
+                        'salidas' => 0,
+                        'existencia' => floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia),
+                        'unitario' => $this->input->post('cantidad_costos'),
+                        'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($this->input->post('cantidad_unidades')) + floatval($existencia_antes->existencia)),
+                        'debe' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                        'haber' => 0,
+                        'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                    );
+                }
+
+                if($this->input->post('unidades') == "salida" && $this->input->post('otras_operaciones') == null)
+                {
+                    $fields = array
+                    (
+                        'empresa_id' => $id_empresa,
+                        'fecha' => $this->input->post('fecha_sc'),
+                        'referencia' => $this->input->post('referencia'),
+                        'entradas' => 0,
+                        'salidas' => $this->input->post('cantidad_unidades'),
+                        'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                        //'unitario' => $this->input->post('cantidad_costos'),
+                        'unitario' => $existencia_antes->promedio,
+                        'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) / ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades'))),
+                        'debe' => 0,
+                        'haber' => $this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio),
+                        'saldo' => floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))
+                    );
+                }
+                switch($this->input->post('otras_operaciones'))
+                {
+                    case "gastosCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
+                            'debe' => $this->input->post('afectacion'),
+                            'haber' => 0, //$this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => floatval($existencia_antes->saldo) + $this->input->post('afectacion')
+                        );
+                        break;
+                    case "descuentosCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
+                            'debe' => 0,
+                            'haber' => $this->input->post('afectacion'),
+                            'saldo' => floatval($existencia_antes->saldo) - $this->input->post('afectacion')
+                        );
+                        break;
+                    case "rebajasCompra": //Afecta Haber
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => 0, //$this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) + ($this->input->post('afectacion'))) / floatval($existencia_antes->existencia),
+                            'debe' => 0,
+                            'haber' => $this->input->post('afectacion'),
+                            'saldo' => floatval($existencia_antes->saldo) - $this->input->post('afectacion')
+                        );
+                        break;
+                    case "devolucionesCompra":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => 0,
+                            'salidas' => $this->input->post('cantidad_unidades'),
+                            'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => $this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($existencia_antes->existencia) - (floatval($this->input->post('cantidad_unidades')))),
+                            'debe' => 0,
+                            'haber' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'saldo' => floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                        break;
+                    case "devolucionesVenta":
+                        $fields = array
+                        (
+                            'empresa_id' => $id_empresa,
+                            'fecha' => $this->input->post('fecha_sc'),
+                            'referencia' => $this->input->post('referencia'),
+                            'entradas' => $this->input->post('cantidad_unidades'),
+                            'salidas' => 0,
+                            'existencia' => floatval($existencia_antes->existencia) + floatval($this->input->post('cantidad_unidades')),
+                            'unitario' => $this->input->post('cantidad_costos'),
+                            'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))) / (floatval($existencia_antes->existencia) - (floatval($this->input->post('cantidad_unidades')))),
+                            'debe' => $this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'),
+                            'haber' => 0,
+                            'saldo' => floatval($existencia_antes->saldo) + ($this->input->post('cantidad_unidades') * $this->input->post('cantidad_costos'))
+                        );
+                    break;
+
+                }
+            }
+
+            //$info = $this->model_stock_card->insert_ta($fields);
+            $update = $this->model_stock_card->update_ta($fields);
+            if($info)
+            {
+                $this->session->set_flashdata('msg', '<div id="men_val" class="alert alert-success"> Registro nuevo agregado correctamente</div>' );
+            }else
+            {
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error al agregar registro</div>');
+            }
+            redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
+        }
+    }
+
     public function delete_register($id_empresa=null)
     {
         $fields = array('id_tarjeta' => $this->input->post('id_register'));
@@ -354,11 +621,45 @@ class Stock_card extends CI_Controller {
         redirect('stock_card/list_sc/'.$id_empresa, 'refresh');
     }
 
+    public function cost_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('cost_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == 0)
+            {
+                $this->form_validation->set_message('cost_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function venta_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('venta_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == 0)
+            {
+                $this->form_validation->set_message('venta_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
     public function date_check($str)
     {
         if($str == '' || $str == '0000-00-00')
         {
-            $this->form_validation->set_message('date_check', 'El campo fecha es obligatorio');
+            $this->form_validation->set_message('date_check', '%s es un campo obligatorio');
             return FALSE;
         }
         else
@@ -379,7 +680,7 @@ class Stock_card extends CI_Controller {
             {
                 if($str == '' || $str == '0000-00-00')
                 {
-                    $this->form_validation->set_message('date_check', 'El campo fecha es obligatorio');
+                    $this->form_validation->set_message('date_check', '%s es un campo obligatorio');
                     return FALSE;
                 }else
                     return TRUE;
