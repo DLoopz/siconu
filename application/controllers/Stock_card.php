@@ -119,11 +119,12 @@ class Stock_card extends CI_Controller {
             if($this->input->post('unidades') == "salida" && $existencia_antes->existencia == 0)
             {
                 $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+                $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'callback_operation_check|required');
             }else
             {
                 $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+                $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
             }
-            $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
             /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
                 $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
         }
@@ -634,6 +635,23 @@ class Stock_card extends CI_Controller {
             if($str == 0)
             {
                 $this->form_validation->set_message('venta_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function operation_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('operation_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == "salida")
+            {
+                $this->form_validation->set_message('operation_check', '%s no debe ser salida cuando aun no hay nada en existencia');
                 return FALSE;
             }else
                 return TRUE;

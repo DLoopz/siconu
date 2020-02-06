@@ -308,6 +308,7 @@
         if(check88.checked)
         {
             check10.value = "";
+            check10.disabled = false;
         }
 
         if(check99.checked && check4.checked == false)

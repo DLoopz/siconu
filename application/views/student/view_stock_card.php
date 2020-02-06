@@ -85,19 +85,19 @@
                             <td><?php echo $sc->existencia ?></td>
                         <?php } ?>
                         <?php if(isset($sc->unitario)){?>
-                            <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->promedio)){?>
-                            <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->debe)){?>
-                            <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->haber)){?>
-                            <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->saldo)){?>
-                            <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->id_tarjeta)){?>
                             <td>
