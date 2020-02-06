@@ -38,6 +38,7 @@ class Professor extends CI_Controller {
 	}
 
   public function edit_password_p(){
+
     $newdata = array(
       'id_user' => $this->session->userdata('id_org'),
       'grupo' => 0
@@ -71,7 +72,21 @@ class Professor extends CI_Controller {
           'contrasenia' =>md5($this->input->post('password'))
         );
         $mod= $this->model_user->update_user($fields);
+        
+        $correo = $this->session->userdata('usuario');
+        $password = $this->input->post('password');
+        $this->load->library('email');
+        $this->email->from('siconu@novauniversitas.edu.mx', 'SICONU:Credenciales');  //de paerte de
+        $this->email->to($correo);                   //para quien
+        //$this->email->cc('another@another-example.com');
+        //$this->email->bcc('them@their-example.com');
+        $this->email->set_mailtype("html");
+        $this->email->subject('Usuario del sistema SICONU');
+        $this->email->message("<h3>Su usuario de ingreso al sistema SICONU es: {$correo} y su contraseña es: {$password}</h3>");
+        
+        $this->email->send();
         //redirect('profesor');
+
         if($mod){
           $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Contraseña editada correctamente</div>');
         }else{
@@ -82,6 +97,7 @@ class Professor extends CI_Controller {
         redirect('professor');
       }    
     }   
+    
   }
 
 	//funciones de los grupos

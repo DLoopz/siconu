@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 26-11-2019 a las 14:07:34
--- Versión del servidor: 5.7.27-0ubuntu0.18.04.1
--- Versión de PHP: 7.2.24-0ubuntu0.18.04.1
+-- Tiempo de generación: 05-02-2020 a las 18:11:41
+-- Versión del servidor: 5.7.29-0ubuntu0.18.04.1
+-- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -580,6 +580,12 @@ ALTER TABLE `catalogo_usuario`
 ALTER TABLE `registro_asiento`
   ADD CONSTRAINT `registro_asiento_ibfk_1` FOREIGN KEY (`asiento_id`) REFERENCES `asiento` (`id_asiento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_asiento_ibfk_2` FOREIGN KEY (`catalogo_usuario_id`) REFERENCES `catalogo_usuario` (`id_catalogo_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `registro_parcial`
+--
+ALTER TABLE `registro_parcial`
+  ADD CONSTRAINT `registro_parcial_ibfk_1` FOREIGN KEY (`registro_id`) REFERENCES `registro_asiento` (`id_registro`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tarjeta_almacen`
