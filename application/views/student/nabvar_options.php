@@ -53,7 +53,7 @@
       <a class="nav-item nav-link <?php if(isset($sheet_balance)) echo "active";?> <?php if($is_active){echo "disabled";} ?>" href="<?php echo base_url();?>balance_sheet/sheet/<?php echo $id_empresa; ?>" title="Balance General">Balance General</a>
       <a class="nav-item nav-link <?php if(isset($result_state)) echo "active"; ?> <?php if($is_active){echo "disabled";} ?>" href="<?php echo base_url();?>result_state/state/<?php echo $id_empresa ?>" title="Estado de resultados">Estado de resultados</a>
       <a class="nav-item nav-link <?php if(isset($stock_card)) echo "active";?> <?php if($is_active){echo "disabled";} ?>" href="<?php echo base_url();?>stock_card/list_sc/<?php echo $id_empresa ?>" title="Tarjeta de Almacén">Tarjeta de almacén</a>
-      <a class="nav-item nav-link" href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a Ejercicios"><i class="icon-home-1"></i></a>
+      <a class="nav-item nav-link nav_home" href="<?php echo base_url();?>student" class="btn btn-outline-info my-2 my-sm-0  " aria-label="Left Align" title="Volver a Ejercicios"><i class="icon-home-1"></i></a>
     </div>
   </nav>
 </div>

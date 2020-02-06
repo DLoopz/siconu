@@ -45,15 +45,15 @@
 				 		<tr>
 							<td></td>
 							<td><?php echo $account->nombre; ?></td>
-						 	<td class="text-right">$ <?php echo number_format($debe,2,'.',','); ?></td>
-							<td class="text-right">$ <?php echo number_format($haber,2,'.',','); ?></td>
+						 	<td class="text-right">$<?php echo number_format($debe,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($haber,2,'.',','); ?></td>
 							<?php if ($debe>$haber)
 								$saldo_deudor=$debe-$haber;
 							else
 								$saldo_acredor=$haber-$debe;
 							?>
-							<td class="text-right">$ <?php echo number_format($saldo_deudor,2,'.',','); ?></td>
-							<td class="text-right">$ <?php echo number_format($saldo_acredor,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($saldo_deudor,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($saldo_acredor,2,'.',','); ?></td>
 						</tr>
 				 	<?php endif ?>
 				<?php 
@@ -66,10 +66,10 @@
 				<tr>
 					<td></td>
 					<th class="text-right">Total:</th>
-					<th class="text-right">$ <?php echo number_format($debe_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($haber_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($saldo_deudor_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($saldo_acredor_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($debe_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($haber_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($saldo_deudor_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($saldo_acredor_total,2,'.',',');?></th>
 				</tr>
 		</tbody>
 	</table>
