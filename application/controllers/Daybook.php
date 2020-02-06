@@ -1,11 +1,11 @@
 <?php
 
-/*
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
 require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
-*/
+
 
 class Daybook extends CI_Controller {
   
@@ -877,11 +877,11 @@ class Daybook extends CI_Controller {
       echo $cont;
       echo $foot;
       */
-      echo $contenido;
+      //echo $contenido;
 
 
 
-      /*
+      ///*
       $dompdf = new Dompdf();
       $dompdf->loadHtml($contenido);
       $dompdf->setPaper('A4', 'landscape');
