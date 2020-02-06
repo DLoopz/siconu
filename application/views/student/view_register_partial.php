@@ -76,7 +76,7 @@
         foreach ($partials as $partial){?>
           <tr>
             <td><?php echo $partial->concepto;?></td>
-            <td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
+            <td class="text-right">$<?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
             <td>
               <!--editar asiento-->
               <a class="btn btn-outline-secondary" 
@@ -88,7 +88,7 @@
         <?php } ?>
         <tr>
           <th>Total</th>
-          <th class="text-right">$ <?php echo number_format($total,2,'.',','); ?></th>
+          <th class="text-right">$<?php echo number_format($total,2,'.',','); ?></th>
           <th></th>
         </tr>
       </tbody>

@@ -66,22 +66,22 @@
 						<td>Ventas Totales</td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($ventas_totales,2,'.',',');?></td>
+						<td>$<?php echo number_format($ventas_totales,2,'.',',');?></td>
 						<td></td>
 					</tr>	
 					<tr>
 						<td>Devoluciones sobre venta</td>
 						<td></td>
-						<td>$ <?php echo number_format($devolucion_venta,2,'.',',');?></td>
+						<td>$<?php echo number_format($devolucion_venta,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Descuentos sobre venta</td>
 						<td></td>
-						<td>$ <?php echo number_format($descuento_venta,2,'.',',');?></td>
+						<td>$<?php echo number_format($descuento_venta,2,'.',',');?></td>
 						<?php $op_ventas=$descuento_venta+$devolucion_venta;?>
-						<td>$ <?php echo number_format($op_ventas,2,'.',',');?></td>
+						<td>$<?php echo number_format($op_ventas,2,'.',',');?></td>
 						<td></td>
 					</tr>
 					<?php $ventas_netas=$ventas_totales-$op_ventas;?>
@@ -90,25 +90,25 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($ventas_netas,2,'.',',');?></td>
+						<td>$<?php echo number_format($ventas_netas,2,'.',',');?></td>
 					</tr>	
 					<tr>
 						<td>Inventario Inicial</td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($inventario_inicial,2,'.',',');?></td>
+						<td>$<?php echo number_format($inventario_inicial,2,'.',',');?></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Compras</td>
-						<td>$ <?php echo number_format($compras,2,'.',',');?></td>
+						<td>$<?php echo number_format($compras,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Gastos de compra</td>
-						<td>$ <?php echo number_format($gastos_compras,2,'.',',');?></td>
+						<td>$<?php echo number_format($gastos_compras,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -117,22 +117,22 @@
 					<tr>
 						<td>Compras Totales</td>
 						<td></td>
-						<td>$ <?php echo number_format($compras_totales,2,'.',',');?></td>
+						<td>$<?php echo number_format($compras_totales,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Devoluciones sobre compras</td>
-						<td>$ <?php echo number_format($devolucion_compra,2,'.',',');?></td>
+						<td>$<?php echo number_format($devolucion_compra,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Descuentos sobre compras</td>
-						<td>$ <?php echo number_format($descuento_compra,2,'.',',');?></td>
+						<td>$<?php echo number_format($descuento_compra,2,'.',',');?></td>
 						<?php $op_compras=$descuento_compra+$devolucion_compra;?>
-						<td>$ <?php echo number_format($op_compras,2,'.',',');?></td>
+						<td>$<?php echo number_format($op_compras,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -141,7 +141,7 @@
 						<td>Compras Netas</td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($compras_netas,2,'.',',');?></td>
+						<td>$<?php echo number_format($compras_netas,2,'.',',');?></td>
 						<td></td>
 					</tr>
 					<?php $sum_mercancias=$inventario_inicial+$compras_netas; ?>
@@ -149,14 +149,14 @@
 						<td>Suma total de mercancias</td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($sum_mercancias,2,'.',',');?></td>
+						<td>$<?php echo number_format($sum_mercancias,2,'.',',');?></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>Inventario Final</td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($inventario_final,2,'.',',');?></td>
+						<td>$<?php echo number_format($inventario_final,2,'.',',');?></td>
 						<td></td>
 					</tr>
 					<?php $costo_vendido=$sum_mercancias-$inventario_final; ?>
@@ -165,7 +165,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($costo_vendido,2,'.',',');?></td>
+						<td>$<?php echo number_format($costo_vendido,2,'.',',');?></td>
 					</tr>
 					<?php $utilidad=$ventas_netas-$costo_vendido; ?>
 					<tr>
@@ -173,7 +173,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td>$ <?php echo number_format($utilidad,2,'.',',');?></td>
+						<td>$<?php echo number_format($utilidad,2,'.',',');?></td>
 					</tr>
 			</tbody>
 		</table>

@@ -53,8 +53,8 @@
 							    			<?php echo $register->cuenta; ?></td>
 							    		</div>
 							    	<td class="text-right"> <?php //echo  number_format($register->parcial, 2, '.', ','); ?></td>
-							    	<td class="text-right">$ <?php echo  number_format($register->debe, 2, '.', ','); $d=$d+$register->debe; ?></td>
-							    	<td class="text-right">$ <?php echo  number_format($register->haber, 2, '.', ','); $h=$h+$register->haber;?></td>
+							    	<td class="text-right"><?php echo '$'. number_format($register->debe, 2, '.', ','); $d=$d+$register->debe; ?></td>
+							    	<td class="text-right"><?php echo '$'. number_format($register->haber, 2, '.', ','); $h=$h+$register->haber;?></td>
 							    	<td></td>
 							    </tr>
 					    <?php 
@@ -65,7 +65,7 @@
 						    		 	<td></td>
 						    		 	<td></td>
 						    		 	<td><?php echo $partial->concepto;?></td>
-						    		 	<td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ',');?></td>
+						    		 	<td class="text-right"><?php echo '$'.number_format($partial->cantidad, 2, '.', ',');?></td>
 						    		 	<td></td>
 						    		 	<td></td>
 						    		 	<td></td>
@@ -102,8 +102,8 @@
 				    	<td></td>
 				    	<td class="float-right font-weight-bold">Total:</td>
 				    	<td></td>
-				    	<td class="text-right">$ <?php echo number_format($d,2, '.', ',');?></td>
-				    	<td class="text-right">$ <?php echo number_format($h,2, '.', ',');?></td>
+				    	<td class="text-right"><?php echo '$'.number_format($d,2, '.', ',');?></td>
+				    	<td class="text-right"><?php echo '$'.number_format($h,2, '.', ',');?></td>
 				    	<td></td>
 				    </tr>
 				  </tbody>
@@ -120,7 +120,7 @@
                 <h5 class="modal-tittle" id="modalTittle">Eliminar Asiento</h5>
             </div>
             <div class="modal-body">
-                ¿Está seguro de eliminar el Asiento?
+            	¿Está seguro que desea eliminar el asiento?
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>daybook/delet_entry/<?php echo $id_empresa; ?>">

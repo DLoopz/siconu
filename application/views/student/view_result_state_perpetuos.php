@@ -30,7 +30,7 @@
 						<td></td>
 						<td></td>
 						<?php $aux=$register->haber-$register->debe;?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 					</tr>
 				<?php } ?>
 			<?php } ?>
@@ -45,7 +45,7 @@
 						<td></td>
 						<td></td>
 						<?php $aux=$register->debe-$register->haber;?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 					</tr>
 				<?php } ?>
 			<?php } ?>
@@ -57,7 +57,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$ <?php echo number_format($utilidad,2,'.',',');?></td>
+				<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$<?php echo number_format($utilidad,2,'.',',');?></td>
 			</tr>
 
 			<!-- Gastos de operacion -->
@@ -78,7 +78,7 @@
 						<td></td>
 						<td></td>
 						<?php $aux=$register->debe-$register->haber;?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 						<td></td>
 					</tr>
 				<?php } ?>
@@ -93,9 +93,9 @@
 						<td></td>
 						<td></td>
 						<?php $aux=$register->debe-$register->haber;?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 						<?php $perdida=$perdida+$aux; $aux=0; ?>
-						<td class="text-right <?php if ($perdida<0){echo 'text-danger';} ?>">$ <?php echo number_format($perdida,2,'.',',');?></td>
+						<td class="text-right <?php if ($perdida<0){echo 'text-danger';} ?>">$<?php echo number_format($perdida,2,'.',',');?></td>
 					</tr>
 				<?php } ?>
 			<?php } ?>
@@ -106,7 +106,7 @@
 				<td></td>
 				<td></td>
 				<?php $utilidad=$utilidad-$perdida ?>
-				<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$ <?php echo number_format($utilidad,2,'.',',');?></td>
+				<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$<?php echo number_format($utilidad,2,'.',',');?></td>
 			</tr>
 		</tbody>
 	</table>
