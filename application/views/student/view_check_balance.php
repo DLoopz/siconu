@@ -2,7 +2,7 @@
 <div class="container">
 
 	<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
-	  <input type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" value="Generar PDF">
+	  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
 	  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
 	  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
 	  <input type="text" id="contpdf" name="contpdf" class="invisible">
@@ -45,15 +45,15 @@
 				 		<tr>
 							<td></td>
 							<td><?php echo $account->nombre; ?></td>
-						 	<td class="text-right">$ <?php echo number_format($debe,2,'.',','); ?></td>
-							<td class="text-right">$ <?php echo number_format($haber,2,'.',','); ?></td>
+						 	<td class="text-right">$<?php echo number_format($debe,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($haber,2,'.',','); ?></td>
 							<?php if ($debe>$haber)
 								$saldo_deudor=$debe-$haber;
 							else
 								$saldo_acredor=$haber-$debe;
 							?>
-							<td class="text-right">$ <?php echo number_format($saldo_deudor,2,'.',','); ?></td>
-							<td class="text-right">$ <?php echo number_format($saldo_acredor,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($saldo_deudor,2,'.',','); ?></td>
+							<td class="text-right">$<?php echo number_format($saldo_acredor,2,'.',','); ?></td>
 						</tr>
 				 	<?php endif ?>
 				<?php 
@@ -66,10 +66,10 @@
 				<tr>
 					<td></td>
 					<th class="text-right">Total:</th>
-					<th class="text-right">$ <?php echo number_format($debe_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($haber_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($saldo_deudor_total,2,'.',',');?></th>
-					<th class="text-right">$ <?php echo number_format($saldo_acredor_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($debe_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($haber_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($saldo_deudor_total,2,'.',',');?></th>
+					<th class="text-right">$<?php echo number_format($saldo_acredor_total,2,'.',',');?></th>
 				</tr>
 		</tbody>
 	</table>

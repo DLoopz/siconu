@@ -31,7 +31,7 @@
 	<div class="table-responsive">
 		<?php //si es aqui? ?>
 		<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
-		  <input type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" value="Generar PDF">
+		  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
 		  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
 		  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
 		  <input type="text" id="contpdf" name="contpdf" class="invisible">
@@ -56,7 +56,7 @@
 						<td></td>
 						<td></td>
 						<?php $aux=$register->haber-$register->debe;?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 						<td></td>								
 					</tr>
 					<?php $ventas_netas=$ventas_netas+$aux; ?>
@@ -74,12 +74,12 @@
 						<td class="offset-1"><?php echo $register->cuenta;?></td>				
 						<td></td>
 						<?php $aux=$register->debe-$register->haber; ?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 					<?php $ventas_netas=$ventas_netas-$aux; $sub_vent=$sub_vent+$aux;?>
 					<?php endif ?>
 				<?php endforeach ?>
 
-						<td class="text-right <?php if ($sub_vent<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_vent,2,'.',',');?> </td>
+						<td class="text-right <?php if ($sub_vent<0){echo 'text-danger';} ?>">$<?php echo number_format($sub_vent,2,'.',',');?> </td>
 						<td></td>			
 					</tr>
 				<tr>
@@ -87,7 +87,7 @@
 					<td></td>
 					<td></td>
 					<td></td>	
-					<td class="text-right font-weight-bold	 <?php if ($ventas_netas<0){echo 'text-danger';} ?>">$ <?php echo number_format($ventas_netas,2,'.',',');?></td>	
+					<td class="text-right font-weight-bold	 <?php if ($ventas_netas<0){echo 'text-danger';} ?>">$<?php echo number_format($ventas_netas,2,'.',',');?></td>	
 				</tr>
 
 				<!-- INVENTARIO INICIAL - [DEVOLUCIONES SOBRE VENTAS+REBAJAS SOBRE VENTAS] = VENTAS NETAS -->
@@ -99,7 +99,7 @@
 							<td></td>
 							<td></td>
 							<?php $aux=$register->debe-$register->haber;$inventario_inicial=$aux;?>
-							<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+							<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 							<td></td>								
 						</tr>
 						<?php $compras_totales=$compras_totales+$aux; ?>
@@ -112,7 +112,7 @@
 					<tr>
 						<td class="offset-1"><?php echo $register->cuenta;?></td>				
 						<?php $aux=$register->debe-$register->haber; ?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 						<td></td>
 						<td></td>
 						<td></td>								
@@ -124,7 +124,7 @@
 				<tr>
 					<td class="font-weight-bold">Compras Totales</td>
 					<td></td>
-					<td class="text-right font-weight-bold	 <?php if ($sub_comp<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_comp,2,'.',',');?></td>	
+					<td class="text-right font-weight-bold	 <?php if ($sub_comp<0){echo 'text-danger';} ?>">$<?php echo number_format($sub_comp,2,'.',',');?></td>	
 					<td></td>
 					<td></td>	
 				</tr>
@@ -142,11 +142,11 @@
 					<tr>
 						<td class="offset-1"><?php echo $register->cuenta;?></td>				
 						<?php $aux=$register->haber-$register->debe; ?>
-						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+						<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 					<?php $sub_deb_comp=$sub_deb_comp+$aux;?>
 					<?php endif ?>
 				<?php endforeach ?>
-						<td class="text-right <?php if ($sub_deb_comp<0){echo 'text-danger';} ?>">$ <?php echo number_format($sub_deb_comp,2,'.',',');?></td>
+						<td class="text-right <?php if ($sub_deb_comp<0){echo 'text-danger';} ?>">$<?php echo number_format($sub_deb_comp,2,'.',',');?></td>
 						<td></td>
 						<td></td>								
 					</tr>
@@ -156,7 +156,7 @@
 					<td></td>
 					<td></td>
 					<?php $compras_totales=$sub_comp-$sub_deb_comp;?>
-					<td class="text-right font-weight-bold	 <?php if ($compras_totales<0){echo 'text-danger';} ?>">$ <?php echo number_format($compras_totales,2,'.',',');?></td>
+					<td class="text-right font-weight-bold	 <?php if ($compras_totales<0){echo 'text-danger';} ?>">$<?php echo number_format($compras_totales,2,'.',',');?></td>
 					<td></td>	
 				</tr>
 
@@ -165,7 +165,7 @@
 					<td></td>
 					<?php $total_merca=$inventario_inicial+$compras_totales;?>
 					<td></td>
-					<td class="text-right font-weight-bold	 <?php if ($total_merca<0){echo 'text-danger';} ?>">$ <?php echo number_format($total_merca,2,'.',',');?></td>
+					<td class="text-right font-weight-bold	 <?php if ($total_merca<0){echo 'text-danger';} ?>">$<?php echo number_format($total_merca,2,'.',',');?></td>
 					<td></td>	
 				</tr>
 
@@ -178,7 +178,7 @@
 							<td></td>
 							<td></td>
 							<?php $aux=$register->debe-$register->haber;?>
-							<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$ <?php echo number_format($aux,2,'.',',');?></td>
+							<td class="text-right <?php if ($aux<0){echo 'text-danger';} ?>">$<?php echo number_format($aux,2,'.',',');?></td>
 															
 						</tr>
 						<?php $inventario_final=$inventario_final+$aux; ?>
@@ -190,7 +190,7 @@
 					<td></td>
 					<?php $costo_vendido=$total_merca-$inventario_final;?>
 					<td></td>
-					<td class="text-right font-weight-bold	 <?php if ($costo_vendido<0){echo 'text-danger';} ?>">$ <?php echo number_format($costo_vendido,2,'.',',');?></td>
+					<td class="text-right font-weight-bold	 <?php if ($costo_vendido<0){echo 'text-danger';} ?>">$<?php echo number_format($costo_vendido,2,'.',',');?></td>
 					<td></td>	
 				</tr>
 
@@ -200,7 +200,7 @@
 					<?php $Utilidad=$ventas_netas-$costo_vendido;?>
 					<td></td>
 					<td></td>	
-					<td class="text-right font-weight-bold	 <?php if ($Utilidad<0){echo 'text-danger';} ?>">$ <?php echo number_format($Utilidad,2,'.',',');?></td>
+					<td class="text-right font-weight-bold	 <?php if ($Utilidad<0){echo 'text-danger';} ?>">$<?php echo number_format($Utilidad,2,'.',',');?></td>
 				</tr>
 
 			</tbody>

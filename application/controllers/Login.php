@@ -28,7 +28,6 @@ class Login extends CI_Controller
 			$this->load->view('head',$data);
 			$this->load->view('login');
 			$this->load->view('foot');
-				echo "ESTO ES OTRA PRUEBA";
 		}
 	}
  

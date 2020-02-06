@@ -112,9 +112,9 @@ class Student extends CI_Controller {
       );
       $add=$this->model_exercise->insert_exercise($fields);
       if($add){
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Ejercicio agregado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Ejercicio agregado correctamente</div>');
       }else{
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error ejercicio no agregado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center> Error ejercicio no agregado</div>');
       }
       redirect('student', 'refresh');
     }
@@ -152,9 +152,9 @@ class Student extends CI_Controller {
         );
         $mod= $this->model_exercise->update_exercise($fields);
         if($mod){
-          $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Ejercicio editado correctamente</div>');
         }else{
-          $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error ejercicio no editado </div>');
         }
         redirect('student');
       }else{
@@ -179,9 +179,9 @@ class Student extends CI_Controller {
     );
     $mod= $this->model_exercise->update_exercise($fields);
     if($mod){
-      $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Ejercicio editado correctamente</div>');
     }else{
-      $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error ejercicio no editado </div>');
     }
     redirect('student');
   }

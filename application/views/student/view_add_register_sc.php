@@ -6,16 +6,19 @@
             </h3>
         </div>
         <hr class="line_sep">
-            <div class="alert alert-warning text-center" role="alert">
-                Registro para <?php echo $info->nombre; ?>
-            </div>
-        <p class="text-danger">* Campos obligatorios</p>
+        <div class="alert alert-warning text-center" role="alert">
+            Registro para <?php echo $info->nombre; ?>
+        </div>
+
+        <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento"  style="display: none;">Cancelar</button>
+
+        <br>
         <div class="panel-body">
-            <form class="form-row" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
-                <div class="col-md-7">
+            <form class="row justify-content-center" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
+                <div class="form-group col-md-7">
                     <div class="form-group" id="content_articulo">
                         <label for="">
-                            <b>Nombre del artículo *</b>
+                            Nombre del artículo *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -25,7 +28,7 @@
                     </div>
                     <div class="form-group" id="content_unidad">
                         <label for="">
-                            <b>Tipo de unidad *</b>
+                            Tipo de unidad *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -36,7 +39,7 @@
                     </div>
                     <div class="form-group" >
                         <label>
-                            <b>Seleccione la fecha *</b>
+                            Seleccione la fecha *
                         </label>
                         <input id="fecha" type="date" name="fecha_sc" class="form-control" value="<?php echo set_value('fecha_sc');?>">
                         <input id="fecha_anterior" type="date" name="fecha_anterior" class="form-control" value="<?php echo $fecha_anterior; ?>" style="display: none;">
@@ -45,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="">
-                            <b>Referencia *</b>
+                            Referencia *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -57,7 +60,7 @@
                     <div class="form-group" id="content_existencia">
                         <div class="form-group">
                             <label for="">
-                            <b>Existencia:</b>
+                            Existencia
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
@@ -67,7 +70,7 @@
                         </div>
                         <div class="form-group" style="display: none;">
                             <label for="">
-                            <b>Existencia actual</b>
+                            Existencia actual
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
@@ -78,7 +81,7 @@
 
                     <div class="form-group" id="content_unidades">
                         <label for="">
-                            <b>Unidades *</b>
+                            Unidades *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -87,19 +90,20 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" checked>
+                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
                                 <label class="custom-control-label" for="entrada">Entrada</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()">
+                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'salida', 'checked');?>>
                                 <label class="custom-control-label" for="salida">Salida</label>
                             </div>
+                            <?php echo form_error('unidades'); ?>
                         </div>
                     </div>
 
                     <div class="form-group" id="content_costo_unitario">
                         <label for="">
-                            <b>Costo unitario *</b>
+                            Costo unitario *
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -115,10 +119,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="form-group col-md-5">
                     <div class="form-group" id="content_otras">
                         <label for="">
-                            <b>Otras operaciones</b>
+                            Otras operaciones
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
@@ -139,7 +143,7 @@
 
                     <div class="form-group" id="content_devoluciones">
                         <label for="">
-                            <b>Devolución</b>
+                            Devolución
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
@@ -155,7 +159,7 @@
 
                     <div class="form-group" id="content" style="display: none;">
                         <label for="">
-                            <b>Afectación:</b>
+                            Afectación
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
@@ -169,9 +173,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col align-self-center">
+                <div class="col-md-12 text-danger">
+        	        <?php echo form_label('* Campo Obligatorio')?>
+      	        </div>
+      	        <br/>
+      	        <hr class="col-md-11">
+                <div class="panel-footer text-center">
                     <input type="submit" name="add_entry" value="Agregar" class="btn btn-outline-success my-2 my-sm-0">
-                    <a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 tam_btn">Volver</button></a>
+                    <a href="<?php echo base_url()?>stock_card/list_sc/<?php echo $id_empresa; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
                 </div>
             </form>
         </div>
@@ -191,6 +200,7 @@
 
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
+        btn_cancelar = document.getElementById("btn_cancelar");
 
         check1 = document.getElementById("gastosCompra");
         check2 = document.getElementById("descuentosCompra");
@@ -212,9 +222,11 @@
         if (check1.checked || check2.checked || check3.checked)
         {
             element.style.display='block';
+            btn_cancelar.style.display='block';
         }else
         {
             element.style.display='none';
+            btn_cancelar.style.display='none';
         }
 
         if(check1.checked)
@@ -290,11 +302,16 @@
         {
             content_otras.style.display='none';
             content_devoluciones.style.display='none';
+            btn_cancelar.style.display='block';
+        }
+
+        if(check88.checked)
+        {
+            check10.value = "";
         }
 
         if(check99.checked && check4.checked == false)
         {
-
             check10.value = document.getElementById('aux_cu').value;
             check10.disabled = true;
         }

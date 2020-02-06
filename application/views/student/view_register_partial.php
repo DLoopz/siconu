@@ -14,7 +14,6 @@
             <div class="modal-content">
                 <div class="modal-body">
                   <h3 class="text-center">Ingresar Registro Parcial </h3>
-                  <h3 class="text-center">Ingresar Registro Parcial </h3>
                   <hr class="line_sep">
               <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro;?>">
                 <?php if ($cuenta->cuenta=="Almacén/Mercancías" and $exercise->procedimiento==3) {?>
@@ -77,7 +76,7 @@
         foreach ($partials as $partial){?>
           <tr>
             <td><?php echo $partial->concepto;?></td>
-            <td class="text-right">$ <?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
+            <td class="text-right">$<?php echo number_format($partial->cantidad, 2, '.', ','); $total=$total+$partial->cantidad;?></td>
             <td>
               <!--editar asiento-->
               <a class="btn btn-outline-secondary" 
@@ -89,7 +88,7 @@
         <?php } ?>
         <tr>
           <th>Total</th>
-          <th class="text-right">$ <?php echo number_format($total,2,'.',','); ?></th>
+          <th class="text-right">$<?php echo number_format($total,2,'.',','); ?></th>
           <th></th>
         </tr>
       </tbody>

@@ -1,6 +1,6 @@
 <div class="container">
 	<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
-	  <input type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" value="Generar PDF">
+	  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
 	  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
 	  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
 	  <input type="text" id="contpdf" name="contpdf" class="invisible">
@@ -44,8 +44,8 @@
 
 							<?php if ($regs->cuenta == $cu->nombre and $regs->registro_id==NULL): ?>
 								<tr>
-									<td class="border-right text-right"><?php if($regs->debe > 0){echo '$ '.number_format($regs->debe,2,'.',',');} ?></td>
-							    <td class="text-right"><?php if($regs->haber > 0){echo '$ '.number_format($regs->haber,2,'.',',');} ?></td>
+									<td class="border-right text-right"><?php if($regs->debe > 0){echo '$'.number_format($regs->debe,2,'.',',');} ?></td>
+							    <td class="text-right"><?php if($regs->haber > 0){echo '$'.number_format($regs->haber,2,'.',',');} ?></td>
 								</tr>
 
 								<?php $total_debe += $regs->debe; ?>
@@ -59,8 +59,8 @@
 
 							<?php if ($parc->cuenta == $cu->nombre and $parc->registro_id!=NULL): ?>
 								<tr>
-									<td class="border-right text-right"><?php if($parc->debe > 0){echo '$ '.number_format($parc->debe,2,'.',',');} ?></td>
-							    <td class="text-right"><?php if($parc->haber > 0){echo '$ '.number_format($parc->haber,2,'.',',');} ?></td>
+									<td class="border-right text-right"><?php if($parc->debe > 0){echo '$'.number_format($parc->debe,2,'.',',');} ?></td>
+							    <td class="text-right"><?php if($parc->haber > 0){echo '$'.number_format($parc->haber,2,'.',',');} ?></td>
 								</tr>
 
 								<?php $total_debe += $parc->debe; ?>
@@ -71,17 +71,17 @@
 						<?php endforeach //parciales ?>
 
 						<tr>
-							<th class="  border-right text-right">$ <?php echo number_format($total_debe,2,'.',','); ?></th>
-							<th class=" text-right">$ <?php echo number_format($total_haber,2,'.',','); ?></th>
+							<th class="  border-right text-right">$<?php echo number_format($total_debe,2,'.',','); ?></th>
+							<th class=" text-right">$<?php echo number_format($total_haber,2,'.',','); ?></th>
 						</tr>
 
 						<tr>
 							<?php if ($total_debe>=$total_haber): ?>
-								<th class=" border-right table-success text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+								<th class=" border-right table-success text-right">$<?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 								<th class="table-secondary"></th>
 							<?php else: ?>
 								<th class=" border-right table-secondary text-right"></th>
-								<th class="table-danger text-right">$ <?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
+								<th class="table-danger text-right">$<?php echo number_format(abs($total_debe-$total_haber),2,'.',','); ?></th>
 							<?php endif ?>						
 						</tr>
 						
