@@ -116,14 +116,20 @@ class Stock_card extends CI_Controller {
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
 
-            if($this->input->post('unidades') == "salida" && $existencia_antes->existencia == 0)
+            if($this->input->post('otras_operaciones') != null)
             {
-                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
-                $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'callback_operation_check|required');
+                $this->form_validation->set_rules('unidades', 'Tipo de movimiento');
             }else
             {
-                $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
-                $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
+                if($this->input->post('unidades') == "salida" && $existencia_antes->existencia == 0)
+                {
+                    $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+                    $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'callback_operation_check|required');
+                }else
+                {
+                    $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required');
+                    $this->form_validation->set_rules('unidades', 'Tipo de movimiento', 'required');
+                }
             }
             /*if($this->form_validation->set_rules('cantidad_unidades', 'cantidad en unidades', 'numeric|min_length[1]|max_length[11]|required'))
                 $this->form_validation->set_rules('radio_unidades', 'entrada o salida', 'required', array('required' => 'Seleccione cualquiera de estos dos movimientos-1'));*/
@@ -228,6 +234,13 @@ class Stock_card extends CI_Controller {
 
                 if($this->input->post('unidades') == "salida" && $this->input->post('otras_operaciones') == null)
                 {
+                    if((floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) == 0 && ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades'))) == 0)
+                    {
+                        $promedio = 0;
+                    }else
+                    {
+                        $promedio = (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) / ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')));
+                    }
                     $fields = array
                     (
                         'empresa_id' => $id_empresa,
@@ -238,7 +251,8 @@ class Stock_card extends CI_Controller {
                         'existencia' => floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades')),
                         //'unitario' => $this->input->post('cantidad_costos'),
                         'unitario' => $existencia_antes->promedio,
-                        'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) / ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades'))),
+                        'unitario' => $promedio,
+                        //'promedio' => (floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))) / ( floatval($existencia_antes->existencia) - floatval($this->input->post('cantidad_unidades'))),
                         'debe' => 0,
                         'haber' => $this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio),
                         'saldo' => floatval($existencia_antes->saldo) - ($this->input->post('cantidad_unidades') * floatval($existencia_antes->promedio))

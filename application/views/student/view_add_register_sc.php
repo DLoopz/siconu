@@ -126,15 +126,15 @@
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
+                                <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'gastosCompra', 'checked');?>>
                                 <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
+                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'descuentosCompra', 'checked');?>>
                                 <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
+                                <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'rebajasCompra', 'checked');?>>
                                 <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                             </div>
                         </div>
@@ -147,11 +147,11 @@
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?>>
                                 <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?>>
                                 <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
                             </div>
                         </div>
@@ -277,9 +277,13 @@
             check7.value = '';
             check10.value = '';
             check8.disabled = true;
+            check9.disabled = false;
             check9.checked = true;
 
-            check4.value = 'devolucionesCompra';
+            check88.checked = false;
+            check99.checked = false;
+
+            //check4.value = 'devolucionesCompra';
             //check10.value = 0;
         }
         if(check5.checked)
@@ -293,16 +297,28 @@
             check7.value = '';
             check10.value = '';
             check8.checked = true;
+            check8.disabled = false;
             check9.disabled = true;
 
-            check4.value = 'devolucionesCompra';
+            check88.checked = false;
+            check99.checked = false;
+
+            //check5.value = 'devolucionesCompra';
             //check10.value = 0;
         }
         if(check88.checked || check99.checked)
         {
-            content_otras.style.display='none';
-            content_devoluciones.style.display='none';
-            btn_cancelar.style.display='block';
+            if(check4.checked || check5.checked)
+            {
+                content_otras.style.display='block';
+                content_devoluciones.style.display='block';
+                btn_cancelar.style.display='block';
+            }else
+            {
+                content_otras.style.display='none';
+                content_devoluciones.style.display='none';
+                btn_cancelar.style.display='block';
+            }
         }
 
         if(check88.checked)
