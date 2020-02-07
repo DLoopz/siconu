@@ -6,17 +6,18 @@
             </h3>
         </div>
         <hr class="line_sep">
+        <!--
         <div class="alert alert-warning text-center" role="alert">
             Registro para <?php echo $info->nombre; ?>
         </div>
-
+        -->
 
         <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento"  style="display: none;">Cancelar</button>
 
         <br>
         <div class="panel-body">
             <?php if (isset($info_edit)) { ?>
-            <form class="row justify-content-center" method="post" action="<?php echo base_url();?>stock_card/add_register_card/<?php echo $id_empresa;?>">
+            <form class="row justify-content-center" method="post" action="<?php echo base_url();?>stock_card/edit_register/<?php echo $id_empresa;?>">
                 <div class="form-group col-md-7">
                     <div class="form-group" id="content_articulo">
                         <label for="">
@@ -87,18 +88,38 @@
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo set_value('cantidad_unidades');?>">
+                            <?php if(isset($info_edit->entradas) && isset($info_edit->salidas)){?>
+                                <?php if($info_edit->entradas == 0){?>
+                                    <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->salidas;?>">
+                                <?php } ?>
+                                <?php if($info_edit->salidas == 0){?>
+                                    <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->entradas;?>">
+                                <?php } ?>
+                            <?php } ?>
                             <?php echo form_error('cantidad_unidades') ?>
                         </div>
                         <div class="form-group">
-                            <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" checked>
-                                <label class="custom-control-label" for="entrada">Entrada</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline col-5">
-                                <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()">
-                                <label class="custom-control-label" for="salida">Salida</label>
-                            </div>
+                            <?php if($info_edit->entradas == 0){?>
+                                <div class="custom-control custom-radio custom-control-inline col-5">
+                                    <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
+                                    <label class="custom-control-label" for="entrada">Entrada</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline col-5">
+                                    <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
+                                    <label class="custom-control-label" for="salida">Salida</label>
+                                </div>
+                            <?php } ?>
+                            <?php if($info_edit->salidas == 0){?>
+                                <div class="custom-control custom-radio custom-control-inline col-5">
+                                    <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
+                                    <label class="custom-control-label" for="entrada">Entrada</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline col-5">
+                                    <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
+                                    <label class="custom-control-label" for="salida">Salida</label>
+                                </div>
+                            <?php } ?>
+                            <?php echo form_error('unidades'); ?>
                         </div>
                     </div>
 
@@ -112,7 +133,12 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">$</div>
                                 </div>
-                                <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('cantidad_costos');?>">
+                                <?php if($info_edit->entradas == 0){?>
+                                    <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>" disabled>
+                                <?php } ?>
+                                   <?php if($info_edit->salidas == 0){?>
+                                    <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>">
+                                <?php } ?>
                                 <input type="text" class="form-control" id="aux_cu" name="aux_cu" aria-describedby="inputGroupPrepend2" value="<?php echo $costo_unitario;?>" style="display: none;">
                             </div>
                             <?php echo form_error('cantidad_costos') ?>
@@ -158,21 +184,43 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="content" style="display: none;">
-                        <label for="">
-                            Afectación
-                        </label>
-                        <div class="form-group">
-                            <!--Cantidad:-->
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">$</div>
+                    <?php if (empty($_POST['otras_operaciones']))
+                    {?>
+                        <div class="form-group" id="content" style="display: none;">
+                            <label for="">
+                                Afectación
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
                                 </div>
-                                <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                <?php echo form_error('afectacion') ?>
                             </div>
-                            <?php echo form_error('cantidad_costos') ?>
                         </div>
-                    </div>
+                    <?php } else {?>
+                        <?php if($_POST['otras_operaciones'] == "gastosCompra" || $_POST['otras_operaciones'] == "descuentosCompra" || $_POST['otras_operaciones'] == "rebajasCompra")
+                        {?>
+                            <div class="form-group" id="content" style="display: block;">
+                                <label for="">
+                                    Afectación
+                                </label>
+                                <div class="form-group">
+                                    <!--Cantidad:-->
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">$</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                    </div>
+                                    <?php echo form_error('afectacion') ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
                 <div class="col-md-12 text-danger">
         	        <?php echo form_label('* Campo Obligatorio')?>
@@ -231,6 +279,16 @@
             btn_cancelar.style.display='none';
         }
 
+        if (check4.checked || check5.checked)
+        {
+            //element.style.display='block';
+            btn_cancelar.style.display='block';
+        }else
+        {
+            //element.style.display='none';
+            btn_cancelar.style.display='none';
+        }
+
         if(check1.checked)
         {
             content_existencia.style.display = 'none';
@@ -280,8 +338,12 @@
             check10.value = '';
             check8.disabled = true;
             check9.checked = true;
+            check9.disabled = false;
 
-            check4.value = 'devolucionesCompra';
+            check88.checked = false;
+            //check99.checked = false;
+
+            //check4.value = 'devolucionesCompra';
             //check10.value = 0;
         }
         if(check5.checked)
@@ -295,21 +357,34 @@
             check7.value = '';
             check10.value = '';
             check8.checked = true;
+            check8.disabled = false;
             check9.disabled = true;
 
-            check4.value = 'devolucionesCompra';
+            //check88.checked = false;
+            check99.checked = false;
+
+            //check5.value = 'devolucionesCompra';
             //check10.value = 0;
         }
         if(check88.checked || check99.checked)
         {
-            content_otras.style.display='none';
-            content_devoluciones.style.display='none';
-            btn_cancelar.style.display='block';
+            if(check4.checked || check5.checked)
+            {
+                content_otras.style.display='block';
+                content_devoluciones.style.display='block';
+                btn_cancelar.style.display='block';
+            }else
+            {
+                content_otras.style.display='none';
+                content_devoluciones.style.display='none';
+                btn_cancelar.style.display='block';
+            }
         }
 
         if(check88.checked)
         {
             check10.value = "";
+            check10.disabled = false;
         }
 
         if(check99.checked && check4.checked == false)
@@ -324,10 +399,13 @@
 
     function habilitar(){
         var ex = document.getElementById('existencia_actual');
+        var af = document.getElementById('content');
 
         var cu = document.getElementById('cantidad_unidades');
+        var cc = document.getElementById("cantidad_costos");
         var en = document.getElementById('entrada');
         var sa = document.getElementById('salida');
+        var oo = document.getElementById('otras_operaciones');
 
         var gc = document.getElementById('gastosCompra');
         var dc = document.getElementById('descuentosCompra');
@@ -345,6 +423,43 @@
 
         content_articulo = document.getElementById("content_articulo");
         content_unidad = document.getElementById("content_unidad");
+
+        if(devc.checked)
+        {
+            en.disabled = true;
+        }
+
+        if(devv.checked)
+        {
+            s.disabled = true;
+        }
+
+        if(devc.checked || devv.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(en.checked || sa.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(sa.checked && oo.value == null)
+        {
+            cc.value = document.getElementById('aux_cu').value;
+            cc.disabled = true;
+        }
+
+        if(gc.checked || dc.checked || rc.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
+        }
 
         if(ex.value != '')
         {

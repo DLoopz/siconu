@@ -10,11 +10,11 @@ class Model_stock_card extends CI_Model
         return $this->db->insert('tarjeta_almacen', $data);
     }
 
-    public function update_ta($data)
+    public function update_ta($data, $id)
     {
         /*$this->db->where('id_tarjeta', $data['id_tarjera']);
         return $this->db->update('tarjeta_almacen', $data);*/
-        $this->db->where(['id' => $id]);
+        $this->db->where(['id_tarjeta' => $id]);
         $update_data = $this->db->update('tarjeta_almacen', $data);
         return $update_data;
     }
@@ -25,6 +25,12 @@ class Model_stock_card extends CI_Model
         $this->db->from('tarjeta_almacen');
         $this->db->where('empresa_id',$data['empresa_id']);
         $sql=$this->db->get();
+        return $sql->row();
+    }
+
+    public function get_penultimate_id()
+    {
+        $sql = $this->db->query("SELECT id_tarjeta FROM tarjeta_almacen ORDER BY id_tarjeta DESC LIMIT 1, 1");
         return $sql->row();
     }
 
