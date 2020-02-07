@@ -157,21 +157,44 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="content" style="display: none;">
-                        <label for="">
-                            Afectación
-                        </label>
-                        <div class="form-group">
-                            <!--Cantidad:-->
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">$</div>
+                    <!--<div class="form-group" id="content" style="display: none;">-->
+                    <?php if (empty($_POST['otras_operaciones']))
+                    {?>
+                        <div class="form-group" id="content" style="display: none;">
+                            <label for="">
+                                Afectación
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
                                 </div>
-                                <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                <?php echo form_error('afectacion') ?>
                             </div>
-                            <?php echo form_error('cantidad_costos') ?>
                         </div>
-                    </div>
+                    <?php } else {?>
+                        <?php if($_POST['otras_operaciones'] == "gastosCompra" || $_POST['otras_operaciones'] == "descuentosCompra" || $_POST['otras_operaciones'] == "rebajasCompra")
+                        {?>
+                            <div class="form-group" id="content" style="display: block;">
+                                <label for="">
+                                    Afectación
+                                </label>
+                                <div class="form-group">
+                                    <!--Cantidad:-->
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">$</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                    </div>
+                                    <?php echo form_error('afectacion') ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
                 <div class="col-md-12 text-danger">
         	        <?php echo form_label('* Campo Obligatorio')?>
@@ -229,6 +252,16 @@
             btn_cancelar.style.display='none';
         }
 
+        if (check4.checked || check5.checked)
+        {
+            //element.style.display='block';
+            btn_cancelar.style.display='block';
+        }else
+        {
+            //element.style.display='none';
+            btn_cancelar.style.display='none';
+        }
+
         if(check1.checked)
         {
             content_existencia.style.display = 'none';
@@ -277,11 +310,11 @@
             check7.value = '';
             check10.value = '';
             check8.disabled = true;
-            check9.disabled = false;
             check9.checked = true;
+            check9.disabled = false;
 
             check88.checked = false;
-            check99.checked = false;
+            //check99.checked = false;
 
             //check4.value = 'devolucionesCompra';
             //check10.value = 0;
@@ -300,7 +333,7 @@
             check8.disabled = false;
             check9.disabled = true;
 
-            check88.checked = false;
+            //check88.checked = false;
             check99.checked = false;
 
             //check5.value = 'devolucionesCompra';
@@ -339,10 +372,13 @@
 
     function habilitar(){
         var ex = document.getElementById('existencia_actual');
+        var af = document.getElementById('content');
 
         var cu = document.getElementById('cantidad_unidades');
+        var cc = document.getElementById("cantidad_costos");
         var en = document.getElementById('entrada');
         var sa = document.getElementById('salida');
+        var oo = document.getElementById('otras_operaciones');
 
         var gc = document.getElementById('gastosCompra');
         var dc = document.getElementById('descuentosCompra');
@@ -360,6 +396,43 @@
 
         content_articulo = document.getElementById("content_articulo");
         content_unidad = document.getElementById("content_unidad");
+
+        if(devc.checked)
+        {
+            en.disabled = true;
+        }
+
+        if(devv.checked)
+        {
+            s.disabled = true;
+        }
+
+        if(devc.checked || devv.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(en.checked || sa.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(sa.checked && oo.value == null)
+        {
+            cc.value = document.getElementById('aux_cu').value;
+            cc.disabled = true;
+        }
+
+        if(gc.checked || dc.checked || rc.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
+        }
 
         if(ex.value != '')
         {

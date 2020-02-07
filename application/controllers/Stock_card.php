@@ -116,6 +116,26 @@ class Stock_card extends CI_Controller {
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]');
 
+            switch($this->input->post('otras_operaciones'))
+            {
+                case "gastosCompra":
+                    $this->form_validation->set_rules('afectacion', 'Cantidad en afectación', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+                    break;
+                case "descuentosCompra":
+                    $this->form_validation->set_rules('afectacion', 'Cantidad en afectación', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+                    break;
+                case "rebajasCompra":
+                    $this->form_validation->set_rules('afectacion', 'Cantidad en afectación', 'callback_venta_check|numeric|min_length[1]|max_length[11]|required');
+                    break;
+                case "devolucionesCompra":
+                    $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]');
+                    $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check|required|numeric|min_length[1]|max_length[11]');
+                    break;
+                case "devolucionesVenta":
+                    $this->form_validation->set_rules('cantidad_unidades', 'Cantidad en unidades', 'callback_venta_check|numeric|min_length[1]|max_length[11]');
+                    $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check|required|numeric|min_length[1]|max_length[11]');
+                    break;
+            }
             if($this->input->post('otras_operaciones') != null)
             {
                 $this->form_validation->set_rules('unidades', 'Tipo de movimiento');
@@ -142,7 +162,7 @@ class Stock_card extends CI_Controller {
                 $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'required|numeric|min_length[1]|max_length[11]');
             }else
             {
-                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check', 'required|numeric|min_length[1]|max_length[11]');
+                $this->form_validation->set_rules('cantidad_costos', 'Cantidad en costo unitario', 'callback_cost_check|required|numeric|min_length[1]|max_length[11]');
             }
         }
 
