@@ -89,11 +89,13 @@
                         <div class="form-group">
                             <!--Cantidad:-->
                             <?php if(isset($info_edit->entradas) && isset($info_edit->salidas)){?>
-                                <?php if($info_edit->entradas == 0){?>
-                                    <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->salidas;?>">
-                                <?php } ?>
-                                <?php if($info_edit->salidas == 0){?>
-                                    <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->entradas;?>">
+                                <?php if($info_edit->debe != 0 || $info_edit->haber != 0){?>
+                                    <?php if($info_edit->entradas == 0 && $total == 1){?>
+                                        <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->salidas;?>">
+                                    <?php } ?>
+                                    <?php if($info_edit->salidas == 0 && $total == 1){?>
+                                        <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->entradas;?>">
+                                    <?php } ?>
                                 <?php } ?>
                             <?php } ?>
                             <?php echo form_error('cantidad_unidades') ?>
@@ -431,7 +433,7 @@
 
         if(devv.checked)
         {
-            s.disabled = true;
+            sa.disabled = true;
         }
 
         if(devc.checked || devv.checked)

@@ -34,6 +34,12 @@ class Model_stock_card extends CI_Model
         return $sql->row();
     }
 
+    public function get_total()
+    {
+        $sql = $this->db->query("SELECT COUNT(*) AS total FROM tarjeta_almacen");
+        return $sql->row();
+    }
+
     public function get_first_id($data)
     {
         $this->db->select_min('id_tarjeta','id');
