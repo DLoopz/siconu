@@ -48,10 +48,10 @@ class Stock_card extends CI_Controller {
                 $primer_id = $this->model_stock_card->get_first_id($fields);
                 $fields = array('id_tarjeta' => intval($primer_id->id));
                 $ii = $this->model_stock_card->get_registro($fields);
-                $compra = $this->model_stock_card->get_sum_debe();
+                $compra = $this->model_stock_card->get_sum_debe($id_empresa);
                 $mercancias = $ii->saldo + $compra;
                 $if = $registro_antes->saldo;
-                $vendido = $this->model_stock_card->get_sum_haber();
+                $vendido = $this->model_stock_card->get_sum_haber($id_empresa);
                 //echo 'Inventario_inicial: ', $ii->id_tarjeta;
 
                 $data['ii'] = $ii->saldo;
@@ -103,7 +103,13 @@ class Stock_card extends CI_Controller {
         // REGLAS
         //$this->form_validation->set_rules('fecha_sc', 'fecha', 'required');
         $this->form_validation->set_rules('fecha_sc', 'Fecha', 'callback_date_check', 'required');
-        $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
+
+        $ref = $this->input->post("referencia");
+        $unic = $this->model_stock_card->get_unic($id_empresa, $ref);
+        if($unic)
+            $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
+        else
+            $this->form_validation->set_rules('referencia', 'Referencia', 'required');
 
 
         if($existencia_antes == NULL)
@@ -220,6 +226,7 @@ class Stock_card extends CI_Controller {
                     'existencia' => $this->input->post('cantidad_existencia'),
                     'unitario' => $this->input->post('cantidad_costos'),
                     'promedio' => $this->input->post('cantidad_costos'),
+                    'debe' => 0,
                     'haber' => 0,
                     'saldo' => $this->input->post('cantidad_existencia') * $this->input->post('cantidad_costos'),
                     'nombre_articulo' => $this->input->post('articulo'),
@@ -382,7 +389,8 @@ class Stock_card extends CI_Controller {
         $ultimo_id = $this->model_stock_card->get_last_id($fields);
         $fields = array('id_tarjeta' => intval($ultimo_id->id));
         $existencia_antes = $this->model_stock_card->get_existencia($fields);
-        $total = $this->model_stock_card->get_total();
+        $exis_ref = $this->model_stock_card->get_unic($id_empresa, $this->input->post('referencia'));
+        $total = $this->model_stock_card->get_total($id_empresa);
         $data['total'] = $total->total;
         //echo("TOTAL DE ELEMENTOS EN TA: ".$total->total);
 
@@ -396,7 +404,13 @@ class Stock_card extends CI_Controller {
             $this->form_validation->set_rules('referencia', 'Referencia', 'required');
         }else
         {
-            $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
+            if($exis_ref)
+            {
+                $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
+            }else
+            {
+                $this->form_validation->set_rules('referencia', 'Referencia', 'required');
+            }
         }
 
         if($existencia_antes == NULL)
@@ -477,7 +491,7 @@ class Stock_card extends CI_Controller {
             $fields = array('empresa_id' => $id_empresa);
             $ultimo_id = $this->model_stock_card->get_last_id($fields);
 
-            $penultim_id = $this->model_stock_card->get_penultimate_id();
+            $penultim_id = $this->model_stock_card->get_penultimate_id($id_empresa);
             $fields = array('id_tarjeta' => intval($penultim_id->id_tarjeta));
             $penultim = $this->model_stock_card->get_existencia($fields);
             //$penultim = $penultim_id->id_tarjeta;
@@ -486,7 +500,7 @@ class Stock_card extends CI_Controller {
 
 
             $fields = array('id_tarjeta' => intval($ultimo_id->id));
-            $data['info_edit']=$this->model_stock_card->get_info($fields);
+            $data['info_edit'] = $this->model_stock_card->get_info($fields);
             $existencia_antes = $this->model_stock_card->get_existencia($fields);
 
             if($existencia_antes == NULL)
@@ -531,7 +545,7 @@ class Stock_card extends CI_Controller {
                 $fields = array('empresa_id' => $id_empresa);
                 $ultimo_id = $this->model_stock_card->get_last_id($fields);
 
-                $penultim_id = $this->model_stock_card->get_penultimate_id();
+                $penultim_id = $this->model_stock_card->get_penultimate_id($id_empresa);
                 $fields = array('id_tarjeta' => intval($penultim_id->id_tarjeta));
                 $penultim = $this->model_stock_card->get_existencia($fields);
 

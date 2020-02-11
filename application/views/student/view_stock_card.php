@@ -128,8 +128,8 @@
                         <th></th>
                         <th></th>
                         <th scope="row">Total</th>
-                        <td class="text-info">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
-                        <td class="text-info">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
+                        <td class="text-info text-right">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
+                        <td class="text-info text-right">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
                         <th></th>
                         <th></th>
                     </tr>
@@ -204,7 +204,7 @@
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>stock_card/delete_register/<?php echo $id_empresa; ?>">
-                   <input type="hidden" id="eliminar" name="id_register"></input>
+                   <input type="hidden" id="eliminar" name="id_register">
                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal tam" value="Si">
                    <input type="reset" class="btn btn-outline-danger my-2 my-sm-0" data-dismiss="modal" value="No">
                </form>
@@ -228,7 +228,7 @@
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>stock_card/terminar/<?php echo $id_empresa; ?>">
-                   <input type="hidden" id="terminar" name="id_terminar"></input>
+                   <input type="hidden" id="terminar" name="id_terminar">
                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal tam" value="Si">
                    <input type="reset" class="btn btn-outline-danger my-2 my-sm-0" data-dismiss="modal" value="No">
                </form>

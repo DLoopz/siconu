@@ -1,3 +1,17 @@
+<script type="text/javascript">
+
+  $(window).ready(function(){
+
+
+    <?php if(isset($modal)) echo "$('#".$modal."').modal('show');";?>
+
+    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
+      habilitar_editar();
+  });
+
+</script>
+
+
 <div class="container col-md-6">
     <div class="panel panel-primary col-md-offset-4">
         <div class="panel-heading">
@@ -88,38 +102,53 @@
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <?php if(isset($info_edit->entradas) && isset($info_edit->salidas)){?>
+                            <?php if(isset($info_edit->entradas) || isset($info_edit->salidas)){?>
                                 <?php if($info_edit->debe != 0 || $info_edit->haber != 0){?>
-                                    <?php if($info_edit->entradas == 0 && $total == 1){?>
+                                    <?php if($info_edit->entradas == 0 && $info_edit->salidas == 0 && $total >= 1){?>
                                         <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->salidas;?>">
-                                    <?php } ?>
-                                    <?php if($info_edit->salidas == 0 && $total == 1){?>
-                                        <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->entradas;?>">
+                                    <?php }else{ ?>
+                                        <?php if($info_edit->entradas == 0 && $total >= 1){?>
+                                            <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->salidas;?>">
+                                        <?php } ?>
+                                        <?php if($info_edit->salidas == 0 && $total >= 1){?>
+                                            <input id="cantidad_unidades" type="text" name="cantidad_unidades" class="form-control" placeholder="Cantidad en números" value="<?php echo $info_edit->entradas;?>">
+                                        <?php } ?>
                                     <?php } ?>
                                 <?php } ?>
                             <?php } ?>
                             <?php echo form_error('cantidad_unidades') ?>
                         </div>
                         <div class="form-group">
-                            <?php if($info_edit->entradas == 0){?>
+                            <?php if($info_edit->entradas == 0 && $info_edit->salidas == 0 && $total > 1){?>
                                 <div class="custom-control custom-radio custom-control-inline col-5">
                                     <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
-                                    <label class="custom-control-label" for="entrada">Entrada</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline col-5">
-                                    <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
-                                    <label class="custom-control-label" for="salida">Salida</label>
-                                </div>
-                            <?php } ?>
-                            <?php if($info_edit->salidas == 0){?>
-                                <div class="custom-control custom-radio custom-control-inline col-5">
-                                    <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
                                     <label class="custom-control-label" for="entrada">Entrada</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline col-5">
                                     <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
                                     <label class="custom-control-label" for="salida">Salida</label>
                                 </div>
+                            <?php }else{ ?>
+                                <?php if($info_edit->entradas == 0){?>
+                                    <div class="custom-control custom-radio custom-control-inline col-5">
+                                        <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
+                                        <label class="custom-control-label" for="entrada">Entrada</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline col-5">
+                                        <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
+                                        <label class="custom-control-label" for="salida">Salida</label>
+                                    </div>
+                                <?php } ?>
+                                <?php if($info_edit->salidas == 0){?>
+                                    <div class="custom-control custom-radio custom-control-inline col-5">
+                                        <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
+                                        <label class="custom-control-label" for="entrada">Entrada</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline col-5">
+                                        <input type="radio" id="salida" name="unidades" class="custom-control-input" value="salida" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
+                                        <label class="custom-control-label" for="salida">Salida</label>
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
                             <?php echo form_error('unidades'); ?>
                         </div>
@@ -135,11 +164,15 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">$</div>
                                 </div>
-                                <?php if($info_edit->entradas == 0){?>
-                                    <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>" disabled>
-                                <?php } ?>
-                                   <?php if($info_edit->salidas == 0){?>
+                                <?php if($info_edit->entradas == 0 && $info_edit->salidas == 0 && $total > 1){?>
                                     <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>">
+                                <?php }else{?>
+                                    <?php if($info_edit->entradas == 0){?>
+                                        <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>" disabled>
+                                    <?php } ?>
+                                       <?php if($info_edit->salidas == 0){?>
+                                        <input type="text" class="form-control" id="cantidad_costos" name="cantidad_costos" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->unitario?>">
+                                    <?php } ?>
                                 <?php } ?>
                                 <input type="text" class="form-control" id="aux_cu" name="aux_cu" aria-describedby="inputGroupPrepend2" value="<?php echo $costo_unitario;?>" style="display: none;">
                             </div>
@@ -154,16 +187,18 @@
                             Otras operaciones
                         </label>
                         <div class="form-group">
+                            <?php if($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->debe != 0){?>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'gastosCompra', 'checked')?> checked>
+                                    <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
+                                </div>
+                            <?php } ?>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()">
-                                <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()">
+                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'descuentosCompra', 'checked')?>>
                                 <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()">
+                                <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'rebajasCompra', 'checked')?>>
                                 <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                             </div>
                         </div>
@@ -176,11 +211,11 @@
                         </label>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?>>
                                 <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="" onchange="javascript:showContent()">
+                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?>>
                                 <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
                             </div>
                         </div>
@@ -198,7 +233,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->debe;?>">
                                 </div>
                                 <?php echo form_error('afectacion') ?>
                             </div>
@@ -216,7 +251,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">$</div>
                                         </div>
-                                        <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2">
+                                        <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00kk" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->debe;?>">
                                     </div>
                                     <?php echo form_error('afectacion') ?>
                                 </div>
@@ -249,6 +284,7 @@
         content_unidades = document.getElementById("content_unidades");
         content_costo_unitario = document.getElementById("content_costo_unitario");
         referencia = document.getElementById("referencia");
+        cantidad_costos = document.getElementById("cantidad_costos");
 
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
@@ -293,6 +329,7 @@
 
         if(check1.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -305,6 +342,7 @@
 
         if(check2.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -317,6 +355,7 @@
 
         if(check3.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -358,9 +397,9 @@
 
             check7.value = '';
             check10.value = '';
+            check9.disabled = true;
             check8.checked = true;
             check8.disabled = false;
-            check9.disabled = true;
 
             //check88.checked = false;
             check99.checked = false;
@@ -399,9 +438,14 @@
 
     ///////////////////////////////////////////
 
-    function habilitar(){
+    function habilitar_editar(){
+        //alert("ENTRA A LA FUNCION DE habilitar_editar()");
+        btn_cancelar = document.getElementById("btn_cancelar");
+
         var ex = document.getElementById('existencia_actual');
         var af = document.getElementById('content');
+
+        var ref = document.getElementById('referencia');
 
         var cu = document.getElementById('cantidad_unidades');
         var cc = document.getElementById("cantidad_costos");
@@ -422,21 +466,87 @@
         content_unidades = document.getElementById("content_unidades");
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
+        content_costo_unitario = document.getElementById("content_costo_unitario");
 
         content_articulo = document.getElementById("content_articulo");
         content_unidad = document.getElementById("content_unidad");
 
+        if(ex.value != '')
+        {
+            /*alert("VALOR DE EX(Existencia): "+ex.value);
+            cu.disabled = false;
+            en.disabled = false;
+            sa.disabled = false;*/
+
+            gc.disabled = false;
+            dc.disabled = false;
+            rc.disabled = false;
+
+            devc.disabled = false;
+            devv.disabled = false;
+
+            exis.disabled = true;
+
+            content_existencia.style.display = 'none';
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'block';
+        }else
+        {
+            cu.disabled = true;
+            en.disabled = true;
+            sa.disabled = true;
+
+            gc.disabled = true;
+            dc.disabled = true;
+            rc.disabled = true;
+
+            devc.disabled = true;
+            devv.disabled = true;
+
+            exis.disabled = false;
+
+            //content_existencia.style.display='none';
+            content_unidades.style.display='none';
+            content_otras.style.display='none';
+            content_devoluciones.style.display='none';
+        }
+
+        if(gc.checked)
+        {
+            //ref.value = "Gastos sobre compra";
+            content_unidades.style.display='none';
+            content_costo_unitario.style.display='none';
+        }
+
+        if(dc.checked)
+        {
+            //ref.value = "Descuentos sobre compra";
+            content_unidades.style.display='none';
+            content_costo_unitario.style.display='none';
+        }
+
+        if(rc.checked)
+        {
+            //ref.value = "Rebajas sobre compra";
+            content_unidades.style.display='none';
+            content_costo_unitario.style.display='none';
+        }
+
         if(devc.checked)
         {
             en.disabled = true;
+            en.checked = false;
+            sa.checked = true;
         }
 
         if(devv.checked)
         {
             sa.disabled = true;
+            sa.checked = false;
+            en.checked = true;
         }
 
-        if(devc.checked || devv.checked)
+        if(devv.checked || devc.checked)
         {
             content_articulo.style.display = 'none';
             content_unidad.style.display = 'none';
@@ -458,51 +568,18 @@
 
         if(gc.checked || dc.checked || rc.checked)
         {
+            btn_cancelar.style.display='block';
+            af.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
+            content_unidad.style.display = 'none';
             content_costo_unitario.style.display = 'none';
         }
+    }
 
-        if(ex.value != '')
-        {
-            cu.disabled = false;
-            en.disabled = false;
-            sa.disabled = false;
+    function cancelar()
+    {
 
-            gc.disabled = false;
-            dc.disabled = false;
-            rc.disabled = false;
-
-            devc.disabled = false;
-            devv.disabled = false;
-
-            exis.disabled = true;
-
-            content_existencia.style.display = 'none';
-            content_articulo.style.display = 'none';
-            content_unidad.style.display = 'none';
-
-        }else
-        {
-            cu.disabled = true;
-            en.disabled = true;
-            sa.disabled = true;
-
-            gc.disabled = true;
-            dc.disabled = true;
-            rc.disabled = true;
-
-            devc.disabled = true;
-            devv.disabled = true;
-
-            exis.disabled = false;
-
-            //content_existencia.style.display='none';
-            content_unidades.style.display='none';
-            content_otras.style.display='none';
-            content_devoluciones.style.display='none';
-
-        }
     }
 
 </script>

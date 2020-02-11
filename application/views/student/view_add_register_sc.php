@@ -60,7 +60,7 @@
                     <div class="form-group" id="content_existencia">
                         <div class="form-group">
                             <label for="">
-                            Existencia
+                            Existencia *
                             </label>
                             <div class="form-group">
                                 <!--Cantidad:-->
@@ -264,6 +264,7 @@
 
         if(check1.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -276,6 +277,7 @@
 
         if(check2.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -288,6 +290,7 @@
 
         if(check3.checked)
         {
+            btn_cancelar.style.display='block';
             content_existencia.style.display = 'none';
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
@@ -329,9 +332,9 @@
 
             check7.value = '';
             check10.value = '';
+            check9.disabled = true;
             check8.checked = true;
             check8.disabled = false;
-            check9.disabled = true;
 
             //check88.checked = false;
             check99.checked = false;
@@ -371,6 +374,7 @@
     ///////////////////////////////////////////
 
     function habilitar(){
+        //alert("ENTRA A LA FUNCION DE habilitar()");
         var ex = document.getElementById('existencia_actual');
         var af = document.getElementById('content');
 
@@ -397,45 +401,9 @@
         content_articulo = document.getElementById("content_articulo");
         content_unidad = document.getElementById("content_unidad");
 
-        if(devc.checked)
-        {
-            en.disabled = true;
-        }
-
-        if(devv.checked)
-        {
-            s.disabled = true;
-        }
-
-        if(devc.checked || devv.checked)
-        {
-            content_articulo.style.display = 'none';
-            content_unidad.style.display = 'none';
-            content_existencia.style.display = 'none';
-        }
-
-        if(en.checked || sa.checked)
-        {
-            content_articulo.style.display = 'none';
-            content_unidad.style.display = 'none';
-            content_existencia.style.display = 'none';
-        }
-
-        if(sa.checked && oo.value == null)
-        {
-            cc.value = document.getElementById('aux_cu').value;
-            cc.disabled = true;
-        }
-
-        if(gc.checked || dc.checked || rc.checked)
-        {
-            content_existencia.style.display = 'none';
-            content_unidades.style.display = 'none';
-            content_costo_unitario.style.display = 'none';
-        }
-
         if(ex.value != '')
         {
+            //alert("VALOR DE EX: "+ex.value);
             cu.disabled = false;
             en.disabled = false;
             sa.disabled = false;
@@ -473,6 +441,50 @@
             content_otras.style.display='none';
             content_devoluciones.style.display='none';
 
+        }
+
+        if(devc.checked)
+        {
+            en.disabled = true;
+            en.checked = false;
+            sa.checked = true;
+        }
+
+        if(devv.checked)
+        {
+            sa.disabled = true;
+            sa.checked = false;
+            en.checked = true;
+            /*sa.checked = false;
+            sa.disabled = true;
+            en.checked = true;*/
+        }
+
+        if(devv.checked || devc.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(en.checked || sa.checked)
+        {
+            content_articulo.style.display = 'none';
+            content_unidad.style.display = 'none';
+            content_existencia.style.display = 'none';
+        }
+
+        if(sa.checked && oo.value == null)
+        {
+            cc.value = document.getElementById('aux_cu').value;
+            cc.disabled = true;
+        }
+
+        if(gc.checked || dc.checked || rc.checked)
+        {
+            content_existencia.style.display = 'none';
+            content_unidades.style.display = 'none';
+            content_costo_unitario.style.display = 'none';
         }
     }
 
