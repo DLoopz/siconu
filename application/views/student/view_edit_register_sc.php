@@ -192,11 +192,23 @@
                                     <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'gastosCompra', 'checked')?> checked>
                                     <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
                                 </div>
+                            <?php } else{ ?>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="gastosCompra" name="otras_operaciones" class="custom-control-input" value="gastosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'gastosCompra', 'checked')?>>
+                                    <label class="custom-control-label" for="gastosCompra">Gastos sobre compra</label>
+                                </div>
                             <?php } ?>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'descuentosCompra', 'checked')?>>
-                                <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
-                            </div>
+                            <?php if($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->haber != 0){?>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'descuentosCompra', 'checked')?> checked>
+                                    <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
+                                </div>
+                            <?php }else{ ?>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'descuentosCompra', 'checked')?>>
+                                    <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
+                                </div>
+                            <?php } ?>
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'rebajasCompra', 'checked')?>>
                                 <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
@@ -209,19 +221,45 @@
                         <label for="">
                             Devolución
                         </label>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?>>
-                                <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
+                        <?php if ($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->haber != 0)
+                        {?>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?> checked>
+                                    <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?>>
+                                    <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
+                                </div>
                             </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?>>
-                                <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
+                        <?php } elseif($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->debe != 0)
+                        {?>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?>>
+                                    <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?> checked>
+                                    <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
+                                </div>
                             </div>
-                        </div>
+                        <?php } else {?>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesCompra" name="otras_operaciones" class="custom-control-input" value="devolucionesCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesCompra', 'checked');?>>
+                                    <label class="custom-control-label" for="devolucionesCompra">Devoluciones sobre compra</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="devolucionesVenta" name="otras_operaciones" class="custom-control-input" value="devolucionesVenta" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'devolucionesVenta', 'checked');?>>
+                                    <label class="custom-control-label" for="devolucionesVenta">Devoluciones sobre venta</label>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
 
-                    <?php if (empty($_POST['otras_operaciones']))
+                    <?php if ($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->debe != 0)
                     {?>
                         <div class="form-group" id="content" style="display: none;">
                             <label for="">
@@ -235,29 +273,60 @@
                                     </div>
                                     <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->debe;?>">
                                 </div>
-                                <?php echo form_error('afectacion') ?>
+                            </div>
+                        </div>
+
+                    <?php if ($info_edit->entradas == 0 && $info_edit->salidas != 0 && $info_edit->haber != 0)
+                    {?>
+                        <div class="form-group" id="content" style="display: none;">
+                            <label for="">
+                                Afectación
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->debe;?>">
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <?php }elseif ($info_edit->entradas == 0 && $info_edit->salidas == 0 && $info_edit->haber != 0)
+                    {?>
+                        <div class="form-group" id="content" style="display: none;">
+                            <label for="">
+                                Afectación
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->haber;?>">
+                                </div>
                             </div>
                         </div>
                     <?php } else {?>
-                        <?php if($_POST['otras_operaciones'] == "gastosCompra" || $_POST['otras_operaciones'] == "descuentosCompra" || $_POST['otras_operaciones'] == "rebajasCompra")
-                        {?>
-                            <div class="form-group" id="content" style="display: block;">
-                                <label for="">
-                                    Afectación
-                                </label>
-                                <div class="form-group">
-                                    <!--Cantidad:-->
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">$</div>
-                                        </div>
-                                        <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00kk" aria-describedby="inputGroupPrepend2" value="<?php echo $info_edit->debe;?>">
+                        <div class="form-group" id="content" style="display: block;">
+                            <label for="">
+                                Afectación
+                            </label>
+                            <div class="form-group">
+                                <!--Cantidad:-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
                                     </div>
-                                    <?php echo form_error('afectacion') ?>
+                                    <input type="text" class="form-control" id="afectacion" name="afectacion" placeholder="0.00" aria-describedby="inputGroupPrepend2" value="<?php echo set_value('afectacion');?>">
                                 </div>
                             </div>
-                        <?php } ?>
+                        </div>
                     <?php } ?>
+                    <?php echo form_error('afectacion') ?>
                 </div>
                 <div class="col-md-12 text-danger">
         	        <?php echo form_label('* Campo Obligatorio')?>
@@ -558,6 +627,7 @@
             content_articulo.style.display = 'none';
             content_unidad.style.display = 'none';
             content_existencia.style.display = 'none';
+            af.style.display = 'none';
         }
 
         if(sa.checked && oo.value == null)
