@@ -29,7 +29,7 @@
           <th colspan="5" class="text-center text-uppercase"><?php echo $exercise->nombre; ?></th>
         </tr>
         <tr>
-          <td colspan="5" class="text-center">Balance general al <?php echo date('j/m/Y'); ?></td>
+          <td colspan="5" class="text-center">Balance general al <?php $date = date_create($entries[count($entries)-1]->fecha);echo date_format($date,'d M \d\e\l Y');?></td>
         </tr>
       </thead>
       <tbody>
@@ -75,7 +75,7 @@
                 <td class="font-weight-light font-italic">Total de <?php echo $type->nombre ?>s <?php echo $clasification->nombre?>s</td>
                 <td></td>
                 <td></td>
-                <td class="font-weight-bold font-italic">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[$type->id_tipo]=$total_tipo[$type->id_tipo]+$total_clas;?></td>
+                <td class="font-weight-bold font-italic text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[$type->id_tipo]=$total_tipo[$type->id_tipo]+$total_clas;?></td>
                 <td></td>
               </tr>
             <?php endforeach ?>
@@ -84,7 +84,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="font-weight-bold font-italic">$<?php echo number_format($total_tipo[$type->id_tipo],2,'.',','); ?></td>
+                <td class="font-weight-bold font-italic text-right">$<?php echo number_format($total_tipo[$type->id_tipo],2,'.',','); ?></td>
               </tr>
           <?php endif ?>
         <?php endforeach ?>
@@ -93,7 +93,7 @@
           <td></td>
           <td></td>
           <td></td>
-          <td class="font-weight-bold font-italic">$<?php echo number_format(($total_tipo[1]-$total_tipo[2]),2,'.',','); ?></td>
+          <td class="font-weight-bold font-italic text-right">$<?php echo number_format(($total_tipo[1]-$total_tipo[2]),2,'.',','); ?></td>
         </tr>
       </tbody>
     </table>
@@ -132,13 +132,13 @@
                 <div class="row td-b font-italic font-weight-light">
                   <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
                   <div class="col-4"></div>
-                  <div class="col-4 text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
+                  <div class="col-4 text-right text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td-b font-weight-bold">
                 <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
                 <div class="col-4"></div>
-                <div class="col-4 text-right">$<?php echo number_format($total_tipo[1],2,'.',','); ?></div>
+                <div class="col-4 text-right text-right">$<?php echo number_format($total_tipo[1],2,'.',','); ?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>

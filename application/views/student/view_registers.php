@@ -9,7 +9,7 @@
 		<br>
 		<a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info  my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
-		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros del Asiento"><i class="icon-plus-2"></i></a>
+		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $edit;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros del Asiento"><i class="icon-plus-2"></i></a>
 
 		<br><br>
 		<div class="table-responsive">
@@ -98,7 +98,7 @@
                 ¿Está seguro de eliminar el registro?
             </div>
             <div class="modal-footer">
-               <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
+               <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>/<?php echo $edit; ?>">
                    <input type="hidden" id="eliminar" name="id_register"></input>
                    <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si">
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">                   
