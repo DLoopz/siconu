@@ -40,7 +40,7 @@
         </div>
     <?php } ?>
     <br>
-    <div class="table-responsive">
+    <div class="table-responsive-md">
       <table class="table table-hover">
             <thead>
                 <tr class="">
@@ -85,19 +85,19 @@
                             <td><?php echo $sc->existencia ?></td>
                         <?php } ?>
                         <?php if(isset($sc->unitario)){?>
-                            <td>$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->unitario, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->promedio)){?>
-                            <td>$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->promedio, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->debe)){?>
-                            <td>$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->debe, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->haber)){?>
-                            <td>$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->haber, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->saldo)){?>
-                            <td>$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
+                            <td class="text-right">$ <?php echo number_format($sc->saldo, 2, ".", ","); ?></td>
                         <?php } ?>
                         <?php if(isset($sc->id_tarjeta)){?>
                             <td>
@@ -105,7 +105,10 @@
                                 <?php
                                     if($ultimo == $sc->id_tarjeta and $terminar == 0)
                                     {?>
+                                        <a id="edit_register" class="btn btn-outline-success" href="<?php echo base_url() ?>stock_card/edit_register/<?php echo $id_empresa;?>/<?php echo $sc->id_tarjeta;?>/1" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+
                                         <a id="delete_register" class="btn btn-outline-danger" href="" data-toggle="modal" data-target="#modal_sc" onclick="eliminar(<?php echo $sc->id_tarjeta;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+
                                     <?php}else
                                     {?>
                                     <?php
@@ -125,15 +128,14 @@
                         <th></th>
                         <th></th>
                         <th scope="row">Total</th>
-                        <td class="text-info">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
-                        <td class="text-info">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
+                        <td class="text-info text-right">$ <?php echo number_format($compra, 2, ".", ","); ?></td>
+                        <td class="text-info text-right">$ <?php echo number_format($vendido, 2, ".", ","); ?></td>
                         <th></th>
                         <th></th>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
-        </div>
 
         <?php if (isset($sc)){?>
             <?php if ($btn_end == 1){?>
@@ -202,7 +204,7 @@
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>stock_card/delete_register/<?php echo $id_empresa; ?>">
-                   <input type="hidden" id="eliminar" name="id_register"></input>
+                   <input type="hidden" id="eliminar" name="id_register">
                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal tam" value="Si">
                    <input type="reset" class="btn btn-outline-danger my-2 my-sm-0" data-dismiss="modal" value="No">
                </form>
@@ -226,7 +228,7 @@
             </div>
             <div class="modal-footer">
                <form method="post" action="<?php echo base_url() ?>stock_card/terminar/<?php echo $id_empresa; ?>">
-                   <input type="hidden" id="terminar" name="id_terminar"></input>
+                   <input type="hidden" id="terminar" name="id_terminar">
                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal tam" value="Si">
                    <input type="reset" class="btn btn-outline-danger my-2 my-sm-0" data-dismiss="modal" value="No">
                </form>

@@ -9,7 +9,7 @@
 		<br>
 		<a href="<?php echo base_url('daybook/book/'.$id_empresa); ?>" class="btn btn-outline-info  my-2 my-sm-0" aria-label="Left Align" title="Volver"><i class="icon-left-big"></i></a>
 
-		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros del Asiento"><i class="icon-plus-2"></i></a>
+		<a href="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $edit;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Registros del Asiento"><i class="icon-plus-2"></i></a>
 
 		<br><br>
 		<div class="table-responsive">
@@ -28,10 +28,10 @@
 	      foreach ($registers as $register){?>
 	        <tr>
 	          <td><div class="<?php if($register->haber>0){echo 'offset-2';}?>"><?php echo $register->cuenta;?></div></td>
-	          <!--td class="text-right">$ <?php echo number_format($register->parcial, 2, '.', ',');?></td-->
+	          <!--td class="text-right">$<?php echo number_format($register->parcial, 2, '.', ',');?></td-->
 	          <td></td>
-	          <td class="text-right">$ <?php echo number_format($register->debe, 2, '.', ','); $d=$register->debe+$d;?></td>
-	          <td class="text-right">$ <?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
+	          <td class="text-right">$<?php echo number_format($register->debe, 2, '.', ','); $d=$register->debe+$d;?></td>
+	          <td class="text-right">$<?php echo number_format($register->haber, 2, '.', ','); $h=$register->haber+$h;?></td>
 	          <td>
 	          	<?php if (!$register->parcial): ?>
 		          	<!--editar asiento-->
@@ -55,7 +55,7 @@
 	      			<?php //mostrar cantidades parciales ?>
 	      			<tr class="table-secondary">
       				  <td><?php echo $partial->concepto;?></td>
-    				    <td class="text-right">$ <?php echo number_format($partial->cantidad,2,'.',',');?></td>
+    				    <td class="text-right">$<?php echo number_format($partial->cantidad,2,'.',',');?></td>
   				      <td>
   				      	<?php //echo $edit."<pre>".print_r($partial,1)."</pre>"; ?>
   				      </td>
@@ -68,8 +68,8 @@
 	      <tr class="<?php if($d==$h and $d!=0) echo "table-success"; else echo "table-danger";?>">
 	        <th>Total</th>
 	        <th></th>
-	        <th class="text-right">$ <?php echo number_format($d,2,'.',','); ?></th>
-	        <th class="text-right">$ <?php echo number_format($h,2,'.',','); ?></th>
+	        <th class="text-right">$<?php echo number_format($d,2,'.',','); ?></th>
+	        <th class="text-right">$<?php echo number_format($h,2,'.',','); ?></th>
 	        <th></th>
 	      </tr>
 	    </tbody>
@@ -98,7 +98,7 @@
                 ¿Está seguro de eliminar el registro?
             </div>
             <div class="modal-footer">
-               <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>">
+               <form method="post" action="<?php echo base_url() ?>daybook/delete_register/<?php echo $id_empresa; ?>/<?php echo $id_asiento; ?>/<?php echo $edit; ?>">
                    <input type="hidden" id="eliminar" name="id_register"></input>
                    <input type="submit" class="btn btn-outline-danger my-2 my-sm-0 tam" value="Si">
                    <input type="reset" class="btn btn-outline-success my-2 my-sm-0 margin_left_modal" data-dismiss="modal" value="No">                   

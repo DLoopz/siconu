@@ -44,7 +44,7 @@
       </li>
     </ul>
   </div>
-  <div class=""></div>
+  
 </nav>
 
 <!-- Modal para confirmación de cierre de sesión-->

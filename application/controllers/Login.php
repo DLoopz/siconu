@@ -33,6 +33,7 @@ class Login extends CI_Controller
  
 	public function login()
 	{
+
 		if ($this->input->post('login')) {
 			//se establecen reglas de validacion
 			$this->form_validation->set_rules('usuario', 'Usuario', 'required');
@@ -51,28 +52,22 @@ class Login extends CI_Controller
 			else
 			{
 				$fields = array(
-					'matricula' => $this->input->post('usuario')
-				);
-				$fields1 = array(
-					'contrasenia' => md5($this->input->post('password'))
+					'matricula' => addslashes($this->input->post('usuario')),
+					'contrasenia' => md5(addslashes($this->input->post('password')))
 				);
 
-				$user=$this->model_user->get_user($fields);
-				$pass=$this->model_user->get_user($fields1);
-				if (!$user && !$pass){
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario y contraseña inválidos</div');
-					redirect();
-				}elseif (!$user) {
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario inválido</div');
-					redirect();
-				}elseif (!$pass) {
-					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Contraseña incorrecta</div');
+				$user = $this->model_user->get_user($fields);
+
+				if (!$user){
+					$this->session->set_flashdata('msg', '<br><div class="alert alert-danger text-center">Usuario o contraseña inválidos</div');
 					redirect();
 				}
+
 				$fields = array(
 					'usuario_id' => $user->id_usuario
 				);
 				$info=$this->model_user->get_info_user($fields);
+
 				$newdata = array(    
 					'usuario' => $user->matricula,
 					'id_user' => $user->id_usuario,

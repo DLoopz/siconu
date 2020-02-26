@@ -1,8 +1,11 @@
 <?php
+
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
 //require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
+
 
 class Daybook extends CI_Controller {
   
@@ -61,10 +64,11 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     //personalizacion de delimitadores
@@ -94,11 +98,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->insert_entry($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no agregado</div>');
       }
       redirect('daybook/register/'.$id_empresa.'/'.$add->id_asiento, 'refresh');
     }
@@ -111,12 +115,13 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras, tildes, acentos y espacios');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -141,11 +146,11 @@ class Daybook extends CI_Controller {
       $upd=$this->model_daybook->update_entry($fields);
       if($upd)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento modificado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento modificado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no modificado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no modificado</div>');
       }
       redirect('daybook/book/'.$id_empresa,'refresh');
     }
@@ -177,7 +182,7 @@ class Daybook extends CI_Controller {
 		$this->load->view('foot');
 	}
 
-	public function add_register($id_empresa=null,$id_asiento=null)
+	public function add_register($id_empresa=null,$id_asiento=null,$edit=null)
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
@@ -188,9 +193,13 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
+    $this->form_validation->set_message('numeric', '%s debe ser numérico');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-
+    if (is_null($edit))
+      $data['edit']=null;
+    else
+      $data['edit']=1;
     $fields = array('id_empresa' => $id_empresa);
     $exercise=$this->model_exercise->get_exercise($fields);
 
@@ -264,13 +273,13 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->insert_register($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
-      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
     }
   }
 
@@ -329,11 +338,11 @@ class Daybook extends CI_Controller {
         $add=$this->model_daybook->insert_register($fields);
         if($add)
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
         }
         $fields = array('asiento_id' =>$id_asiento);
         $add=$this->model_daybook->last_register($fields);
@@ -368,13 +377,14 @@ class Daybook extends CI_Controller {
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
-    $this->form_validation->set_rules('cantidad','Cantidad','required|numeric');
+    $this->form_validation->set_rules('cantidad','Cantidad','required|numeric|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
     $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
+    $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
     if (!$this->form_validation->run())
@@ -405,48 +415,40 @@ class Daybook extends CI_Controller {
       $fields = array(
           'registro_id' => $id_registro,
           'concepto' => $this->input->post('concepto'),
-          'cantidad' =>$this->input->post('cantidad')
+          'cantidad' => $this->input->post('cantidad')
         );
-      $add=$this->model_daybook->insert_register_partial($fields);
 
       
-      /*
-      $fields = array(
-        'id_registro' => $id_registro,
-        'parcial' => 1
-      );
-      $act_parc = $this->model_daybook->partial($fields);
-      */
-
-
+      $add=$this->model_daybook->insert_register_partial($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
       $fields = array('asiento_id' =>$id_asiento);
       $add=$this->model_daybook->last_register($fields);
       $id_registro = $add->id_registro;
 
       redirect('daybook/register_partial/'.$id_empresa.'/'.$id_asiento.'/'.$add->id_registro, 'refresh');
+      
     }
   }
 
 
   //de add registaer partial
-  public function edit_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null,$id_parcial)
+  //public function edit_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null,$id_parcial)
+  public function edit_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null,$id_parcial=null)
   {
 
-    if (!is_null($cantidad)){
-
-      //se establecen reglas de validacion
-      $this->form_validation->set_rules('operacion','Operación del Registro','required');
-      //personalizacion de reglas de validacion
+    //if (!is_null($cantidad)){
+      $this->form_validation->set_rules('concepto','Concepto','required|alpha_numeric_spaces');
+      $this->form_validation->set_rules('cantidad','Cantidad','required|callback_notCero');
       $this->form_validation->set_message('required', '%s es un campo obligatorio');
-      //personalizacion de delimitadores
+      $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
+      $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
       $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
       if (!$this->form_validation->run())
       {
@@ -457,42 +459,69 @@ class Daybook extends CI_Controller {
         $fields = array('registro_id' => $id_registro);
         $data['partials']=$this->model_daybook->get_registers_partial($fields);
 
+        //datos de un parcial
         $fields = array('id_registro' => $id_registro);
         $cuenta = $this->model_daybook->get_partial($fields);
         $data['cuenta']= $cuenta;
 
         $fields = array('id_parcial' => $id_parcial);
         $p = $this->model_daybook->get_partial_rp($fields);
+
+        $data['id_parcial'] = $id_parcial;
         $data['concepto'] = $p->concepto;
         $data['cantidad'] = $p->cantidad;
 
-
+        ///*
         $this->load->view('head',$data);
         $this->load->view('navbar');
         $this->load->view('student/edit_partial');
         $this->load->view('foot');
+        //*/
       }
       else
       {
-
         $concepto = $this->input->post('concepto');
         $cantidad = $this->input->post('cantidad');
 
-        if ($this->input->post('operacion')=='cargo') {
-          $fields = array(
-            'id_parcial' => $id_parcial,
-            'concepto' => $concepto,
-            'cantidad' => $cantidad
-          );
-        }
-        else{
-          $fields = array(
-            'id_parcial' => $id_parcial,
-            'cantidad' => $cantidad,
-            'concepto' => $concepto
-          );
-        }
+        
+        $fields = array(
+          'id_parcial' => $id_parcial,
+          'cantidad' => $cantidad,
+          'concepto' => $concepto
+        );
+        
         $upd=$this->model_daybook->update_parcial($fields);
+
+        //acutalizo la cantidad
+        $fields = array('registro_id' => $id_registro);
+        $vp = $this->model_daybook->get_partials_rp($fields);
+        //echo '<pre>'.print_r($vp,1).'</pre>';
+        $cantidad = 0;
+        foreach ($vp as $p) {
+          $cantidad += $p->cantidad;
+        }
+
+        //cantidad en debe o abono
+        $fields = array(
+          'id_registro' => $id_registro        
+        );
+        $vp = $this->model_daybook->get_partial($fields);
+
+        if ($vp->debe > 0) {
+          $fields = array(
+            'id_registro' => $id_registro,
+            'debe' => $cantidad
+          );
+        }
+        else
+        {
+          $fields = array(
+            'id_registro' => $id_registro,
+            'haber' => $cantidad
+          );
+        }
+
+        $upd = $this->model_daybook->update_register($fields);
 
         if($upd)
         {
@@ -500,15 +529,18 @@ class Daybook extends CI_Controller {
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no modificado</div>');
         }
-        redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
-
+        redirect("daybook/edit_register_partial/{$id_empresa}/{$id_asiento}/{$id_registro}/{$cantidad}");
+        //redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
       }
-    }
+    //}//if cantidad
     
   }
 
+  
+
+  //vista de operacion y terminar
   public function edit_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null)
   {
     if (!is_null($cantidad)){
@@ -528,6 +560,7 @@ class Daybook extends CI_Controller {
         $fields = array('registro_id' => $id_registro);
         $data['partials']=$this->model_daybook->get_registers_partial($fields);
 
+        //datos de un parcial
         $fields = array('id_registro' => $id_registro);
         $cuenta = $this->model_daybook->get_partial($fields);
         $data['cuenta']= $cuenta;
@@ -561,7 +594,7 @@ class Daybook extends CI_Controller {
         }
         else
         {
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no modificado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no modificado</div>');
         }
         redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
 
@@ -570,39 +603,70 @@ class Daybook extends CI_Controller {
   }
 
   //eliminar un parcialito
-  public function delete_parcial_rp($id_empresa=null,$id_asiento=null)
+  public function delete_parcial_rp($id_empresa=null,$id_asiento=null, $id_registro=null)
   {
+    //elimino
     $fields = array('id_parcial' => $this->input->post('id_parcial'));
     $del=$this->model_daybook->delete_parcial($fields);
 
-    if($del)
-    {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Parcial borrado correctamente</div>');
+    //acutalizo la cantidad
+    $fields = array('registro_id' => $id_registro);
+    $vp = $this->model_daybook->get_partials_rp($fields);
+    //echo '<pre>'.print_r($vp,1).'</pre>';
+    $cantidad = 0;
+    foreach ($vp as $p) {
+      $cantidad += $p->cantidad;
+    }
+
+    //cantidad en debe o abono
+    $fields = array(
+      'id_registro' => $id_registro        
+    );
+    $vp = $this->model_daybook->get_partial($fields);
+
+    if ($vp->debe > 0) {
+      $fields = array(
+        'id_registro' => $id_registro,
+        'debe' => $cantidad
+      );
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger">Error parcial no borado</div>');
+      $fields = array(
+        'id_registro' => $id_registro,
+        'haber' => $cantidad
+      );
+    }
+    $upd=$this->model_daybook->update_register($fields);
+
+    if($del)
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Parcial borrado correctamente</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Error parcial no borado</div>');
     }
     redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
   }
 
   //para cancelar en el parcial
-  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null)
+  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null,$edit=null)
   {
     $fields = array('id_registro' => $id_registro);
     $del=$this->model_daybook->delete_register($fields);
     if($del)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borrado</div>');
       }
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/1', 'refresh');
   }
 
-  public function delete_register($id_empresa=null,$id_asiento=null)
+  public function delete_register($id_empresa=null,$id_asiento=null,$edit=null)
   {
     //verificamos si es parcial, entonces borramos los aprciales
     $fields = array('id_registro' => $this->input->post('id_register'));
@@ -618,13 +682,13 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_register($fields);
     if($del)
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
-    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
       
   }
 
@@ -638,11 +702,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_entry($fields);
     if($del)
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
     }
     else
     {
-      $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+      $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
     redirect('daybook/book/'.$id_empresa, 'refresh');
   }
@@ -655,11 +719,11 @@ class Daybook extends CI_Controller {
     $del=$this->model_daybook->delete_entry($fields);
     if($del)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Asiento borrado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Asiento borrado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error asiento no borado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
       }
       redirect('daybook/book/'.$id_empresa, 'refresh');
   }
@@ -750,11 +814,11 @@ class Daybook extends CI_Controller {
       $add=$this->model_daybook->update_register($fields);
       if($add)
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-success"> Registro agregado correctamente</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Registro agregado correctamente</div>');
       }
       else
       {
-        $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error registro no agregado</div>');
+        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
       $xdir='daybook/register/'.$id_empresa.'/'.$id_asiento;
       if ($edit==1){
@@ -810,25 +874,46 @@ class Daybook extends CI_Controller {
       ";
       
       $contenido = $head.$cont.$foot;
-      //echo $cont;
+      
+      /*
+      echo $head;
+      echo $cont;
+      echo $foot;
+      */
       //echo $contenido;
-      
+
+
+
+      ///*
       $dompdf = new Dompdf();
-      
       $dompdf->loadHtml($contenido);
       $dompdf->setPaper('A4', 'landscape');
       //ini_set("memory_limit","50M");//aumentar memoria
       $dompdf->render();
       $dompdf->stream( $titulo_pdf.'.pdf' , array('Attachment' => true));
-      //$dompdf->stream('archivo.pdf');
+      
+      //*/
     }
     else
     {
       redirect('');
     }
-}
-
+  }
 
   
 
+  public function alpha_spaces($str)
+  {
+    $resultado=preg_match('/^([A-Za-z\sÑñáéíóú])*+$/i', $str);
+    if ($resultado==1)
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+
 }//fin clase
+

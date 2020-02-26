@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="text-danger">
-      <?php echo form_label('* Campos Obligatorios')?><br>
+      <?php echo form_label('* Campos Obligatorios')?>
     </div>
     <hr>
     <br>
@@ -45,9 +45,9 @@
         <input type="submit" name="submit" class="btn btn-outline-success my-2 my-sm-0" value="Guardar" />
         <a class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn tam_btn" href="<?php echo base_url() ?>professor">
         Volver</a>
-        
     </div>
   </form>
   <?php } ?>
   </div>
 </div>
+<br>
