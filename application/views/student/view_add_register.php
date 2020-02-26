@@ -10,7 +10,7 @@
     <div class="container">
       <h3 class="text-center">Registro del Asiento</h3>
       <hr class="line_sep">
-      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $edit;?>">
         <?php if ($accounts==null) { ?>
           <div class="form-check alert-warning text-center">
             <br>

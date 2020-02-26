@@ -182,7 +182,7 @@ class Daybook extends CI_Controller {
 		$this->load->view('foot');
 	}
 
-	public function add_register($id_empresa=null,$id_asiento=null)
+	public function add_register($id_empresa=null,$id_asiento=null,$edit=null)
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
@@ -196,7 +196,10 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-
+    if (is_null($edit))
+      $data['edit']=null;
+    else
+      $data['edit']=1;
     $fields = array('id_empresa' => $id_empresa);
     $exercise=$this->model_exercise->get_exercise($fields);
 
@@ -276,7 +279,7 @@ class Daybook extends CI_Controller {
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
-      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
     }
   }
 
@@ -648,7 +651,7 @@ class Daybook extends CI_Controller {
   }
 
   //para cancelar en el parcial
-  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null)
+  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null,$edit=null)
   {
     $fields = array('id_registro' => $id_registro);
     $del=$this->model_daybook->delete_register($fields);
@@ -663,7 +666,7 @@ class Daybook extends CI_Controller {
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/1', 'refresh');
   }
 
-  public function delete_register($id_empresa=null,$id_asiento=null)
+  public function delete_register($id_empresa=null,$id_asiento=null,$edit=null)
   {
     //verificamos si es parcial, entonces borramos los aprciales
     $fields = array('id_registro' => $this->input->post('id_register'));
@@ -685,7 +688,7 @@ class Daybook extends CI_Controller {
     {
       $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
-    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
       
   }
 

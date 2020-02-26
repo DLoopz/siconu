@@ -776,6 +776,7 @@ class Professor extends CI_Controller {
       }    
     }   
   }
+
   public function alpha_spaces($str)
   {
     $resultado=preg_match('/^([A-Za-z\sÑñáéíóú])*+$/i', $str);
@@ -789,6 +790,7 @@ class Professor extends CI_Controller {
       return FALSE;
     }
   }
+
   public function thisPassword($str)
   {
     $fields = array('id_usuario' => $this->session->userdata('id_user'));
@@ -798,6 +800,7 @@ class Professor extends CI_Controller {
     }
     return false;
   }
+  
   public function account_exists($str)
   {
     $fields = array('usuario_id' => $this->session->userdata('id_user'),'nombre' => $str);
