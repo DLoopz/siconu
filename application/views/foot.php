@@ -28,7 +28,7 @@
 
   });
 
-  //habilitar();
+  habilitar();
 
 </script>
 

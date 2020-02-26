@@ -3,7 +3,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
-require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
+//require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 
 
