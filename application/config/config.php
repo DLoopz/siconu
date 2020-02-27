@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/siconu/';
+//$config['base_url'] = 'http://192.168.137.36/siconu';
 
 /*
 |--------------------------------------------------------------------------

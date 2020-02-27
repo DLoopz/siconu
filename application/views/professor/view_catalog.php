@@ -56,16 +56,16 @@
 				<?php endif ?>
 			<?php } ?>
 			<hr class="line_sep">
-
+			<br>
 		<div class="panel-footer text-center">
-			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0 ">
+			<input type="submit" name="crear_catalogo" value="Crear" class="btn btn-outline-success my-2 my-sm-0 tam_btn">
 			<a href="<?php echo base_url()?>professor"> <button type="button" class="btn btn-outline-danger my-2 my-sm-0 margin_left_btn tam_btn">Volver</button></a>
 			
 		</div >
 		</form>
-	</div><br><br>
+	</div>
 </div>
-
+<br>
 <script type="text/javascript">
 	$("#checkall").change(function(){
 		$(".checkitem").prop("checked",$(this).prop("checked"))

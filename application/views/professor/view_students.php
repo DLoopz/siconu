@@ -7,7 +7,7 @@
     if($this->session->flashdata('msg'))
       echo $this->session->flashdata('msg');
   ?>
-  <a href="<?php echo base_url() ?>professor " class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
+  <a href="<?php echo base_url() ?>professor" class="btn btn-outline-info my-2 my-sm-0" aria-label="Left Align" title="Volver a la Lista de Grupos"><i class="icon-left-big"></i></a>
   
   <a href="<?php echo base_url() ?>professor/add_student/<?php echo $id_group;?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Alumno"><i class="icon-user-add"></i></a>
 
@@ -39,15 +39,7 @@
             <!-- eliminar confirmación -->
             <a class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" href="" data-target="#mi_modal" onclick="eliminar(<?php echo $student->usuario_id;?>)" title="Eliminar Alumno"><strong><em><i class="icon-user-delete"></i></em></strong></a>
             <!-- Ver Ejercicios -->
-            <?php 
-              $newdata = array(
-                'id_user' => $student->usuario_id,
-                'grupo' => $id_group,
-                'id_org' =>$this->session->userdata('id_user')
-              );
-              $this->session->set_userdata($newdata);
-            ?>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student" title="Ver Ejercicios"><strong><em><i class="icon-eye"></i></em></strong></a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url() ?>student/see_student/<?php echo $student->usuario_id; ?>/<?php echo $id_group; ?>" title="Ver Ejercicios"><strong><em><i class="icon-eye"></i></em></strong></a>
           </td>
         </tr>
         <?php } ?>

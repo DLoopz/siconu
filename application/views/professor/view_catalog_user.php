@@ -29,31 +29,33 @@
               <?php }else{$flag++;} ?>
               <?php if ($flag<2) {?> 
               <div>
-                <table class="table" id="user-table">
-                  <head>
-                    <tr>
-                      <th>Folio</th>
-                      <th>Cuenta</th>
-                      <th colspan="2">Opciones</th>
-                    </tr>
-                  </head>
-                  <tbody>
-                  <?php $j=0; foreach ($accounts as $account){
-                  if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {$j++;?>
-                    <tr>
-                    <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
-                    <td><?php echo $account->nombre;?></td>
-                    <td>
-                    <!-- eliminar cuenta -->
-                    <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-                    <!--editar cuenta-->
-                    <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
-                    </td>
-                    </tr>
-                  <?php }
-                  }?>
-                  </tbody>
-                </table>
+                <div class="table-responsive">
+                  <table class="table" id="user-table">
+                    <head>
+                      <tr>
+                        <th>Folio</th>
+                        <th>Cuenta</th>
+                        <th colspan="2">Opciones</th>
+                      </tr>
+                    </head>
+                    <tbody>
+                    <?php $j=0; foreach ($accounts as $account){
+                    if ($type->id_tipo==$account->tipo_id && $cla->id_clasificacion==$account->clasificacion_id) {$j++;?>
+                      <tr>
+                      <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
+                      <td><?php echo $account->nombre;?></td>
+                      <td>
+                      <!-- eliminar cuenta -->
+                      <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                      <!--editar cuenta-->
+                      <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
+                      </td>
+                      </tr>
+                    <?php }
+                    }?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <?php } ?>
             </div>
@@ -64,35 +66,37 @@
         <hr class="line_sep">
          <div class="row">
           <div class="col-6 espacio">
-         <table class="table table-over">
-          <head>
-            <tr>
-              <th>Folio</th>
-              <th>Cuenta</th>
-              <th colspan="2">Opciones</th>
-            </tr>
-          </head>
-          <tbody>
-          <?php if (isset($accounts[0])): 
-              $aux_cls=$accounts[0]->clasificacion_id;
-          endif ?>
-        <?php $j=0; foreach ($accounts as $account){
-          if ($type->id_tipo==$account->tipo_id) {$j++;?>
-            <?php if ($aux_cls!=$account->clasificacion_id): $j=1;  $aux_cls=$account->clasificacion_id; endif ?>
-            <tr>
-            <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
-            <td><?php echo $account->nombre;?></td>
-            <td colspan="2">
-            <!-- eliminar cuenta -->
-            <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
-            <!--editar cuenta-->
-            <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
-            </td>
-            </tr>
-          <?php }
-          }?>
-          </tbody>
-        </table>
+            <div class="table-responsive">
+             <table class="table table-over">
+              <head>
+                <tr>
+                  <th>Folio</th>
+                  <th>Cuenta</th>
+                  <th colspan="2">Opciones</th>
+                </tr>
+              </head>
+              <tbody>
+              <?php if (isset($accounts[0])):
+                  $aux_cls=$accounts[0]->clasificacion_id;
+              endif ?>
+            <?php $j=0; foreach ($accounts as $account){
+              if ($type->id_tipo==$account->tipo_id) {$j++;?>
+                <?php if ($aux_cls!=$account->clasificacion_id): $j=1;  $aux_cls=$account->clasificacion_id; endif ?>
+                <tr>
+                <td><?php $folio=($account->tipo_id*1000)+($account->clasificacion_id*100)+$j; echo $folio; ?></td>
+                <td><?php echo $account->nombre;?></td>
+                <td colspan="2">
+                <!-- eliminar cuenta -->
+                <a class="btn btn-outline-danger my-2 my-sm-0 col-5"  href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $account->id_catalogo_usuario;?>)" title="Eliminar Cuenta"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+                <!--editar cuenta-->
+                <a class="btn btn-outline-secondary my-2 my-sm-0 col-5 offset-1" href="<?php echo base_url() ?>professor/edit_account/<?php echo $account->id_catalogo_usuario;?>" title="Editar Cuenta"><strong><em><i class="icon-edit"></i></em></strong></a>
+                </td>
+                </tr>
+              <?php }
+              }?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <?php endif ?>

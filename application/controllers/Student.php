@@ -28,11 +28,21 @@ class Student extends CI_Controller {
 		$this->load->view('foot');
 	}
 
+  public function see_student($id_student=null,$id_group=null){
+    $newdata = array(
+      'id_user' => $id_student,
+      'grupo' => $id_group,
+      'id_org' =>$this->session->userdata('id_user')
+    );
+    $this->session->set_userdata($newdata);
+    redirect('student');
+  }
+
     public function edit_password(){
     //reglas de validacion
-    $this->form_validation->set_rules('password_act','contraseña actual','trim|required|min_length[8]|callback_thisPassword');
-    $this->form_validation->set_rules('password','contraseña','trim|required|min_length[8]');
-    $this->form_validation->set_rules('password_c','comfirmacion de contraseña','trim|required|matches[password]|min_length[8]');
+    $this->form_validation->set_rules('password_act','Contraseña actual','trim|required|min_length[8]|callback_thisPassword');
+    $this->form_validation->set_rules('password','Contraseña','trim|required|min_length[8]');
+    $this->form_validation->set_rules('password_c','Confirmación de contraseña','trim|required|matches[password]|min_length[8]');
     //personalizacion de reglas
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('matches', 'Las contraseñas no coinciden');
@@ -72,17 +82,19 @@ class Student extends CI_Controller {
 	{
     $id=$this->session->userdata('id_user');
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
-    $this->form_validation->set_rules('procedimiento','Procedimiento','required');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|callback_alpha_spaces|trim');
+    $this->form_validation->set_rules('procedimiento','Procedimiento del ejercicio','required');
+
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
 
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-    if (!$this->form_validation->run())
+    if ($this->form_validation->run()==FAlSE)
     {
     	$data['title']="Alumno: Agregar ejercicios";
 			$data['id_user']=$id;
@@ -100,9 +112,9 @@ class Student extends CI_Controller {
       );
       $add=$this->model_exercise->insert_exercise($fields);
       if($add){
-          $this->session->set_flashdata('msg','<div class="alert alert-success"> Ejercicio agregado correctamente</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-success text-center"> Ejercicio agregado correctamente</div>');
       }else{
-          $this->session->set_flashdata('msg','<div class="alert alert-danger"> Error ejercicio no agregado</div>');
+          $this->session->set_flashdata('msg','<div class="alert alert-danger text-center> Error ejercicio no agregado</div>');
       }
       redirect('student', 'refresh');
     }
@@ -112,6 +124,7 @@ class Student extends CI_Controller {
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('procedimiento','procedimiento del Ejercicio','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
@@ -134,13 +147,14 @@ class Student extends CI_Controller {
       if($this->input->post("edit_exercise")){
         $fields = array(
           'id_empresa' => $id,
-          'nombre' =>  $this->input->post('nombre')
+          'nombre' =>  $this->input->post('nombre'),
+          'procedimiento' => $this->input->post('procedimiento')
         );
         $mod= $this->model_exercise->update_exercise($fields);
         if($mod){
-          $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+          $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Ejercicio editado correctamente</div>');
         }else{
-          $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error ejercicio no editado </div>');
         }
         redirect('student');
       }else{
@@ -165,9 +179,9 @@ class Student extends CI_Controller {
     );
     $mod= $this->model_exercise->update_exercise($fields);
     if($mod){
-      $this->session->set_flashdata('msg', '<div class="alert alert-success"> Ejercicio editado correctamente</div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Ejercicio editado correctamente</div>');
     }else{
-      $this->session->set_flashdata('msg', '<div class="alert alert-danger"> Error ejercicio no editado </div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error ejercicio no editado </div>');
     }
     redirect('student');
   }
@@ -180,5 +194,18 @@ class Student extends CI_Controller {
       return true;
     }
     return false;
+  }
+
+  public function alpha_spaces($str)
+  {
+    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
+    if ($resultado)
+    {
+      return FALSE;
+    }
+    else
+    {
+      return TRUE;
+    }
   }
 }

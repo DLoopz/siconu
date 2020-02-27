@@ -21,6 +21,7 @@ class Model_result extends CI_Model
     $this->db->where('fecha >= "'.$data['fecha_inicio'].'"');
     $this->db->where('fecha <= "'.$data['fecha_fin'].'"');
     $this->db->where('empresa_id',$data['empresa_id']);
+    $this->db->where('ajuste',0);
   	$sql = $this->db->get_where('rayado_diario');
     return $sql->result();   
   }

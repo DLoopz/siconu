@@ -1,9 +1,19 @@
 <div class="container">
 	<?php
 	setlocale(LC_ALL, 'es_MX');?>
-	<h3 class="text-center">Balance General</h3>
-	<hr class="line_sep">
-  <br>
+
+
+    <form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
+      <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
+      <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
+      <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
+      <input type="text" id="contpdf" name="contpdf" class="invisible">
+    </form>
+
+    <h3 class="text-center">Balance General</h3>
+    <hr class="line_sep">
+    <br>
+
 
 	<nav class="nav-fill">
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -19,7 +29,7 @@
           <th colspan="5" class="text-center text-uppercase"><?php echo $exercise->nombre; ?></th>
         </tr>
         <tr>
-          <td colspan="5" class="text-center">Balance general al <?php echo date('j/m/Y'); ?></td>
+          <td colspan="5" class="text-center">Balance general al <?php $date = date_create($entries[count($entries)-1]->fecha);echo date_format($date,'d M \d\e\l Y');?></td>
         </tr>
       </thead>
       <tbody>
@@ -65,7 +75,7 @@
                 <td class="font-weight-light font-italic">Total de <?php echo $type->nombre ?>s <?php echo $clasification->nombre?>s</td>
                 <td></td>
                 <td></td>
-                <td class="font-weight-bold font-italic">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[$type->id_tipo]=$total_tipo[$type->id_tipo]+$total_clas;?></td>
+                <td class="font-weight-bold font-italic text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[$type->id_tipo]=$total_tipo[$type->id_tipo]+$total_clas;?></td>
                 <td></td>
               </tr>
             <?php endforeach ?>
@@ -74,7 +84,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="font-weight-bold font-italic">$ <?php echo number_format($total_tipo[$type->id_tipo],2,'.',','); ?></td>
+                <td class="font-weight-bold font-italic text-right">$<?php echo number_format($total_tipo[$type->id_tipo],2,'.',','); ?></td>
               </tr>
           <?php endif ?>
         <?php endforeach ?>
@@ -83,14 +93,14 @@
           <td></td>
           <td></td>
           <td></td>
-          <td class="font-weight-bold font-italic">$ <?php echo number_format(($total_tipo[1]-$total_tipo[2]),2,'.',','); ?></td>
+          <td class="font-weight-bold font-italic text-right">$<?php echo number_format(($total_tipo[1]-$total_tipo[2]),2,'.',','); ?></td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <div>
+    <div class="bg-cuenta">
       <div class="text-center text-uppercase font-weight-bold td"><?php echo $exercise->nombre;?></div>
       <div class="text-center td">Balance general al <?php echo date('j/m/Y'); ?></div>
       <div class="row">
@@ -115,20 +125,20 @@
                   <?php if ($cuenta): ?>
                     <div class="row td-b">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$ <?php echo number_format(($debe-$haber),2,'.',','); $total_clas=$total_clas+($debe-$haber)?></div>
+                      <div class="col-6">$<?php echo number_format(($debe-$haber),2,'.',','); $total_clas=$total_clas+($debe-$haber)?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
                 <div class="row td-b font-italic font-weight-light">
                   <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
                   <div class="col-4"></div>
-                  <div class="col-4 text-right">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
+                  <div class="col-4 text-right text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td-b font-weight-bold">
                 <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
                 <div class="col-4"></div>
-                <div class="col-4 text-right">$  <?php echo number_format($total_tipo[1],2,'.',','); ?></div>
+                <div class="col-4 text-right text-right">$<?php echo number_format($total_tipo[1],2,'.',','); ?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>
@@ -155,20 +165,20 @@
                   <?php if ($cuenta): ?>
                     <div class="row td">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$ <?php echo number_format(($haber-$debe),2,'.',','); $total_clas=$total_clas+($haber-$debe);?></div>
+                      <div class="col-6">$<?php echo number_format(($haber-$debe),2,'.',','); $total_clas=$total_clas+($haber-$debe);?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
                 <div class="row td font-italic font-weight-light">
                   <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
                 <div class="col-4"></div>
-                  <div class="col-4 text-right">$ <?php echo number_format($total_clas,2,'.',','); $total_tipo[2]=$total_tipo[2]+$total_clas;$total_clas=0;?></div>
+                  <div class="col-4 text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[2]=$total_tipo[2]+$total_clas;$total_clas=0;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td font-weight-bold">
                 <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
                 <div class="col-4"></div>
-                <div class="col-4 text-right">$ <?php echo number_format($total_tipo[2],2,'.',','); $totla_pasivo=$total_tipo[2]?></div>
+                <div class="col-4 text-right">$<?php echo number_format($total_tipo[2],2,'.',','); $totla_pasivo=$total_tipo[2]?></div>
               </div>
             <?php endif ?>
             <?php if ($type->id_tipo == 3): $total_tipo[3]=0;?>
@@ -187,21 +197,21 @@
                   <?php if ($cuenta): ?>
                     <div class="row td">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$ <?php echo number_format(($haber-$debe),2,'.',','); $total_tipo[3]=$total_tipo[3]+($haber-$debe)?></div>
+                      <div class="col-6">$<?php echo number_format(($haber-$debe),2,'.',','); $total_tipo[3]=$total_tipo[3]+($haber-$debe)?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
                  <div class="row td-a font-weight-bold">
                 <div class="col-4">Total <?php echo $type->nombre; ?></div>
                 <div class="col-4"></div>
-                <div class="col-4 text-right">$ <?php echo number_format($total_tipo[3],2,'.',','); $total_capital=$total_tipo[3];?></div>
+                <div class="col-4 text-right">$<?php echo number_format($total_tipo[3],2,'.',','); $total_capital=$total_tipo[3];?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>
           <div class="row td-a">
             <div class="col-4">Total Pasivo + Capital</div>
             <div class="col-4"></div>
-            <div class="col-4 text-right">$ <?php echo number_format(($totla_pasivo+$total_capital),2,'.',',');?></div>
+            <div class="col-4 text-right">$<?php echo number_format(($totla_pasivo+$total_capital),2,'.',',');?></div>
           </div>
         </div>
       </div>
