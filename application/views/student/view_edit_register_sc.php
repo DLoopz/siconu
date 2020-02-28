@@ -1,13 +1,9 @@
 <script type="text/javascript">
 
-  $(window).ready(function(){
-
-
-    <?php if(isset($modal)) echo "$('#".$modal."').modal('show');";?>
-
-    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
-      habilitar_editar();
-  });
+    window.onload = function() {
+        //funciones a ejecutar
+        habilitar_editar();
+    };
 
 </script>
 
