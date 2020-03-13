@@ -17,6 +17,13 @@
 
 $(window).ready(function(){
 
+	$("#nav-profile-tab").click(function(){
+		$("form").attr({"action":"<?php echo base_url();?>daybook/pdf_cuenta"});
+	});
+	$("#nav-home-tab").click(function(){
+		$("form").attr({"action":"<?php echo base_url();?>daybook/pdf"});
+	});
+
 	$("#sendcont").click(function() {
 
 		var titulo_pdf = $('.nav-item.nav-link.active').attr("title"); //sacar title
@@ -34,7 +41,7 @@ $(window).ready(function(){
 	  if (titulo_pdf != 'Esquemas de Mayor')
 	  {
 	  	$(".table").each(function(){
-	  		console.log('tabla detectada');
+	  		
 	  	  if (titulo_pdf == 'Rayado Diario' || titulo_pdf == 'Tarjeta de Almacén')
 	  	  {
 	  	 		$('table tr th:last-child, tbody tr td:last-child').toggle();
@@ -52,6 +59,7 @@ $(window).ready(function(){
 	  	{
   			var tablas = '';
   			tablas += container + titulo;
+
 		  	//balance f cuenta
 		  	$(".tab-pane.fade.show.active").each(function(){
 		  		console.log('entra al activo');
@@ -68,6 +76,7 @@ $(window).ready(function(){
 	  {
 	  	<?php //para esquemas de mayor ?>
 	  	tablas += container;
+	  	
 	  	$(".table").each(function(){
 	  	  //$('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
 	  	  //$('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('scheme');

@@ -82,7 +82,10 @@
 		<?php } ?>
 		<div class="panel-footer text-center">
 			<a href="<?php echo base_url()?>daybook/book/<?php echo $id_empresa;?>"> <button type="button" class="btn btn-outline-success my-2 my-sm-0" <?php if ($d!=$h or $d==0) {echo "disabled";}?>>Cerrar Asiento</button></a>
-			<a href="<?php if($edit==null){echo base_url()."daybook/delete_entry/".$id_empresa."/".$id_asiento;}else{echo base_url()."daybook/book/".$id_empresa;} ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a>
+			<?php /*
+			<a href="<?php if($edit==null){echo base_url()."daybook/delete_entry/".$id_empresa."/".$id_asiento;}else{echo base_url()."daybook/book/".$id_empresa;} ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a> */?>
+
+			<a href="<?php if($edit==null){echo base_url('daybook/book/'.$id_empresa);}else{echo base_url()."daybook/book/".$id_empresa;} ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0 margin_left_btn">Cancelar</button></a>
 		</div>
 	</div>
 
