@@ -1,13 +1,9 @@
 <script type="text/javascript">
 
-  $(window).ready(function(){
-
-
-    <?php if(isset($modal)) echo "$('#".$modal."').modal('show');";?>
-
-    $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
-      habilitar_editar();
-  });
+    window.onload = function() {
+        //funciones a ejecutar
+        habilitar_editar();
+    };
 
 </script>
 
@@ -20,7 +16,7 @@
             </h3>
         </div>
         <hr class="line_sep">
-        
+
         <div class="alert alert-info text-center" role="alert" id="tipo" style="display:none;">
             <?php echo $info_edit->tipo_registro."<br>"; ?>
         </div>
@@ -35,7 +31,8 @@
             <?php echo form_error('unidades') ?>
             <?php echo form_error('afectacion') ?>
         </div>
-        
+
+        <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento" style="display: none;">Cancelar</button>
 
         <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento" style="display: none;">Cancelar</button>
 
@@ -152,7 +149,7 @@
                                         <label class="custom-control-label" for="salida">Salida</label>
                                     </div>
                                 <?php } ?>
-                                
+
                                 <?php if($info_edit->tipo_registro == 3){?>
                                     <div class="custom-control custom-radio custom-control-inline col-5">
                                         <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
@@ -163,7 +160,7 @@
                                         <label class="custom-control-label" for="salida">Salida</label>
                                     </div>
                                 <?php } ?>
-                                
+
                                 <?php if($info_edit->tipo_registro == 4 || $info_edit->tipo_registro == 5 || $info_edit->tipo_registro == 6){?>
                                     <div class="custom-control custom-radio custom-control-inline col-5">
                                         <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?>>
@@ -174,7 +171,7 @@
                                         <label class="custom-control-label" for="salida">Salida</label>
                                     </div>
                                 <?php } ?>
-                                
+
                                 <?php if($info_edit->tipo_registro == 7){?>
                                     <div class="custom-control custom-radio custom-control-inline col-5">
                                         <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> disabled>
@@ -185,7 +182,7 @@
                                         <label class="custom-control-label" for="salida">Salida</label>
                                     </div>
                                 <?php } ?>
-                                
+
                                 <?php if($info_edit->tipo_registro == 8){?>
                                     <div class="custom-control custom-radio custom-control-inline col-5">
                                         <input type="radio" id="entrada" name="unidades" class="custom-control-input" value="entrada" onchange="javascript:showContent()" <?php echo  set_radio('unidades', 'entrada', 'checked');?> checked>
@@ -196,7 +193,7 @@
                                         <label class="custom-control-label" for="salida">Salida</label>
                                     </div>
                                 <?php } ?>
-                                
+
                                 <?php echo form_error('unidades'); ?>
                             </div>
                         </div>
@@ -280,7 +277,7 @@
                                         <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo set_radio('otras_operaciones', 'descuentosCompra', 'checked');?>>
                                         <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                                     </div>
-                                    <div class="custom-control custom-radio">    
+                                    <div class="custom-control custom-radio">
                                         <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'rebajasCompra', 'checked');?>>
                                         <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                                     </div>
@@ -300,7 +297,7 @@
                                         <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'descuentosCompra', 'checked');?>>
                                         <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                                     </div>
-                                    <div class="custom-control custom-radio">    
+                                    <div class="custom-control custom-radio">
                                         <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'rebajasCompra', 'checked');?>>
                                         <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                                     </div>
@@ -320,7 +317,7 @@
                                         <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'descuentosCompra', 'checked');?> checked>
                                         <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                                     </div>
-                                    <div class="custom-control custom-radio">    
+                                    <div class="custom-control custom-radio">
                                         <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'rebajasCompra', 'checked');?>>
                                         <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                                     </div>
@@ -340,7 +337,7 @@
                                         <input type="radio" id="descuentosCompra" name="otras_operaciones" class="custom-control-input" value="descuentosCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'descuentosCompra', 'checked');?>>
                                         <label class="custom-control-label" for="descuentosCompra">Descuentos sobre compra</label>
                                     </div>
-                                    <div class="custom-control custom-radio">    
+                                    <div class="custom-control custom-radio">
                                         <input type="radio" id="rebajasCompra" name="otras_operaciones" class="custom-control-input" value="rebajasCompra" onchange="javascript:showContent()" <?php echo  set_radio('otras_operaciones', 'rebajasCompra', 'checked');?> checked>
                                         <label class="custom-control-label" for="rebajasCompra">Rebajas sobre compra</label>
                                     </div>
@@ -479,7 +476,7 @@
         content_costo_unitario = document.getElementById("content_costo_unitario");
         content_otras = document.getElementById("content_otras");
         content_devoluciones = document.getElementById("content_devoluciones");
-        
+
         btn_cancelar = document.getElementById("btn_cancelar");
         referencia = document.getElementById("referencia");
         cantidad_costos = document.getElementById("cantidad_costos");
@@ -492,15 +489,15 @@
         salida = document.getElementById("salida");
         cantidad_unidades = document.getElementById("cantidad_unidades");
         afectacion = document.getElementById("afectacion");
-                
+
         if(gastosCompra.checked)
         {
             cantidad_unidades.value = 1;
             cantidad_costos.value = 1;
-            
+
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
-            
+
             referencia.value = "Gastos sobre compra";
             element.style.display = 'block';
             btn_cancelar.style.display = 'block';
@@ -509,10 +506,10 @@
         {
             cantidad_unidades.value = 1;
             cantidad_costos.value = 1;
-            
+
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
-            
+
             referencia.value = "Descuentos sobre compra";
             element.style.display = 'block';
             btn_cancelar.style.display = 'block';
@@ -521,10 +518,10 @@
         {
             cantidad_unidades.value = 1;
             cantidad_costos.value = 1;
-            
+
             content_unidades.style.display = 'none';
             content_costo_unitario.style.display = 'none';
-            
+
             referencia.value = "Rebajas sobre compra";
             element.style.display='block';
             btn_cancelar.style.display='block';
@@ -552,7 +549,7 @@
             salida.disabled = true;
         }
     }
-    
+
     function habilitar_editar()
     {
         btn_cancelar = document.getElementById("btn_cancelar");
@@ -570,7 +567,7 @@
         var devv = document.getElementById('devolucionesVenta');
         var exis = document.getElementById('existencia');
         var afectacion = document.getElementById('afectacion');
-        
+
         content_existencia = document.getElementById("content_existencia");
         content_unidades = document.getElementById("content_unidades");
         content_otras = document.getElementById("content_otras");
@@ -578,7 +575,7 @@
         content_costo_unitario = document.getElementById("content_costo_unitario");
         content_articulo = document.getElementById("content_articulo");
         content_unidad = document.getElementById("content_unidad");
-        
+
         if(gc.checked)
         {
             ref.value = "Gastos sobre compra";

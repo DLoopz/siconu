@@ -262,6 +262,16 @@
             btn_cancelar.style.display='none';
         }
 
+        if (check4.checked || check5.checked)
+        {
+            //element.style.display='block';
+            btn_cancelar.style.display='block';
+        }else
+        {
+            //element.style.display='none';
+            btn_cancelar.style.display='none';
+        }
+
         if(check1.checked)
         {
             btn_cancelar.style.display='block';

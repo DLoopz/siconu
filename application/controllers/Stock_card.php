@@ -112,6 +112,14 @@ class Stock_card extends CI_Controller {
             $this->form_validation->set_rules('referencia', 'Referencia', 'required');
 
 
+        $ref = $this->input->post("referencia");
+        $unic = $this->model_stock_card->get_unic($id_empresa, $ref);
+        if($unic)
+            $this->form_validation->set_rules('referencia', 'Referencia', 'required|is_unique[tarjeta_almacen.referencia]');
+        else
+            $this->form_validation->set_rules('referencia', 'Referencia', 'required');
+
+
         if($existencia_antes == NULL)
         {
             $this->form_validation->set_rules('cantidad_existencia', 'Cantidad en existencia', 'numeric|min_length[1]|max_length[11]|required');
@@ -770,6 +778,78 @@ class Stock_card extends CI_Controller {
     }
 
     public function cost_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('cost_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == 0)
+            {
+                $this->form_validation->set_message('cost_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function venta_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('venta_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == 0)
+            {
+                $this->form_validation->set_message('venta_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function operation_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('operation_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str == "salida")
+            {
+                $this->form_validation->set_message('operation_check', '%s no debe ser salida cuando aun no hay nada en existencia');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function existencia_check($str)
+    {
+        if($str == NULL)
+        {
+            $this->form_validation->set_message('existencia_check', '%s es un campo obligatorio');
+            return FALSE;
+        }else
+        {
+            if($str != 0)
+            {
+                $this->form_validation->set_message('existencia_check', '%s debe ser 0 cuando existencia es 0');
+                return FALSE;
+            }elseif($str == 0)
+            {
+                $this->form_validation->set_message('existencia_check', '%s debe ser distinto a 0');
+                return FALSE;
+            }else
+                return TRUE;
+        }
+    }
+
+    public function date_check($str)
     {
         if($str == NULL)
         {
