@@ -1,8 +1,7 @@
 <div class="container">
 	<?php
 	setlocale(LC_ALL, 'es_MX');?>
-  
-  
+    
     <form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
       <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
       <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
