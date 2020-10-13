@@ -1,7 +1,5 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-defined('BASEPATH') OR exit('No direct script access allowed');
 $usuario_local = get_current_user();
 //require_once("/home/{$usuario_local}/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
@@ -156,10 +154,7 @@ class Daybook extends CI_Controller {
     }
   }
 
-  
-
-
-//-----------funciones para los registros en los asientos
+  //-----------funciones para los registros en los asientos
   public function register($id_empresa=null, $id_asiento=null,$edit=null)
 	{
     if ($this->session->userdata('empresa') == 1) {
@@ -538,8 +533,6 @@ class Daybook extends CI_Controller {
     
   }
 
-  
-
   //vista de operacion y terminar
   public function edit_register_partial($id_empresa=null,$id_asiento=null,$id_registro=null,$cantidad=null)
   {
@@ -893,6 +886,66 @@ class Daybook extends CI_Controller {
       $dompdf->stream( $titulo_pdf.'.pdf' , array('Attachment' => true));
       
       //*/
+    }
+    else
+    {
+      redirect('');
+    }
+  }
+
+  public function pdf_cuenta()
+  {
+    if ($this->input->post('sendcont'))
+    {
+      //$head = $this->input->post('contpdf');
+      $titulo_pdf = $this->input->post('titulo_pdf');
+      $cont = $this->input->post('contpdf');
+      $id_empresa = $this->input->post('id_empresa');
+
+      $head = "
+        <!DOCTYPE html>
+        <html lang='es'>
+        <head>
+          <title>".$titulo_pdf."</title>
+          <meta charset='utf-8'>
+          <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/bootstrap.min.css'>
+          <script type='text/javascript' src='".base_url()."source/js/jquery-3.3.1.min.js'></script>
+          <script type='text/javascript' src='".base_url()."source/js/bootstrap.min.js'></script>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/css/styles.css'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+          <link rel='stylesheet' type='text/css' href='".base_url()."source/fontello/css/fontello.css'>
+        </head>
+        <body>
+      ";
+
+      $foot = "
+            <footer class='espacio-footer'>
+              <div class='text-center'>
+                <br>
+                Copyright © Derechos Reservados ".date('Y')."  SICONU
+              </div>
+            </footer>
+          </body>
+        </html>
+
+        <script type='text/javascript'>
+          $(window).ready(function(){
+            $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2'); 
+          }
+        </script>
+      ";
+      
+      $contenido = $head.$cont.$foot;
+      echo $contenido;
+
+      /*
+      $dompdf = new Dompdf();
+      $dompdf->loadHtml($contenido);
+      $dompdf->setPaper('A4', 'landscape');
+      $dompdf->render();
+      $dompdf->stream( $titulo_pdf.'.pdf' , array('Attachment' => true));
+      */
     }
     else
     {
