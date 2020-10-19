@@ -103,10 +103,36 @@ class Model_daybook extends CI_Model
     $sql = $this->db->get_where('parcial', $data);
     return $sql->result();
   }
+
+
+
+
   public function insert_register_partial($data)
   {
-    return $this->db->insert('registro_parcial', $data);
+    //aqui 
+    $add = $this->db->insert('registro_parcial', $data);
+    return $add;
   }
+  public function update_register_partial($data)
+  {
+    //aqui
+    //actualizar a 1 los parciales
+    $this->db->where('agregar', 0);
+    $this->db->update('registro_parcial',  array('agregar' => 1 ));
+    //actualizar registro asiento, el debe o el haber con la cantidad total
+    $this->db->where('id_registro', $data['id_registro']);
+    return $this->db->update('registro_asiento', $data);
+
+  }
+  public function cancel_partials($data)
+  {
+    //aqui
+    $this->db->where('agregar <> 1');
+    return $this->db->delete( 'registro_parcial');
+  }
+
+
+
 
   //estado de la empresa
   public function get_status($data)
@@ -146,6 +172,7 @@ class Model_daybook extends CI_Model
   //actulaizar parcial en rp
   public function update_parcial($data)
   {
+    
     $this->db->where('id_parcial', $data['id_parcial']);
     return $this->db->update('registro_parcial', $data);
   }
@@ -153,6 +180,6 @@ class Model_daybook extends CI_Model
   public function delete_parcial($data)
   {
     return $this->db->delete('registro_parcial', $data );
-  }
+  }  
 
 }
