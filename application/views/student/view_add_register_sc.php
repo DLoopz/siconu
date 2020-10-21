@@ -20,8 +20,7 @@
                         </label>
                         <div class="form-group">
                             <!--Cantidad:-->
-                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" val                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
-ue="<?php echo set_value('articulo');?>">
+                            <input id="articulo" type="text" name="articulo" class="form-control" placeholder="Nombre del artículo" value="<?php echo set_value('articulo');?>">
                             <?php echo form_error('articulo'); ?>
                         </div>
                     </div>
