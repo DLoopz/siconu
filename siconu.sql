@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 21-10-2020 a las 18:42:31
+-- Tiempo de generación: 22-10-2020 a las 17:22:46
 -- Versión del servidor: 5.7.31-0ubuntu0.18.04.1
 -- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
@@ -154,7 +154,7 @@ CREATE TABLE `clasificacion_cuenta` (
 
 INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 (1, 'Circulante'),
-(2, 'No Circulante');
+(2, 'No circulante');
 
 -- --------------------------------------------------------
 
@@ -306,7 +306,8 @@ CREATE TABLE `tarjeta_almacen` (
   `saldo` float NOT NULL,
   `terminar` int(1) NOT NULL DEFAULT '0',
   `nombre_articulo` varchar(50) NOT NULL,
-  `tipo_unidad` varchar(50) NOT NULL
+  `tipo_unidad` varchar(50) NOT NULL,
+  `tipo_registro` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -581,12 +582,6 @@ ALTER TABLE `catalogo_usuario`
 ALTER TABLE `registro_asiento`
   ADD CONSTRAINT `registro_asiento_ibfk_1` FOREIGN KEY (`asiento_id`) REFERENCES `asiento` (`id_asiento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_asiento_ibfk_2` FOREIGN KEY (`catalogo_usuario_id`) REFERENCES `catalogo_usuario` (`id_catalogo_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `registro_parcial`
---
-ALTER TABLE `registro_parcial`
-  ADD CONSTRAINT `registro_parcial_ibfk_1` FOREIGN KEY (`registro_id`) REFERENCES `registro_asiento` (`id_registro`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tarjeta_almacen`
