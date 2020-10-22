@@ -178,6 +178,8 @@ class Admin extends CI_Controller
   }
 
   public function eliminar_professor(){
+    $fields = array('usuario_id' => $this->input->post("id_profesor"));
+    $this->model_account->delete_catalog($fields);
     $fields = array('id_usuario' => $this->input->post("id_profesor"));
     $del=$this->model_user->delete_user($fields);
     if($del)
