@@ -124,11 +124,15 @@ class Model_daybook extends CI_Model
     return $this->db->update('registro_asiento', $data);
 
   }
-  public function cancel_partials($data)
+  public function cancel_partials()
   {
     //aqui
+    $this->db->where('parcial = 1 and debe = 0 and haber = 0');
+    $this->db->delete('registro_asiento');
+
     $this->db->where('agregar <> 1');
-    return $this->db->delete( 'registro_parcial');
+    return $this->db->delete('registro_parcial');
+    
   }
 
 

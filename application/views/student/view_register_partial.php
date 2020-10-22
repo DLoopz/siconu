@@ -115,13 +115,6 @@
         <?php echo form_error('operacion'); ?>
       </div>
 
-      <?php 
-      /*
-      <div class="panel-footer text-center">
-        <a href="<?php echo base_url()?>daybook/delet_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $id_registro; ?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
-        <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">  
-      </div>
-      */?>
       <div class="panel-footer text-center">
         <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0">Cancelar</button></a>
         <input type="submit" name="upd_resgistry" value="Terminar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">  

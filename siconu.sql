@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-02-2020 a las 18:11:41
--- Versión del servidor: 5.7.29-0ubuntu0.18.04.1
+-- Tiempo de generación: 21-10-2020 a las 18:42:31
+-- Versión del servidor: 5.7.31-0ubuntu0.18.04.1
 -- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -221,7 +221,7 @@ CREATE TABLE `parcial` (
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` float
+,`cantidad` double
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -280,7 +280,8 @@ CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` float NOT NULL
+  `cantidad` double NOT NULL,
+  `agregar` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
