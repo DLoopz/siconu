@@ -32,7 +32,6 @@
             <?php echo form_error('afectacion') ?>
         </div>
 
-        <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento" style="display: none;">Cancelar</button>
 
         <button id="btn_cancelar" class="btn btn-sm btn-outline-primary my-2 my-sm-0 float-right" onclick="location.reload()" title="Cancelar procedimiento" style="display: none;">Cancelar</button>
 
