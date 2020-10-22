@@ -100,14 +100,14 @@
 					<?php } ?>
 				<?php } ?>
 
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<?php $utilidad=$utilidad-$perdida ?>
-					<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$<?php echo number_format($utilidad,2,'.',',');?></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<?php $utilidad=$utilidad-$perdida ?>
+				<td class="text-right <?php if ($utilidad<0){echo 'text-danger';} ?>">$<?php echo number_format($utilidad,2,'.',',');?></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

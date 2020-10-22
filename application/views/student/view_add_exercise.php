@@ -8,7 +8,7 @@
 			<form method="post"  action="<?php echo base_url();?>student/add_exercise">
 				<div class="form-group">
 					Nombre del Ejercicio *
-					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Ejercicio">
+					<input type="text" name="nombre" class="form-control" placeholder="Nombre del Ejercicio" value="<?php echo set_value('nombre');?>">
 					<?php echo form_error('nombre'); ?>
 				</div>
 				<div class="form-group">
@@ -33,4 +33,4 @@
 			</form>
 		</div>
 	</div>
-</div>	
+</div>

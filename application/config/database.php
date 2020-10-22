@@ -80,6 +80,7 @@ $db['default'] = array(
 	'password' => 'x',
 	'database' => 'siconu',
 	'dbdriver' => 'mysqli',
+	'port' => '3308',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

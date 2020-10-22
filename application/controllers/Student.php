@@ -123,13 +123,13 @@ class Student extends CI_Controller {
   public function edit_exercise($id=null)
   {
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+    $this->form_validation->set_rules('nombre','Nombre del Ejercicio','required|min_length[3]|max_length[50]|callback_alpha_spaces');
     $this->form_validation->set_rules('procedimiento','procedimiento del Ejercicio','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
-    $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
+    $this->form_validation->set_message('alpha_spaces', '%s debe contener solo letras y espacios');
 
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
@@ -198,14 +198,14 @@ class Student extends CI_Controller {
 
   public function alpha_spaces($str)
   {
-    $resultado = intval(preg_replace("/[^0-9]+/", '', $str, 10));
-    if ($resultado)
+    $resultado=preg_match('/^([A-Za-z\sÑñáéíóú.-_0-9])*+$/i', $str);
+    if ($resultado==1)
     {
-      return FALSE;
+      return TRUE;
     }
     else
     {
-      return TRUE;
+      return FALSE;
     }
   }
 }

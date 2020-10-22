@@ -1,3 +1,17 @@
+ <?php
+ 	$equilibrado=0;$de=0;$ha=0;
+ 	foreach ($entries as $entry) {
+	 	foreach ($registers as $r){
+		 	$de=$de+$r->debe;
+		 	$ha=$ha+$r->haber;
+		}
+		if ($de==$ha) {
+			$equilibrado=$equilibrado+1;
+		}else{
+			$equilibrado=$equilibrado-1;
+		}
+	}
+ //echo $equilibrado;?>
 		<div class="container">
 			<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
 			  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
@@ -16,7 +30,7 @@
 				<div class="col-6">
 					<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 				</div>
-				<div class="col-6 text-right">
+				<div class="col-6 text-right" <?php if($de==$ha and $de>0 and $equilibrado==count($entries)){echo '';}else{ echo "hidden";}?> >
 					<a href="" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Ejercicio" data-toggle="modal" data-target="#cerrarEmpresa"><i class="icon-cancel-circled"></i></a>
 				</div>
 			</div>
@@ -41,6 +55,7 @@
 				  <tbody>
 				  	<?php 
 				  		$d=0;$h=0;
+				  		$asiento_equilibrado=0;
 				  		$i=0;$aux=0;foreach ($entries as $entry) {$i++;?>
 					    <?php foreach ($registers as $register){
 					    	if ($entry->id_asiento==$register->asiento_id){ ?>
@@ -74,6 +89,11 @@
 					    		}
 					    	 }
 					     } ?>
+					    <?php if ($d==$h) {
+							    		$asiento_equilibrado=$asiento_equilibrado+1;
+							    	}else{
+							    		$asiento_equilibrado=$asiento_equilibrado-1;
+							    	}?>
 					     <tr>
 					    	<td></td>
 					    	<td></td>
@@ -96,7 +116,7 @@
               	<?php } ?>
 					    </tr>
 				  	<?php } ?>
-				    <tr class="<?php if ($d==$h and $d>0) echo"table-success"; else echo "table-danger";?>">
+				    <tr class="<?php if ($d==$h and $d>0 and $asiento_equilibrado==count($entries)) echo"table-success"; else echo "table-danger";?>">
 				    	<td></td>
 				    	<td></td>
 				    	<td></td>

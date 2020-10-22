@@ -61,7 +61,7 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
@@ -112,7 +112,7 @@ class Daybook extends CI_Controller {
       redirect('daybook/book/'.$id_empresa);
     }
     //se establecen reglas de validacion
-    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]|callback_alpha_spaces');
+    $this->form_validation->set_rules('concepto','Nombre del Asiento','required|min_length[3]|max_length[50]');
     $this->form_validation->set_rules('fecha_asiento','Fecha del Asiento','required');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
@@ -188,7 +188,7 @@ class Daybook extends CI_Controller {
     
 	}
 
-	public function add_register($id_empresa=null,$id_asiento=null)
+	public function add_register($id_empresa=null,$id_asiento=null,$edit=null)
 	{
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','Cuenta del Registro','required');
@@ -202,7 +202,10 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
     //personalizacion de delimitadores
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger text-center">', '</div>');
-
+    if (is_null($edit))
+      $data['edit']=null;
+    else
+      $data['edit']=1;
     $fields = array('id_empresa' => $id_empresa);
     $exercise=$this->model_exercise->get_exercise($fields);
 
@@ -282,7 +285,7 @@ class Daybook extends CI_Controller {
       {
         $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error registro no agregado</div>');
       }
-      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+      redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
     }
   }
 
@@ -710,7 +713,7 @@ class Daybook extends CI_Controller {
   }
 
   //para cancelar en el parcial
-  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null)
+  public function delet_register($id_empresa=null,$id_asiento=null, $id_registro=null,$edit=null)
   {
     $fields = array('id_registro' => $id_registro);
     $del=$this->model_daybook->delete_register($fields);
@@ -725,7 +728,7 @@ class Daybook extends CI_Controller {
       redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/1', 'refresh');
   }
 
-  public function delete_register($id_empresa=null,$id_asiento=null)
+  public function delete_register($id_empresa=null,$id_asiento=null,$edit=null)
   {
     //verificamos si es parcial, entonces borramos los aprciales
     $fields = array('id_registro' => $this->input->post('id_register'));
@@ -747,7 +750,7 @@ class Daybook extends CI_Controller {
     {
       $this->session->set_flashdata('msg','<div class="alert alert-danger text-center"> Error asiento no borado</div>');
     }
-    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento, 'refresh');
+    redirect('daybook/register/'.$id_empresa.'/'.$id_asiento.'/'.$edit, 'refresh');
       
   }
 
@@ -804,7 +807,7 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 7 caracteres');
+    $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 11 caracteres');
     $this->form_validation->set_message('min_length', 'El campo %s no debe de contener menos de 3 caracteres');
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     $this->form_validation->set_message('numeric', '%s debe ser un número');

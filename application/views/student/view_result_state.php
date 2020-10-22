@@ -4,21 +4,21 @@
 	<div class="">
 		<form method="post" action="<?php echo base_url();?>result_state/state/<?php echo $id_empresa;?>">
 			<div class="row">
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-6">
 					<label>Fecha de inicio:</label>
 					<input class="form-control" type="date" name="fecha_inicio" value="<?php echo set_value('fecha_inicio') ?>" min="<?php echo(date('Y')-1) ?>-01-01" max="<?php echo(date('Y-m-d')) ?>">
 					<?php echo form_error('fecha_inicio'); ?>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-6">
 					<label>Fecha de fin:</label>
 					<input class="form-control" type="date" name="fecha_fin" value="<?php echo set_value('fecha_fin') ?>" min="<?php echo(date('Y')-1) ?>-01-01" max="<?php echo(date('Y-m-d')) ?>">
 					<?php echo form_error('fecha_fin'); ?>
 				</div>
-				<div class="form-group col-md-4">
+				<!--div class="form-group col-md-4">
 					<label>Porcentaje de ISR:</label>
 					<input class="form-control" type="text" name="isr" value="<?php echo set_value('isr') ?>">
 					<?php echo form_error('isr'); ?>
-				</div>
+				</div-->
 			</div>
 			<div class="offset-4 col-4">
 				<input class="btn btn-outline-success my-2 my-sm-0 margin_left_btn" type="submit" name="submit_generar" value="Generar">

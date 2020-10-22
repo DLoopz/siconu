@@ -1,8 +1,8 @@
 <div class="container col-md-6">
 <nav class="nav-fill">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Registro Normal</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Registro Parcial</a>
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" onclick="reset_forms()">Registro Normal</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="reset_forms()">Registro Parcial</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -10,7 +10,7 @@
     <div class="container">
       <h3 class="text-center">Registro del Asiento</h3>
       <hr class="line_sep">
-      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+      <form name="form_register" id="normal" method="post" action="<?php echo base_url();?>daybook/add_register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $edit;?>">
         <?php if ($accounts==null) { ?>
           <div class="form-check alert-warning text-center">
             <br>
@@ -132,6 +132,19 @@
 </div>
 <br>
 <script type="text/javascript">
+    function reset_forms() {
+      //reseteo cuenta normal
+      document.getElementById('parcial').reset();
+      document.getElementById('clasificacion_cuenta').disabled=true;
+      document.getElementById('cuenta').disabled=true;
+
+
+      // reseteo cuenta parciales
+      document.getElementById('normal').reset();
+      document.getElementById('clasificacion_cuenta_p').disabled=true;
+      document.getElementById('cuenta_p').disabled=true;
+    }
+
   function activeClasification(){
     if (document.getElementById('tipo_cuenta').value>2) {
       document.getElementById('clasificacion_cuenta').disabled=true;
