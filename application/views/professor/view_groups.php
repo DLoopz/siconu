@@ -27,13 +27,13 @@
           <?php foreach ($groups as $group) {?>
           <tr >
             <td><?php echo $group->grupo ?></td>
-            <td colspan="2">
+            <td colspan="2" class="text-center">
               <!--EDITAR-->
-              <a class="btn btn-outline-success my-2 my-sm-0 offset-2" href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil"></i></em></strong></a>
+              <a class="btn btn-outline-success my-2 my-sm-0 " href="<?php echo base_url() ?>professor/edit_group/<?php echo $group->grupo_id;?>" title="Editar Grupo"><strong><em><i class="icon-pencil"></i></em></strong></a>
               <!--ELIMINAR-->
-               <a class="btn btn-outline-danger offset-1 " href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
+               <a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#mi_modal" onclick="eliminar(<?php echo $group->grupo_id;?>)" title="Eliminar Grupo"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
               <!--VER-->
-              <a class="btn btn-outline-info my-2 my-sm-0 offset-1" href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos del Grupo"><strong><em><i class="icon-eye"></i></em></strong></a>
+              <a class="btn btn-outline-info my-2 my-sm-0 margin_left" href="<?php echo base_url() ?>professor/show_students/<?php echo $group->grupo_id;?>" title="Ver Alumnos del Grupo"><strong><em><i class="icon-eye"></i></em></strong></a>
             </td>
           </tr>
           <?php } ?>

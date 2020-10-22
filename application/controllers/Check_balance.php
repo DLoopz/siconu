@@ -18,6 +18,8 @@ class Check_balance extends CI_Controller
   
 	public function check($id_empresa=null)
 	{
+    $fields = array('empresa_id' => $id_empresa );
+    $data['entries']=$this->model_daybook->get_entries($fields);
 		$fields = array('grupo_id' => $this->session->userdata('grupo'));
     $data['accounts']=$this->model_account->get_catalog_student($fields);
 		$fields = array('empresa_id' => $id_empresa );

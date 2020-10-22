@@ -13,7 +13,7 @@
 				</div>
 				<div class="form-group">
           <label>Seleccione la fecha del Asiento *</label>
-          <input type="date" name="fecha_asiento" class="form-control" value="<?php echo set_value('fecha_asiento');?>">
+          <input type="date" name="fecha_asiento" class="form-control" value="<?php echo set_value('fecha_asiento');?>" min="<?php echo(date('Y')-1) ?>-01-01" max="<?php echo(date('Y-m-d')) ?>">
           <?php echo form_error('fecha_asiento'); ?>
         </div>
         <div class="form-check alert-warning text-center">
@@ -34,4 +34,4 @@
 			</form>
 		</div>
 	</div>
-</div>		
+</div>

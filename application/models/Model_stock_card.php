@@ -9,12 +9,46 @@ class Model_stock_card extends CI_Model
     {
         return $this->db->insert('tarjeta_almacen', $data);
     }
+
+    public function update_ta($data, $id)
+    {
+        $this->db->where(['id_tarjeta' => $id]);
+        $update_data = $this->db->update('tarjeta_almacen', $data);
+        return $update_data;
+    }
+
     public function get_last_id($data)
     {
         $this->db->select_max('id_tarjeta','id');
         $this->db->from('tarjeta_almacen');
         $this->db->where('empresa_id',$data['empresa_id']);
         $sql=$this->db->get();
+        return $sql->row();
+    }
+
+    public function get_penultimate_id($id_empresa)
+    {
+        $sql = $this->db->query("SELECT id_tarjeta FROM tarjeta_almacen WHERE empresa_id = $id_empresa ORDER BY id_tarjeta DESC LIMIT 1, 1");
+        return $sql->row();
+    }
+
+    public function get_unic($id_exercise, $ref)
+    {
+        //$sql = $this->db->query("SELECT referencia AS unic FROM tarjeta_almacen WHERE empresa_id = $id_exercise");
+        /*$sql = $this->db->query("SELECT referencia AS unic FROM tarjeta_almacen WHERE (empresa_id = $id_exercise AND tarjeta_almacen.referencia = $ref)");
+        return $sql->result();*/
+
+        $this->db->select('referencia');
+        $this->db->from('tarjeta_almacen');
+        $this->db->where('empresa_id',$id_exercise);
+        $this->db->where('referencia',$ref);
+        $sql=$this->db->get();
+        return $sql->row();
+    }
+
+    public function get_total($id_empresa)
+    {
+        $sql = $this->db->query("SELECT COUNT(*) AS total FROM tarjeta_almacen WHERE empresa_id = $id_empresa");
         return $sql->row();
     }
 
@@ -44,21 +78,22 @@ class Model_stock_card extends CI_Model
         return $sql->result();
     }
 
-    public function get_sc($id_empresa){
+    public function get_sc($id_empresa)
+    {
         $sql = $this->db->query("SELECT * FROM tarjeta_almacen WHERE tarjeta_almacen.empresa_id  = $id_empresa");
         return $sql->result();
     }
 
-    public function get_sum_debe()
+    public function get_sum_debe($id_exercise)
     {
-        $sql = "SELECT sum(debe) as debe FROM tarjeta_almacen";
+        $sql = "SELECT sum(debe) as debe FROM tarjeta_almacen WHERE empresa_id = $id_exercise";
         $result = $this->db->query($sql);
         return $result->row()->debe;
     }
 
-    public function get_sum_haber()
+    public function get_sum_haber($id_empresa)
     {
-        $sql = "SELECT sum(haber) as haber FROM tarjeta_almacen";
+        $sql = "SELECT sum(haber) as haber FROM tarjeta_almacen WHERE empresa_id = $id_empresa";
         $result = $this->db->query($sql);
         return $result->row()->haber;
     }
@@ -107,5 +142,11 @@ class Model_stock_card extends CI_Model
         $sql = $this->db->query("SELECT saldo FROM tarjeta_almacen WHERE id_tarjeta = $id_tarjeta");
         $result = $this->db->query($sql);
         return $result->row()->saldo;
+    }
+
+    public function get_info($data)
+    {
+        $sql = $this->db->get_where('tarjeta_almacen', $data);
+        return $sql->row();
     }
 }

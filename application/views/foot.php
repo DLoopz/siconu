@@ -14,15 +14,21 @@
 
   $(window).ready(function(){
 
-  	habilitar();
-
     <?php //if (isset($stock_card)) {echo "habilitar();";} ?>
 
-    <?php if(isset($modal)) echo "$('#".$modal."').modal('show')";?>    
+
+    <?php if(isset($modal)) echo "$('#".$modal."').modal('show');";?>
+
+    console.log('cola1');
+
 
     $('table.table.table-hover.table-responsive-md.col-md-5:nth-child(2n)').addClass('offset-2');
 
+    console.log('cola');
+
   });
+
+  habilitar();
 
 </script>
 
