@@ -42,18 +42,24 @@
 		            	<a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
 		          <?php else: ?>
 		          	<?php //si tienen parciales ?>
-		          	<a class="btn btn-outline-secondary" href="<?php echo base_url();?>daybook/edit_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>/<?php echo $register->id_registro; ?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
+
+		          	<?php $total_parciales = ($register->debe > 0)? $register->debe : $register->haber; ?>
+		          	
+		          	<a class="btn btn-outline-secondary" href="<?php echo base_url();?>daybook/edit_register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>/<?php echo $register->id_registro;?>/<?php echo $total_parciales;?>" title="Editar Registro"><strong><em><i class="icon-edit"></i></em></strong></a>
 
 				        	  	<!-- eliminar asiento -->
 				        	  	<a class="btn btn-outline-danger margin_left" href="" data-toggle="modal" data-target="#modal_del_register" onclick="eliminar(<?php echo $register->id_registro;?>)" title="Eliminar Registro"><strong><em><i class="icon-trash-empty"></i></em></strong></a>
 	          	<?php endif ?>
             </td>
 	        </tr>
+
+
 					<?php foreach ($partials as $partial){
 	      		if ($register->id_registro==$partial->registro_id){?>
 
 	      			<?php //mostrar cantidades parciales ?>
 	      			<tr class="table-secondary">
+	      				
       				  <td><?php echo $partial->concepto;?></td>
     				    <td class="text-right">$<?php echo number_format($partial->cantidad,2,'.',',');?></td>
   				      <td>

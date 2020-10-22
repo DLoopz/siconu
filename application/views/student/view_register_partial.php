@@ -36,7 +36,7 @@
                       Concepto *
                       <input class="form-control" type="text" name="concepto" value="<?php echo set_value('concepto');?>">
                       <?php echo form_error('concepto') ?>
-                    </div>
+                  </div>
                 <?php } ?>
                   <div class="form-group">
                       Cantidad *
@@ -44,7 +44,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                      <input type="text" name="cantidad" class="form-control" placeholder="0.00">
+                      <input class="form-control" type="text" name="cantidad" value="<?php echo set_value('cantidad');?>" placeholder="0.00">
                     </div>
                     <?php echo form_error('cantidad') ?>
                   </div>
@@ -158,3 +158,5 @@
         $('#eliminar').val(id);
     }
 </script>
+
+

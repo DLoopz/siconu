@@ -17,6 +17,7 @@
 
 $(window).ready(function(){
 
+
 	$("#nav-profile-tab").click(function(){
 		$("form").attr({"action":"<?php echo base_url();?>daybook/pdf_cuenta"});
 	});
@@ -54,7 +55,7 @@ $(window).ready(function(){
 		  	$('table tr th:last-child, tbody tr td:last-child').toggle();
 	  	}
 
-	  	
+	  	//para formato de cuenta
 	  	if (titulo_pdf == 'Balance General' && $("#nav-profile").hasClass('active'))
 	  	{
   			var tablas = '';
@@ -88,6 +89,8 @@ $(window).ready(function(){
 
 
 	  contpdf = tablas;
+
+	  //alert($("#contpdf").val().trim());
 	  $("#contpdf").val(String(contpdf));
 	  $("#titulo_pdf").val(String(titulo_pdf));
 	  //console.log('');
