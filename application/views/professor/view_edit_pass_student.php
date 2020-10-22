@@ -15,14 +15,7 @@
         <input class="" name="password" id="password" type="password" value="qwertyuiop"autofocus >
         <?php echo form_error('password');?>
       </div>
-      <!--div class="form-group invisible">
-        <label>Confirmar Nueva Contraseña *</label>
-        <input class="form-control" name="password_c" id="password_c" type="password" autofocus >
-        <?php echo form_error('password_c');?>
-      </div>
-      <div class="text-danger invisible">
-        <?php echo form_label('* Campos Obligatorios')?><br>
-      </div-->
+      
       <hr>
 
       <div class="panel-footer text-center">

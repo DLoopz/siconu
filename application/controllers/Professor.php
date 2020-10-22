@@ -303,35 +303,70 @@ class Professor extends CI_Controller {
       {
         $filename = $_FILES['file']['tmp_name'];
         $handle = fopen($filename, "r");
-
+        $f_errors = 0; //mat repetida
+        $t_errors = 0; //!= de 10 digitos
         while( ($data = fgetcsv($handle, 200, '"') ) !== FALSE )
         {
-          $fields = array(
-            'matricula' => $data[0],
-            'apellido_paterno' => $data[1],
-            'apellido_materno' => $data[2],
-            'nombre' => $data[3],
-            'contrasenia' =>  md5($data[0])
-          );
+          if ($data[0][0] != '0' and strlen($data[0])==9) {
+            $data0 = '0'.$data[0];
+          }
+          else
+          {
+            $data0 = $data[0];
+          }
 
-          $this->model_user->insert_user($fields);
-          $std=$this->model_user->last_user();
-          $fields = array
-          (
-            'usuario_id' => $std->id_usuario,
-            'grupo_id' => $id_grupo
-          );
-          $add=$this->model_user->insert_std($fields);
+          //esta el Alumno
+          if (strlen($data0)==10) {
+            //se agrega
+            $fields = array(
+              'matricula' => $data0
+            );
+            $existe = $this->model_user->get_user($fields);            
+
+            if (!$existe) {
+              //preparar el Alumno
+              $fields = array(
+                'matricula' => $data0,
+                'apellido_paterno' => $data[1],
+                'apellido_materno' => $data[2],
+                'nombre' => $data[3],
+                'contrasenia' =>  md5($data0)
+              );
+              $this->model_user->insert_user($fields);
+              //agregarlo al grupo
+              $std = $this->model_user->last_user();
+              $fields = array
+              (
+                'usuario_id' => $std->id_usuario,
+                'grupo_id' => $id_grupo
+              );
+              $add = $this->model_user->insert_std($fields);
+            }
+            else
+            {
+              $f_errors++;
+            }
+          }
+          else
+            $t_errors++;
         }
         fclose($handle);
 
-        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Alumnos agregados correctamente<br>La contraseña del alumno es su matrícula</div>');
+        $msg1 = (isset($add)) ? "Alumnos agregados correctamente<br>La contraseña del alumno es su matrícula<br>" : "" ;
+        $msg2 = ($f_errors) ? "Hay $f_errors alumno(s) con matricula ya registrada o repetida<br>" : '' ;
+        $msg3 = ($t_errors) ? "Hay $t_errors alumno(s) con error en la matricula<br>" : "" ;
+        //$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">'.$msg1.'</div>') ;
+
         
+        $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">'.$msg2.$msg3.$msg1.'</div>') ;
+        
+        //echo "<pre>".print_r($ver_grupo,1)."</pre>";
         redirect('professor/show_students/'.$id_grupo);
+
       }
       else
       {
-        $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error alumno no agregado</div>');
+        $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error alumno(s) no agregado(s), la extensión del archivo es incorrecta</div>');
         redirect('professor/show_students/'.$id_grupo);
       }
     }

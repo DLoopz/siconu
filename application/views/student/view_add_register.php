@@ -219,8 +219,14 @@
 </script>
 
 <script type="text/javascript">
+
+  $(window).ready(function(){
+    $("#tipo_cuenta_p").find('option[value=4]').remove();
+    $("#tipo_cuenta_p").find('option[value=5]').remove();
+  });
+
   function activeClasificationP(){
-    if (document.getElementById('tipo_cuenta_p').value>2) {
+    if (document.getElementById('tipo_cuenta_p').value > 2 ) {
       document.getElementById('clasificacion_cuenta_p').disabled=true;
       document.getElementById('clasificacion_cuenta_p').options[0].selected=true;
       document.getElementById('cuenta_p').disabled=false;

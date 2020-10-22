@@ -69,27 +69,5 @@
     </div>
   </div>
 
-  <!--div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <div class="container">
-      <h3 class="text-center">Editar Registro Parcial</h3>
-      <hr class="line_sep">
-      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
-        <div class="form-group">
-          Cuenta
-          <select class="form-control" name="cuenta">
-            <?php foreach ($accounts as $account) {?>
-              <option value="<?php echo $account->id_catalogo_usuario;?>"><?php echo $account->nombre;?></option>
-            <?php } ?>
-          </select>
-          <?php echo form_error('cuenta') ?>
-        </div>
-        <div class="panel-footer text-center">
-          <a href="<?php echo base_url()?>daybook/register/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>"> <button type="button" class="btn btn-outline-primary my-2 my-sm-0" name="cancelar">Cancelar</button></a>
-          <input type="submit" name="add_resgistry" value="Continuar" class="btn btn-outline-success my-2 my-sm-0 margin_left_btn">
-        
-        </div>
-      </form>
-    </div>
-  </div -->
 </div>
 </div>

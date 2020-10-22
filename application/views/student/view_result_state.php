@@ -27,16 +27,20 @@
 		</form>
 	</div>
 	<hr>
-<?php if (isset($registers)) {?>	
-	<div class="table-responsive">
-		<?php //si es aqui? ?>
-		<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
-		  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
-		  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
-		  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
-		  <input type="text" id="contpdf" name="contpdf" class="invisible">
-		</form>
 
+
+
+<?php if (isset($registers)) {?>	
+
+	<!-- si es aqui normal		-->
+	<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
+	  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
+	  <input type="text" id="id_empresa" name="id_empresa" value="<?php if(isset($id_empresa)) echo $id_empresa;?>" class="invisible">
+	  <input type="text" id="titulo_pdf" name="titulo_pdf" value="<?php if(isset($titulo_pdf)) echo $titulo_pdf;?>" class="invisible">
+	  <input type="text" id="contpdf" name="contpdf" class="invisible">
+	</form>
+
+	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
