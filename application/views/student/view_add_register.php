@@ -81,10 +81,18 @@
     <div class="container">
       <h3 class="text-center"> Agregar Registros Parciales al Asiento</h3>
       <hr class="line_sep">
-      <form name="form_register" id="parcial" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+        <?php if ($accounts==null) { ?>
+          <div class="form-check alert-warning text-center">
+            <br>
+            El Catalogo de cuentas no ha sido dado de alta, avisa a tu Profesor(a). <br>
+            <br>
+          </div>
+          <hr>
+        <?php } ?>
          <div class="form-group">
           Tipo de cuenta *
-          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasificationP()">
+          <select class="form-control" name="tipo_cuenta" id="tipo_cuenta_p" onchange="activeClasificationP()" <?php if($accounts==null){echo "disabled";} ?>>
             <option value="0" selected disabled>Seleccione tipo de cuenta</option>
             <?php foreach ($types as $type) {?>
               <option value="<?php echo $type->id_tipo;?>"><?php echo $type->nombre;?></option>
@@ -107,6 +115,7 @@
           </select>
           <?php echo form_error('cuenta') ?>
         </div>
+
          <div class="text-danger">
           <?php echo form_label('* Campos Obligatorios')?><br>
         </div>
