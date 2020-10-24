@@ -81,7 +81,7 @@
     <div class="container">
       <h3 class="text-center"> Agregar Registros Parciales al Asiento</h3>
       <hr class="line_sep">
-      <form name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
+      <form id="parcial" name="form_register" method="post" action="<?php echo base_url();?>daybook/register_partial/<?php echo $id_empresa;?>/<?php echo $id_asiento;?>">
         <?php if ($accounts==null) { ?>
           <div class="form-check alert-warning text-center">
             <br>
@@ -221,8 +221,8 @@
 <script type="text/javascript">
 
   $(window).ready(function(){
-    $("#tipo_cuenta_p").find('option[value=4]').remove();
-    $("#tipo_cuenta_p").find('option[value=5]').remove();
+    //$("#tipo_cuenta_p").find('option[value=4]').remove();
+    //$("#tipo_cuenta_p").find('option[value=5]').remove();
   });
 
   function activeClasificationP(){
