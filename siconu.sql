@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 22-10-2020 a las 17:22:46
+-- Tiempo de generación: 24-10-2020 a las 01:30:13
 -- Versión del servidor: 5.7.31-0ubuntu0.18.04.1
 -- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
@@ -577,11 +577,23 @@ ALTER TABLE `catalogo_usuario`
   ADD CONSTRAINT `catalogo_usuario_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `registro_asiento`
 --
 ALTER TABLE `registro_asiento`
   ADD CONSTRAINT `registro_asiento_ibfk_1` FOREIGN KEY (`asiento_id`) REFERENCES `asiento` (`id_asiento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_asiento_ibfk_2` FOREIGN KEY (`catalogo_usuario_id`) REFERENCES `catalogo_usuario` (`id_catalogo_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `registro_parcial`
+--
+ALTER TABLE `registro_parcial`
+  ADD CONSTRAINT `registro_parcial_ibfk2` FOREIGN KEY (`registro_id`) REFERENCES `registro_asiento` (`id_registro`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tarjeta_almacen`
