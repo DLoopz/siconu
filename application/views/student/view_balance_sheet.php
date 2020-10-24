@@ -59,7 +59,7 @@
                   <tr>
                     <td><?php echo $account->nombre; ?></td>
                     <td colspan="1">   </td>
-                    <td>$<?php if ($type->id_tipo == 1): ?>
+                    <td class="text-right">$<?php if ($type->id_tipo == 1): ?>
                       <?php echo number_format(($debe-$haber),2,'.',','); $total_clas=$total_clas+($debe-$haber);?>
                       <?php else: ?>
                         <?php echo number_format(($haber-$debe),2,'.',','); $total_clas=$total_clas+($haber-$debe);?>
@@ -123,20 +123,20 @@
                   <?php if ($cuenta): ?>
                     <div class="row td-b">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$<?php echo number_format(($debe-$haber),2,'.',','); $total_clas=$total_clas+($debe-$haber)?></div>
+                      <div class="col-6 text-right">$<?php echo number_format(($debe-$haber),2,'.',','); $total_clas=$total_clas+($debe-$haber)?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
                 <div class="row td-b font-italic font-weight-light">
                   <div class="col-4">Total de <?php echo $type->nombre; ?>s <?php echo $clasification->nombre; ?>s</div>
                   <div class="col-4"></div>
-                  <div class="col-4 text-right text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
+                  <div class="col-4 text-right">$<?php echo number_format($total_clas,2,'.',','); $total_tipo[1]=$total_tipo[1]+$total_clas;?></div>
                 </div>
               <?php endforeach ?>
               <div class="row td-b font-weight-bold">
                 <div class="col-4">Total <?php echo $type->nombre; ?>s</div>
                 <div class="col-4"></div>
-                <div class="col-4 text-right text-right">$<?php echo number_format($total_tipo[1],2,'.',','); ?></div>
+                <div class="col-4 text-right">$<?php echo number_format($total_tipo[1],2,'.',','); ?></div>
               </div>
             <?php endif ?>
           <?php endforeach ?>
@@ -163,7 +163,7 @@
                   <?php if ($cuenta): ?>
                     <div class="row td">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$<?php echo number_format(($haber-$debe),2,'.',','); $total_clas=$total_clas+($haber-$debe);?></div>
+                      <div class="col-6 text-right">$<?php echo number_format(($haber-$debe),2,'.',','); $total_clas=$total_clas+($haber-$debe);?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
@@ -195,7 +195,7 @@
                   <?php if ($cuenta): ?>
                     <div class="row td">
                       <div class="col-6"><?php echo $cuenta; ?></div>
-                      <div class="col-6">$<?php echo number_format(($haber-$debe),2,'.',','); $total_tipo[3]=$total_tipo[3]+($haber-$debe)?></div>
+                      <div class="col-6 text-right">$<?php echo number_format(($haber-$debe),2,'.',','); $total_tipo[3]=$total_tipo[3]+($haber-$debe)?></div>
                     </div>
                   <?php endif ?>
                 <?php endforeach ?>
