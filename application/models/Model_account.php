@@ -38,11 +38,14 @@ class Model_account extends CI_Model
       ON ca.id_catalogo_usuario = ra.catalogo_usuario_id and ca.usuario_id = {$data['usuario_id']}
     ");
     if ($sql->num_rows()>0) {
+      //esta usado
       return false;
     }
     else
     {
-      return $this->db->delete( 'catalogo_usuario' , $data );
+      //si no es usado
+      $this->db->delete( 'catalogo_usuario' , $data );
+      return true;
     }
   }
 

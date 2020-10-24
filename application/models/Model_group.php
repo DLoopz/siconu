@@ -55,5 +55,22 @@ class Model_group extends CI_Model
     return $sql;
   }
 
+  public function delete_group_al($data)
+  {
+    $sql = $this->db->get_where('usuario_grupo', $data);
+    $us_en_gr = $sql->result();
+    foreach ($us_en_gr as $u) {
+      $f = array('id_usuario' => $u->usuario_id, 'rol' => 3 );
+      $sql = $this->db->delete('usuario', $f);
+    }
+    $f = array('id_grupo' => $data['grupo_id'] );
+    return $sql = $this->db->delete('grupo', $f);
+  }
+
+  public function sacar_grupos($data)
+  {
+    $sql = $this->db->get_where('usuario_grupo', $data);
+    return $sql->result();
+  }
 
 }
