@@ -14,14 +14,6 @@ class Result_state extends CI_Controller {
       redirect('');
     }
   }
-  
-	public function index()
-	{
-		/*$data['title']="Rayado Diario";
-		$this->load->view('head',$data);
-		$this->load->view('student/view_daybook');
-		$this->load->view('foot');*/
-	}
 
 	public function state($id_empresa=null)
 	{
@@ -45,6 +37,7 @@ class Result_state extends CI_Controller {
 				$this->load->view('navbar');
 		    $this->load->view('student/nabvar_options');
 				$this->load->view('student/view_result_state');
+				$this->load->view('pdf');
 				$this->load->view('foot');
 	    }else{
 				$data['id_empresa']=$id_empresa;				

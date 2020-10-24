@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-02-2020 a las 18:11:41
--- Versión del servidor: 5.7.29-0ubuntu0.18.04.1
+-- Tiempo de generación: 22-10-2020 a las 17:22:46
+-- Versión del servidor: 5.7.31-0ubuntu0.18.04.1
 -- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -154,7 +154,7 @@ CREATE TABLE `clasificacion_cuenta` (
 
 INSERT INTO `clasificacion_cuenta` (`id_clasificacion`, `nombre`) VALUES
 (1, 'Circulante'),
-(2, 'No Circulante');
+(2, 'No circulante');
 
 -- --------------------------------------------------------
 
@@ -221,7 +221,7 @@ CREATE TABLE `parcial` (
 ,`id_parcial` int(11)
 ,`registro_id` int(11)
 ,`concepto` varchar(50)
-,`cantidad` float
+,`cantidad` double
 ,`id_asiento` int(11)
 ,`empresa_id` int(11)
 ,`descripcion` varchar(50)
@@ -280,7 +280,8 @@ CREATE TABLE `registro_parcial` (
   `id_parcial` int(11) NOT NULL,
   `registro_id` int(11) NOT NULL,
   `concepto` varchar(50) NOT NULL,
-  `cantidad` float NOT NULL
+  `cantidad` double NOT NULL,
+  `agregar` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -305,7 +306,8 @@ CREATE TABLE `tarjeta_almacen` (
   `saldo` float NOT NULL,
   `terminar` int(1) NOT NULL DEFAULT '0',
   `nombre_articulo` varchar(50) NOT NULL,
-  `tipo_unidad` varchar(50) NOT NULL
+  `tipo_unidad` varchar(50) NOT NULL,
+  `tipo_registro` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -580,12 +582,6 @@ ALTER TABLE `catalogo_usuario`
 ALTER TABLE `registro_asiento`
   ADD CONSTRAINT `registro_asiento_ibfk_1` FOREIGN KEY (`asiento_id`) REFERENCES `asiento` (`id_asiento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `registro_asiento_ibfk_2` FOREIGN KEY (`catalogo_usuario_id`) REFERENCES `catalogo_usuario` (`id_catalogo_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `registro_parcial`
---
-ALTER TABLE `registro_parcial`
-  ADD CONSTRAINT `registro_parcial_ibfk_1` FOREIGN KEY (`registro_id`) REFERENCES `registro_asiento` (`id_registro`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tarjeta_almacen`

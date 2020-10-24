@@ -11,7 +11,7 @@
 			$equilibrado=$equilibrado-1;
 		}
 	}
- echo $equilibrado;?>
+ //echo $equilibrado;?>
 		<div class="container">
 			<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
 			  <button type="submit" id="sendcont" name="sendcont" class="btn btn-outline-primary btn-pdf" title="Generar PDF" value="1"><i class="icon-file-pdf"></i></button>
