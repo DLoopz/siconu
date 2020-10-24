@@ -131,7 +131,28 @@ class Model_daybook extends CI_Model
     $this->db->delete('registro_asiento');
 
     $this->db->where('agregar <> 1');
-    return $this->db->delete('registro_parcial');
+    $this->db->delete('registro_parcial');
+
+    //revisar que cada cuenta en registr_asiento con parcial = 1
+    // tenga registros parciales en registro_parcial
+
+    $con_parcial = $this->db->where('parcial = 1');
+    $sql = $this->db->get('registro_asiento');
+
+    //echo '<pre>'.print_r($sql->result(),1).'</pre>';
+
+    foreach ($sql->result() as $r) {
+      $f = array('registro_id' => $r->id_registro );
+      
+      $sql = $this->db->get_where('registro_parcial', $f);
+
+      if (!$sql->num_rows()) {
+        $f = array('id_registro' =>  $r->id_registro);
+        $this->db->delete('registro_asiento', $f);
+      }
+    }
+
+    
     
   }
 
