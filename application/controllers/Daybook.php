@@ -196,7 +196,7 @@ class Daybook extends CI_Controller {
     $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
-    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('max_length', '%s no debe contener más de 11 caracteres');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
