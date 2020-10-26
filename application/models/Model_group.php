@@ -44,15 +44,17 @@ class Model_group extends CI_Model
   }
 
   //eliminar grupos
-  public function delete_groups()
+  public function delete_groups($data)
   {
-    $this->db->where('id_grupo>0');
-    $sql=$this->db->delete('grupo');
-
-    $this->db->where('rol=3');
-    $sql=$this->db->delete('usuario');
-
-    return $sql;
+    $sql = $this->db->get_where('usuario_grupo', $data);
+    $sus_grupos = $sql->result();
+    
+    foreach ($sus_grupos as $sg) {
+      
+      $data = array('grupo_id' => $sg->grupo_id );
+      $this->model_group->delete_group_al($data);
+    }
+    return true;
   }
 
   public function delete_group_al($data)

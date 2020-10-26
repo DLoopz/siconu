@@ -44,9 +44,9 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                      <input class="form-control" type="text" name="cantidad" value="<?php echo set_value('cantidad');?>" placeholder="0.00">
+                      <input class="form-control" type="text" name="cantidad" value="<?php //echo set_value('cantidad'); ?>" placeholder="0.00">
                     </div>
-                    <?php echo form_error('cantidad') ?>
+                    <?php echo form_error('cantidad'); ?>
                   </div>
                   <div class="text-danger">
                     <?php echo form_label('* Campos Obligatorios')?><br>

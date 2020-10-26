@@ -385,12 +385,12 @@ class Daybook extends CI_Controller {
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
-    $this->form_validation->set_rules('cantidad','Cantidad','required|numeric|callback_notCero');
+    $this->form_validation->set_rules('cantidad','Cantidad','required|trim|numeric|callback_notCero|max_length[11]');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', '%s es un campo obligatorio');
     $this->form_validation->set_message('numeric', '%s debe ser numérico');
     $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
-    $this->form_validation->set_message('max_length', '%s no debe contener más de 50 caracteres');
+    $this->form_validation->set_message('max_length', '%s no debe contener más caracteres para cantidad 11 y concepto 50');
     $this->form_validation->set_message('min_length', '%s no debe contener menos de 3 caracteres');
     $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
     //personalizacion de delimitadores
@@ -455,8 +455,9 @@ class Daybook extends CI_Controller {
   {
 
     //if (!is_null($cantidad)){
-      $this->form_validation->set_rules('concepto','Concepto','required|alpha_numeric_spaces');
-      $this->form_validation->set_rules('cantidad','Cantidad','required|callback_notCero');
+      
+      $this->form_validation->set_rules('concepto','Concepto','required|min_length[3]|max_length[50]|alpha_numeric_spaces');
+      $this->form_validation->set_rules('cantidad','Cantidad','required|trim|numeric|callback_notCero|max_length[11]');
       $this->form_validation->set_message('required', '%s es un campo obligatorio');
       $this->form_validation->set_message('notCero', '%s debe ser mayor a 0');
       $this->form_validation->set_message('alpha_numeric_spaces', '%s no debe contener caracteres especiales');
@@ -598,14 +599,14 @@ class Daybook extends CI_Controller {
           if ($this->input->post('operacion')=='cargo') {
             $fields = array(
               'id_registro' => $id_registro,
-              'debe' => $cantidad,
+              'debe' => trim($cantidad),
               'haber' => 0
             );
           }
           else{
             $fields = array(
               'id_registro' => $id_registro,
-              'haber' => $cantidad,
+              'haber' => trim($cantidad),
               'debe' => 0
             );
           }
@@ -804,7 +805,7 @@ class Daybook extends CI_Controller {
   {
     //se establecen reglas de validacion
     $this->form_validation->set_rules('cuenta','cuenta del registro','required');
-    $this->form_validation->set_rules('cantidad','Cantidad','numeric|required|min_length[1]|max_length[11]|callback_notCero');
+    $this->form_validation->set_rules('cantidad','Cantidad','trim|numeric|required|min_length[1]|max_length[11]|callback_notCero');
     //personalizacion de reglas de validacion
     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
     $this->form_validation->set_message('max_length', 'El campo %s no debe de contener más de 11 caracteres');
@@ -857,7 +858,7 @@ class Daybook extends CI_Controller {
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
           'cuenta' => $accounts[$a]->nombre,
-          'debe' => $this->input->post('cantidad'),
+          'debe' => trim($this->input->post('cantidad')),
           'haber' => 0
         );
       }
@@ -869,7 +870,7 @@ class Daybook extends CI_Controller {
           'folio'      => $folio,
           'catalogo_usuario_id' =>$id,
           'cuenta' => $accounts[$a]->nombre,
-          'haber' => $this->input->post('cantidad'),
+          'haber' => trim($this->input->post('cantidad')),
           'debe' => 0,
         );
       }
