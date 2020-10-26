@@ -200,17 +200,19 @@ class Professor extends CI_Controller {
     redirect('professor', 'refresh');
   }
 
-  public function del_groups($group=NULL)
+  public function del_groups()
   {
     if ($this->input->post('del_groups')) {
-
-      $del = $this->model_group->delete_groups();
+      $fields = array('usuario_id' => $this->session->userdata('id_user'));
+      $del = $this->model_group->delete_groups($fields);
+      
       if($del){
         $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupos eliminados correctamente</div>');
       }else{
         $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center"> Error grupo no eliminado </div>');
       }
       redirect('professor');
+      
     }
     redirect('professor');
   }
