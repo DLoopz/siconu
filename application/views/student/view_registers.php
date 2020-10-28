@@ -1,3 +1,9 @@
+<?php 
+function dos_decimales($valor) {
+   $float_redondeado=round($valor * 100) / 100;
+   return $float_redondeado;
+}
+?>
 <div class="container col-md-10">
 	<h3 class="text-center">Editar Registros del Asiento</h3>
 	<hr class="line_sep">
@@ -71,7 +77,7 @@
     		<?php }
 	      	} ?>
 	      <?php } ?>
-	      <tr class="<?php if($d==$h and $d!=0) echo "table-success"; else echo "table-danger";?>">
+	      <tr class="<?php if(dos_decimales($d)==dos_decimales($h) and $d!=0) echo "table-success"; else echo "table-danger";?>">
 	        <th>Total</th>
 	        <th></th>
 	        <th class="text-right">$<?php echo number_format($d,2,'.',','); ?></th>
