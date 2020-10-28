@@ -184,7 +184,14 @@ class Professor extends CI_Controller {
   {
     $id = $this->input->post("id_grupo");
     $fields = array('id_grupo' => $id );
-    $del=$this->model_group->delete_group($fields);
+
+    //$del=$this->model_group->delete_group($fields);
+
+    $fields = array('grupo_id' => $id );
+    $del=$this->model_group->delete_group_al($fields);
+
+    
+
     if($del){
       $this->session->set_flashdata('msg', '<div class="alert alert-success text-center"> Grupo eliminado correctamente</div>');
     }else{

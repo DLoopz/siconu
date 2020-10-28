@@ -178,19 +178,35 @@ class Admin extends CI_Controller
   }
 
   public function eliminar_professor(){
+    
+
+    
+    $fields = array('usuario_id' => $this->input->post("id_profesor"));
+    $grupos=$this->model_group->sacar_grupos($fields);
+
+    foreach ($grupos as $g) {
+      $fields = array('grupo_id' => $g->grupo_id );
+      $this->model_group->delete_group_al($fields);
+    }
+
+    $fields = array('id_usuario' => $this->input->post("id_profesor"));
+    $del = $this->model_user->delete_user($fields);
+
     $fields = array('usuario_id' => $this->input->post("id_profesor"));
     $this->model_account->delete_catalog($fields);
-    $fields = array('id_usuario' => $this->input->post("id_profesor"));
-    $del=$this->model_user->delete_user($fields);
+
+    
     if($del)
-      {
-        $this->session->set_flashdata('msg', '<div class="text-center alert alert-success text-center">Profesor eliminado exitosamente</div>');
-      }
-      else
-      {
-        $this->session->set_flashdata('msg', '<div class="text-center alert alert-danger text-center">Error profesor no eliminado</div>');
-      }
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-success text-center">Profesor eliminado exitosamente</div>');
+    }
+    else
+    {
+      $this->session->set_flashdata('msg', '<div class="text-center alert alert-danger text-center">Error profesor no eliminado</div>');
+    }
     redirect('admin', 'refresh');
+    
+    
   }
 
   public function clean_data()
