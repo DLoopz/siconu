@@ -11,6 +11,11 @@
 			$equilibrado=$equilibrado-1;
 		}
 	}
+
+function dos_decimales($valor) {
+   $float_redondeado=round($valor * 100) / 100;
+   return $float_redondeado;
+}
  //echo $equilibrado;?>
 		<div class="container">
 			<form action="<?php echo base_url();?>daybook/pdf" method='post' class="">
@@ -30,7 +35,7 @@
 				<div class="col-6">
 					<a href="<?php echo base_url();?>daybook/add_entry/<?php echo $id_empresa; ?>" class="btn btn-outline-success my-2 my-sm-0" aria-label="Left Align" title="Agregar Asiento Contable"><i class="icon-plus-2"></i></a>
 				</div>
-				<div class="col-6 text-right" <?php if($de==$ha and $de>0 and $equilibrado==count($entries)){echo '';}else{ echo "hidden";}?> >
+				<div class="col-6 text-right" <?php if(dos_decimales($de)==dos_decimales($ha) and $de>0 and $equilibrado==count($entries)){echo '';}else{ echo "hidden";}?> >
 					<a href="" class="btn btn-outline-danger my-2 my-sm-0" aria-label="Left Align" title="Cerrar Ejercicio" data-toggle="modal" data-target="#cerrarEmpresa"><i class="icon-cancel-circled"></i></a>
 				</div>
 			</div>
@@ -89,7 +94,7 @@
 					    		}
 					    	 }
 					     } ?>
-					    <?php if ($d==$h) {
+					    <?php if (dos_decimales($d)==dos_decimales($h)) {
 							    		$asiento_equilibrado=$asiento_equilibrado+1;
 							    	}else{
 							    		$asiento_equilibrado=$asiento_equilibrado-1;
@@ -116,7 +121,7 @@
               	<?php } ?>
 					    </tr>
 				  	<?php } ?>
-				    <tr class="<?php if ($d==$h and $d>0 and $asiento_equilibrado==count($entries)) echo"table-success"; else echo "table-danger";?>">
+				    <tr class="<?php if (dos_decimales($d)==dos_decimales($h) and $d>0 and $asiento_equilibrado==count($entries)) echo"table-success"; else echo "table-danger";?>">
 				    	<td></td>
 				    	<td></td>
 				    	<td></td>

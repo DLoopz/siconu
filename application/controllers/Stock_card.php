@@ -2,18 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Stock_card extends CI_Controller {
-    function __construct()
-    {
-        parent:: __construct();
-        if ($this->session->userdata('activo') != TRUE)
-        {
-            redirect('');
-        }
-        if ($this->session->userdata('rol') == 1)
-        {
-            redirect('');
-        }
-    }
 	public function index($id=null)
 	{
 		$data['title']="Tarjeta de Almacén";
@@ -844,11 +832,11 @@ class Stock_card extends CI_Controller {
             {
                 $this->form_validation->set_message('existencia_check', '%s debe ser 0 cuando existencia es 0');
                 return FALSE;
-            }elseif($str == 0)
+            }/*elseif($str == 0)
             {
                 $this->form_validation->set_message('existencia_check', '%s debe ser distinto a 0');
                 return FALSE;
-            }else
+            }*/else
                 return TRUE;
         }
     }
